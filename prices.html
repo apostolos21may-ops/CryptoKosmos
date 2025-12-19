@@ -1,0 +1,735 @@
+<!doctype html>
+<html lang="el">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>LIVEprices – CryptoKosmos</title>
+
+  <!-- GLOBAL STYLES -->
+  <link rel="stylesheet" href="../styles.css" />
+
+  <!-- PAGE TRANSLATIONS -->
+  <script src="../translations-prices.js" defer></script>
+
+  <!-- Light/Dark article images preload -->
+  <link rel="preload" as="image" href="./IMG_5536.png">
+  <link rel="preload" as="image" href="./IMG_5537.png">
+
+  <style>
+    body.article-page {
+      padding: 0;
+    }
+
+    .article-container {
+      max-width: 800px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    /* Desktop: lock widths of header buttons */
+    @media (min-width: 900px) {
+      #theme-toggle {
+        width: 85px;
+        justify-content: center;
+      }
+
+      #auth-btn {
+        width: 85px;
+        justify-content: center;
+      }
+
+      #lang-toggle {
+        width: 70px;
+        justify-content: center;
+      }
+
+      .pill-btn {
+        height: 34px;
+      }
+    }
+
+
+
+
+
+        .prices-page { padding: 26px 0; }
+    .prices-head {
+      display:flex; gap:12px; align-items:center; justify-content:space-between;
+      margin-bottom:14px;
+    }
+    .prices-head h2{ margin:0; font-size:22px; }
+    .prices-tools{ display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+
+    .prices-search{
+      width:min(420px, 90vw);
+      padding:12px 12px;
+      border-radius:12px;
+      border:1px solid var(--border, #222a33);
+      background: rgba(15,19,25,.8);
+      color: var(--text, #e8edf2);
+      outline:none;
+    }
+
+    .segmented {
+      display:flex;
+      border:1px solid var(--border, #222a33);
+      border-radius:999px;
+      overflow:hidden;
+      background: rgba(15,19,25,.6);
+    }
+    
+.segmented button{
+  min-width: 90px;              /* 🔒 ΣΤΑΘΕΡΟ ΠΛΑΤΟΣ */
+  text-align: center;
+
+  padding: 10px 12px;
+  border: 1px solid transparent; /* ίδιο border πάντα */
+  background: transparent;
+
+  color: var(--text, #e8edf2);
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;              /* 🔒 ίδιο weight ΠΑΝΤΑ */
+
+  opacity: .85;
+  transition: background .2s ease, color .2s ease;
+}
+
+    .segmented button.active{
+  opacity: 1;
+  background: linear-gradient(
+    135deg,
+    var(--brand, #5bb4ff),
+    var(--brand2, #7b61ff)
+  );
+  color: #0f1216;
+  font-weight: 600; /* ❌ ΟΧΙ bold */
+}
+
+    /* Panel look (like your screenshot) */
+    .prices-panel{
+  width: 100%;
+  max-width: 100%;
+  border-radius: 26px;
+  padding: 16px;
+  background:
+    radial-gradient(circle at 20% 0%, rgba(120,170,255,.18), transparent 55%),
+    radial-gradient(circle at 80% 100%, rgba(150,110,255,.16), transparent 55%),
+    linear-gradient(145deg, rgba(10,15,25,.92), rgba(12,16,28,.92));
+  border: 1px solid rgba(255,255,255,.07);
+  box-shadow: 0 30px 70px rgba(0,0,0,.45);
+}
+
+    .prices-list{ display:flex; flex-direction:column; gap:10px; }
+
+
+    .rank{ opacity:.7; font-weight:700; font-variant-numeric: tabular-nums; }
+    .coin-icon{ width:30px; height:30px; border-radius:50%; object-fit:cover; }
+    .sym{
+      font-weight:800;
+      letter-spacing:.4px;
+      text-transform:uppercase;
+      display:flex; align-items:center; gap:8px;
+    }
+    .name{ opacity:.7; font-size:12px; margin-top:2px; }
+
+   
+    .arrow{
+      font-size:12px;
+      line-height:1;
+      opacity:.9;
+    }
+    .up{ color:#4ade80; }
+    .down{ color:#f97373; }
+    .flat{ color:#cbd5e1; }
+
+    
+
+    .sub{
+      display:flex; flex-direction:column;
+      min-width:0;
+    }
+    .symline{ display:flex; align-items:center; gap:8px; min-width:0; }
+    .symline span{ white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+
+    .meta{
+      margin-top:10px;
+      display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap;
+      color: var(--muted, #8ea0b3);
+      font-size:12px;
+      opacity:.9;
+    }
+    .pill{
+      border:1px solid rgba(255,255,255,.12);
+      border-radius:999px;
+      padding:6px 10px;
+      background: rgba(255,255,255,.04);
+    }
+
+    .loading, .error{
+      padding:12px;
+      border-radius:14px;
+      background: rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.08);
+      color: var(--text, #e8edf2);
+      font-size:13px;
+      margin-bottom:10px;
+    }
+
+    @media (max-width: 520px){
+      .prices-panel{ max-width: 100%; }
+      .price-row{ grid-template-columns: 26px 32px 1fr 82px 86px; }
+    }
+
+    /* =========================
+   PRICE ROW — FINAL FIX
+========================= */
+
+.price-row{
+  display: grid;
+  grid-template-columns: 
+    28px      /* rank */
+    34px      /* icon */
+    1fr       /* name */
+    120px     /* % change */
+    150px;    /* price */
+
+  align-items: center;
+  column-gap: 12px;
+
+  padding: 12px;
+  border-radius: 18px;
+  background: rgba(10,15,25,.88);
+  border: 1px solid rgba(255,255,255,.06);
+  box-shadow: 0 10px 22px rgba(0,0,0,.35);
+}
+
+/* % CHANGE COLUMN */
+.chg{
+  justify-self: end;
+  margin-right: 20px;              /* 🔥 ΣΤΑΘΕΡΗ ΑΠΟΣΤΑΣΗ */
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+/* PRICE COLUMN */
+.price{
+  justify-self: end;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+/* COLORS */
+.up{ color:#4ade80; }
+.down{ color:#f97373; }
+.flat{ color:#cbd5e1; }
+
+/* =========================
+   MOBILE FIX
+========================= */
+@media (max-width: 520px){
+  .price-row{
+    grid-template-columns:
+      26px
+      32px
+      1fr
+      96px
+      120px;
+  }
+
+  .chg{
+    margin-right: 14px;
+  }
+}
+
+
+/* =========================================
+   LIGHT THEME — PRICES PANEL
+========================================= */
+
+body.light-theme .prices-panel{
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  box-shadow:
+    0 20px 40px rgba(0,0,0,0.08);
+}
+
+/* Κάθε γραμμή */
+body.light-theme .price-row{
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.06);
+}
+
+/* Rank */
+body.light-theme .rank{
+  color: #475569;
+}
+
+/* Symbol + name */
+body.light-theme .sym{
+  color: #0f172a;
+}
+body.light-theme .name{
+  color: #64748b;
+}
+
+/* Τιμή */
+body.light-theme .price{
+  color: #0f172a;
+}
+
+/* Ποσοστά */
+body.light-theme .up{
+  color: #16a34a;      /* πράσινο όπως φωτο */
+}
+
+body.light-theme .down{
+  color: #dc2626;      /* κόκκινο όπως φωτο */
+}
+
+body.light-theme .flat{
+  color: #64748b;
+}
+
+/* Icon χωρίς glow */
+body.light-theme .coin-icon{
+  filter: none;
+}
+
+
+
+
+/* =========================
+   PAGINATION
+========================= */
+.pagination-wrap{
+  margin-top: 22px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:10px;
+}
+
+.pages{
+  display:flex;
+  gap:8px;
+}
+
+.page-btn{
+  min-width:40px;
+  height:40px;
+  border-radius:12px;
+  border:1px solid rgba(255,255,255,.15);
+
+  background: rgba(15,19,25,.6);
+  color: var(--text, #e8edf2);
+
+  font-weight:600;
+  cursor:pointer;
+  transition:.2s ease;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.page-btn:hover{
+  border-color: var(--brand, #5bb4ff);
+}
+
+.page-btn.active{
+  background: linear-gradient(
+    135deg,
+    var(--brand, #5bb4ff),
+    var(--brand2, #7b61ff)
+  );
+  color:#0f1216;
+  border-color: transparent;
+}
+
+.page-btn:disabled{
+  opacity:.4;
+  cursor:not-allowed;
+}
+
+/* Light theme */
+body.light-theme .page-btn{
+  background:#ffffff;
+  color:#0f172a;
+  border:1px solid #d0d7e2;
+}
+
+
+
+.prices-pagination-wrap {
+  margin: 26px auto 34px;   /* ⬅ απόσταση από panel & footer */
+  max-width: 100%;
+}
+
+
+.prices-pagination {
+  max-width: 1100px;        /* ίδιο με .container / panel */
+  margin: 0 auto;
+  padding: 14px 18px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+
+  background: rgba(15,19,30,.6);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 22px;
+  backdrop-filter: blur(10px);
+}
+
+.page-btn:hover {
+  border-color: var(--brand);
+  background: rgba(91,180,255,.15);
+}
+
+.page-btn.active {
+  background: linear-gradient(135deg, var(--brand), var(--brand2));
+  color: #0f1216;
+  border-color: transparent;
+}
+
+.page-btn:disabled {
+  opacity: .35;
+  cursor: not-allowed;
+}
+
+
+
+
+
+
+/* =====================================
+   SKELETON LOADING
+===================================== */
+.skeleton {
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+/* ---------- DARK THEME ---------- */
+body:not(.light-theme) .skeleton {
+  background: linear-gradient(
+    90deg,
+    rgba(255,255,255,.06) 25%,
+    rgba(255,255,255,.14) 37%,
+    rgba(255,255,255,.06) 63%
+  );
+  background-size: 400% 100%;
+  animation: skeleton-shimmer 1.4s ease infinite;
+}
+
+/* ---------- LIGHT THEME ---------- */
+body.light-theme .skeleton {
+  background: linear-gradient(
+    90deg,
+    #e5e7eb 25%,
+    #f1f5f9 37%,
+    #e5e7eb 63%
+  );
+  background-size: 400% 100%;
+  animation: skeleton-shimmer 1.4s ease infinite;
+}
+
+@keyframes skeleton-shimmer {
+  0% { background-position: 100% 0; }
+  100% { background-position: 0 0; }
+}
+  </style>
+</head>
+
+<body class="article-page">
+
+<!-- ================= HEADER ================= -->
+<header class="site-header">
+  <div class="container header-inner">
+
+    <a class="brand" href="../index.html">
+      <img id="site-logo" src="../logo.png" alt="CryptoKosmos" class="logo" />
+      <div class="brand-text">
+        <h1>CryptoKosmos</h1>
+        <p class="tagline" data-i18n="header_tagline">Ο παλμός του κόσμου των crypto</p>
+      </div>
+    </a>
+
+    <nav class="nav">
+      <a href="../index.html#market" data-i18n="nav_market">Αγορά</a>
+      <a href="../index.html#charts" data-i18n="nav_charts">Τάσεις</a>
+      <a href="../index.html#guides" data-i18n="nav_guides">Οδηγοί</a>
+      <a href="../index.html#glossary" data-i18n="nav_glossary">Γλωσσάρι</a>
+    </nav>
+
+    <div class="header-actions">
+
+      <button id="theme-toggle" class="pill-btn">
+        <img id="theme-icon" src="../IMG_5300.png" class="icon-img" />
+        <span id="theme-label">Dark</span>
+      </button>
+
+      <button id="auth-btn" class="pill-btn">
+        <img id="auth-icon" src="../IMG_5301.png" class="icon-img" />
+        <span id="auth-label" data-i18n="login">Login</span>
+      </button>
+
+      <button id="menu-toggle" class="menu-btn">
+        <span class="burger-line"></span>
+        <span class="burger-line"></span>
+        <span class="burger-line"></span>
+      </button>
+
+      <button id="lang-toggle" class="pill-btn">
+        <img id="lang-icon" class="icon-img" src="../IMG_5542.png">
+        <span id="lang-label">GR</span>
+      </button>
+
+    </div>
+  </div>
+</header>
+
+<!-- ================= MOBILE MENU ================= -->
+<div id="mobile-menu" class="mobile-menu">
+  <a href="../index.html#market" data-i18n="nav_market">Αγορά</a>
+  <a href="../index.html#charts" data-i18n="nav_charts">Τάσεις</a>
+  <a href="../index.html#guides" data-i18n="nav_guides">Οδηγοί</a>
+  <a href="../index.html#glossary" data-i18n="nav_glossary">Γλωσσάρι</a>
+
+  <button id="mobile-home-btn" class="mobile-btn" data-i18n="mobile_home">
+    Αρχική Σελίδα
+  </button>
+
+  <button id="mobile-theme-toggle" class="mobile-btn" data-i18n="mobile_theme">
+    Αλλαγή Θέματος
+  </button>
+
+  <button id="mobile-auth-btn" class="mobile-btn" data-i18n="login">
+    Login
+  </button>
+
+  <button id="mobile-lang-toggle" class="mobile-btn">
+    <img id="mobile-lang-icon" class="icon-img" src="../IMG_5542.png">
+    <span id="mobile-lang-label">GR</span>
+  </button>
+</div>
+
+
+  <section class="prices-page">
+    <div class="container">
+
+      <div class="prices-head">
+        <h2>All Crypto Prices</h2>
+
+        <div class="prices-tools">
+          <input id="q" class="prices-search" placeholder="Search (e.g. btc, eth, sol)" />
+          <div class="segmented" role="tablist" aria-label="Source">
+            <button id="src-auto" class="active" type="button">Auto</button>
+            <button id="src-binance" type="button">Binance</button>
+            <button id="src-coingecko" type="button">CoinGecko</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="status" class="loading">Φόρτωση τιμών…</div>
+
+      <div class="prices-panel">
+        <div id="list" class="prices-list"></div>
+        <div class="meta">
+          <span class="pill" id="meta-source">Source: Auto</span>
+          <span class="pill" id="meta-updated">Updated: —</span>
+          <span class="pill" id="meta-count">Coins: —</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <div class="prices-pagination-wrap">
+  <div class="prices-pagination">
+    <button class="page-btn prev">‹</button>
+
+    <div class="pages">
+      <!-- numbers injected by JS -->
+    </div>
+
+    <button class="page-btn next">›</button>
+  </div>
+</div>
+
+<!-- ================= ARTICLE CONTENT ================= -->
+
+
+<footer class="site-footer">
+  <div class="container">
+    <p>
+      © <span id="year"></span> CryptoKosmos —
+      <span data-i18n="footer_rights">Όλα τα δικαιώματα διατηρούνται.</span>
+    </p>
+  </div>
+</footer>
+
+<div id="login-modal" class="modal hidden">
+  <div class="modal-backdrop"></div>
+  <div class="modal-card">
+
+    <div class="modal-header">
+      <span class="modal-title" data-i18n="login_title">Σύνδεση</span>
+      <button class="modal-close" id="login-close">×</button>
+    </div>
+
+    <form id="login-form">
+      <div class="modal-body">
+
+        <label data-i18n="login_email">Email</label>
+        <input id="login-email" type="email" 
+               data-i18n-placeholder="login_email"
+               placeholder="Email">
+
+        <label data-i18n="login_password">Κωδικός</label>
+        <div class="pass-wrap">
+          <input id="login-pass" type="password"
+                 data-i18n-placeholder="login_password"
+                 placeholder="Password">
+          <img id="login-pass-toggle" class="pass-eye" src="../IMG_5380.png">
+        </div>
+
+      </div>
+
+      <button class="modal-submit" type="submit" data-i18n="login_btn">
+        Σύνδεση
+      </button>
+
+      <p id="no-account"
+         class="modal-hint"
+         style="color:#ffb3b3; display:none;"
+         data-i18n="login_no_account">
+         Δεν έχεις λογαριασμό στο CryptoKosmos.
+      </p>
+
+      <button id="signup-btn" type="button"
+        style="display:none;margin-top:10px;width:100%;padding:10px 14px;border:none;border-radius:14px;
+        background:#1e293b;color:white;font-weight:600;cursor:pointer;border:1px solid rgba(255,255,255,0.25);"
+        data-i18n="login_create_account">
+        Δημιουργία λογαριασμού
+      </button>
+
+    </form>
+  </div>
+</div>
+
+<div id="signup-modal" class="modal hidden">
+  <div class="modal-backdrop"></div>
+  <div class="modal-card">
+
+    <div class="modal-header">
+      <h3 class="modal-title" data-i18n="signup_title">Δημιούργησε λογαριασμό</h3>
+      <button class="modal-close signup-close">×</button>
+    </div>
+
+    <div class="modal-body">
+
+      <label data-i18n="signup_email">Email</label>
+      <input id="signup-email" type="email"
+             data-i18n-placeholder="signup_email"
+             placeholder="Email">
+
+      <label data-i18n="signup_pass1">Κωδικός</label>
+      <div class="pass-wrap">
+        <input id="signup-pass1" type="password"
+               data-i18n-placeholder="signup_pass1"
+               placeholder="Password">
+        <img id="signup-pass1-toggle" class="pass-eye" src="../IMG_5380.png">
+      </div>
+
+      <label data-i18n="signup_pass2">Επιβεβαίωση κωδικού</label>
+      <div class="pass-wrap">
+        <input id="signup-pass2" type="password"
+               data-i18n-placeholder="signup_pass2"
+               placeholder="Confirm Password">
+        <img id="signup-pass2-toggle" class="pass-eye" src="../IMG_5380.png">
+      </div>
+
+      <p id="signup-error"
+         style="color:#ff6b6b; display:none;"
+         data-i18n="signup_error">
+         Οι κωδικοί δεν ταιριάζουν.
+      </p>
+
+      <button id="signup-create" class="modal-submit" data-i18n="signup_btn">
+        Δημιουργία λογαριασμού
+      </button>
+
+      <p class="modal-hint">
+        <span data-i18n="signup_have_account">Έχεις ήδη λογαριασμό;</span>
+        <span id="back-to-login"
+              style="color:#5bb4ff;cursor:pointer;"
+              data-i18n="signup_back">
+          Σύνδεση
+        </span>
+      </p>
+
+    </div>
+  </div>
+</div>
+
+<div id="verify-modal" class="modal hidden">
+  <div class="modal-backdrop"></div>
+  <div class="modal-card">
+
+    <div class="modal-header">
+      <h3 class="modal-title" data-i18n="verify_title">Επαλήθευση Email</h3>
+      <button class="modal-close verify-close">×</button>
+    </div>
+
+    <div class="modal-body">
+
+      <p class="muted" data-i18n="verify_subtitle">
+        Σου στείλαμε έναν 6-ψήφιο κωδικό.
+      </p>
+
+      <label data-i18n="verify_code">Κωδικός</label>
+      <input id="verify-code" type="text"
+             data-i18n-placeholder="verify_code"
+             placeholder="Code">
+
+      <p id="verify-error" style="color:#ff6b6b; display:none;"
+         data-i18n="verify_error">
+         Λάθος κωδικός. Προσπάθησε ξανά.
+      </p>
+
+      <button id="verify-submit" class="modal-submit" data-i18n="verify_btn">
+        Επιβεβαίωση
+      </button>
+
+    </div>
+
+  </div>
+</div>
+
+<!-- YEAR -->
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+  document.getElementById("mobile-home-btn")?.addEventListener("click", () => {
+    window.location.href = "../index.html";
+  });
+</script>
+
+
+<!-- GLOBAL SCRIPTS -->
+<script src="../app.js" defer></script>
+<script src="../i18n.js" defer></script>
+
+</body>
+</html>

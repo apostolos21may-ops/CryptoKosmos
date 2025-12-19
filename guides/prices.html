@@ -1,0 +1,1227 @@
+<!doctype html>
+<html lang="el">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>LIVEprices – CryptoKosmos</title>
+
+  <!-- GLOBAL STYLES -->
+  <link rel="stylesheet" href="../styles.css" />
+
+  <!-- PAGE TRANSLATIONS -->
+  <script src="../translations-prices.js" defer></script>
+
+  <!-- Light/Dark article images preload -->
+  <link rel="preload" as="image" href="./IMG_5536.png">
+  <link rel="preload" as="image" href="./IMG_5537.png">
+
+  <style>
+    body.article-page {
+      padding: 0;
+    }
+
+    .article-container {
+      max-width: 800px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    /* Desktop: lock widths of header buttons */
+    @media (min-width: 900px) {
+      #theme-toggle {
+        width: 85px;
+        justify-content: center;
+      }
+
+      #auth-btn {
+        width: 85px;
+        justify-content: center;
+      }
+
+      #lang-toggle {
+        width: 70px;
+        justify-content: center;
+      }
+
+      .pill-btn {
+        height: 34px;
+      }
+    }
+
+
+
+
+
+
+
+
+
+
+
+/* =====================================
+   PRICES PAGE
+===================================== */
+.prices-page {
+  padding: 26px 0;
+}
+
+.prices-head {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.prices-head h2 {
+  margin: 0;
+  font-size: 22px;
+}
+
+.prices-tools {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/* SEARCH */
+.prices-search {
+  width: min(420px, 90vw);
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid var(--border, #222a33);
+  background: rgba(15,19,25,.8);
+  color: var(--text, #e8edf2);
+  outline: none;
+}
+
+/* SOURCE BUTTONS */
+.segmented {
+  display: flex;
+  border: 1px solid var(--border, #222a33);
+  border-radius: 999px;
+  overflow: hidden;
+  background: rgba(15,19,25,.6);
+}
+
+.segmented button {
+  min-width: 90px;
+  padding: 10px 12px;
+  background: transparent;
+  border: 0;
+  color: var(--text, #e8edf2);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  opacity: .85;
+  transition: background .2s ease, color .2s ease;
+}
+
+.segmented button.active {
+  opacity: 1;
+  background: linear-gradient(135deg,var(--brand,#5bb4ff),var(--brand2,#7b61ff));
+  color: #0f1216;
+}
+
+/* =====================================
+   PANEL
+===================================== */
+.prices-panel {
+  width: 100%;
+  border-radius: 26px;
+  padding: 16px;
+  background:
+    radial-gradient(circle at 20% 0%, rgba(120,170,255,.18), transparent 55%),
+    radial-gradient(circle at 80% 100%, rgba(150,110,255,.16), transparent 55%),
+    linear-gradient(145deg, rgba(10,15,25,.92), rgba(12,16,28,.92));
+  border: 1px solid rgba(255,255,255,.07);
+  box-shadow: 0 30px 70px rgba(0,0,0,.45);
+}
+
+.prices-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* =====================================
+   PRICE ROW
+===================================== */
+.price-row {
+  display: grid;
+  grid-template-columns:
+  minmax(44px, auto)  /* rank – δυναμικό */
+  34px                /* icon */
+  1fr
+  120px
+  150px;
+  align-items: center;
+  column-gap: 12px;
+
+  padding: 12px;
+  border-radius: 18px;
+  background: rgba(10,15,25,.88);
+  border: 1px solid rgba(255,255,255,.06);
+  box-shadow: 0 10px 22px rgba(0,0,0,.35);
+}
+
+.rank{
+  opacity: .7;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+
+  min-width: 32px;        /* ⬅ extra χώρος για 1000+ */
+  text-align: right;
+  padding-right: 6px;    /* ⬅ ανάσα από το icon */
+  box-sizing: border-box;
+}
+
+.coin-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.sub {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.sym {
+  font-weight: 800;
+  letter-spacing: .4px;
+  text-transform: uppercase;
+}
+
+.name {
+  font-size: 12px;
+  opacity: .7;
+}
+
+/* CHANGE */
+.chg {
+  justify-self: end;
+  margin-right: 20px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+.arrow {
+  font-size: 12px;
+  opacity: .9;
+}
+
+/* PRICE */
+.price {
+  justify-self: end;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+/* COLORS */
+.up { color: #4ade80; }
+.down { color: #f97373; }
+.flat { color: #cbd5e1; }
+
+/* =====================================
+   META
+===================================== */
+.meta {
+  margin-top: 10px;
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  font-size: 12px;
+  color: var(--muted,#8ea0b3);
+}
+
+.pill {
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.04);
+}
+
+/* =====================================
+   PAGINATION
+===================================== */
+.prices-pagination-wrap {
+  margin: 26px auto 34px;
+}
+
+.prices-pagination {
+  max-width: 1050px;
+  margin: auto;
+  padding: 14px 18px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+
+  background: rgba(15,19,30,.6);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 22px;
+  backdrop-filter: blur(10px);
+}
+
+.pages {
+  display: flex;
+  gap: 8px;
+}
+
+.page-btn {
+  min-width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,.15);
+  background: rgba(15,19,25,.6);
+  color: var(--text,#e8edf2);
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.page-btn.active {
+  background: linear-gradient(135deg,var(--brand),var(--brand2));
+  color: #0f1216;
+  border-color: transparent;
+}
+
+.page-btn:disabled {
+  opacity: .35;
+  cursor: not-allowed;
+}
+
+/* =====================================
+   MOBILE
+===================================== */
+@media (max-width: 520px){
+  .price-row{
+    grid-template-columns:
+      34px   /* rank */
+      32px
+      1fr
+      96px
+      120px;
+  }
+  .chg {
+    margin-right: 14px;
+  }
+}
+
+/* =====================================
+   LIGHT THEME
+===================================== */
+body.light-theme .prices-panel {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 20px 40px rgba(0,0,0,.08);
+}
+
+body.light-theme .price-row {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 6px 14px rgba(0,0,0,.06);
+}
+
+body.light-theme .rank { color:#475569; }
+body.light-theme .sym { color:#0f172a; }
+body.light-theme .name { color:#64748b; }
+body.light-theme .price { color:#0f172a; }
+
+body.light-theme .up { color:#16a34a; }
+body.light-theme .down { color:#dc2626; }
+body.light-theme .flat { color:#64748b; }
+
+body.light-theme .page-btn {
+  background:#ffffff;
+  color:#0f172a;
+  border:1px solid #d0d7e2;
+}
+
+/* =====================================
+   MOBILE PAGINATION – REAL FIX
+===================================== */
+@media (max-width: 520px){
+
+  .prices-pagination-wrap{
+    overflow-x: auto !important;   /* ⬅ ΑΥΤΟ ΕΛΕΙΠΕ */
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .prices-pagination{
+    min-width: max-content;        /* ⬅ να ΜΗΝ στριμώχνεται */
+  }
+
+  .pages{
+    flex-wrap: nowrap;
+  }
+
+  .page-btn{
+    min-width: 32px;
+    height: 32px;
+    font-size: 12px;
+    flex: 0 0 auto;
+  }
+}
+
+
+/* =====================================
+   SKELETON BASE
+===================================== */
+.skeleton {
+  position: relative;
+  overflow: hidden;
+  background: rgba(255,255,255,0.08);
+  border-radius: 6px;
+}
+
+/* shimmer animation */
+.skeleton::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255,255,255,0.18),
+    transparent
+  );
+  animation: skeleton-shimmer 1.4s infinite;
+}
+
+@keyframes skeleton-shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* =====================================
+   SKELETON ROW
+===================================== */
+.skeleton-row {
+  pointer-events: none;
+}
+
+/* rank */
+.skeleton-row .rank.skeleton {
+  width: 34px;
+  height: 14px;
+}
+
+/* icon */
+.skeleton-row .coin-icon.skeleton {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+
+/* symbol */
+.skeleton-row .sym.skeleton {
+  width: 90px;
+  height: 14px;
+  margin-bottom: 6px;
+}
+
+/* name */
+.skeleton-row .name.skeleton {
+  width: 130px;
+  height: 12px;
+}
+
+/* change */
+.skeleton-row .chg.skeleton {
+  width: 60px;
+  height: 14px;
+}
+
+/* price */
+.skeleton-row .price.skeleton {
+  width: 90px;
+  height: 16px;
+}
+
+/* =====================================
+   LIGHT THEME SKELETON
+===================================== */
+body.light-theme .skeleton {
+  background: #e5e7eb;
+}
+
+body.light-theme .skeleton::after {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255,255,255,0.6),
+    transparent
+  );
+}
+
+/* =====================================
+   MOBILE OPTIMIZATION
+===================================== */
+@media (max-width: 520px) {
+  .skeleton-row .price.skeleton {
+    width: 70px;
+  }
+
+  .skeleton-row .chg.skeleton {
+    width: 50px;
+  }
+}
+
+
+
+/* PRICE COLUMN – STACKED */
+.price-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;   /* ⬅ ΠΙΟ ΑΡΙΣΤΕΡΑ */
+  justify-content: center;
+
+  width: 160px;
+  min-width: 160px;
+
+  padding-left: 20px;        /* ⬅ micro-shift αριστερά */
+  gap: 6px;
+}
+
+/* ΜΟΝΟ μετακίνηση της τιμής */
+.price-wrap .price {
+  margin-right: 12px;   /* ⬅ πάει την τιμή πιο αριστερά */
+}
+
+.price {
+  font-weight: 800;
+  white-space: nowrap;
+  text-align: right;
+}
+
+/* SPARKLINE ΚΑΤΩ ΑΠΟ ΤΗΝ ΤΙΜΗ */
+.spark {
+  width: 120px;
+  height: 28px;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+  </style>
+</head>
+
+<body class="article-page">
+
+<!-- ================= HEADER ================= -->
+<header class="site-header">
+  <div class="container header-inner">
+
+    <a class="brand" href="../index.html">
+      <img id="site-logo" src="../logo.png" alt="CryptoKosmos" class="logo" />
+      <div class="brand-text">
+        <h1>CryptoKosmos</h1>
+        <p class="tagline" data-i18n="header_tagline">Ο παλμός του κόσμου των crypto</p>
+      </div>
+    </a>
+
+    <nav class="nav">
+      <a href="../index.html#market" data-i18n="nav_market">Αγορά</a>
+      <a href="../index.html#charts" data-i18n="nav_charts">Τάσεις</a>
+      <a href="../index.html#guides" data-i18n="nav_guides">Οδηγοί</a>
+      <a href="../index.html#glossary" data-i18n="nav_glossary">Γλωσσάρι</a>
+    </nav>
+
+    <div class="header-actions">
+
+      <button id="theme-toggle" class="pill-btn">
+        <img id="theme-icon" src="../IMG_5300.png" class="icon-img" />
+        <span id="theme-label">Dark</span>
+      </button>
+
+      <button id="auth-btn" class="pill-btn">
+        <img id="auth-icon" src="../IMG_5301.png" class="icon-img" />
+        <span id="auth-label" data-i18n="login">Login</span>
+      </button>
+
+      <button id="menu-toggle" class="menu-btn">
+        <span class="burger-line"></span>
+        <span class="burger-line"></span>
+        <span class="burger-line"></span>
+      </button>
+
+      <button id="lang-toggle" class="pill-btn">
+        <img id="lang-icon" class="icon-img" src="../IMG_5542.png">
+        <span id="lang-label">GR</span>
+      </button>
+
+    </div>
+  </div>
+</header>
+
+<!-- ================= MOBILE MENU ================= -->
+<div id="mobile-menu" class="mobile-menu">
+  <a href="../index.html#market" data-i18n="nav_market">Αγορά</a>
+  <a href="../index.html#charts" data-i18n="nav_charts">Τάσεις</a>
+  <a href="../index.html#guides" data-i18n="nav_guides">Οδηγοί</a>
+  <a href="../index.html#glossary" data-i18n="nav_glossary">Γλωσσάρι</a>
+
+  <button id="mobile-home-btn" class="mobile-btn" data-i18n="mobile_home">
+    Αρχική Σελίδα
+  </button>
+
+  <button id="mobile-theme-toggle" class="mobile-btn" data-i18n="mobile_theme">
+    Αλλαγή Θέματος
+  </button>
+
+  <button id="mobile-auth-btn" class="mobile-btn" data-i18n="login">
+    Login
+  </button>
+
+  <button id="mobile-lang-toggle" class="mobile-btn">
+    <img id="mobile-lang-icon" class="icon-img" src="../IMG_5542.png">
+    <span id="mobile-lang-label">GR</span>
+  </button>
+</div>
+
+<!-- ================= PRICES PAGE ================= -->
+<section class="prices-page">
+  <div class="container">
+
+    <!-- ===== Header ===== -->
+    <div class="prices-head">
+
+      <h2 data-i18n="bc_title">
+        Όλες οι Τιμές Κρυπτονομισμάτων
+      </h2>
+
+      <div class="prices-tools">
+        <input
+          id="q"
+          class="prices-search"
+          type="search"
+          placeholder="Search (e.g. btc, eth, sol)"
+          aria-label="Search cryptocurrencies"
+        />
+
+        <div class="segmented" role="tablist" aria-label="Price source">
+          <button id="src-auto" class="active" type="button" role="tab">
+            Auto
+          </button>
+          <button id="src-binance" type="button" role="tab">
+            Binance
+          </button>
+          <button id="src-coingecko" type="button" role="tab">
+            CoinGecko
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ===== Status ===== -->
+    <div id="status" class="loading">
+      Φόρτωση τιμών…
+    </div>
+
+    <!-- ===== Prices Panel ===== -->
+    <div class="prices-panel">
+
+      <!-- LIST (data ή skeleton μπαίνουν εδώ) -->
+      <div id="list" class="prices-list"></div>
+
+       
+
+      <!-- ===== Meta ===== -->
+      <div class="meta">
+        <span class="pill" id="meta-source">Source: Auto</span>
+        <span class="pill" id="meta-updated">Updated: —</span>
+        <span class="pill" id="meta-count">Coins: —</span>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- ================= PAGINATION ================= -->
+<div class="prices-pagination-wrap">
+  <div class="prices-pagination">
+    <button class="page-btn prev" aria-label="Previous page">‹</button>
+
+    <div class="pages">
+      <!-- injected by JS -->
+    </div>
+
+    <button class="page-btn next" aria-label="Next page">›</button>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>
+      © <span id="year"></span> CryptoKosmos —
+      <span data-i18n="footer_rights">Όλα τα δικαιώματα διατηρούνται.</span>
+    </p>
+  </div>
+</footer>
+
+<div id="login-modal" class="modal hidden">
+  <div class="modal-backdrop"></div>
+  <div class="modal-card">
+
+    <div class="modal-header">
+      <span class="modal-title" data-i18n="login_title">Σύνδεση</span>
+      <button class="modal-close" id="login-close">×</button>
+    </div>
+
+    <form id="login-form">
+      <div class="modal-body">
+
+        <label data-i18n="login_email">Email</label>
+        <input id="login-email" type="email" 
+               data-i18n-placeholder="login_email"
+               placeholder="Email">
+
+        <label data-i18n="login_password">Κωδικός</label>
+        <div class="pass-wrap">
+          <input id="login-pass" type="password"
+                 data-i18n-placeholder="login_password"
+                 placeholder="Password">
+          <img id="login-pass-toggle" class="pass-eye" src="../IMG_5380.png">
+        </div>
+
+      </div>
+
+      <button class="modal-submit" type="submit" data-i18n="login_btn">
+        Σύνδεση
+      </button>
+
+      <p id="no-account"
+         class="modal-hint"
+         style="color:#ffb3b3; display:none;"
+         data-i18n="login_no_account">
+         Δεν έχεις λογαριασμό στο CryptoKosmos.
+      </p>
+
+      <button id="signup-btn" type="button"
+        style="display:none;margin-top:10px;width:100%;padding:10px 14px;border:none;border-radius:14px;
+        background:#1e293b;color:white;font-weight:600;cursor:pointer;border:1px solid rgba(255,255,255,0.25);"
+        data-i18n="login_create_account">
+        Δημιουργία λογαριασμού
+      </button>
+
+    </form>
+  </div>
+</div>
+
+<div id="signup-modal" class="modal hidden">
+  <div class="modal-backdrop"></div>
+  <div class="modal-card">
+
+    <div class="modal-header">
+      <h3 class="modal-title" data-i18n="signup_title">Δημιούργησε λογαριασμό</h3>
+      <button class="modal-close signup-close">×</button>
+    </div>
+
+    <div class="modal-body">
+
+      <label data-i18n="signup_email">Email</label>
+      <input id="signup-email" type="email"
+             data-i18n-placeholder="signup_email"
+             placeholder="Email">
+
+      <label data-i18n="signup_pass1">Κωδικός</label>
+      <div class="pass-wrap">
+        <input id="signup-pass1" type="password"
+               data-i18n-placeholder="signup_pass1"
+               placeholder="Password">
+        <img id="signup-pass1-toggle" class="pass-eye" src="../IMG_5380.png">
+      </div>
+
+      <label data-i18n="signup_pass2">Επιβεβαίωση κωδικού</label>
+      <div class="pass-wrap">
+        <input id="signup-pass2" type="password"
+               data-i18n-placeholder="signup_pass2"
+               placeholder="Confirm Password">
+        <img id="signup-pass2-toggle" class="pass-eye" src="../IMG_5380.png">
+      </div>
+
+      <p id="signup-error"
+         style="color:#ff6b6b; display:none;"
+         data-i18n="signup_error">
+         Οι κωδικοί δεν ταιριάζουν.
+      </p>
+
+      <button id="signup-create" class="modal-submit" data-i18n="signup_btn">
+        Δημιουργία λογαριασμού
+      </button>
+
+      <p class="modal-hint">
+        <span data-i18n="signup_have_account">Έχεις ήδη λογαριασμό;</span>
+        <span id="back-to-login"
+              style="color:#5bb4ff;cursor:pointer;"
+              data-i18n="signup_back">
+          Σύνδεση
+        </span>
+      </p>
+
+    </div>
+  </div>
+</div>
+
+<div id="verify-modal" class="modal hidden">
+  <div class="modal-backdrop"></div>
+  <div class="modal-card">
+
+    <div class="modal-header">
+      <h3 class="modal-title" data-i18n="verify_title">Επαλήθευση Email</h3>
+      <button class="modal-close verify-close">×</button>
+    </div>
+
+    <div class="modal-body">
+
+      <p class="muted" data-i18n="verify_subtitle">
+        Σου στείλαμε έναν 6-ψήφιο κωδικό.
+      </p>
+
+      <label data-i18n="verify_code">Κωδικός</label>
+      <input id="verify-code" type="text"
+             data-i18n-placeholder="verify_code"
+             placeholder="Code">
+
+      <p id="verify-error" style="color:#ff6b6b; display:none;"
+         data-i18n="verify_error">
+         Λάθος κωδικός. Προσπάθησε ξανά.
+      </p>
+
+      <button id="verify-submit" class="modal-submit" data-i18n="verify_btn">
+        Επιβεβαίωση
+      </button>
+
+    </div>
+
+  </div>
+</div>
+
+<!-- Performance -->
+<link rel="preconnect" href="https://api.coingecko.com">
+<link rel="preconnect" href="https://api.binance.com">
+
+<!-- YEAR -->
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+  document.getElementById("mobile-home-btn")?.addEventListener("click", () => {
+    window.location.href = "../index.html";
+  });
+</script>
+
+<script>
+/* =====================================
+   CONFIG
+===================================== */
+const VS = "usd";
+const PER_PAGE = 200;
+const TOTAL_PAGES = 10;
+const REFRESH_MS = 30_000;
+
+/* =====================================
+   CACHE
+===================================== */
+const CACHE_KEY = "ck_prices_cache_v4";
+const CACHE_TTL = 2 * 60 * 1000;
+
+function saveCache(data){
+  try{
+    localStorage.setItem(CACHE_KEY, JSON.stringify({
+      time: Date.now(),
+      data
+    }));
+  }catch(e){}
+}
+
+function loadCache(){
+  try{
+    const raw = localStorage.getItem(CACHE_KEY);
+    if(!raw) return null;
+    const parsed = JSON.parse(raw);
+    if(Date.now() - parsed.time > CACHE_TTL) return null;
+    return parsed.data;
+  }catch(e){
+    return null;
+  }
+}
+
+/* =====================================
+   STATE
+===================================== */
+let sourceMode = "auto";
+let currentPage = 1;
+let allRows = [];
+let binanceMap = null;
+
+let abortCtrl = null;
+let requestId = 0;
+let hasLoadedOnce = false;
+
+const prefetchCache = new Map();
+
+const $ = id => document.getElementById(id);
+
+/* =====================================
+   UI HELPERS
+===================================== */
+function setStatus(text="", type="loading"){
+  const el = $("status");
+  if(!el) return;
+  el.textContent = text;
+  el.className = type;
+  el.style.display = text ? "block" : "none";
+}
+
+function setActiveSource(id){
+  document.querySelectorAll(".segmented button")
+    .forEach(b => b.classList.remove("active"));
+  document.getElementById(id)?.classList.add("active");
+}
+
+function formatPrice(n){
+  if(n == null || !isFinite(n)) return "—";
+  if(n >= 1000) return "$" + n.toLocaleString(undefined,{maximumFractionDigits:2});
+  if(n >= 1) return "$" + n.toLocaleString(undefined,{maximumFractionDigits:2});
+  if(n >= 0.01) return "$" + n.toLocaleString(undefined,{maximumFractionDigits:4});
+  return "$" + n.toLocaleString(undefined,{maximumFractionDigits:8});
+}
+
+function chgClass(v){
+  if(!isFinite(v)) return "flat";
+  if(v > 0) return "up";
+  if(v < 0) return "down";
+  return "flat";
+}
+
+function arrow(v){
+  if(!isFinite(v)) return "•";
+  return v > 0 ? "▲" : v < 0 ? "▼" : "•";
+}
+
+/* =====================================
+   FETCHERS
+===================================== */
+async function fetchCoinGecko(page, signal){
+  const url =
+    `https://api.coingecko.com/api/v3/coins/markets` +
+    `?vs_currency=${VS}` +
+    `&order=market_cap_desc` +
+    `&per_page=${PER_PAGE}` +
+    `&page=${page}` +
+    `&sparkline=true` +
+    `&price_change_percentage=24h`;
+
+  const res = await fetch(url, { signal });
+  if(!res.ok) throw new Error("CoinGecko error");
+  return res.json();
+}
+
+async function fetchBinanceMap(){
+  const res = await fetch("https://api.binance.com/api/v3/ticker/24hr");
+  if(!res.ok) return null;
+
+  const arr = await res.json();
+  const map = new Map();
+
+  for(const t of arr){
+    if(t.symbol.endsWith("USDT")){
+      map.set(t.symbol.slice(0,-4), {
+        price: +t.lastPrice,
+        chg: +t.priceChangePercent
+      });
+    }
+  }
+  return map;
+}
+
+/* =====================================
+   DATA MERGE
+===================================== */
+function mergeRows(cg, binMap){
+  return cg.map(c=>{
+    const sym = c.symbol.toUpperCase();
+    const b = binMap?.get(sym);
+
+    return {
+      rank: c.market_cap_rank,
+      symbol: sym,
+      name: c.name,
+      icon: c.image,
+      spark: c.sparkline_in_7d?.price || [],
+      cgPrice: c.current_price,
+      cgChg: c.price_change_percentage_24h,
+      price: b ? b.price : c.current_price,
+      chg: b ? b.chg : c.price_change_percentage_24h,
+      source: b ? "binance" : "coingecko"
+    };
+  });
+}
+
+/* =====================================
+   SOURCE MODE
+===================================== */
+function applySource(rows){
+  return rows.map(r=>{
+    if(sourceMode === "coingecko"){
+      return { ...r, price:r.cgPrice, chg:r.cgChg };
+    }
+    if(sourceMode === "binance"){
+      if(r.source === "binance") return r;
+      return { ...r, price:r.cgPrice, chg:r.cgChg };
+    }
+    return r;
+  });
+}
+
+/* =====================================
+   SPARKLINE
+===================================== */
+function drawSparkline(data, color){
+  if(!data || data.length < 2) return "";
+
+  const w = 90, h = 28;
+  const min = Math.min(...data);
+  const max = Math.max(...data);
+  const range = max - min || 1;
+
+  const pts = data.map((v,i)=>{
+    const x = (i/(data.length-1))*w;
+    const y = h - ((v-min)/range)*h;
+    return `${x.toFixed(1)},${y.toFixed(1)}`;
+  }).join(" ");
+
+  return `
+    <svg viewBox="0 0 ${w} ${h}" width="${w}" height="${h}">
+      <polyline
+        fill="none"
+        stroke="${color}"
+        stroke-width="1.8"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        points="${pts}" />
+    </svg>`;
+}
+
+/* =====================================
+   RENDER
+===================================== */
+function render(rows){
+  const q = $("q")?.value.trim().toUpperCase() || "";
+  const list = !q ? rows :
+    rows.filter(r =>
+      r.symbol.includes(q) ||
+      r.name.toUpperCase().includes(q)
+    );
+
+  const startRank = (currentPage - 1) * PER_PAGE + 1;
+$("meta-count").textContent = "Coins: " + list.length;
+
+$("list").innerHTML = list.map((r, i)=>`
+  <div class="price-row">
+    <div class="rank">${startRank + i}</div>
+
+    <img class="coin-icon" src="${r.icon}" loading="lazy">
+
+    <div class="sub">
+      <div class="sym">${r.symbol}</div>
+      <div class="name">${r.name}</div>
+    </div>
+
+    <div class="chg ${chgClass(r.chg)}">
+      <span>${arrow(r.chg)}</span>
+      <span>${r.chg != null ? r.chg.toFixed(2) + "%" : "—"}</span>
+    </div>
+
+    <!-- ✅ PRICE + MINI CHART ΣΕ ΕΥΘΕΙΑ -->
+   <div class="price-wrap">
+  <div class="price">${formatPrice(r.price)}</div>
+  <div class="spark">
+    ${drawSparkline(
+      r.spark,
+      r.chg > 0 ? "#4ade80" : r.chg < 0 ? "#f87171" : "#94a3b8"
+    )}
+  </div>
+</div>
+  </div>
+`).join("");
+}
+
+/* =====================================
+   PAGINATION
+===================================== */
+function renderPagination(){
+  const wrap = document.querySelector(".pages");
+  wrap.innerHTML = "";
+
+  for(let i=1;i<=TOTAL_PAGES;i++){
+    const b = document.createElement("button");
+    b.className = "page-btn" + (i===currentPage?" active":"");
+    b.textContent = i;
+    b.onclick = ()=> goToPage(i);
+    wrap.appendChild(b);
+  }
+
+  document.querySelector(".page-btn.prev").disabled = currentPage===1;
+  document.querySelector(".page-btn.next").disabled = currentPage===TOTAL_PAGES;
+}
+
+function goToPage(p){
+  if(p===currentPage) return;
+  currentPage = p;
+  window.scrollTo({top:0,behavior:"instant"});
+  loadPage(true);
+}
+
+/* =====================================
+   SKELETON
+===================================== */
+function renderSkeleton(count=PER_PAGE){
+  const row = `
+    <div class="price-row skeleton-row">
+      <div class="rank skeleton"></div>
+      <div class="coin-icon skeleton"></div>
+      <div class="sub">
+        <div class="sym skeleton"></div>
+        <div class="name skeleton"></div>
+      </div>
+      <div class="chg skeleton"></div>
+      <div class="price skeleton"></div>
+    </div>`;
+  $("list").innerHTML = Array.from({length:count}).map(()=>row).join("");
+}
+
+/* =====================================
+   PREFETCH
+===================================== */
+async function prefetchPage(page){
+  if(page>TOTAL_PAGES || prefetchCache.has(page)) return;
+  try{
+    const cg = await fetchCoinGecko(page, new AbortController().signal);
+    prefetchCache.set(page, mergeRows(cg, binanceMap));
+  }catch{}
+}
+
+/* =====================================
+   LOAD PAGE
+===================================== */
+async function loadPage(isPageChange=false){
+  const token = ++requestId;
+  if(abortCtrl) abortCtrl.abort();
+  abortCtrl = new AbortController();
+
+  if(!hasLoadedOnce || isPageChange){
+    renderSkeleton(PER_PAGE);
+  }
+
+  setStatus("Φόρτωση τιμών…");
+
+  try{
+    if(!binanceMap){
+      binanceMap = await fetchBinanceMap().catch(()=>null);
+    }
+
+    let rows;
+    if(prefetchCache.has(currentPage)){
+      rows = prefetchCache.get(currentPage);
+      prefetchCache.delete(currentPage);
+    }else{
+      const cg = await fetchCoinGecko(currentPage, abortCtrl.signal);
+      if(token!==requestId) return;
+      rows = mergeRows(cg, binanceMap);
+    }
+
+    allRows = rows;
+    saveCache({page:currentPage,rows});
+
+    render(applySource(allRows));
+    renderPagination();
+
+    $("meta-updated").textContent = "Updated: " + new Date().toLocaleTimeString();
+    $("meta-source").textContent = "Source: " + sourceMode;
+
+    setStatus("");
+    hasLoadedOnce = true;
+
+    prefetchPage(currentPage + 1);
+
+  }catch(e){
+    if(e.name==="AbortError") return;
+    const cached = loadCache();
+    if(cached?.rows){
+      allRows = cached.rows;
+      render(applySource(allRows));
+      renderPagination();
+      setStatus("Offline δεδομένα","warning");
+    }else{
+      setStatus("Αδυναμία σύνδεσης","error");
+    }
+  }
+}
+
+/* =====================================
+   EVENTS
+===================================== */
+$("src-auto").onclick = ()=>{sourceMode="auto";setActiveSource("src-auto");render(applySource(allRows));};
+$("src-binance").onclick = ()=>{sourceMode="binance";setActiveSource("src-binance");render(applySource(allRows));};
+$("src-coingecko").onclick = ()=>{sourceMode="coingecko";setActiveSource("src-coingecko");render(applySource(allRows));};
+$("q")?.addEventListener("input",()=>render(applySource(allRows)));
+
+document.querySelector(".page-btn.prev").onclick=()=>{
+  if(currentPage>1){currentPage--;window.scrollTo({top:0,behavior:"instant"});loadPage(true);}
+};
+document.querySelector(".page-btn.next").onclick=()=>{
+  if(currentPage<TOTAL_PAGES){currentPage++;window.scrollTo({top:0,behavior:"instant"});loadPage(true);}
+};
+
+
+/* =====================================
+   INIT
+===================================== */
+setActiveSource("src-auto");
+
+/* 🔥 RESET state για back/forward navigation */
+hasLoadedOnce = false;
+abortCtrl = null;
+requestId = 0;
+
+/* 🔥 Πρώτο καθαρό load */
+loadPage();
+
+/* 🔥 Interval refresh */
+let pricesInterval = setInterval(() => loadPage(false), REFRESH_MS);
+
+/* 🔥 Καθάρισμα όταν φεύγεις από τη σελίδα */
+window.addEventListener("pagehide", () => {
+  clearInterval(pricesInterval);
+});
+
+window.addEventListener("pageshow", (e) => {
+  if (e.persisted) {
+    location.reload();
+  }
+});
+</script>
+
+<!-- GLOBAL SCRIPTS -->
+<script src="../app.js" defer></script>
+<script src="../i18n.js" defer></script>
+
+</body>
+</html>
