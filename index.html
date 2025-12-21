@@ -1667,7 +1667,7 @@ const verifyError   = document.getElementById("verify-error");
 let currentUser      = null;
 let tempUser         = null;
 let verificationCode = null;
-
+let pricesInterval = null;
 
 // ========================================
 // USER STORAGE
@@ -2043,9 +2043,12 @@ function initIndexLive() {
   fetchPrices();
 }
 
-initIndexLive();
+document.addEventListener("DOMContentLoaded", () => {
+  initIndexLive();
 
-let pricesInterval = setInterval(fetchPrices, 60000);
+  // ⏱ refresh κάθε 90s (πιο ασφαλές για CoinGecko)
+  pricesInterval = setInterval(fetchPrices, 90000);
+});
 
 window.addEventListener("pagehide", () => {
   clearInterval(pricesInterval);
@@ -2100,6 +2103,8 @@ function formatEur(n) {
   }).format(n);
 }
 
+
+
 function renderMarket(data) {
   const wrap = document.getElementById("market-cards");
   if (!wrap) return;
@@ -2107,7 +2112,9 @@ function renderMarket(data) {
   wrap.innerHTML = "";
 
   coins.forEach(c => {
-    const d = data[c.id] || {};
+    const d = data[c.id];
+    if (!d) return;
+
     const change = typeof d.eur_24h_change === "number" ? d.eur_24h_change : 0;
     const up = change >= 0;
 
@@ -2116,17 +2123,20 @@ function renderMarket(data) {
     card.innerHTML = `
       <div class="row">
         <h4>${c.symbol}</h4>
-        <span class="chip ${up ? "up" : "down"}">${change.toFixed(2)}%</span>
+        <span class="chip ${up ? "up" : "down"}">
+          ${change.toFixed(2)}%
+        </span>
       </div>
-      <div class="price">${formatEur(d.eur || 0)}</div>
+      <div class="price">${formatEur(d.eur)}</div>
       <div class="row muted">
-        <span>USD: $${(d.usd || 0).toFixed(2)}</span>
+        <span>USD: $${d.usd.toFixed(2)}</span>
         <span>24h ${up ? "▲" : "▼"}</span>
       </div>
     `;
     wrap.appendChild(card);
   });
 }
+
 
 async function fetchPrices() {
   try {
