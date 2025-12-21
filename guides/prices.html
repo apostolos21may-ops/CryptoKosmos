@@ -675,6 +675,29 @@ body.light-theme .skeleton::after {
   line-height: 40px;
   user-select: none;
 }
+
+
+/* =====================================
+   PAGINATION ALIGN FIX
+===================================== */
+.prices-pagination{
+  display: flex;
+  align-items: center;   /* ⬅️ ΚΛΕΙΔΙ */
+}
+
+.pages{
+  display: flex;
+  align-items: center;   /* ⬅️ ίδια γραμμή */
+}
+
+/* dots */
+.pages .dots{
+  display: flex;
+  align-items: center;
+  height: 40px;
+  font-weight: 700;
+  opacity: .6;
+}
   </style>
 </head>
 
@@ -1338,7 +1361,6 @@ setActiveSource("src-auto");
 loadPage();
 setInterval(()=>loadPage(false), REFRESH_MS);
 </script>
-
 
 <!-- GLOBAL SCRIPTS -->
 <script src="../app.js" defer></script>
