@@ -669,6 +669,12 @@ body.light-theme .skeleton::after {
   }
 }
 
+.pages span {
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 40px;
+  user-select: none;
+}
   </style>
 </head>
 
@@ -1019,7 +1025,6 @@ let requestId = 0;
 let hasLoadedOnce = false;
 
 const prefetchCache = new Map();
-
 const $ = id => document.getElementById(id);
 
 /* =====================================
@@ -1104,7 +1109,6 @@ function mergeRows(cg, binMap){
     const b = binMap?.get(sym);
 
     return {
-      rank: c.market_cap_rank,
       symbol: sym,
       name: c.name,
       icon: c.image,
@@ -1127,8 +1131,7 @@ function applySource(rows){
       return { ...r, price:r.cgPrice, chg:r.cgChg };
     }
     if(sourceMode === "binance"){
-      if(r.source === "binance") return r;
-      return { ...r, price:r.cgPrice, chg:r.cgChg };
+      return r.source === "binance" ? r : { ...r, price:r.cgPrice, chg:r.cgChg };
     }
     return r;
   });
@@ -1152,7 +1155,7 @@ function drawSparkline(data, color){
   }).join(" ");
 
   return `
-    <svg viewBox="0 0 ${w} ${h}" width="${w}" height="${h}">
+    <svg viewBox="0 0 ${w} ${h}">
       <polyline
         fill="none"
         stroke="${color}"
@@ -1175,62 +1178,86 @@ function render(rows){
     );
 
   const startRank = (currentPage - 1) * PER_PAGE + 1;
-$("meta-count").textContent = "Coins: " + list.length;
+  $("meta-count").textContent = "Coins: " + list.length;
 
-$("list").innerHTML = list.map((r, i)=>`
-  <div class="price-row">
-    <div class="rank">${startRank + i}</div>
+  $("list").innerHTML = list.map((r, i)=>`
+    <div class="price-row">
+      <div class="rank">${startRank + i}</div>
 
-   <div class="coin-wrap">
-  <img class="coin-icon" src="${r.icon}" loading="lazy">
-  <div class="name mobile-name">${r.name}</div>
-</div>
+      <div class="coin-wrap">
+        <img class="coin-icon" src="${r.icon}" loading="lazy">
+        <div class="name mobile-name">${r.name}</div>
+      </div>
 
-<div class="sub">
-  <div class="sym">${r.symbol}</div>
-  <div class="name desktop-name">${r.name}</div>
-</div>
+      <div class="sub">
+        <div class="sym">${r.symbol}</div>
+        <div class="name desktop-name">${r.name}</div>
+      </div>
 
-    <div class="chg ${chgClass(r.chg)}">
-      <span>${arrow(r.chg)}</span>
-      <span>${r.chg != null ? r.chg.toFixed(2) + "%" : "—"}</span>
+      <div class="chg ${chgClass(r.chg)}">
+        <span class="arrow">${arrow(r.chg)}</span>
+        <span>${r.chg != null ? r.chg.toFixed(2) + "%" : "—"}</span>
+      </div>
+
+      <div class="price-wrap">
+        <div class="price">${formatPrice(r.price)}</div>
+        <div class="spark">
+          ${drawSparkline(
+            r.spark,
+            r.chg > 0 ? "#4ade80" : r.chg < 0 ? "#f87171" : "#94a3b8"
+          )}
+        </div>
+      </div>
     </div>
-
-    <!-- ✅ PRICE + MINI CHART ΣΕ ΕΥΘΕΙΑ -->
-   <div class="price-wrap">
-  <div class="price">${formatPrice(r.price)}</div>
-  <div class="spark">
-    ${drawSparkline(
-      r.spark,
-      r.chg > 0 ? "#4ade80" : r.chg < 0 ? "#f87171" : "#94a3b8"
-    )}
-  </div>
-</div>
-  </div>
-`).join("");
+  `).join("");
 }
 
 /* =====================================
-   PAGINATION
+   PAGINATION (SMART + …)
 ===================================== */
 function renderPagination(){
   const wrap = document.querySelector(".pages");
   wrap.innerHTML = "";
 
-  for(let i=1;i<=TOTAL_PAGES;i++){
+  const isMobile = window.innerWidth <= 600;
+  const total = TOTAL_PAGES;
+  const current = currentPage;
+
+  const addPage = p => {
     const b = document.createElement("button");
-    b.className = "page-btn" + (i===currentPage?" active":"");
-    b.textContent = i;
-    b.onclick = ()=> goToPage(i);
+    b.className = "page-btn" + (p === current ? " active" : "");
+    b.textContent = p;
+    b.onclick = () => goToPage(p);
     wrap.appendChild(b);
+  };
+
+  const addDots = () => {
+    const s = document.createElement("span");
+    s.className = "dots";
+    s.textContent = "…";
+    wrap.appendChild(s);
+  };
+
+  if(!isMobile){
+    for(let i=1;i<=total;i++) addPage(i);
+  }else{
+    addPage(1);
+    if(current > 3) addDots();
+
+    for(let i=Math.max(2,current-1); i<=Math.min(total-1,current+1); i++){
+      addPage(i);
+    }
+
+    if(current < total-2) addDots();
+    if(total > 1) addPage(total);
   }
 
-  document.querySelector(".page-btn.prev").disabled = currentPage===1;
-  document.querySelector(".page-btn.next").disabled = currentPage===TOTAL_PAGES;
+  document.querySelector(".page-btn.prev").disabled = current === 1;
+  document.querySelector(".page-btn.next").disabled = current === total;
 }
 
 function goToPage(p){
-  if(p===currentPage) return;
+  if(p === currentPage) return;
   currentPage = p;
   window.scrollTo({top:0,behavior:"instant"});
   loadPage(true);
@@ -1243,7 +1270,10 @@ function renderSkeleton(count=PER_PAGE){
   const row = `
     <div class="price-row skeleton-row">
       <div class="rank skeleton"></div>
-      <div class="coin-icon skeleton"></div>
+      <div class="coin-wrap">
+        <div class="coin-icon skeleton"></div>
+        <div class="name skeleton" style="width:40px;height:10px"></div>
+      </div>
       <div class="sub">
         <div class="sym skeleton"></div>
         <div class="name skeleton"></div>
@@ -1255,18 +1285,7 @@ function renderSkeleton(count=PER_PAGE){
 }
 
 /* =====================================
-   PREFETCH
-===================================== */
-async function prefetchPage(page){
-  if(page>TOTAL_PAGES || prefetchCache.has(page)) return;
-  try{
-    const cg = await fetchCoinGecko(page, new AbortController().signal);
-    prefetchCache.set(page, mergeRows(cg, binanceMap));
-  }catch{}
-}
-
-/* =====================================
-   LOAD PAGE
+   LOAD
 ===================================== */
 async function loadPage(isPageChange=false){
   const token = ++requestId;
@@ -1284,19 +1303,10 @@ async function loadPage(isPageChange=false){
       binanceMap = await fetchBinanceMap().catch(()=>null);
     }
 
-    let rows;
-    if(prefetchCache.has(currentPage)){
-      rows = prefetchCache.get(currentPage);
-      prefetchCache.delete(currentPage);
-    }else{
-      const cg = await fetchCoinGecko(currentPage, abortCtrl.signal);
-      if(token!==requestId) return;
-      rows = mergeRows(cg, binanceMap);
-    }
+    const cg = await fetchCoinGecko(currentPage, abortCtrl.signal);
+    if(token !== requestId) return;
 
-    allRows = rows;
-    saveCache({page:currentPage,rows});
-
+    allRows = mergeRows(cg, binanceMap);
     render(applySource(allRows));
     renderPagination();
 
@@ -1306,84 +1316,29 @@ async function loadPage(isPageChange=false){
     setStatus("");
     hasLoadedOnce = true;
 
-    prefetchPage(currentPage + 1);
-
   }catch(e){
-    if(e.name==="AbortError") return;
-    const cached = loadCache();
-    if(cached?.rows){
-      allRows = cached.rows;
-      render(applySource(allRows));
-      renderPagination();
-      setStatus("Offline δεδομένα","warning");
-    }else{
+    if(e.name !== "AbortError"){
       setStatus("Αδυναμία σύνδεσης","error");
     }
   }
 }
 
 /* =====================================
-   EVENTS
+   EVENTS & INIT
 ===================================== */
 $("src-auto").onclick = ()=>{sourceMode="auto";setActiveSource("src-auto");render(applySource(allRows));};
 $("src-binance").onclick = ()=>{sourceMode="binance";setActiveSource("src-binance");render(applySource(allRows));};
 $("src-coingecko").onclick = ()=>{sourceMode="coingecko";setActiveSource("src-coingecko");render(applySource(allRows));};
 $("q")?.addEventListener("input",()=>render(applySource(allRows)));
 
-document.querySelector(".page-btn.prev").onclick=()=>{
-  if(currentPage>1){currentPage--;window.scrollTo({top:0,behavior:"instant"});loadPage(true);}
-};
-document.querySelector(".page-btn.next").onclick=()=>{
-  if(currentPage<TOTAL_PAGES){currentPage++;window.scrollTo({top:0,behavior:"instant"});loadPage(true);}
-};
+document.querySelector(".page-btn.prev").onclick=()=>{ if(currentPage>1) goToPage(currentPage-1); };
+document.querySelector(".page-btn.next").onclick=()=>{ if(currentPage<TOTAL_PAGES) goToPage(currentPage+1); };
 
-
-/* =====================================
-   INIT
-===================================== */
 setActiveSource("src-auto");
-
-/* 🔥 RESET state για back/forward navigation */
-hasLoadedOnce = false;
-abortCtrl = null;
-requestId = 0;
-
-/* 🔥 Πρώτο καθαρό load */
 loadPage();
-
-/* 🔥 Interval refresh */
-let pricesInterval = setInterval(() => loadPage(false), REFRESH_MS);
-
-/* 🔥 Καθάρισμα όταν φεύγεις από τη σελίδα */
-window.addEventListener("pagehide", () => {
-  clearInterval(pricesInterval);
-});
-
-window.addEventListener("pageshow", (e) => {
-  if (e.persisted) {
-    location.reload();
-  }
-});
+setInterval(()=>loadPage(false), REFRESH_MS);
 </script>
 
-
-
-<script>
-  (function () {
-    const MOBILE_BP = 600;
-
-    function applyPricesMode() {
-      const isMobile = window.innerWidth <= MOBILE_BP;
-      document.body.classList.toggle("prices-mobile", isMobile);
-    }
-
-    window.addEventListener("resize", applyPricesMode);
-    window.addEventListener("orientationchange", applyPricesMode);
-    document.addEventListener("DOMContentLoaded", applyPricesMode);
-
-    applyPricesMode();
-  })();
-</script>
 
 <!-- GLOBAL SCRIPTS -->
 <script src="../app.js" defer></script>
