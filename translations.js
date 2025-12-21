@@ -2,6 +2,8 @@ window.TRANSLATIONS = {
   el: {
 
 
+live_prices: "Δες Live Τιμές",
+
 mobile_theme: "Αλλαγή Θέματος",
 
 
@@ -296,6 +298,8 @@ guide_ethereum_desc:
   },
 
   en: {
+
+live_prices: "View Live Prices",
 
 mobile_theme: "Change Theme",
 

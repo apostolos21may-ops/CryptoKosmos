@@ -845,3 +845,21 @@ body.light-theme .mobile-menu a {
 #glossary-wrapper {
   padding-bottom: 17px;   /* 👈 αυτό λύνει το κόψιμο */
 }
+
+
+/* =========================================
+   iOS SAFARI FIX — PHANTOM BOTTOM SPACE
+========================================= */
+html, body {
+  height: 100%;
+  overscroll-behavior-y: none;
+}
+
+body {
+  min-height: 100svh;   /* 🔥 όχι 100vh */
+}
+
+/* Safari + sticky header fix */
+body {
+  overflow-x: hidden;
+}

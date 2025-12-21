@@ -54,6 +54,17 @@ window.TRANSLATIONS = {
     footer_rights: "Όλα τα δικαιώματα διατηρούνται.",
 
 
+mobile_home: "Αρχική Σελίδα",
+mobile_theme: "Αλλαγή Θέματος",
+
+
+    /* HEADER */
+    header_tagline: "Ο παλμός του κόσμου των crypto",
+    nav_market: "Αγορά",
+    nav_charts: "Τάσεις",
+    nav_guides: "Οδηγοί",
+    nav_glossary: "Γλωσσάρι",
+
     /* =======================
              LOGIN
     ======================= */
@@ -142,6 +153,16 @@ window.TRANSLATIONS = {
     /* FOOTER */
     footer_rights: "All rights reserved.",
 
+
+mobile_home: "Home Page",
+mobile_theme: "Change Theme",
+
+    /* HEADER */
+    header_tagline: "The pulse of the crypto world",
+    nav_market: "Market",
+    nav_charts: "Trends",
+    nav_guides: "Guides",
+    nav_glossary: "Glossary",
 
     /* LOGIN */
     login: "Login",   // ← ΚΑΙ ΕΔΩ ΕΙΝΑΙ Η ΛΥΣΗ
