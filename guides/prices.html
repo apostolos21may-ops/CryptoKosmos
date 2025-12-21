@@ -514,109 +514,28 @@ body.light-theme .skeleton::after {
   pointer-events: none;
 }
 
-/* =====================================
-   SCALE WRAPPER – FINAL FIX
-===================================== */
-
-.prices-scale {
-  display: block;
-}
-
-/* MOBILE = σαν φωτογραφία που μικραίνει */
-@media (max-width: 600px){
-
-  .prices-scale{
-    position: relative;
-
-    left: 50%;
-    transform: translateX(-50%) scale(0.85);
-    transform-origin: top center;
-
-    /* ⬇️ ΑΥΤΟ ΕΞΑΦΑΝΙΖΕΙ ΤΟ ΚΕΝΟ */
-    width: calc(100% / 0.85);
-  }
-
-  /* ΚΟΛΛΑΕΙ pagination με panel */
-  .prices-panel{
-    margin-bottom: 12px; /* ίδιο “σφιχτό” κενό όπως desktop */
-  }
-
-  .prices-pagination-wrap{
-    margin-top: 0;
-    padding-top: 0;
-  }
-}
-
 
 
 /* =====================================
-   FINAL MOBILE GAP FIX (PAGINATION → FOOTER)
+   MOBILE GAP FIX — SAFE & CLEAN
+   (NO size / NO layout changes)
 ===================================== */
 @media (max-width: 600px){
 
-  .prices-scale{
-    position: relative;
-    left: 50%;
-    transform: translateX(-50%) scale(0.85);
-    transform-origin: top center;
-    width: calc(100% / 0.85);
-
-    /* ⬇️ ΑΦΑΙΡΕΙ ΤΟ “ΨΕΥΤΙΚΟ” ΥΨΟΣ ΤΟΥ SCALE */
-    margin-bottom: -120px;
-  }
-
-  /* pagination κολλητά στο panel */
   .prices-pagination-wrap{
-    margin-top: 0 !important;
-    padding-top: 0 !important;
+    margin-top: 12px;     /* ίδιο με desktop */
+    margin-bottom: 0;
   }
 
-  /* footer να ΜΗΝ κρατάει έξτρα απόσταση */
   footer,
   .site-footer{
-    margin-top: 0 !important;
-    padding-top: 24px; /* φυσιολογική ανάσα */
+    margin-top: 12px;     /* φυσιολογικό, μικρό */
   }
 }
 
 
 
 
-
-
-
-
-/* =====================================================
-   MOBILE GAP FIX — TOGGLE CLASS LIKE MOBILE MENU
-   (NO layout/style changes)
-===================================================== */
-
-body.prices-mobile .prices-wrap{
-  margin-bottom: 0 !important;
-  padding-bottom: 0 !important;
-}
-
-body.prices-mobile .prices-panel{
-  margin-bottom: 10px !important;   /* όσο “λίγο κενό” θες */
-}
-
-body.prices-mobile .prices-pagination-wrap{
-  margin-top: 0 !important;
-  margin-bottom: 0 !important;
-  padding-top: 0 !important;
-  padding-bottom: 0 !important;
-}
-
-/* Αν το footer κρατάει “ανάσα” από global styles */
-body.prices-mobile footer,
-body.prices-mobile .site-footer{
-  margin-top: 10px !important;
-}
-
-/* Bonus: κόβει τυχόν extra bottom spacing από το section */
-body.prices-mobile .prices-page{
-  padding-bottom: 0 !important;
-}
   </style>
 </head>
 
