@@ -533,6 +533,35 @@ body.light-theme .skeleton::after {
   }
 }
 
+/* =====================================
+   MOBILE HEADER FIX (visual only)
+===================================== */
+@media (max-width: 600px){
+
+  .prices-head{
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .prices-tools{
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .prices-search{
+    width: 100%;
+  }
+
+  .segmented{
+    width: 100%;
+  }
+
+  .segmented button{
+    flex: 1 1 0;
+    min-width: 0;
+  }
+}
 
 
 
