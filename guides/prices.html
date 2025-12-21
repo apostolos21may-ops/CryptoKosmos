@@ -517,54 +517,58 @@ body.light-theme .skeleton::after {
 
 
 /* =====================================
-   MOBILE GAP FIX — SAFE & CLEAN
-   (NO size / NO layout changes)
+   MOBILE REAL FIX – NO OVERLAP
 ===================================== */
 @media (max-width: 600px){
 
-  .prices-pagination-wrap{
-    margin-top: 12px;     /* ίδιο με desktop */
-    margin-bottom: 0;
+  .price-row{
+    grid-template-columns:
+      28px        /* rank */
+      28px        /* icon */
+      1fr;        /* name block */
+
+    grid-template-rows: auto auto;
+    row-gap: 6px;
   }
 
-  footer,
-  .site-footer{
-    margin-top: 12px;     /* φυσιολογικό, μικρό */
-  }
-}
-
-/* =====================================
-   MOBILE HEADER FIX (visual only)
-===================================== */
-@media (max-width: 600px){
-
-  .prices-head{
-    flex-direction: column;
-    align-items: stretch;
-    gap: 10px;
+  /* σύμβολο + όνομα */
+  .sub{
+    grid-column: 3;
   }
 
-  .prices-tools{
-    flex-direction: column;
-    align-items: stretch;
+  /* ποσοστό */
+  .chg{
+    grid-column: 3;
+    grid-row: 2;
+    justify-self: start;
+    margin-right: 0;
+    font-size: 13px;
   }
 
-  .prices-search{
+  /* τιμή + chart */
+  .price-wrap{
+    grid-column: 1 / -1;
+    grid-row: 3;
+
     width: 100%;
-  }
-
-  .segmented{
-    width: 100%;
-  }
-
-  .segmented button{
-    flex: 1 1 0;
     min-width: 0;
+    padding-left: 0;
+
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .price{
+    font-size: 16px;
+  }
+
+  .spark{
+    width: 90px;
+    height: 24px;
   }
 }
-
-
-
   </style>
 </head>
 
