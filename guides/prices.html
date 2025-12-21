@@ -514,6 +514,62 @@ body.light-theme .skeleton::after {
   pointer-events: none;
 }
 
+
+
+
+
+/* =====================================
+   MOBILE TEXT COMPRESSION – FINAL
+===================================== */
+@media (max-width: 600px){
+
+  /* 🔢 Rank πιο μικρό */
+  .rank{
+    font-size: 11px;
+    min-width: 22px;
+    padding-right: 4px;
+  }
+
+  /* 🪙 Icon ελάχιστα μικρότερο */
+  .coin-icon{
+    width: 26px;
+    height: 26px;
+  }
+
+  /* 🔤 Symbol (BTC, EETH, WSTUSR) */
+  .sym{
+    font-size: 13px;
+    letter-spacing: .2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 90px;
+  }
+
+  /* 🏷️ Name: ΜΟΝΟ 1 γραμμή */
+  .name{
+    font-size: 11px;
+    line-height: 1.2;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 120px;
+  }
+
+  /* 📉 % change – ΠΟΤΕ πάνω στο icon */
+  .chg{
+    justify-self: end;
+    align-self: center;
+    font-size: 12px;
+    margin: 0;
+    white-space: nowrap;
+    min-width: 64px;
+    text-align: right;
+  }
+}
+
+
+
 /* =====================================
    MOBILE GRID LOCK – FINAL FIX
 ===================================== */
@@ -574,7 +630,6 @@ body.light-theme .skeleton::after {
     display: block;
   }
 }
-
   </style>
 </head>
 
