@@ -582,152 +582,40 @@ body.light-theme .skeleton::after {
 
 
 
-/* =========================================================
-   MOBILE (NO SCALE) — REAL RESPONSIVE, NO CUTS, NO GAPS
-========================================================= */
-@media (max-width: 600px){
 
-  /* Σφίγγει γενικά το section */
-  .prices-page{
-    padding: 16px 0;
-  }
 
-  /* Header stack */
-  .prices-head{
-    flex-direction: column;
-    align-items: stretch;
-    gap: 10px;
-    margin-bottom: 10px;
-  }
 
-  .prices-tools{
-    flex-direction: column;
-    align-items: stretch;
-    gap: 10px;
-  }
 
-  .prices-search{
-    width: 100%;
-  }
+/* =====================================================
+   MOBILE GAP FIX — TOGGLE CLASS LIKE MOBILE MENU
+   (NO layout/style changes)
+===================================================== */
 
-  .segmented{
-    width: 100%;
-    justify-content: space-between;
-  }
-  .segmented button{
-    min-width: 0;
-    flex: 1 1 0;
-    padding: 9px 10px;
-    font-size: 12px;
-  }
-
-  /* Panel πιο “μαζεμένο” */
-  .prices-panel{
-    padding: 12px;
-    border-radius: 20px;
-  }
-
-  .prices-list{
-    gap: 8px;
-  }
-
-  /* ROW: μικραίνει ΠΡΑΓΜΑΤΙΚΑ */
-  .price-row{
-    padding: 10px;
-    border-radius: 16px;
-
-    /* πιο στενές στήλες */
-    grid-template-columns:
-      28px            /* rank */
-      26px            /* icon */
-      minmax(0,1fr)   /* name */
-      74px            /* % */
-      auto;           /* price */
-
-    column-gap: 8px;
-  }
-
-  .rank{
-    min-width: 0;
-    padding-right: 4px;
-    font-size: 12px;
-  }
-
-  .coin-icon{
-    width: 26px;
-    height: 26px;
-  }
-
-  .sym{
-    font-size: 13px;
-    letter-spacing: .2px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .name{
-    font-size: 11px;
-  }
-
-  .chg{
-    margin-right: 0;
-    font-size: 12px;
-    gap: 4px;
-  }
-
-  .price{
-    font-size: 13px;
-  }
-
-  /* Αν κάποια τιμή είναι τεράστια, να μη σπάει το layout */
-  .price, .chg{
-    max-width: 100%;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  /* Pagination: καμία “ανάσα” κάτω/πάνω */
-  .prices-pagination-wrap{
-    margin: 10px auto 0 !important;
-    padding: 0 !important;
-  }
-
-  .prices-pagination{
-    padding: 10px 10px;
-    gap: 10px;
-    border-radius: 18px;
-  }
-
-  .pages{
-    gap: 6px;
-  }
-
-  .page-btn{
-    min-width: 32px;
-    height: 32px;
-    font-size: 12px;
-  }
-
-  /* Footer να “κολλάει” φυσιολογικά */
-  footer,
-  .site-footer{
-    margin-top: 12px !important;
-    padding-top: 18px;
-  }
+body.prices-mobile .prices-wrap{
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
 }
 
-/* Extra-small phones: κρύψε rank για να κερδίσεις χώρο */
-@media (max-width: 380px){
-  .price-row{
-    grid-template-columns:
-      0px
-      24px
-      minmax(0,1fr)
-      70px
-      auto;
-  }
-  .rank{ display:none; }
+body.prices-mobile .prices-panel{
+  margin-bottom: 10px !important;   /* όσο “λίγο κενό” θες */
+}
+
+body.prices-mobile .prices-pagination-wrap{
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+/* Αν το footer κρατάει “ανάσα” από global styles */
+body.prices-mobile footer,
+body.prices-mobile .site-footer{
+  margin-top: 10px !important;
+}
+
+/* Bonus: κόβει τυχόν extra bottom spacing από το section */
+body.prices-mobile .prices-page{
+  padding-bottom: 0 !important;
 }
   </style>
 </head>
@@ -806,6 +694,7 @@ body.light-theme .skeleton::after {
 </div>
 
 <!-- ================= PRICES PAGE ================= -->
+
 <section class="prices-page">
   <div class="container">
 
@@ -837,31 +726,33 @@ body.light-theme .skeleton::after {
       Φόρτωση τιμών…
     </div>
 
-    <!-- ===== SCALE WRAPPER (ΤΟ ΚΛΕΙΔΙ) ===== -->
+    <!-- ===== SCALE WRAPPER ===== -->
     <div class="prices-scale">
 
-      <!-- ===== Prices Panel ===== -->
-      <div class="prices-panel">
+      <!-- ===== WRAP (PANEL + PAGINATION ΜΑΖΙ) ===== -->
+      <div id="prices-wrap" class="prices-wrap">
 
-        <div id="list" class="prices-list"></div>
+        <!-- ===== Prices Panel ===== -->
+        <div class="prices-panel">
+          <div id="list" class="prices-list"></div>
 
-        <!-- ===== Meta ===== -->
-        <div class="meta">
-          <span class="pill" id="meta-source">Source: Auto</span>
-          <span class="pill" id="meta-updated">Updated: —</span>
-          <span class="pill" id="meta-count">Coins: —</span>
+          <div class="meta">
+            <span class="pill" id="meta-source">Source: Auto</span>
+            <span class="pill" id="meta-updated">Updated: —</span>
+            <span class="pill" id="meta-count">Coins: —</span>
+          </div>
         </div>
 
-      </div>
-
-      <!-- ================= PAGINATION ================= -->
-      <div class="prices-pagination-wrap">
-        <div class="prices-pagination">
-          <button class="page-btn prev" aria-label="Previous page">‹</button>
-          <div class="pages"></div>
-          <button class="page-btn next" aria-label="Next page">›</button>
+        <!-- ===== Pagination ===== -->
+        <div class="prices-pagination-wrap">
+          <div class="prices-pagination">
+            <button class="page-btn prev" aria-label="Previous page">‹</button>
+            <div class="pages"></div>
+            <button class="page-btn next" aria-label="Next page">›</button>
+          </div>
         </div>
-      </div>
+
+      </div><!-- /prices-wrap -->
 
     </div><!-- /prices-scale -->
 
@@ -1418,6 +1309,25 @@ window.addEventListener("pageshow", (e) => {
     location.reload();
   }
 });
+</script>
+
+
+
+<script>
+  (function () {
+    const MOBILE_BP = 600;
+
+    function applyPricesMode() {
+      const isMobile = window.innerWidth <= MOBILE_BP;
+      document.body.classList.toggle("prices-mobile", isMobile);
+    }
+
+    window.addEventListener("resize", applyPricesMode);
+    window.addEventListener("orientationchange", applyPricesMode);
+    document.addEventListener("DOMContentLoaded", applyPricesMode);
+
+    applyPricesMode();
+  })();
 </script>
 
 <!-- GLOBAL SCRIPTS -->
