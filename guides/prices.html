@@ -837,30 +837,38 @@ body {
 }
 
 
- 
-/* ===============================
-   FORCE HEADER COLOR (prices.html)
-   =============================== */
+ /* =====================================
+   HEADER THEME FIX – prices.html
+   (Tablet Safari safe)
+===================================== */
 
-/* Light mode */
-body.light .site-header {
-  background: rgba(219, 215, 215, 0.95) !important;
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+/* 🌞 LIGHT THEME */
+body.light-theme .site-header {
+  background: rgba(255, 255, 255, 0.95) !important;
+  color: #0f172a;
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
 }
 
-/* Dark mode */
-body.dark .site-header {
-  background: rgba(80, 93, 106, 0.96) !important;
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-}
-
-/* Safari iPad fix (pseudo layers) */
-body.dark .site-header::before,
-body.dark .site-header::after {
+/* 🌙 DARK THEME */
+body:not(.light-theme) .site-header {
   background: rgba(10, 14, 22, 0.96) !important;
+  color: #e8edf2;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
 }
+
+/* 🧯 Safari iPad – force repaint */
+.site-header {
+  will-change: background;
+  transform: translateZ(0);
+}
+
+
 </style>
 </head>
 
