@@ -863,3 +863,37 @@ body {
 body {
   overflow-x: hidden;
 }
+
+
+body.light-theme .site-header {
+  background: #ffffff;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+
+html, body {
+  min-height: 100%;
+  height: auto;
+  overflow-y: scroll; /* ⬅️ ΠΟΛΥ ΣΗΜΑΝΤΙΚΟ */
+  background: #ffffff; /* light theme default */
+}
+
+body.light-theme {
+  background: #ffffff;
+}
+
+body:not(.light-theme) {
+  background: #0f1216;
+}
+
+
+/* ===============================
+   FIX STICKY HEADER BLOCK
+================================ */
+
+/* ❌ ΜΗΝ υπάρχει overflow πάνω από το header */
+body,
+.prices-page,
+.container {
+  overflow: visible !important;
+}
