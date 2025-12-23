@@ -836,16 +836,19 @@ body {
   z-index: 9999; /* ΠΑΝΩ ΑΠΟ ΟΛΑ */
 }
 
-
-body.dark .site-header {
-  background: rgba(10, 14, 22, 0.92) !important;
+body.dark .site-header,
+body.dark .site-header::before,
+body.dark .site-header::after {
+  background: rgba(10, 14, 22, 0.94) !important;
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
 }
 
 @supports (-webkit-touch-callout: none) {
-  body.dark .site-header {
-    background: rgba(10, 14, 22, 0.95);
+  body.dark .site-header,
+  body.dark .site-header::before,
+  body.dark .site-header::after {
+    background: rgba(10, 14, 22, 0.96) !important;
   }
 }
   </style>
