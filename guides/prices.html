@@ -836,22 +836,32 @@ body {
   z-index: 9999; /* ΠΑΝΩ ΑΠΟ ΟΛΑ */
 }
 
-body.dark .site-header,
-body.dark .site-header::before,
-body.dark .site-header::after {
-  background: rgba(10, 14, 22, 0.94) !important;
+
+ 
+/* ===============================
+   FORCE HEADER COLOR (prices.html)
+   =============================== */
+
+/* Light mode */
+body.light .site-header {
+  background: rgba(219, 215, 215, 0.95) !important;
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
 }
 
-@supports (-webkit-touch-callout: none) {
-  body.dark .site-header,
-  body.dark .site-header::before,
-  body.dark .site-header::after {
-    background: rgba(10, 14, 22, 0.96) !important;
-  }
+/* Dark mode */
+body.dark .site-header {
+  background: rgba(80, 93, 106, 0.96) !important;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
 }
-  </style>
+
+/* Safari iPad fix (pseudo layers) */
+body.dark .site-header::before,
+body.dark .site-header::after {
+  background: rgba(10, 14, 22, 0.96) !important;
+}
+</style>
 </head>
 
 <body class="article-page">
