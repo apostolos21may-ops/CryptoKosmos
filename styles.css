@@ -897,3 +897,38 @@ body,
 .container {
   overflow: visible !important;
 }
+
+
+
+/* ===============================
+   GLOBAL BLUR WHEN MODAL OPEN
+================================ */
+
+/* Όλο το site εκτός από το modal */
+body.modal-open .site-header,
+body.modal-open main,
+body.modal-open .prices-page,
+body.modal-open .container {
+  filter: blur(6px);
+  pointer-events: none;
+  transition: filter 0.25s ease;
+}
+
+/* Το modal ΠΑΝΩ από όλα */
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+}
+
+/* Το modal card ΚΑΘΑΡΟ */
+.modal-card {
+  filter: none !important;
+  pointer-events: auto;
+}
+
+/* Σκούρο backdrop */
+.modal-backdrop {
+  backdrop-filter: blur(6px);
+  background: rgba(0,0,0,0.25);
+}

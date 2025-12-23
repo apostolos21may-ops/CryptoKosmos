@@ -18,6 +18,51 @@
   <style>
    
 
+.spark {
+  overflow: visible !important;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+
+#auth-icon {
+  width: 20px;
+  height: 20px;
+}
+
+
+body.article-page {
+      padding: 0;
+    }
+
+    .article-container {
+      max-width: 800px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    /* Desktop: lock widths of header buttons */
+    @media (min-width: 900px) {
+      #theme-toggle {
+        width: 85px;
+        justify-content: center;
+      }
+
+      #auth-btn {
+        width: 85px;
+        justify-content: center;
+      }
+
+      #lang-toggle {
+        width: 70px;
+        justify-content: center;
+      }
+
+      .pill-btn {
+        height: 34px;
+      }
+    }
 
 /* =====================================
    PRICES PAGE
