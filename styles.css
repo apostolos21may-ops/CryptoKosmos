@@ -1,0 +1,934 @@
+/* =========================================
+   THEME VARIABLES
+========================================= */
+:root{
+  --bg:#0f1216;
+  --bg-alt:#12161c;
+  --card:#171b22;
+  --text:#e8edf2;
+  --muted:#8ea0b3;
+  --brand:#5bb4ff;
+  --brand2:#7b61ff;
+  --accent:#35d0a7;
+  --border:#222a33;
+}
+
+/* Light theme tokens */
+body.light-theme{
+  --bg:#f7fafc;
+  --bg-alt:#edf2f7;
+  --card:#ffffff;
+  --text:#0f172a;
+  --muted:#64748b;
+  --border:#d0d7e2;
+}
+
+/* =========================================
+   BASE
+========================================= */
+*{
+  box-sizing:border-box;
+}
+
+html,body{
+  margin:0;
+  padding:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  transition:background-color .25s ease, color .25s ease;
+}
+
+a{
+  color:inherit;
+  text-decoration:none;
+}
+
+.container{
+  max-width:1100px;
+  margin:auto;
+  padding:0 16px;
+}
+
+/* =========================================
+   HEADER
+========================================= */
+.site-header{
+  position:sticky;
+  top:0;
+  z-index:50;
+  background:rgba(15,18,22,.9);
+  backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--border);
+}
+
+body.light-theme .site-header{
+  background:rgba(255,255,255,.9);
+}
+
+.header-inner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  height:72px;
+  gap:16px;
+}
+
+.brand{
+  display:flex;
+  gap:12px;
+  align-items:center;
+}
+
+.logo{
+  width:44px;
+  height:44px;
+  border-radius:10px;
+  display:block;
+  object-fit:cover;
+}
+
+.brand-text h1{
+  font-size:20px;
+  line-height:1;
+  margin:0;
+}
+
+.tagline{
+  margin:2px 0 0;
+  color:var(--muted);
+  font-size:12px;
+}
+
+.nav{
+  display:flex;
+  gap:18px;
+}
+
+.nav a{
+  padding:8px 10px;
+  border-radius:8px;
+  color:#cfe3ff;
+}
+
+.nav a:hover{
+  background:var(--bg-alt);
+}
+
+body.light-theme .nav a{
+  color:#1f2937;
+}
+
+/* Header actions (theme + login) */
+.header-actions{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.pill-btn{
+  border-radius:999px;
+  border:1px solid var(--border);
+  padding:6px 12px;
+  font-size:13px;
+  background:rgba(15,23,42,0.9);
+  color:var(--text);
+  cursor:pointer;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  transition:.18s ease;
+}
+
+body.light-theme .pill-btn{
+  background:#ffffff;
+}
+
+.pill-btn:hover{
+  border-color:var(--brand);
+}
+
+.pill-btn .icon-img{
+  width:22px;
+  height:22px;
+  object-fit:contain;
+  display:inline-block;
+  margin-right:4px;
+}
+
+/* =========================================
+   HERO
+========================================= */
+.hero{
+  padding:70px 0;
+  border-bottom:1px solid var(--border);
+  background:linear-gradient(180deg,rgba(91,180,255,.05),transparent);
+  perspective:1600px;
+}
+
+.hero-flex{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:40px;
+  perspective:1200px;
+}
+
+/* 3D crypto panel */
+.hero-rank-box{
+  width:320px;
+  max-height:440px;
+  padding:22px 18px;
+  border-radius:32px;
+
+  background:
+    radial-gradient(circle at 15% 0%,rgba(120,170,255,0.28),transparent 55%),
+    radial-gradient(circle at 85% 100%,rgba(150,110,255,0.28),transparent 55%),
+    linear-gradient(145deg,#0c111b,#0f141f);
+
+  box-shadow:
+    0 0 60px rgba(91,180,255,0.28),
+    0 0 130px rgba(123,97,255,0.25),
+    inset 0 0 22px rgba(255,255,255,0.06),
+    0 35px 55px rgba(0,0,0,0.45);
+
+  overflow:hidden;
+
+  transform:
+    rotate(6deg)
+    rotateY(35deg)
+    translateX(-25px)
+    scale(0.93);
+
+  transition:transform .55s ease, box-shadow .55s ease;
+}
+
+.hero-rank-box:hover{
+  transform:rotate(0) rotateY(0) translateX(0) scale(1.06);
+  box-shadow:
+    0 0 100px rgba(91,180,255,0.55),
+    0 0 180px rgba(123,97,255,0.45),
+    inset 0 0 30px rgba(255,255,255,0.10),
+    0 45px 75px rgba(0,0,0,0.65);
+}
+
+/* crypto rows */
+.hero-rank-inner{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+
+.hero-rank-row{
+  display:grid;
+  grid-template-columns:28px 120px 1fr 80px;
+  align-items:center;
+  padding:8px 12px;
+  border-radius:14px;
+  background:rgba(10,15,25,0.88);
+  box-shadow:0 8px 18px rgba(0,0,0,0.45);
+  font-size:13px;
+}
+
+.hr-pos{opacity:.7;}
+.hr-symbol{font-weight:600;text-transform:uppercase;}
+.hr-price{text-align:right;font-variant-numeric:tabular-nums;}
+.hr-change{text-align:right;font-variant-numeric:tabular-nums;font-weight:600;}
+.hr-up{color:#4ade80;}
+.hr-down{color:#f97373;}
+.hr-icon{width:26px;height:26px;border-radius:50%;margin-right:6px;}
+
+/* hero text */
+.hero-text{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+
+.hero-text h2{
+  margin-bottom:12px;
+  font-size:34px;
+}
+
+.hero-text p{
+  max-width:480px;
+  font-size:16px;
+  line-height:1.6;
+  color:var(--muted);
+}
+
+/* mobile */
+@media(max-width:900px){
+  .hero-flex{
+    flex-direction:column;
+    text-align:center;
+    gap:20px;
+  }
+
+  .hero-rank-box{
+    margin:auto;
+    transform:rotate(0deg) rotateY(0deg) scale(0.9);
+  }
+}
+
+/* light theme hero panel */
+body.light-theme .hero-rank-box{
+  background:#ffffff;
+  border:1px solid #e2e8f0;
+  box-shadow:
+    0 0 40px rgba(0,0,0,0.08),
+    0 0 80px rgba(0,0,0,0.05);
+}
+
+body.light-theme .hero-rank-row{
+  background:#ffffff;
+  box-shadow:0 4px 10px rgba(0,0,0,0.06);
+  color:#111 !important;
+}
+
+body.light-theme .hr-pos{
+  color:#111 !important;
+  opacity:.6;
+}
+
+body.light-theme .hr-symbol{
+  color:#111 !important;
+}
+
+body.light-theme .hr-price{
+  color:#111 !important;
+}
+
+body.light-theme .hr-change{
+  font-weight:700;
+}
+
+body.light-theme .hr-up{
+  color:#16a34a !important;
+}
+
+body.light-theme .hr-down{
+  color:#dc2626 !important;
+}
+
+/* =========================================
+   SECTIONS & CARDS
+========================================= */
+.section{
+  padding:40px 0;
+}
+
+.section.alt{
+  background:var(--bg-alt);
+}
+
+h3{
+  margin:0 0 18px;
+  font-size:22px;
+}
+
+.cards{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:16px;
+}
+
+.card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:16px;
+  transition:background-color .25s ease, border-color .25s ease;
+}
+
+.card h4{
+  margin:0 0 6px;
+}
+
+.card .btn{
+  display:inline-block;
+  margin-top:10px;
+  background:linear-gradient(135deg,var(--brand),var(--brand2));
+  padding:8px 12px;
+  border-radius:10px;
+  color:#0f1216;
+  font-weight:600;
+}
+
+/* =========================================
+   MARKET
+========================================= */
+.market-card{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+
+.price{
+  font-size:24px;
+  font-weight:700;
+}
+
+.row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.chip{
+  font-weight:600;
+  border-radius:10px;
+  padding:4px 8px;
+}
+
+.up{
+  background:#0d2d1f;
+  color:#6fffce;
+}
+
+.down{
+  background:#2d1414;
+  color:#ff8c8c;
+}
+
+.muted{
+  color:var(--muted);
+  font-size:13px;
+}
+
+.note{
+  margin-top:8px;
+}
+
+/* =========================================
+   CHARTS
+========================================= */
+.chart-wrap{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:8px;
+}
+
+.pairs{
+  display:flex;
+  gap:8px;
+  margin-top:10px;
+  flex-wrap:wrap;
+}
+
+.pair{
+  background:#12161c;
+  color:#cfe3ff;
+  border:1px solid var(--border);
+  padding:8px 10px;
+  border-radius:10px;
+  cursor:pointer;
+}
+
+body.light-theme .pair{
+  background:#e5edff;
+  color:#1f2937;
+}
+
+.pair.active,
+.pair:hover{
+  border-color:#355cff;
+}
+
+/* =========================================
+   GLOSSARY
+========================================= */
+.search{
+  width:100%;
+  padding:12px;
+  border-radius:12px;
+  border:1px solid var(--border);
+  background:#0f1319;
+  color:var(--text);
+  margin-bottom:16px;
+}
+
+body.light-theme .search{
+  background:#ffffff;
+}
+
+.glossary{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+}
+
+.term{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:12px;
+}
+
+.term h5{
+  margin:0 0 6px;
+}
+
+/* =========================================
+   FOOTER
+========================================= */
+.site-footer{
+  padding:28px 0;
+  border-top:1px solid var(--border);
+  text-align:center;
+}
+
+/* =========================================
+   MODALS (Login / Signup / Verify)
+========================================= */
+.modal{
+  position:fixed;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:200;
+}
+
+.modal.hidden{
+  display:none;
+}
+
+.modal-backdrop{
+  position:absolute;
+  inset:0;
+  background:rgba(15,23,42,0.65);
+  backdrop-filter:blur(6px);
+  -webkit-backdrop-filter:blur(6px);
+  z-index:0;
+}
+
+/* κάρτα */
+.modal-card{
+  position:relative;
+  z-index:10;
+  width:100%;
+  max-width:380px;
+  padding:24px;
+
+  border-radius:22px;
+  border:2px solid transparent;
+  background-clip:padding-box;
+  overflow:hidden;
+  box-shadow:0 25px 60px rgba(0,0,0,0.65);
+  isolation:isolate;
+
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+  transition:background-image .3s ease;
+}
+
+/* Light theme → IMG_5308 */
+body.light-theme .modal-card{
+  background-image:url("./IMG_5308.jpg");
+}
+
+/* Dark theme → IMG_5377 */
+body:not(.light-theme) .modal-card{
+  background-image:url("./IMG_5377.jpg");
+}
+
+/* Gradient περίγραμμα */
+.modal-card::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:22px;
+  padding:2px;
+  background:linear-gradient(135deg,#5bb4ff,#7b61ff);
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite:xor;
+          mask-composite:exclude;
+  z-index:5;
+  pointer-events:none;
+}
+
+/* ελαφρύ σκοτείνιασμα πάνω από την εικόνα */
+.modal-card::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,0.25);
+  backdrop-filter:blur(4px);
+  -webkit-backdrop-filter:blur(4px);
+  z-index:0;
+}
+
+/* περιεχόμενο modals */
+.modal-header,
+.modal-body,
+.modal-submit,
+.modal-hint{
+  position:relative;
+  z-index:10;
+}
+
+.modal-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:10px;
+}
+
+.modal-title{
+  color:#fff;
+  font-size:20px;
+  font-weight:700;
+  text-shadow:0 0 6px rgba(0,0,0,0.5);
+}
+
+.modal-close{
+  border:none;
+  background:transparent;
+  color:#e2e8f0;
+  font-size:18px;
+  cursor:pointer;
+}
+
+/* inputs */
+.modal-body label{
+  display:block;
+  font-size:13px;
+  color:#f9fafb;
+  margin-bottom:4px;
+}
+
+.modal-body input{
+  width:100%;
+  padding:10px 12px;
+  border-radius:12px;
+  border:1px solid rgba(255,255,255,0.35);
+  background:rgba(0,0,0,0.45);
+  backdrop-filter:blur(3px);
+  -webkit-backdrop-filter:blur(3px);
+  color:#fff;
+  margin-bottom:12px;
+  transition:.2s;
+}
+
+.modal-body input:focus{
+  background:rgba(0,0,0,0.65);
+  border-color:#7b61ff;
+  outline:none;
+}
+
+/* button */
+.modal-submit{
+  width:100%;
+  margin-top:8px;
+  padding:10px 14px;
+  border:none;
+  border-radius:14px;
+  background:linear-gradient(135deg,#5bb4ff,#7b61ff);
+  color:#fff;
+  font-size:15px;
+  font-weight:600;
+  cursor:pointer;
+  transition:.2s;
+}
+
+.modal-submit:hover{
+  transform:scale(1.03);
+  box-shadow:0 8px 18px rgba(0,0,0,0.4);
+}
+
+/* hint text */
+.modal-hint{
+  font-size:12px;
+  color:#e7e7e7;
+  margin-top:6px;
+}
+
+/* signup button + "no account" να είναι πάνω από blur */
+#signup-btn,
+#no-account{
+  position:relative;
+  z-index:20 !important;
+}
+
+/* =========================================
+   PASSWORD EYE (login + signup)
+========================================= */
+.pass-wrap{
+  position:relative;
+  width:100%;
+}
+
+.pass-wrap input{
+  width:100%;
+  padding-right:42px; /* χώρος για το μάτι */
+}
+
+.pass-eye{
+  position:absolute;
+  right:10px;
+  top:50%;
+  width:22px;
+  height:22px;
+  transform:translateY(-50%);
+  cursor:pointer;
+  opacity:.8;
+}
+
+.pass-eye:hover{
+  opacity:1;
+}
+
+/* ============================================
+   BURGER BUTTON — FINAL CLEAN VERSION
+============================================ */
+
+.menu-btn {
+  display: none;
+  position: relative;
+  width: 34px;
+  height: 26px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+  z-index: 300;
+}
+
+.burger-line {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: var(--text);
+  border-radius: 4px;
+  transition: 0.35s ease;
+}
+
+.burger-line:nth-child(1) { top: 0; }
+.burger-line:nth-child(2) { top: 50%; transform: translateY(-50%); }
+.burger-line:nth-child(3) { bottom: 0; }
+
+.menu-btn.open .burger-line:nth-child(1) {
+  transform: translateY(11px) rotate(45deg);
+}
+.menu-btn.open .burger-line:nth-child(2) {
+  opacity: 0;
+}
+.menu-btn.open .burger-line:nth-child(3) {
+  transform: translateY(-11px) rotate(-45deg);
+}
+
+/* MOBILE ONLY */
+@media (max-width: 850px) {
+  .menu-btn { display: block; }
+
+  .nav {
+    display: none !important;
+  }
+
+  .header-actions .pill-btn {
+    display: none !important;
+  }
+}
+
+/* ============================================
+   MOBILE MENU — FINAL CLEAN VERSION
+============================================ */
+
+.mobile-menu {
+  display: none;
+  flex-direction: column;
+  gap: 18px;
+
+  position: fixed;
+  top: 70px;
+  left: 12px;
+  right: 12px;
+
+  padding: 22px 20px;
+
+  background: rgba(255,255,255,0.12);
+  border-radius: 20px;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  border: 1px solid rgba(255,255,255,0.25);
+  box-shadow: 0 10px 35px rgba(0,0,0,0.35);
+
+  z-index: 999;
+
+  transform: translateY(-20px);
+  opacity: 0;
+  transition: 0.35s ease;
+}
+
+body.light-theme .mobile-menu {
+  background: rgba(255,255,255,0.85);
+  border: 1px solid rgba(0,0,0,0.12);
+}
+
+.mobile-menu.open {
+  display: flex;
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.mobile-menu a {
+  font-size: 20px;
+  padding: 12px 0;
+  color: var(--text);
+  font-weight: 500;
+  border-bottom: 1px solid rgba(255,255,255,0.15);
+}
+
+body.light-theme .mobile-menu a {
+  border-bottom: 1px solid rgba(0,0,0,0.12);
+}
+
+.mobile-btn {
+  padding: 14px;
+  border-radius: 14px;
+  border: none;
+  background: linear-gradient(135deg, var(--brand), var(--brand2));
+  color: #fff;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 600;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.25);
+}
+
+@media (min-width: 851px) {
+  .mobile-menu { display: none !important; }
+}
+
+
+
+
+.lang-anim {
+  transition: opacity 0.25s ease;
+  opacity: 1;
+}
+
+.lang-anim.hide {
+  opacity: 0;
+}
+
+/* ============================
+   MOBILE LANG BUTTON FIX
+=============================== */
+#mobile-lang-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 8px 12px !important;   /* μικρότερο ύψος */
+  height: 42px;                   /* σταθερό μικρό ύψος */
+  gap: 6px;                       /* μικρότερο κενό ανάμεσα σε icon & text */
+
+  border-radius: 14px;
+}
+
+/* Μικρότερη εικόνα */
+#mobile-lang-toggle .icon-img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+
+#glossary-wrapper {
+  padding-bottom: 17px;   /* 👈 αυτό λύνει το κόψιμο */
+}
+
+
+/* =========================================
+   iOS SAFARI FIX — PHANTOM BOTTOM SPACE
+========================================= */
+html, body {
+  height: 100%;
+  overscroll-behavior-y: none;
+}
+
+body {
+  min-height: 100svh;   /* 🔥 όχι 100vh */
+}
+
+/* Safari + sticky header fix */
+body {
+  overflow-x: hidden;
+}
+
+
+body.light-theme .site-header {
+  background: #ffffff;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+
+html, body {
+  min-height: 100%;
+  height: auto;
+  overflow-y: scroll; /* ⬅️ ΠΟΛΥ ΣΗΜΑΝΤΙΚΟ */
+  background: #ffffff; /* light theme default */
+}
+
+body.light-theme {
+  background: #ffffff;
+}
+
+body:not(.light-theme) {
+  background: #0f1216;
+}
+
+
+/* ===============================
+   FIX STICKY HEADER BLOCK
+================================ */
+
+/* ❌ ΜΗΝ υπάρχει overflow πάνω από το header */
+body,
+.prices-page,
+.container {
+  overflow: visible !important;
+}
+
+
+
+/* ===============================
+   GLOBAL BLUR WHEN MODAL OPEN
+================================ */
+
+/* Όλο το site εκτός από το modal */
+body.modal-open .site-header,
+body.modal-open main,
+body.modal-open .prices-page,
+body.modal-open .container {
+  filter: blur(6px);
+  pointer-events: none;
+  transition: filter 0.25s ease;
+}
+
+/* Το modal ΠΑΝΩ από όλα */
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+}
+
+/* Το modal card ΚΑΘΑΡΟ */
+.modal-card {
+  filter: none !important;
+  pointer-events: auto;
+}
+
+/* Σκούρο backdrop */
+.modal-backdrop {
+  backdrop-filter: blur(6px);
+  background: rgba(0,0,0,0.25);
+}
