@@ -1664,12 +1664,10 @@ const verifyClose   = document.querySelector(".verify-close");
 const verifySubmit  = document.getElementById("verify-submit");
 const verifyError   = document.getElementById("verify-error");
 
-// ========================================
-// GLOBAL STATE (SAFE)
-// ========================================
-let currentUser = null;
-let tempUser = null;
+let currentUser      = null;
+let tempUser         = null;
 let verificationCode = null;
+let pricesInterval = null;
 
 // ========================================
 // USER STORAGE
@@ -1976,22 +1974,13 @@ document.querySelectorAll("#mobile-menu a").forEach(link => {
 });
 
 // ========================================
-// HERO RANKING – Top 50 coins (SAFE)
+// HERO RANKING – Top 50 coins (auto scroll)
 // ========================================
 const rankBox  = document.querySelector(".hero-rank-box");
 const rankWrap = document.getElementById("hero-rank-inner");
 
-let heroScrollInterval = null;
-let heroObserver = null;
-
-// ----------------------------------------
-// LOAD DATA
-// ----------------------------------------
 async function loadHeroRanking() {
   if (!rankBox || !rankWrap) return;
-
-  stopHeroScroll();
-  rankWrap.innerHTML = "";
 
   try {
     const res = await fetch(
@@ -1999,19 +1988,21 @@ async function loadHeroRanking() {
       "?vs_currency=usd&order=market_cap_desc&per_page=50&page=1&sparkline=false",
       { cache: "no-store" }
     );
-
     const data = await res.json();
 
+    rankWrap.innerHTML = "";
+
     data.forEach((coin, idx) => {
-      const change = coin.price_change_percentage_24h ?? 0;
+      const change = coin.price_change_percentage_24h || 0;
       const up = change >= 0;
 
       const row = document.createElement("div");
       row.className = "hero-rank-row";
+
       row.innerHTML = `
         <span class="hr-pos">${idx + 1}</span>
         <div class="hr-icon-wrap">
-          <img src="${coin.image}" class="hr-icon" loading="lazy">
+          <img src="${coin.image}" class="hr-icon">
           <span class="hr-symbol">${coin.symbol.toUpperCase()}</span>
         </div>
         <span class="hr-change ${up ? "hr-up" : "hr-down"}">
@@ -2021,29 +2012,25 @@ async function loadHeroRanking() {
           $${coin.current_price.toLocaleString("en-US",{ maximumFractionDigits: 2 })}
         </span>
       `;
+
       rankWrap.appendChild(row);
     });
 
-    // 🔁 duplicate για endless scroll
+    // διπλασιάζουμε για endless scroll
     rankWrap.innerHTML += rankWrap.innerHTML;
-
-    observeHeroVisibility();
-
+    startHeroScroll();
   } catch (e) {
     console.warn("Hero ranking error:", e);
   }
 }
 
-// ----------------------------------------
-// AUTO SCROLL
-// ----------------------------------------
 function startHeroScroll() {
-  if (!rankBox || heroScrollInterval) return;
+  if (!rankBox || !rankWrap) return;
 
   let pos = 0;
-  const speed = 0.4;
+  const speed = 0.5;
 
-  heroScrollInterval = setInterval(() => {
+  setInterval(() => {
     pos += speed;
     const half = rankWrap.scrollHeight / 2;
     if (pos >= half) pos = 0;
@@ -2051,142 +2038,20 @@ function startHeroScroll() {
   }, 30);
 }
 
-function stopHeroScroll() {
-  if (heroScrollInterval) {
-    clearInterval(heroScrollInterval);
-    heroScrollInterval = null;
-  }
+function initIndexLive() {
+  loadHeroRanking();
+  fetchPrices();
 }
 
-// ----------------------------------------
-// VISIBILITY CONTROL
-// ----------------------------------------
-function observeHeroVisibility() {
-  if (heroObserver) heroObserver.disconnect();
+document.addEventListener("DOMContentLoaded", () => {
+  initIndexLive();
 
-  heroObserver = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) startHeroScroll();
-      else stopHeroScroll();
-    });
-  }, { threshold: 0.2 });
-
-  heroObserver.observe(rankBox);
-}
-
-// ----------------------------------------
-// INIT & CLEANUP
-// ----------------------------------------
-document.addEventListener("DOMContentLoaded", loadHeroRanking);
-
-window.addEventListener("pagehide", () => {
-  stopHeroScroll();
-  if (heroObserver) {
-    heroObserver.disconnect();
-    heroObserver = null;
-  }
+  // ⏱ refresh κάθε 90s (πιο ασφαλές για CoinGecko)
+  pricesInterval = setInterval(fetchPrices, 90000);
 });
 
-
-// ========================================
-// AUTO SCROLL
-// ========================================
-function startHeroScroll() {
-  if (!rankBox || heroScrollInterval) return;
-
-  let pos = 0;
-  const speed = 0.4;
-
-  heroScrollInterval = setInterval(() => {
-    pos += speed;
-    const half = rankWrap.scrollHeight / 2;
-    if (pos >= half) pos = 0;
-    rankBox.scrollTop = pos;
-  }, 30);
-}
-
-function stopHeroScroll() {
-  if (heroScrollInterval) {
-    clearInterval(heroScrollInterval);
-    heroScrollInterval = null;
-  }
-}
-
-// ========================================
-// VISIBILITY CONTROL
-// ========================================
-function observeHeroVisibility() {
-  if (heroObserver) heroObserver.disconnect();
-
-  heroObserver = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) startHeroScroll();
-      else stopHeroScroll();
-    });
-  }, { threshold: 0.2 });
-
-  heroObserver.observe(rankBox);
-}
-
-// ========================================
-// CLEANUP
-// ========================================
 window.addEventListener("pagehide", () => {
-  stopHeroScroll();
-  if (heroObserver) {
-    heroObserver.disconnect();
-    heroObserver = null;
-  }
-});
-
-// ========================================
-// AUTO SCROLL (SAFE)
-// ========================================
-function startHeroScroll() {
-  if (!rankBox || heroScrollInterval) return;
-
-  let pos = 0;
-  const speed = 0.4;
-
-  heroScrollInterval = setInterval(() => {
-    pos += speed;
-    const half = rankWrap.scrollHeight / 2;
-    if (pos >= half) pos = 0;
-    rankBox.scrollTop = pos;
-  }, 30);
-}
-
-function stopHeroScroll() {
-  if (heroScrollInterval) {
-    clearInterval(heroScrollInterval);
-    heroScrollInterval = null;
-  }
-}
-
-// ========================================
-// START / STOP όταν φαίνεται
-// ========================================
-function observeHeroVisibility() {
-  if (!rankBox) return;
-
-  if (heroObserver) heroObserver.disconnect();
-
-  heroObserver = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) startHeroScroll();
-      else stopHeroScroll();
-    });
-  }, { threshold: 0.2 });
-
-  heroObserver.observe(rankBox);
-}
-
-// ========================================
-// CLEANUP
-// ========================================
-window.addEventListener("pagehide", () => {
-  stopHeroScroll();
-  heroObserver && heroObserver.disconnect();
+  clearInterval(pricesInterval);
 });
 
 // ========================================
@@ -2224,7 +2089,7 @@ renderGlossary();
 
 
 // ========================================
-// LIVE PRICES – CoinGecko (SAFE)
+// LIVE PRICES – CoinGecko
 // ========================================
 const coins = [
   { id: "bitcoin",  symbol: "BTC" },
@@ -2232,13 +2097,13 @@ const coins = [
   { id: "solana",   symbol: "SOL" }
 ];
 
-let pricesInterval = null;
-
 function formatEur(n) {
   return "€" + new Intl.NumberFormat("el-GR", {
     maximumFractionDigits: 2
   }).format(n);
 }
+
+
 
 function renderMarket(data) {
   const wrap = document.getElementById("market-cards");
@@ -2272,6 +2137,7 @@ function renderMarket(data) {
   });
 }
 
+
 async function fetchPrices() {
   try {
     const ids = coins.map(c => c.id).join(",");
@@ -2287,25 +2153,6 @@ async function fetchPrices() {
   }
 }
 
-function startPrices() {
-  if (pricesInterval) {
-    clearInterval(pricesInterval);
-    pricesInterval = null;
-  }
-
-  fetchPrices(); // άμεσο load
-  pricesInterval = setInterval(fetchPrices, 90000);
-}
-
-function stopPrices() {
-  if (pricesInterval) {
-    clearInterval(pricesInterval);
-    pricesInterval = null;
-  }
-}
-
-document.addEventListener("DOMContentLoaded", startPrices);
-window.addEventListener("pagehide", stopPrices);
 
 // ========================================
 // TradingView Chart
