@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Ethereum – CryptoKosmos</title>
+  <title>Solana – CryptoKosmos</title>
 
   <!-- GLOBAL STYLES -->
   <link rel="stylesheet" href="../styles.css" />
@@ -12,14 +12,6 @@
 
 
   <style>
-
-
-#auth-icon {
-  width: 20px;
-  height: 20px;
-}
-
-
      body.article-page {
       padding: 0;
     }
@@ -51,6 +43,23 @@
         height: 34px;
       }
     }
+
+
+#auth-icon {
+  width: 20px;
+  height: 20px;
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -157,6 +166,7 @@ body.light-theme .more-guides{
   margin-top: 8px;       /* μικρό κενό από πάνω */
 }
 
+</style>
   </style>
 </head>
 
@@ -225,85 +235,164 @@ body.light-theme .more-guides{
   </button>
 </div>
 
-<!-- ================= ARTICLE CONTENT ================= -->
-<div class="article-container">
+<!-- GUIDES -->
+<section id="guides" class="section">
+  <div class="container">
 
-  <h2 data-i18n="eth_title">Τι είναι το Ethereum;</h2>
+    
+  <h3 data-i18n="guides_title">Οδηγοί για αρχάριους</h3>
+
+    <!-- ΟΡΙΖΟΝΤΙΟ SCROLL -->
+   <div id="guides-cards" class="guides-grid">
+
+      <!-- Blockchain Guide -->
+      <article class="card">
+        <h4 data-i18n="guide_blockchain_title">Τι είναι το Blockchain</h4>
+        <p data-i18n="guide_blockchain_desc">
+          Το “κοινόχρηστο ψηφιακό βιβλίο” που καταγράφει συναλλαγές με ασφάλεια &amp; διαφάνεια.
+        </p>
+        <a href="../guides/blockchain.html" class="btn" data-i18n="read_more">Διάβασε</a>
+      </article>
+
+      <!-- Wallets Guide -->
+      <article class="card">
+        <h4 data-i18n="guide_wallets_title">Wallets: Custodial vs Non-custodial</h4>
+        <p data-i18n="guide_wallets_desc">
+          Ποιες είναι οι διαφορές και πότε διαλέγω το ένα ή το άλλο. Seed phrase &amp; 2FA.
+        </p>
+        <a href="../guides/wallets.html" class="btn" data-i18n="read_more">Διάβασε</a>
+      </article>
+
+      <!-- Solana Guide -->
+      <article class="card">
+        <h4 data-i18n="guide_solana_title">Αγορά Solana με ασφάλεια</h4>
+        <p data-i18n="guide_solana_desc">
+          DCA, alerts, fees, επιλογή ανταλλακτηρίου και πρακτικά tips για αρχή.
+        </p>
+        <a href="../guides/solana.html" class="btn" data-i18n="read_more">Διάβασε</a>
+      </article>
+
+      <!-- Bitcoin Guide -->
+      <article class="card">
+        <h4 data-i18n="guide_bitcoin_title">Τι είναι το Bitcoin</h4>
+        <p data-i18n="guide_bitcoin_desc">
+          Το πρώτο αποκεντρωμένο ψηφιακό νόμισμα. Mining, halving και store of value.
+        </p>
+        <a href="../guides/bitcoin.html" class="btn" data-i18n="read_more">Διάβασε</a>
+      </article>
+
+      <!-- Ethereum Guide -->
+      <article class="card">
+        <h4 data-i18n="guide_ethereum_title">Τι είναι το Ethereum</h4>
+        <p data-i18n="guide_ethereum_desc">
+          Smart contracts, gas fees και το blockchain που έφερε το Web3.
+        </p>
+        <a href="../guides/ethereum.html" class="btn" data-i18n="read_more">Διάβασε</a>
+      </article>
+
+<!-- DeFi Guide -->
+<article class="card">
+  <h4 data-i18n="guide_defi_title">Τι είναι το DeFi</h4>
+  <p data-i18n="guide_defi_desc">
+    Δανεισμός, ανταλλαγές και αποδόσεις χωρίς τράπεζες — πώς δουλεύει και τι να προσέχεις.
+  </p>
+  <a href="../guides/DeFi.html" class="btn" data-i18n="read_more">Διάβασε</a>
+</article>
+
+<!-- NFT Guide -->
+<article class="card">
+  <h4 data-i18n="guide_nft_title">Τι είναι τα NFT</h4>
+  <p data-i18n="guide_nft_desc">
+    Μοναδικά ψηφιακά assets, συλλογές και χρησιμότητα — τι αξίζει πραγματικά και τι όχι.
+  </p>
+  <a href="../guides/NFT.html" class="btn" data-i18n="read_more">Διάβασε</a>
+</article>
+
+<!-- Security Guide -->
+<article class="card">
+  <h4 data-i18n="guide_security_title">Ασφάλεια στα Crypto</h4>
+  <p data-i18n="guide_security_desc">
+    Seed phrase, 2FA, phishing και scams — τα βασικά βήματα για να μην την πατήσεις.
+  </p>
+  <a href="../guides/CryptoSecurity.html" class="btn" data-i18n="read_more">Διάβασε</a>
+</article>
+
+<!-- Stablecoins Guide -->
+<article class="card">
+  <h4 data-i18n="guide_stablecoins_title">Τι είναι τα Stablecoins</h4>
+  <p data-i18n="guide_stablecoins_desc">
+    USDT/USDC και γιατί “κρατάνε” τιμή — πλεονεκτήματα, ρίσκα και χρήσεις.
+  </p>
+  <a href="./guides/stablecoins.html" class="btn" data-i18n="read_more">Διάβασε</a>
+</article>
+
+<!-- Fees Guide -->
+<article class="card">
+  <h4 data-i18n="guide_fees_title">Gas Fees & Προμήθειες</h4>
+  <p data-i18n="guide_fees_desc">
+    Τι πληρώνεις σε κάθε συναλλαγή, γιατί αλλάζει το κόστος και πώς το μειώνεις.
+  </p>
+  <a href="./guides/fees.html" class="btn" data-i18n="read_more">Διάβασε</a>
+</article>
+
+<!-- Exchanges Guide -->
+<article class="card">
+  <h4 data-i18n="guide_exchanges_title">Exchanges: CEX vs DEX</h4>
+  <p data-i18n="guide_exchanges_desc">
+    Ανταλλακτήρια τύπου Binance vs αποκεντρωμένα (DEX) — διαφορές, fees και ασφάλεια.
+  </p>
+  <a href="./guides/exchanges.html" class="btn" data-i18n="read_more">Διάβασε</a>
+</article>
+
+<!-- Wallets Setup Guide -->
+<article class="card">
+  <h4 data-i18n="guide_wallet_setup_title">Πώς στήνω Wallet σωστά</h4>
+  <p data-i18n="guide_wallet_setup_desc">
+    Βήμα-βήμα: δημιουργία, backup seed phrase, 2FA και “κανόνες” για αρχή.
+  </p>
+  <a href="./guides/wallet-setup.html" class="btn" data-i18n="read_more">Διάβασε</a>
+</article>
+
+<!-- Market Cycles Guide -->
+<article class="card">
+  <h4 data-i18n="guide_cycles_title">Κύκλοι αγοράς & ψυχολογία</h4>
+  <p data-i18n="guide_cycles_desc">
+    Bull / bear market, FOMO, panic selling — πώς να σκέφτεσαι πιο “ψύχραιμα”.
+  </p>
+  <a href="./guides/market-cycles.html" class="btn" data-i18n="read_more">Διάβασε</a>
+</article>
+
+<!-- Risk Management Guide -->
+<article class="card">
+  <h4 data-i18n="guide_risk_title">Risk Management στα Crypto</h4>
+  <p data-i18n="guide_risk_desc">
+    Διαχείριση ρίσκου: θέση, stop-loss λογική, diversification και τι να αποφεύγεις.
+  </p>
+  <a href="./guides/risk-management.html" class="btn" data-i18n="read_more">Διάβασε</a>
+</article>
 
 
-  <p data-i18n="eth_intro">
-  Το Ethereum είναι ένα αποκεντρωμένο blockchain που επιτρέπει τη δημιουργία smart contracts και αποκεντρωμένων εφαρμογών (dApps).
-</p>
-
-<img id="article-image"
-       src="./IMG_5820.jpg"
-       data-light-img="./IMG_5820.jpg"
-       data-dark-img="./IMG_5820.jpg"
-       style="width:100%;border-radius:16px;margin:20px 0;">
-
-
-<h3 data-i18n="eth_speed_title">Πόσο γρήγορο είναι το Ethereum;</h3>
-<p data-i18n="eth_speed_text">
-  Το Ethereum υποστηρίζει χιλιάδες εφαρμογές παγκοσμίως και με το Proof-of-Stake βελτιώνει συνεχώς την απόδοση και την επεκτασιμότητά του.
-</p>
-
-<h3 data-i18n="eth_fees_title">Πώς λειτουργούν τα fees;</h3>
-<p data-i18n="eth_fees_text">
-  Οι χρεώσεις στο Ethereum (gas fees) εξαρτώνται από τη ζήτηση του δικτύου και την πολυπλοκότητα της συναλλαγής.
-</p>
-
-<h3 data-i18n="eth_tech_title">Τεχνολογία του Ethereum</h3>
-<p data-i18n="eth_tech_text">Το Ethereum βασίζεται σε βασικές τεχνολογίες:</p>
-
-<ul>
-  <li data-i18n="eth_tech1">Smart Contracts</li>
-  <li data-i18n="eth_tech2">Proof-of-Stake (Ethereum 2.0)</li>
-  <li data-i18n="eth_tech3">Ethereum Virtual Machine (EVM)</li>
-  <li data-i18n="eth_tech4">Layer 2 λύσεις (Optimism, Arbitrum)</li>
-</ul>
-
-<h3 data-i18n="eth_use_title">Πού χρησιμοποιείται;</h3>
-<ul>
-  <li data-i18n="eth_use1">DeFi εφαρμογές</li>
-  <li data-i18n="eth_use2">NFT πλατφόρμες</li>
-  <li data-i18n="eth_use3">DAO οργανισμοί</li>
-  <li data-i18n="eth_use4">Tokenization περιουσιακών στοιχείων</li>
-  <li data-i18n="eth_use5">Web3 εφαρμογές</li>
-  <li data-i18n="eth_use6">Blockchain gaming</li>
-</ul>
-
-<h3 data-i18n="eth_pros_title">Πλεονεκτήματα</h3>
-<ul>
-  <li data-i18n="eth_pro1">Μεγάλο οικοσύστημα</li>
-  <li data-i18n="eth_pro2">Ισχυρή ασφάλεια</li>
-  <li data-i18n="eth_pro3">Πρωτοπόρο στα smart contracts</li>
-  <li data-i18n="eth_pro4">Τεράστια υποστήριξη developers</li>
-  <li data-i18n="eth_pro5">Συνεχής εξέλιξη</li>
-</ul>
-
-<h3 data-i18n="eth_cons_title">Μειονεκτήματα</h3>
-<ul>
-  <li data-i18n="eth_con1">Υψηλά gas fees σε περιόδους φόρτου</li>
-  <li data-i18n="eth_con2">Περιορισμένη ταχύτητα στο Layer 1</li>
-  <li data-i18n="eth_con3">Εξάρτηση από Layer 2 λύσεις</li>
-</ul>
-
-<h3 data-i18n="eth_future_title">Το μέλλον του Ethereum</h3>
-<p data-i18n="eth_future_text">
-  Το Ethereum συνεχίζει να εξελίσσεται με στόχο τη μεγαλύτερη κλιμάκωση, χαμηλότερα fees και μαζική υιοθέτηση του Web3.
-</p>
-
-<h3 data-i18n="eth_conclusion_title">Συμπέρασμα</h3>
-<p data-i18n="eth_conclusion">
-  Το Ethereum αποτελεί τη βάση του Web3 και παραμένει το πιο σημαντικό blockchain για smart contracts και αποκεντρωμένες εφαρμογές.
-</p>
+<!-- On-chain Basics Guide -->
+<article class="card">
+  <h4 data-i18n="guide_onchain_title">On-chain δεδομένα (βασικά)</h4>
+  <p data-i18n="guide_onchain_desc">
+    Τι δείχνουν οι κινήσεις στο blockchain: wallets, flows, volume και απλά σημάδια τάσης.
+  </p>
+  <a href="./guides/onchain.html" class="btn" data-i18n="read_more">Διάβασε</a>
+</article>
 
 
-<a href="../guides/MoreGuids.html" class="more-guides" data-i18n="guides_more" aria-label="More guides">
-    Δες περισσότερα <span class="mg-arrow">→</span>
+<a href="../index.html" class="more-guides" data-i18n="guides_more" aria-label="More guides"><span class="mg-arrow">←</span>
+    Γύρνα πίσω 
   </a>
 
+    </div>
+
   </div>
+</section>
+
+
+
 
 <!-- ================= FOOTER ================= -->
 <footer class="site-footer">
@@ -462,7 +551,7 @@ body.light-theme .more-guides{
   });
 </script>
 
-<script src="../translations-ethereum.js"></script>
+<script src="../translations-MoreGuids.js"></script>
 <script src="../i18n.js"></script>
 <script src="../app.js" defer></script>
 

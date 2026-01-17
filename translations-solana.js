@@ -54,6 +54,8 @@ window.TRANSLATIONS = {
       "Η Solana προσφέρει ταχύτητα, χαμηλό κόστος και προηγμένη τεχνολογία, καθιστώντας τη μία από τις πιο υποσχόμενες blockchain πλατφόρμες.",
 
 
+guides_more: "Δες περισσότερα →",
+
     /* =======================
            FOOTER
     ======================= */
@@ -158,6 +160,9 @@ mobile_theme: "Αλλαγή Θέματος",
     sol_conclusion_title: "Conclusion",
     sol_conclusion:
       "Solana offers exceptional speed, low cost, and advanced technology—making it one of the strongest contenders in the blockchain ecosystem.",
+
+
+guides_more: "See more →",
 
 
     /* FOOTER */

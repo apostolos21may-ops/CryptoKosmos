@@ -48,6 +48,8 @@ window.TRANSLATIONS = {
       "Τα crypto wallets είναι απαραίτητα για την ασφαλή διαχείριση των ψηφιακών περιουσιακών σου στοιχείων.",
 
 
+guides_more: "Δες περισσότερα →",
+
     /* =======================
            FOOTER
     ======================= */
@@ -149,6 +151,8 @@ mobile_theme: "Αλλαγή Θέματος",
     wl_conclusion:
       "Crypto wallets are essential tools for securely managing your digital assets.",
 
+
+guides_more: "See more →",
 
     /* FOOTER */
     footer_rights: "All rights reserved.",

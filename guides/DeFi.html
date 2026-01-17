@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Ethereum – CryptoKosmos</title>
+  <title>Bitcoin – CryptoKosmos</title>
 
   <!-- GLOBAL STYLES -->
   <link rel="stylesheet" href="../styles.css" />
@@ -18,6 +18,7 @@
   width: 20px;
   height: 20px;
 }
+
 
 
      body.article-page {
@@ -51,6 +52,11 @@
         height: 34px;
       }
     }
+
+
+
+
+
 
 
 
@@ -156,7 +162,6 @@ body.light-theme .more-guides{
   align-self: end;       /* κάτω στο row του */
   margin-top: 8px;       /* μικρό κενό από πάνω */
 }
-
   </style>
 </head>
 
@@ -228,82 +233,92 @@ body.light-theme .more-guides{
 <!-- ================= ARTICLE CONTENT ================= -->
 <div class="article-container">
 
-  <h2 data-i18n="eth_title">Τι είναι το Ethereum;</h2>
+  <h2 data-i18n="defi_title">Τι είναι το DeFi;</h2>
 
+  <p data-i18n="defi_intro">
+    Το DeFi (Decentralized Finance) είναι “αποκεντρωμένα χρηματοοικονομικά”.
+    Δηλαδή υπηρεσίες όπως ανταλλαγές, δανεισμός και αποδόσεις χωρίς τράπεζες,
+    με έξυπνα συμβόλαια (smart contracts) πάνω σε blockchains.
+  </p>
 
-  <p data-i18n="eth_intro">
-  Το Ethereum είναι ένα αποκεντρωμένο blockchain που επιτρέπει τη δημιουργία smart contracts και αποκεντρωμένων εφαρμογών (dApps).
-</p>
-
-<img id="article-image"
-       src="./IMG_5820.jpg"
-       data-light-img="./IMG_5820.jpg"
-       data-dark-img="./IMG_5820.jpg"
+  <img id="article-image"
+       src="./IMG_5818.jpg"
+       data-light-img="./1223.png"
+       data-dark-img="./1223.png"
        style="width:100%;border-radius:16px;margin:20px 0;">
 
+  <h3 data-i18n="defi_speed_title">Πόσο γρήγορο είναι το DeFi;</h3>
+  <p data-i18n="defi_speed_text">
+    Η ταχύτητα στο DeFi εξαρτάται από το blockchain που χρησιμοποιείς
+    (π.χ. Ethereum, Solana, Polygon). Συνήθως οι συναλλαγές ολοκληρώνονται
+    από δευτερόλεπτα έως λίγα λεπτά, ανάλογα με το δίκτυο και τη συμφόρηση.
+  </p>
 
-<h3 data-i18n="eth_speed_title">Πόσο γρήγορο είναι το Ethereum;</h3>
-<p data-i18n="eth_speed_text">
-  Το Ethereum υποστηρίζει χιλιάδες εφαρμογές παγκοσμίως και με το Proof-of-Stake βελτιώνει συνεχώς την απόδοση και την επεκτασιμότητά του.
-</p>
+  <h3 data-i18n="defi_fees_title">Πώς λειτουργούν τα fees;</h3>
+  <p data-i18n="defi_fees_text">
+    Τα fees στο DeFi είναι κυρίως “gas fees” που πληρώνονται στο blockchain
+    για να εκτελεστεί μια ενέργεια (swap, δανεισμός, staking).
+    Όταν το δίκτυο έχει φόρτο, τα fees ανεβαίνουν.
+  </p>
 
-<h3 data-i18n="eth_fees_title">Πώς λειτουργούν τα fees;</h3>
-<p data-i18n="eth_fees_text">
-  Οι χρεώσεις στο Ethereum (gas fees) εξαρτώνται από τη ζήτηση του δικτύου και την πολυπλοκότητα της συναλλαγής.
-</p>
+  <h3 data-i18n="defi_tech_title">Τεχνολογία του DeFi</h3>
+  <p data-i18n="defi_tech_text">
+    Το DeFi βασίζεται σε τεχνολογίες που κάνουν τις συναλλαγές αυτόματες και διαφανείς:
+  </p>
 
-<h3 data-i18n="eth_tech_title">Τεχνολογία του Ethereum</h3>
-<p data-i18n="eth_tech_text">Το Ethereum βασίζεται σε βασικές τεχνολογίες:</p>
+  <ul>
+    <li data-i18n="defi_tech1">Smart Contracts (αυτοματοποιημένοι κανόνες)</li>
+    <li data-i18n="defi_tech2">DEX (αποκεντρωμένα ανταλλακτήρια)</li>
+    <li data-i18n="defi_tech3">Liquidity Pools & AMM (ρευστότητα & αυτόματη τιμολόγηση)</li>
+    <li data-i18n="defi_tech4">Oracles (τιμές/δεδομένα από έξω προς το blockchain)</li>
+  </ul>
 
-<ul>
-  <li data-i18n="eth_tech1">Smart Contracts</li>
-  <li data-i18n="eth_tech2">Proof-of-Stake (Ethereum 2.0)</li>
-  <li data-i18n="eth_tech3">Ethereum Virtual Machine (EVM)</li>
-  <li data-i18n="eth_tech4">Layer 2 λύσεις (Optimism, Arbitrum)</li>
-</ul>
+  <h3 data-i18n="defi_use_title">Πού χρησιμοποιείται;</h3>
+  <ul>
+    <li data-i18n="defi_use1">Ανταλλαγές κρυπτονομισμάτων (swaps) χωρίς μεσάζοντες</li>
+    <li data-i18n="defi_use2">Δανεισμός/δανειοδοτήσεις με εγγυήσεις (collateral)</li>
+    <li data-i18n="defi_use3">Earn / αποδόσεις μέσω staking ή liquidity</li>
+    <li data-i18n="defi_use4">Stablecoins και πληρωμές εντός crypto</li>
+    <li data-i18n="defi_use5">Trading με μόχλευση σε ορισμένα πρωτόκολλα</li>
+    <li data-i18n="defi_use6">Διαχείριση κεφαλαίων με διαφάνεια on-chain</li>
+  </ul>
 
-<h3 data-i18n="eth_use_title">Πού χρησιμοποιείται;</h3>
-<ul>
-  <li data-i18n="eth_use1">DeFi εφαρμογές</li>
-  <li data-i18n="eth_use2">NFT πλατφόρμες</li>
-  <li data-i18n="eth_use3">DAO οργανισμοί</li>
-  <li data-i18n="eth_use4">Tokenization περιουσιακών στοιχείων</li>
-  <li data-i18n="eth_use5">Web3 εφαρμογές</li>
-  <li data-i18n="eth_use6">Blockchain gaming</li>
-</ul>
+  <h3 data-i18n="defi_pros_title">Πλεονεκτήματα</h3>
+  <ul>
+    <li data-i18n="defi_pro1">Χωρίς τράπεζες: πρόσβαση 24/7</li>
+    <li data-i18n="defi_pro2">Διαφάνεια (όλα φαίνονται στο blockchain)</li>
+    <li data-i18n="defi_pro3">Έλεγχος κεφαλαίων από εσένα (non-custodial)</li>
+    <li data-i18n="defi_pro4">Πολλά εργαλεία: swaps, lending, earning</li>
+    <li data-i18n="defi_pro5">Καινοτομία και γρήγορη εξέλιξη</li>
+  </ul>
 
-<h3 data-i18n="eth_pros_title">Πλεονεκτήματα</h3>
-<ul>
-  <li data-i18n="eth_pro1">Μεγάλο οικοσύστημα</li>
-  <li data-i18n="eth_pro2">Ισχυρή ασφάλεια</li>
-  <li data-i18n="eth_pro3">Πρωτοπόρο στα smart contracts</li>
-  <li data-i18n="eth_pro4">Τεράστια υποστήριξη developers</li>
-  <li data-i18n="eth_pro5">Συνεχής εξέλιξη</li>
-</ul>
+  <h3 data-i18n="defi_cons_title">Μειονεκτήματα</h3>
+  <ul>
+    <li data-i18n="defi_con1">Ρίσκο smart contracts (bugs / hacks)</li>
+    <li data-i18n="defi_con2">Απάτες/scams και fake tokens</li>
+    <li data-i18n="defi_con3">Fees και συμφόρηση σε κάποια δίκτυα</li>
+  </ul>
 
-<h3 data-i18n="eth_cons_title">Μειονεκτήματα</h3>
-<ul>
-  <li data-i18n="eth_con1">Υψηλά gas fees σε περιόδους φόρτου</li>
-  <li data-i18n="eth_con2">Περιορισμένη ταχύτητα στο Layer 1</li>
-  <li data-i18n="eth_con3">Εξάρτηση από Layer 2 λύσεις</li>
-</ul>
+  <h3 data-i18n="defi_future_title">Το μέλλον του DeFi</h3>
+  <p data-i18n="defi_future_text">
+    Το DeFi συνεχίζει να μεγαλώνει, με στόχο πιο εύκολη χρήση, χαμηλότερα fees
+    και καλύτερη ασφάλεια. Πολλοί το βλέπουν ως “εναλλακτική υποδομή”
+    για χρηματοοικονομικές υπηρεσίες παγκοσμίως.
+  </p>
 
-<h3 data-i18n="eth_future_title">Το μέλλον του Ethereum</h3>
-<p data-i18n="eth_future_text">
-  Το Ethereum συνεχίζει να εξελίσσεται με στόχο τη μεγαλύτερη κλιμάκωση, χαμηλότερα fees και μαζική υιοθέτηση του Web3.
-</p>
+  <h3 data-i18n="defi_conclusion_title">Συμπέρασμα</h3>
+  <p data-i18n="defi_conclusion">
+    Το DeFi ανοίγει τον δρόμο για οικονομικές υπηρεσίες χωρίς μεσάζοντες,
+    αλλά χρειάζεται προσοχή: σωστό wallet, έρευνα στο πρωτόκολλο και διαχείριση ρίσκου.
+  </p>
 
-<h3 data-i18n="eth_conclusion_title">Συμπέρασμα</h3>
-<p data-i18n="eth_conclusion">
-  Το Ethereum αποτελεί τη βάση του Web3 και παραμένει το πιο σημαντικό blockchain για smart contracts και αποκεντρωμένες εφαρμογές.
-</p>
 
 
 <a href="../guides/MoreGuids.html" class="more-guides" data-i18n="guides_more" aria-label="More guides">
     Δες περισσότερα <span class="mg-arrow">→</span>
   </a>
 
-  </div>
+</div>
 
 <!-- ================= FOOTER ================= -->
 <footer class="site-footer">
@@ -462,7 +477,7 @@ body.light-theme .more-guides{
   });
 </script>
 
-<script src="../translations-ethereum.js"></script>
+<script src="../translations-DeFi.js"></script>
 <script src="../i18n.js"></script>
 <script src="../app.js" defer></script>
 

@@ -54,6 +54,9 @@ window.TRANSLATIONS = {
       "Το Ethereum είναι το πιο σημαντικό blockchain για smart contracts και αποκεντρωμένες εφαρμογές.",
 
 
+guides_more: "Δες περισσότερα →",
+
+
     /* =======================
            FOOTER
     ======================= */
@@ -159,6 +162,9 @@ mobile_theme: "Αλλαγή Θέματος",
     eth_conclusion_title: "Conclusion",
     eth_conclusion:
       "Ethereum is the most important blockchain for smart contracts and decentralized applications.",
+
+guides_more: "See more →",
+
 
 
     /* FOOTER */

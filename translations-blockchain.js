@@ -77,6 +77,8 @@ window.TRANSLATIONS = {
     bc_conclusion:
       "Το blockchain αποτελεί μία από τις σημαντικότερες τεχνολογίες της εποχής μας και αναμένεται να διαδραματίσει καθοριστικό ρόλο στο μέλλον της ψηφιακής οικονομίας.",
 
+guides_more: "Δες περισσότερα →",
+
 
     /* =======================
           FOOTER
@@ -205,6 +207,9 @@ mobile_theme: "Αλλαγή Θέματος",
     bc_conclusion_title: "Conclusion",
     bc_conclusion:
       "Blockchain is one of the most important technologies of our era, shaping the future of digital finance and information systems.",
+
+guides_more: "See more →",
+
 
 
     /* FOOTER */

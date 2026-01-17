@@ -55,6 +55,7 @@ guide_bitcoin_desc:
 guide_ethereum_title: "Τι είναι το Ethereum",
 guide_ethereum_desc:
   "Το blockchain των smart contracts, του Web3 και των αποκεντρωμένων εφαρμογών.",
+guides_more: "Δες περισσότερα →",
 
     /* GLOSSARY */
     glossary_title: "Γλωσσάρι",
@@ -258,7 +259,8 @@ guide_ethereum_desc:
 "Downtime": "Χρόνος μη λειτουργίας.",
 "Network Partition": "Διαχωρισμός δικτύου."
     },
-
+glossary_more: "Δες περισσότερα",
+glossary_less: "Λιγότερα",
     /* FOOTER */
     footer_rights: "Όλα τα δικαιώματα διατηρούνται.",
     footer_disclaimer:
@@ -351,6 +353,7 @@ guide_bitcoin_desc:
 guide_ethereum_title: "What Is Ethereum",
 guide_ethereum_desc:
   "The blockchain of smart contracts, Web3, and decentralized applications.",
+guides_more: "See more →",
 
     /* GLOSSARY */
     glossary_title: "Glossary",
@@ -552,7 +555,8 @@ guide_ethereum_desc:
 "Downtime": "Period of unavailability.",
 "Network Partition": "Network split event."
     },
-
+glossary_more: "See more",
+glossary_less: "See less",
 
     /* FOOTER */
     footer_rights: "All rights reserved.",

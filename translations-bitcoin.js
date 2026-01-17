@@ -53,6 +53,8 @@ window.TRANSLATIONS = {
     btc_conclusion:
       "Το Bitcoin παραμένει το πιο αξιόπιστο, ασφαλές και αναγνωρίσιμο ψηφιακό περιουσιακό στοιχείο στον κόσμο.",
 
+guides_more: "Δες περισσότερα →",
+
 
     /* =======================
            FOOTER
@@ -159,6 +161,8 @@ mobile_theme: "Αλλαγή Θέματος",
     btc_conclusion_title: "Conclusion",
     btc_conclusion:
       "Bitcoin remains the most trusted, secure, and recognizable digital asset worldwide.",
+
+      guides_more: "See more →",
 
 
     /* FOOTER */

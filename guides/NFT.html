@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Ethereum – CryptoKosmos</title>
+  <title>Bitcoin – CryptoKosmos</title>
 
   <!-- GLOBAL STYLES -->
   <link rel="stylesheet" href="../styles.css" />
@@ -18,6 +18,7 @@
   width: 20px;
   height: 20px;
 }
+
 
 
      body.article-page {
@@ -51,6 +52,11 @@
         height: 34px;
       }
     }
+
+
+
+
+
 
 
 
@@ -156,7 +162,6 @@ body.light-theme .more-guides{
   align-self: end;       /* κάτω στο row του */
   margin-top: 8px;       /* μικρό κενό από πάνω */
 }
-
   </style>
 </head>
 
@@ -228,82 +233,89 @@ body.light-theme .more-guides{
 <!-- ================= ARTICLE CONTENT ================= -->
 <div class="article-container">
 
-  <h2 data-i18n="eth_title">Τι είναι το Ethereum;</h2>
+  <h2 data-i18n="nft_title">Τι είναι τα NFT;</h2>
+
+  <p data-i18n="nft_intro">
+    Τα NFT (Non-Fungible Tokens) είναι μοναδικά ψηφιακά tokens που αποδεικνύουν ιδιοκτησία και αυθεντικότητα
+    για ένα συγκεκριμένο ψηφιακό αντικείμενο (τέχνη, συλλεκτικά, μουσική, in-game items κ.λπ.).
+    Σε αντίθεση με τα κρυπτονομίσματα, κάθε NFT είναι διαφορετικό και δεν ανταλλάσσεται 1:1 με κάποιο άλλο.
+  </p>
 
 
-  <p data-i18n="eth_intro">
-  Το Ethereum είναι ένα αποκεντρωμένο blockchain που επιτρέπει τη δημιουργία smart contracts και αποκεντρωμένων εφαρμογών (dApps).
-</p>
-
-<img id="article-image"
-       src="./IMG_5820.jpg"
-       data-light-img="./IMG_5820.jpg"
-       data-dark-img="./IMG_5820.jpg"
+  <img id="article-image"
+       src="./image.png"
+       data-light-img="./image.png"
+       data-dark-img="./image.png"
        style="width:100%;border-radius:16px;margin:20px 0;">
 
+  <h3 data-i18n="nft_speed_title">Πόσο γρήγορα “γίνονται” οι συναλλαγές NFT;</h3>
+  <p data-i18n="nft_speed_text">
+    Η ταχύτητα αγοράς/πώλησης ή minting ενός NFT εξαρτάται από το blockchain (π.χ. Ethereum, Solana, Polygon).
+    Συνήθως ολοκληρώνεται σε δευτερόλεπτα έως λίγα λεπτά, ανάλογα με το δίκτυο και τη συμφόρηση.
+  </p>
 
-<h3 data-i18n="eth_speed_title">Πόσο γρήγορο είναι το Ethereum;</h3>
-<p data-i18n="eth_speed_text">
-  Το Ethereum υποστηρίζει χιλιάδες εφαρμογές παγκοσμίως και με το Proof-of-Stake βελτιώνει συνεχώς την απόδοση και την επεκτασιμότητά του.
-</p>
+  <h3 data-i18n="nft_fees_title">Πώς λειτουργούν τα fees;</h3>
+  <p data-i18n="nft_fees_text">
+    Τα fees στα NFT είναι κυρίως gas fees για ενέργειες όπως mint, listing, buying ή transferring.
+    Σε marketplaces μπορεί επίσης να υπάρχει προμήθεια πλατφόρμας και royalties προς τον δημιουργό (όπου εφαρμόζεται).
+  </p>
 
-<h3 data-i18n="eth_fees_title">Πώς λειτουργούν τα fees;</h3>
-<p data-i18n="eth_fees_text">
-  Οι χρεώσεις στο Ethereum (gas fees) εξαρτώνται από τη ζήτηση του δικτύου και την πολυπλοκότητα της συναλλαγής.
-</p>
+  <h3 data-i18n="nft_tech_title">Τεχνολογία των NFT</h3>
+  <p data-i18n="nft_tech_text">
+    Τα NFT βασίζονται σε τεχνολογίες που επιτρέπουν μοναδικότητα και “ιδιοκτησία” on-chain:
+  </p>
 
-<h3 data-i18n="eth_tech_title">Τεχνολογία του Ethereum</h3>
-<p data-i18n="eth_tech_text">Το Ethereum βασίζεται σε βασικές τεχνολογίες:</p>
+  <ul>
+    <li data-i18n="nft_tech1">Smart contracts (κανόνες mint, μεταβίβασης και δικαιωμάτων)</li>
+    <li data-i18n="nft_tech2">Standards όπως ERC-721 / ERC-1155 (ή αντίστοιχα σε άλλα chains)</li>
+    <li data-i18n="nft_tech3">Metadata (όνομα, περιγραφή, traits) που “δείχνει” το NFT</li>
+    <li data-i18n="nft_tech4">Αποθήκευση αρχείων σε IPFS / Arweave ή σε server (ανάλογα το project)</li>
+  </ul>
 
-<ul>
-  <li data-i18n="eth_tech1">Smart Contracts</li>
-  <li data-i18n="eth_tech2">Proof-of-Stake (Ethereum 2.0)</li>
-  <li data-i18n="eth_tech3">Ethereum Virtual Machine (EVM)</li>
-  <li data-i18n="eth_tech4">Layer 2 λύσεις (Optimism, Arbitrum)</li>
-</ul>
+  <h3 data-i18n="nft_use_title">Πού χρησιμοποιούνται;</h3>
+  <ul>
+    <li data-i18n="nft_use1">Digital art & συλλεκτικές σειρές</li>
+    <li data-i18n="nft_use2">In-game αντικείμενα και skins που “ανήκουν” στον χρήστη</li>
+    <li data-i18n="nft_use3">Tickets/εισιτήρια, memberships και πρόσβαση σε communities</li>
+    <li data-i18n="nft_use4">Μουσική, βίντεο και licensing δικαιωμάτων</li>
+    <li data-i18n="nft_use5">Tokenization αντικειμένων/πιστοποιητικών (π.χ. collectibles, diplomas)</li>
+    <li data-i18n="nft_use6">Brand campaigns και ψηφιακές εμπειρίες (quests, rewards)</li>
+  </ul>
 
-<h3 data-i18n="eth_use_title">Πού χρησιμοποιείται;</h3>
-<ul>
-  <li data-i18n="eth_use1">DeFi εφαρμογές</li>
-  <li data-i18n="eth_use2">NFT πλατφόρμες</li>
-  <li data-i18n="eth_use3">DAO οργανισμοί</li>
-  <li data-i18n="eth_use4">Tokenization περιουσιακών στοιχείων</li>
-  <li data-i18n="eth_use5">Web3 εφαρμογές</li>
-  <li data-i18n="eth_use6">Blockchain gaming</li>
-</ul>
+  <h3 data-i18n="nft_pros_title">Πλεονεκτήματα</h3>
+  <ul>
+    <li data-i18n="nft_pro1">Απόδειξη αυθεντικότητας και ιδιοκτησίας on-chain</li>
+    <li data-i18n="nft_pro2">Εύκολη μεταβίβαση/πώληση χωρίς “χαρτιά”</li>
+    <li data-i18n="nft_pro3">Νέα μοντέλα εσόδων για δημιουργούς (π.χ. royalties όπου ισχύει)</li>
+    <li data-i18n="nft_pro4">Χρήσεις πέρα από τέχνη (gaming, tickets, access)</li>
+    <li data-i18n="nft_pro5">Διαφάνεια στο ιστορικό συναλλαγών (provenance)</li>
+  </ul>
 
-<h3 data-i18n="eth_pros_title">Πλεονεκτήματα</h3>
-<ul>
-  <li data-i18n="eth_pro1">Μεγάλο οικοσύστημα</li>
-  <li data-i18n="eth_pro2">Ισχυρή ασφάλεια</li>
-  <li data-i18n="eth_pro3">Πρωτοπόρο στα smart contracts</li>
-  <li data-i18n="eth_pro4">Τεράστια υποστήριξη developers</li>
-  <li data-i18n="eth_pro5">Συνεχής εξέλιξη</li>
-</ul>
+  <h3 data-i18n="nft_cons_title">Μειονεκτήματα</h3>
+  <ul>
+    <li data-i18n="nft_con1">Υψηλή μεταβλητότητα και συχνά hype-driven τιμές</li>
+    <li data-i18n="nft_con2">Scams/phishing και fake collections (χρειάζεται προσοχή)</li>
+    <li data-i18n="nft_con3">Το αρχείο μπορεί να μην είναι πάντα “on-chain” (αν είναι σε server)</li>
+  </ul>
 
-<h3 data-i18n="eth_cons_title">Μειονεκτήματα</h3>
-<ul>
-  <li data-i18n="eth_con1">Υψηλά gas fees σε περιόδους φόρτου</li>
-  <li data-i18n="eth_con2">Περιορισμένη ταχύτητα στο Layer 1</li>
-  <li data-i18n="eth_con3">Εξάρτηση από Layer 2 λύσεις</li>
-</ul>
+  <h3 data-i18n="nft_future_title">Το μέλλον των NFT</h3>
+  <p data-i18n="nft_future_text">
+    Πολλοί βλέπουν τα NFT να εξελίσσονται από “εικόνες συλλογών” σε εργαλεία χρησιμότητας:
+    ψηφιακή ταυτότητα, memberships, in-game ιδιοκτησία, tickets, πιστοποιήσεις και brand εμπειρίες.
+    Η αξία τείνει να στηρίζεται περισσότερο στη χρησιμότητα και λιγότερο στο hype.
+  </p>
 
-<h3 data-i18n="eth_future_title">Το μέλλον του Ethereum</h3>
-<p data-i18n="eth_future_text">
-  Το Ethereum συνεχίζει να εξελίσσεται με στόχο τη μεγαλύτερη κλιμάκωση, χαμηλότερα fees και μαζική υιοθέτηση του Web3.
-</p>
-
-<h3 data-i18n="eth_conclusion_title">Συμπέρασμα</h3>
-<p data-i18n="eth_conclusion">
-  Το Ethereum αποτελεί τη βάση του Web3 και παραμένει το πιο σημαντικό blockchain για smart contracts και αποκεντρωμένες εφαρμογές.
-</p>
-
+  <h3 data-i18n="nft_conclusion_title">Συμπέρασμα</h3>
+  <p data-i18n="nft_conclusion">
+    Τα NFT είναι μοναδικά ψηφιακά assets που αποδεικνύουν ιδιοκτησία και μπορούν να δώσουν πραγματική χρησιμότητα.
+    Για ασφάλεια, πάντα έλεγχε το official link της συλλογής, το smart contract και μην υπογράφεις ύποπτες συναλλαγές.
+  </p>
 
 <a href="../guides/MoreGuids.html" class="more-guides" data-i18n="guides_more" aria-label="More guides">
     Δες περισσότερα <span class="mg-arrow">→</span>
   </a>
 
-  </div>
+</div>
 
 <!-- ================= FOOTER ================= -->
 <footer class="site-footer">
@@ -462,7 +474,7 @@ body.light-theme .more-guides{
   });
 </script>
 
-<script src="../translations-ethereum.js"></script>
+<script src="../translations-NFT.js"></script>
 <script src="../i18n.js"></script>
 <script src="../app.js" defer></script>
 

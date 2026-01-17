@@ -52,6 +52,116 @@
         height: 34px;
       }
     }
+
+
+
+
+
+
+
+
+
+.more-guides{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+
+  padding:10px 16px;
+  border-radius:14px;
+
+  background: rgba(15,18,22,.55);
+  border: 1px solid rgba(91,180,255,.35);
+
+  color: var(--text);
+  font-weight:700;
+  font-size:13px;
+  letter-spacing:.2px;
+  text-decoration:none;
+
+  box-shadow:
+    0 0 0 1px rgba(123,97,255,.12),
+    0 10px 26px rgba(0,0,0,.35);
+
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+}
+
+.more-guides:hover{
+  transform: translateY(-2px);
+  border-color: rgba(91,180,255,.75);
+  box-shadow:
+    0 0 0 1px rgba(91,180,255,.18),
+    0 16px 34px rgba(0,0,0,.42);
+}
+
+.more-guides:hover{
+  transform: translateY(-2px);
+  border-color: rgba(91,180,255,.75);
+  box-shadow:
+    0 0 0 1px rgba(91,180,255,.18),
+    0 16px 34px rgba(0,0,0,.42);
+}
+
+/* Arrow pill */
+.mg-arrow{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+
+  width:28px;
+  height:28px;
+
+  border-radius:10px;
+  background: linear-gradient(135deg, rgba(91,180,255,.95), rgba(123,97,255,.95));
+  color:#0f1216;
+
+  font-weight:900;
+  line-height:1;
+
+  box-shadow: 0 10px 22px rgba(91,180,255,.22);
+}
+
+/* Light theme version */
+body.light-theme .more-guides{
+  background: rgba(255,255,255,.85);
+  border: 1px solid rgba(0,0,0,.12);
+  box-shadow:
+    0 0 0 1px rgba(0,0,0,.04),
+    0 10px 22px rgba(0,0,0,.10);
+}
+
+body.light-theme .more-guides:hover{
+  border-color: rgba(53,92,255,.55);
+}
+
+body.light-theme .more-guides{
+  background: rgba(255,255,255,.85);
+  border: 1px solid rgba(0,0,0,.12);
+}
+
+/* Mobile */
+@media (max-width: 520px){
+  .more-guides{
+    padding:9px 12px;
+    font-size:12px;
+    white-space:nowrap;
+  }
+  .mg-arrow{ width:26px; height:26px; border-radius:9px; }
+}
+
+/* ✅ Το "Γύρνα πίσω" να μένει κάτω από την 1η (αριστερή) κάρτα */
+.guides-grid{
+  display:grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap:16px;
+}
+
+.guides-grid > .more-guides{
+  grid-column: 1;        /* 1η στήλη (αριστερά) */
+  justify-self: start;   /* αριστερά μέσα στη στήλη */
+  align-self: end;       /* κάτω στο row του */
+  margin-top: 8px;       /* μικρό κενό από πάνω */
+}
+
   </style>
 </head>
 
@@ -197,6 +307,11 @@
   Το Bitcoin αποτελεί τη βάση όλων των κρυπτονομισμάτων και
   παραμένει το πιο αξιόπιστο και αναγνωρίσιμο ψηφιακό asset.
 </p>
+
+
+<a href="../guides/MoreGuids.html" class="more-guides" data-i18n="guides_more" aria-label="More guides">
+    Δες περισσότερα <span class="mg-arrow">→</span>
+  </a>
 
 </div>
 
