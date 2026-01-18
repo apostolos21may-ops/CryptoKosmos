@@ -1242,6 +1242,29 @@ body.light-theme .more-guides:hover{
   }
   .mg-arrow{ width:26px; height:26px; border-radius:9px; }
 }
+
+/* Το κουμπί/κάρτα "Δες περισσότερα" να μην κόβεται στο mobile */
+@media (max-width: 520px){
+  .more-guides{
+    width: 100%;
+    max-width: 160px;      /* παίξε 140-180 */
+    padding: 10px 12px;
+    gap: 8px;
+
+    white-space: normal;  /* <- σημαντικό */
+    line-height: 1.1;
+  }
+
+  .more-guides span:not(.mg-arrow){
+    display: block;       /* να σπάει σε γραμμή */
+  }
+
+  .more-guides{
+    overflow: visible;    /* να μη “κόβει” */
+  }
+}
+
+
 </style>
 
 
