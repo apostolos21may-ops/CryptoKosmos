@@ -8,10 +8,7 @@
   <!-- GLOBAL STYLES -->
   <link rel="stylesheet" href="../styles.css" />
 
-  <!-- Light/Dark article images preload -->
-  <link rel="preload" as="image" href="../image00.png">
-  <link rel="preload" as="image" href="../image00.png">
-
+  <link rel="preload" as="image" href="../image00.png" fetchpriority="high">
   <!-- PAGE TRANSLATIONS -->
 
 
@@ -245,11 +242,14 @@ body.light-theme .more-guides{
     με έξυπνα συμβόλαια (smart contracts) πάνω σε blockchains.
   </p>
 
-  <img id="article-image"
-       src="../image00.png"
-       data-light-img="../image00.png"
-       data-dark-img="../image00.png"
-       style="width:100%;border-radius:16px;margin:20px 0;">
+<img id="article-image"
+     src="../image00.png"
+     alt="DeFi"
+     loading="eager"
+     fetchpriority="high"
+     decoding="async"
+     onerror="this.style.display='none'; console.log('IMAGE ERROR:', this.src)"
+     style="width:100%;border-radius:16px;margin:20px 0;">
 
   <h3 data-i18n="defi_speed_title">Πόσο γρήγορο είναι το DeFi;</h3>
   <p data-i18n="defi_speed_text">
