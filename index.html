@@ -1292,6 +1292,31 @@ body.light-theme .more-guides:hover{
     border-radius:12px;
   }
 }
+
+@media (max-width: 520px){
+  .more-guides{
+    display:flex;
+    flex-direction:column;
+    align-items:center;   /* 👈 κέντρο */
+    justify-content:center;
+    text-align:center;    /* 👈 κέντρο το κείμενο */
+    gap:8px;
+
+    width:150px;
+    padding:14px;
+  }
+
+  .more-guides .mg-text{
+    max-width:10ch;
+    line-height:1.05;
+  }
+
+  .more-guides .mg-arrow{
+    display:flex;
+    align-items:center;
+    justify-content:center; /* 👈 κέντρο και το βελάκι */
+  }
+}
 </style>
 
 
