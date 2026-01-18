@@ -1264,7 +1264,34 @@ body.light-theme .more-guides:hover{
   }
 }
 
+/* =========================
+   MORE GUIDES — MOBILE OVERRIDE
+========================= */
+@media (max-width: 520px){
+  .more-guides{
+    display:flex;              /* από inline-flex → flex */
+    flex-direction:column;     /* σπάει σε γραμμές */
+    align-items:flex-start;
+    gap:8px;
 
+    width:150px;              /* ρύθμισε: 140–170px */
+    padding:14px;
+    white-space:normal;        /* επιτρέπει wrap */
+  }
+
+  .more-guides .mg-text{
+    font-size:18px;
+    font-weight:800;
+    line-height:1.05;
+    max-width:10ch;            /* force 2-3 γραμμές */
+  }
+
+  .more-guides .mg-arrow{
+    width:34px;
+    height:34px;
+    border-radius:12px;
+  }
+}
 </style>
 
 
