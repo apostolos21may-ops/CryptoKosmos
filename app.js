@@ -472,3 +472,16 @@ document.dispatchEvent(new Event("themeChanged"));
 
 
 
+
+  function applyArticleImageTheme(){
+    const img = document.getElementById("article-image");
+    if(!img) return;
+
+    const isLight = document.body.classList.contains("light-theme");
+    const target = isLight ? img.dataset.lightImg : img.dataset.darkImg;
+
+    if (target && img.src !== target) img.src = target;
+  }
+
+  document.addEventListener("DOMContentLoaded", applyArticleImageTheme);
+  document.addEventListener("themeChanged", applyArticleImageTheme); // αν κάνεις dispatch
