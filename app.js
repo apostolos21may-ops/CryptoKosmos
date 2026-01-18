@@ -429,40 +429,43 @@ document.querySelector(".verify-close")?.addEventListener("click", closeBurger);
 // ARTICLE IMAGE THEME SWITCH
 // ================================
 
-
 const articleImage = document.getElementById("article-image");
 
 function updateArticleImage() {
-    if (!articleImage) return;
+  if (!articleImage) return;
 
-    const lightImg = articleImage.dataset.lightImg;
-    const darkImg  = articleImage.dataset.darkImg;
+  const lightImg = articleImage.dataset.lightImg;
+  const darkImg  = articleImage.dataset.darkImg;
 
-    if (document.body.classList.contains("light-theme")) {
-        articleImage.src = lightImg;
-    } else {
-        articleImage.src = darkImg;
-    }
+  // ✅ Αν δεν υπάρχουν data attributes, κράτα το src όπως είναι
+  if (!lightImg && !darkImg) return;
+
+  const isLight = document.body.classList.contains("light-theme");
+
+  // ✅ Αν λείπει το ένα, χρησιμοποίησε το άλλο ή το υπάρχον src
+  const fallback = articleImage.getAttribute("src");
+  const target = isLight ? (lightImg || fallback) : (darkImg || fallback);
+
+  if (target) articleImage.setAttribute("src", target);
 }
 
 themeBtn?.addEventListener("click", () => {
-    setTimeout(updateArticleImage, 20);
+  setTimeout(updateArticleImage, 20);
 });
 
+document.addEventListener("DOMContentLoaded", updateArticleImage);
 updateArticleImage();
 
 
-
-// Μεταφράζει ΚΑΙ τα modals που είναι hidden
 function translateAllHidden() {
-    document.querySelectorAll("[data-i18n]").forEach(el => {
-        const key = el.getAttribute("data-i18n");
-        if (TRANSLATIONS[lang] && TRANSLATIONS[lang][key]) {
-            el.textContent = TRANSLATIONS[lang][key];
-        }
-    });
+  const lang = localStorage.getItem("ck-lang") || "el";
+  document.querySelectorAll("[data-i18n]").forEach(el => {
+    const key = el.getAttribute("data-i18n");
+    if (window.TRANSLATIONS?.[lang]?.[key]) {
+      el.textContent = window.TRANSLATIONS[lang][key];
+    }
+  });
 }
-translateAllHidden();
 
 document.dispatchEvent(new Event("themeChanged"));
 
