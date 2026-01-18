@@ -3,19 +3,20 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Bitcoin – CryptoKosmos</title>
+  <title>Blockchain – CryptoKosmos</title>
 
   <!-- GLOBAL STYLES -->
   <link rel="stylesheet" href="../styles.css" />
 
-<!-- Light/Dark article images preload -->
-  <link rel="preload" as="image" href="./image.png">
-  <link rel="preload" as="image" href="./image.png">
-
   <!-- PAGE TRANSLATIONS -->
+  <script src="../translations-Gasfees.js" defer></script>
 
+  <!-- Light/Dark article images preload -->
+  <link rel="preload" as="image" href="./image4.png">
+  <link rel="preload" as="image" href="./image12.png">
 
   <style>
+
 
 
 #auth-icon {
@@ -24,8 +25,7 @@
 }
 
 
-
-     body.article-page {
+    body.article-page {
       padding: 0;
     }
 
@@ -56,11 +56,6 @@
         height: 34px;
       }
     }
-
-
-
-
-
 
 
 
@@ -166,6 +161,7 @@ body.light-theme .more-guides{
   align-self: end;       /* κάτω στο row του */
   margin-top: 8px;       /* μικρό κενό από πάνω */
 }
+
   </style>
 </head>
 
@@ -176,7 +172,7 @@ body.light-theme .more-guides{
   <div class="container header-inner">
 
     <a class="brand" href="../index.html">
-      <img id="site-logo" src="../logo.png" class="logo" />
+      <img id="site-logo" src="../logo.png" alt="CryptoKosmos" class="logo" />
       <div class="brand-text">
         <h1>CryptoKosmos</h1>
         <p class="tagline" data-i18n="header_tagline">Ο παλμός του κόσμου των crypto</p>
@@ -194,7 +190,7 @@ body.light-theme .more-guides{
 
       <button id="theme-toggle" class="pill-btn">
         <img id="theme-icon" src="../IMG_5300.png" class="icon-img" />
-        <span id="theme-label" data-i18n="theme_dark">Dark</span>
+        <span id="theme-label">Dark</span>
       </button>
 
       <button id="auth-btn" class="pill-btn">
@@ -224,9 +220,17 @@ body.light-theme .more-guides{
   <a href="../index.html#guides" data-i18n="nav_guides">Οδηγοί</a>
   <a href="../index.html#glossary" data-i18n="nav_glossary">Γλωσσάρι</a>
 
-  <button id="mobile-home-btn" class="mobile-btn" data-i18n="mobile_home">Αρχική</button>
-  <button id="mobile-theme-toggle" class="mobile-btn" data-i18n="mobile_theme">Αλλαγή Θέματος</button>
-  <button id="mobile-auth-btn" class="mobile-btn" data-i18n="login">Login</button>
+  <button id="mobile-home-btn" class="mobile-btn" data-i18n="mobile_home">
+    Αρχική Σελίδα
+  </button>
+
+  <button id="mobile-theme-toggle" class="mobile-btn" data-i18n="mobile_theme">
+    Αλλαγή Θέματος
+  </button>
+
+  <button id="mobile-auth-btn" class="mobile-btn" data-i18n="login">
+    Login
+  </button>
 
   <button id="mobile-lang-toggle" class="mobile-btn">
     <img id="mobile-lang-icon" class="icon-img" src="../IMG_5542.png">
@@ -237,83 +241,95 @@ body.light-theme .more-guides{
 <!-- ================= ARTICLE CONTENT ================= -->
 <div class="article-container">
 
-  <h2 data-i18n="nft_title">Τι είναι τα NFT;</h2>
+  <h2 data-i18n="fees_title">Gas Fees & Fees: Τι πληρώνεις στα crypto;</h2>
 
-  <p data-i18n="nft_intro">
-    Τα NFT (Non-Fungible Tokens) είναι μοναδικά ψηφιακά tokens που αποδεικνύουν ιδιοκτησία και αυθεντικότητα
-    για ένα συγκεκριμένο ψηφιακό αντικείμενο (τέχνη, συλλεκτικά, μουσική, in-game items κ.λπ.).
-    Σε αντίθεση με τα κρυπτονομίσματα, κάθε NFT είναι διαφορετικό και δεν ανταλλάσσεται 1:1 με κάποιο άλλο.
+  <p data-i18n="fees_intro">
+    Στα crypto υπάρχουν διαφορετικά είδη “fees” — άλλα είναι χρεώσεις δικτύου (gas) και άλλα είναι χρεώσεις υπηρεσίας (trading fees)…
   </p>
 
 
-  <img id="article-image"
-       src="./image.png"
-       data-light-img="./image.png"
-       data-dark-img="./image.png"
-       style="width:100%;border-radius:16px;margin:20px 0;">
+<!-- IMAGE: Language-based sources -->
+<img id="article-image"
+     src="./image4.png"
+     data-lang-el="./image4.png"
+     data-lang-en="./image12.png"
+     alt="Gas Fees"
+     style="width:100%;border-radius:16px;margin:20px 0;">
 
-  <h3 data-i18n="nft_speed_title">Πόσο γρήγορα “γίνονται” οι συναλλαγές NFT;</h3>
-  <p data-i18n="nft_speed_text">
-    Η ταχύτητα αγοράς/πώλησης ή minting ενός NFT εξαρτάται από το blockchain (π.χ. Ethereum, Solana, Polygon).
-    Συνήθως ολοκληρώνεται σε δευτερόλεπτα έως λίγα λεπτά, ανάλογα με το δίκτυο και τη συμφόρηση.
-  </p>
+  <h3 data-i18n="fees_gas_title">Τι είναι Gas Fee;</h3>
+  <p data-i18n="fees_gas_text"></p>
 
-  <h3 data-i18n="nft_fees_title">Πώς λειτουργούν τα fees;</h3>
-  <p data-i18n="nft_fees_text">
-    Τα fees στα NFT είναι κυρίως gas fees για ενέργειες όπως mint, listing, buying ή transferring.
-    Σε marketplaces μπορεί επίσης να υπάρχει προμήθεια πλατφόρμας και royalties προς τον δημιουργό (όπου εφαρμόζεται).
-  </p>
+  <h3 data-i18n="fees_other_title">Τι είναι τα “άλλα fees”;</h3>
+  <p data-i18n="fees_other_text"></p>
 
-  <h3 data-i18n="nft_tech_title">Τεχνολογία των NFT</h3>
-  <p data-i18n="nft_tech_text">
-    Τα NFT βασίζονται σε τεχνολογίες που επιτρέπουν μοναδικότητα και “ιδιοκτησία” on-chain:
-  </p>
+  <h3 data-i18n="fees_why_title">Γιατί αλλάζουν τα fees;</h3>
+  <p data-i18n="fees_why_intro"></p>
 
   <ul>
-    <li data-i18n="nft_tech1">Smart contracts (κανόνες mint, μεταβίβασης και δικαιωμάτων)</li>
-    <li data-i18n="nft_tech2">Standards όπως ERC-721 / ERC-1155 (ή αντίστοιχα σε άλλα chains)</li>
-    <li data-i18n="nft_tech3">Metadata (όνομα, περιγραφή, traits) που “δείχνει” το NFT</li>
-    <li data-i18n="nft_tech4">Αποθήκευση αρχείων σε IPFS / Arweave ή σε server (ανάλογα το project)</li>
+    <li data-i18n="fees_why_li1"></li>
+    <li data-i18n="fees_why_li2"></li>
+    <li data-i18n="fees_why_li3"></li>
+    <li data-i18n="fees_why_li4"></li>
   </ul>
 
-  <h3 data-i18n="nft_use_title">Πού χρησιμοποιούνται;</h3>
+  <p data-i18n="fees_why_outro"></p>
+
+  <h3 data-i18n="fees_steps_title">Τι πληρώνεις σε μια συναλλαγή (ροή)</h3>
+
+  <ol>
+    <li data-i18n="fees_step1"></li>
+    <li data-i18n="fees_step2"></li>
+    <li data-i18n="fees_step3"></li>
+    <li data-i18n="fees_step4"></li>
+    <li data-i18n="fees_step5"></li>
+    <li data-i18n="fees_step6"></li>
+  </ol>
+
+  <h3 data-i18n="fees_terms_title">Βασικοί όροι</h3>
+  <p data-i18n="fees_terms_text"></p>
+
+  <h3 data-i18n="fees_reduce_title">Πώς μειώνω τα fees;</h3>
+  <p data-i18n="fees_reduce_text"></p>
+  <p><strong data-i18n="fees_reduce_tip_title"></strong> <span data-i18n="fees_reduce_tip"></span></p>
+
+  <h3 data-i18n="fees_mistakes_title">Συχνά λάθη</h3>
   <ul>
-    <li data-i18n="nft_use1">Digital art & συλλεκτικές σειρές</li>
-    <li data-i18n="nft_use2">In-game αντικείμενα και skins που “ανήκουν” στον χρήστη</li>
-    <li data-i18n="nft_use3">Tickets/εισιτήρια, memberships και πρόσβαση σε communities</li>
-    <li data-i18n="nft_use4">Μουσική, βίντεο και licensing δικαιωμάτων</li>
-    <li data-i18n="nft_use5">Tokenization αντικειμένων/πιστοποιητικών (π.χ. collectibles, diplomas)</li>
-    <li data-i18n="nft_use6">Brand campaigns και ψηφιακές εμπειρίες (quests, rewards)</li>
+    <li data-i18n="fees_mistake1"></li>
+    <li data-i18n="fees_mistake2"></li>
+    <li data-i18n="fees_mistake3"></li>
+    <li data-i18n="fees_mistake4"></li>
+    <li data-i18n="fees_mistake5"></li>
+    <li data-i18n="fees_mistake6"></li>
+    <li data-i18n="fees_mistake7"></li>
   </ul>
 
-  <h3 data-i18n="nft_pros_title">Πλεονεκτήματα</h3>
+  <h3 data-i18n="fees_pros_title">Τι είναι “OK” να πληρώνεις</h3>
   <ul>
-    <li data-i18n="nft_pro1">Απόδειξη αυθεντικότητας και ιδιοκτησίας on-chain</li>
-    <li data-i18n="nft_pro2">Εύκολη μεταβίβαση/πώληση χωρίς “χαρτιά”</li>
-    <li data-i18n="nft_pro3">Νέα μοντέλα εσόδων για δημιουργούς (π.χ. royalties όπου ισχύει)</li>
-    <li data-i18n="nft_pro4">Χρήσεις πέρα από τέχνη (gaming, tickets, access)</li>
-    <li data-i18n="nft_pro5">Διαφάνεια στο ιστορικό συναλλαγών (provenance)</li>
+    <li data-i18n="fees_pro1"></li>
+    <li data-i18n="fees_pro2"></li>
+    <li data-i18n="fees_pro3"></li>
+    <li data-i18n="fees_pro4"></li>
+    <li data-i18n="fees_pro5"></li>
   </ul>
 
-  <h3 data-i18n="nft_cons_title">Μειονεκτήματα</h3>
+  <h3 data-i18n="fees_cons_title">Τι να προσέχεις</h3>
   <ul>
-    <li data-i18n="nft_con1">Υψηλή μεταβλητότητα και συχνά hype-driven τιμές</li>
-    <li data-i18n="nft_con2">Scams/phishing και fake collections (χρειάζεται προσοχή)</li>
-    <li data-i18n="nft_con3">Το αρχείο μπορεί να μην είναι πάντα “on-chain” (αν είναι σε server)</li>
+    <li data-i18n="fees_con1"></li>
+    <li data-i18n="fees_con2"></li>
+    <li data-i18n="fees_con3"></li>
+    <li data-i18n="fees_con4"></li>
   </ul>
 
-  <h3 data-i18n="nft_future_title">Το μέλλον των NFT</h3>
-  <p data-i18n="nft_future_text">
-    Πολλοί βλέπουν τα NFT να εξελίσσονται από “εικόνες συλλογών” σε εργαλεία χρησιμότητας:
-    ψηφιακή ταυτότητα, memberships, in-game ιδιοκτησία, tickets, πιστοποιήσεις και brand εμπειρίες.
-    Η αξία τείνει να στηρίζεται περισσότερο στη χρησιμότητα και λιγότερο στο hype.
-  </p>
+  <h3 data-i18n="fees_examples_title">Παραδείγματα κόστους</h3>
+  <ul>
+    <li data-i18n="fees_ex1"></li>
+    <li data-i18n="fees_ex2"></li>
+    <li data-i18n="fees_ex3"></li>
+    <li data-i18n="fees_ex4"></li>
+  </ul>
 
-  <h3 data-i18n="nft_conclusion_title">Συμπέρασμα</h3>
-  <p data-i18n="nft_conclusion">
-    Τα NFT είναι μοναδικά ψηφιακά assets που αποδεικνύουν ιδιοκτησία και μπορούν να δώσουν πραγματική χρησιμότητα.
-    Για ασφάλεια, πάντα έλεγχε το official link της συλλογής, το smart contract και μην υπογράφεις ύποπτες συναλλαγές.
-  </p>
+  <h3 data-i18n="fees_conclusion_title">Συμπέρασμα</h3>
+  <p data-i18n="fees_conclusion"></p>
 
 <a href="../guides/MoreGuids.html" class="more-guides" data-i18n="guides_more" aria-label="More guides">
     Δες περισσότερα <span class="mg-arrow">→</span>
@@ -321,7 +337,6 @@ body.light-theme .more-guides{
 
 </div>
 
-<!-- ================= FOOTER ================= -->
 <footer class="site-footer">
   <div class="container">
     <p>
@@ -331,7 +346,6 @@ body.light-theme .more-guides{
   </div>
 </footer>
 
-<!-- ================= LOGIN MODAL ================= -->
 <div id="login-modal" class="modal hidden">
   <div class="modal-backdrop"></div>
   <div class="modal-card">
@@ -345,7 +359,7 @@ body.light-theme .more-guides{
       <div class="modal-body">
 
         <label data-i18n="login_email">Email</label>
-        <input id="login-email" type="email"
+        <input id="login-email" type="email" 
                data-i18n-placeholder="login_email"
                placeholder="Email">
 
@@ -363,27 +377,28 @@ body.light-theme .more-guides{
         Σύνδεση
       </button>
 
-      <p id="no-account" class="modal-hint" style="color:#ffb3b3; display:none;"
+      <p id="no-account"
+         class="modal-hint"
+         style="color:#ffb3b3; display:none;"
          data-i18n="login_no_account">
-        Δεν έχεις λογαριασμό στο CryptoKosmos.
+         Δεν έχεις λογαριασμό στο CryptoKosmos.
       </p>
 
       <button id="signup-btn" type="button"
-        style="display:none;margin-top:10px;width:100%;padding:10px 14px;border:none;border-radius:14px;background:#1e293b;color:white;font-weight:600;cursor:pointer;border:1px solid rgba(255,255,255,0.25);"
+        style="display:none;margin-top:10px;width:100%;padding:10px 14px;border:none;border-radius:14px;
+        background:#1e293b;color:white;font-weight:600;cursor:pointer;border:1px solid rgba(255,255,255,0.25);"
         data-i18n="login_create_account">
         Δημιουργία λογαριασμού
       </button>
 
     </form>
-
   </div>
 </div>
 
-<!-- ================= SIGNUP MODAL ================= -->
 <div id="signup-modal" class="modal hidden">
   <div class="modal-backdrop"></div>
-
   <div class="modal-card">
+
     <div class="modal-header">
       <h3 class="modal-title" data-i18n="signup_title">Δημιούργησε λογαριασμό</h3>
       <button class="modal-close signup-close">×</button>
@@ -412,13 +427,13 @@ body.light-theme .more-guides{
         <img id="signup-pass2-toggle" class="pass-eye" src="../IMG_5380.png">
       </div>
 
-      <p id="signup-error" style="color:#ff6b6b; display:none;"
+      <p id="signup-error"
+         style="color:#ff6b6b; display:none;"
          data-i18n="signup_error">
          Οι κωδικοί δεν ταιριάζουν.
       </p>
 
-      <button id="signup-create" class="modal-submit"
-              data-i18n="signup_btn">
+      <button id="signup-create" class="modal-submit" data-i18n="signup_btn">
         Δημιουργία λογαριασμού
       </button>
 
@@ -435,11 +450,10 @@ body.light-theme .more-guides{
   </div>
 </div>
 
-<!-- ================= VERIFY MODAL ================= -->
 <div id="verify-modal" class="modal hidden">
   <div class="modal-backdrop"></div>
-
   <div class="modal-card">
+
     <div class="modal-header">
       <h3 class="modal-title" data-i18n="verify_title">Επαλήθευση Email</h3>
       <button class="modal-close verify-close">×</button>
@@ -461,16 +475,16 @@ body.light-theme .more-guides{
          Λάθος κωδικός. Προσπάθησε ξανά.
       </p>
 
-      <button id="verify-submit" class="modal-submit"
-              data-i18n="verify_btn">
+      <button id="verify-submit" class="modal-submit" data-i18n="verify_btn">
         Επιβεβαίωση
       </button>
 
     </div>
+
   </div>
 </div>
 
-<!-- ================= SCRIPTS ================= -->
+<!-- YEAR -->
 <script>
   document.getElementById("year").textContent = new Date().getFullYear();
   document.getElementById("mobile-home-btn")?.addEventListener("click", () => {
@@ -478,9 +492,31 @@ body.light-theme .more-guides{
   });
 </script>
 
-<script src="../translations-NFT.js"></script>
-<script src="../i18n.js"></script>
+<script>
+  function updateArticleImageByLang() {
+    const img = document.getElementById("article-image");
+    if (!img) return;
+
+    const lang = localStorage.getItem("ck-lang") || "el";
+    const elSrc = img.dataset.langEl;
+    const enSrc = img.dataset.langEn;
+
+    img.src = (lang === "en" ? enSrc : elSrc) || img.src;
+  }
+
+  // 1) Στο πρώτο load
+  document.addEventListener("DOMContentLoaded", updateArticleImageByLang);
+
+  // 2) Όταν αλλάζει γλώσσα (εσύ ήδη κάνεις dispatch αυτό το event)
+  document.addEventListener("languageChanged", updateArticleImageByLang);
+
+  // 3) Αν ο browser κάνει back/forward cache
+  window.addEventListener("pageshow", updateArticleImageByLang);
+</script>
+
+<!-- GLOBAL SCRIPTS -->
 <script src="../app.js" defer></script>
+<script src="../i18n.js" defer></script>
 
 </body>
 </html>
