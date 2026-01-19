@@ -12,7 +12,6 @@
   <!-- Favicon & logo -->
   <link rel="icon" href="./logo.png" type="image/png" />
 <script src="translations.js"></script>
-<script src="i18n.js"></script>
   <style>
 
 /* =========================================
@@ -1579,6 +1578,42 @@ body.light-theme .more-guides:hover{
     transform: none;
   }
 }
+
+
+
+/* HERO skeleton rows */
+.hero-rank-row.skeleton{
+  background: rgba(10,15,25,0.65);
+  overflow: hidden;
+  position: relative;
+}
+
+.hero-rank-row.skeleton::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background: linear-gradient(90deg,
+    transparent,
+    rgba(255,255,255,0.10),
+    transparent
+  );
+  transform: translateX(-120%);
+  animation: skMove 1.2s ease-in-out infinite;
+}
+
+@keyframes skMove{
+  to{ transform: translateX(120%); }
+}
+
+.sk-bar{
+  height: 10px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.10);
+}
+.sk-bar.w1{ width: 30px; }
+.sk-bar.w2{ width: 90px; }
+.sk-bar.w3{ width: 60px; }
+.sk-bar.w4{ width: 70px; margin-left:auto; }
 </style>
 
 
@@ -2430,22 +2465,78 @@ document.querySelectorAll("#mobile-menu a").forEach(link => {
 });
 
 // ========================================
-// HERO RANKING – Top 50 coins (SAFE)
+// HERO RANKING – Top 50 coins (STABLE)
 // ========================================
 const rankBox  = document.querySelector(".hero-rank-box");
 const rankWrap = document.getElementById("hero-rank-inner");
 
 let heroScrollInterval = null;
 let heroObserver = null;
+let heroRefreshInterval = null;
 
-// ----------------------------------------
-// LOAD DATA
-// ----------------------------------------
+rankBox.scrollTop = 0;
+
+// --- Skeleton so it looks "open" instantly ---
+function renderHeroSkeleton(count = 12){
+  if (!rankWrap) return;
+  rankWrap.innerHTML = "";
+
+  for(let i=0;i<count;i++){
+    const row = document.createElement("div");
+    row.className = "hero-rank-row skeleton";
+    row.innerHTML = `
+      <div class="sk-bar w1"></div>
+      <div class="sk-bar w2"></div>
+      <div class="sk-bar w3"></div>
+      <div class="sk-bar w4"></div>
+    `;
+    rankWrap.appendChild(row);
+  }
+}
+
+// --- Auto scroll ---
+function startHeroScroll() {
+  if (!rankBox || !rankWrap || heroScrollInterval) return;
+
+  let pos = rankBox.scrollTop || 0;
+  const speed = 0.4;
+
+  heroScrollInterval = setInterval(() => {
+    pos += speed;
+    const half = rankWrap.scrollHeight / 2;
+    if (half > 0 && pos >= half) pos = 0;
+    rankBox.scrollTop = pos;
+  }, 30);
+}
+
+function stopHeroScroll() {
+  if (heroScrollInterval) {
+    clearInterval(heroScrollInterval);
+    heroScrollInterval = null;
+  }
+}
+
+// --- Pause when not visible (optional but good) ---
+function observeHeroVisibility() {
+  if (!rankBox) return;
+  if (heroObserver) heroObserver.disconnect();
+
+  heroObserver = new IntersectionObserver(entries => {
+    for (const entry of entries) {
+      if (entry.isIntersecting) startHeroScroll();
+      else stopHeroScroll();
+    }
+  }, { threshold: 0.15 });
+
+  heroObserver.observe(rankBox);
+}
+
+// --- Load data ---
 async function loadHeroRanking() {
   if (!rankBox || !rankWrap) return;
 
   stopHeroScroll();
-  rankWrap.innerHTML = "";
+  renderHeroSkeleton(); // always looks open
 
   try {
     const res = await fetch(
@@ -2455,6 +2546,7 @@ async function loadHeroRanking() {
     );
 
     const data = await res.json();
+    rankWrap.innerHTML = "";
 
     data.forEach((coin, idx) => {
       const change = coin.price_change_percentage_24h ?? 0;
@@ -2465,7 +2557,7 @@ async function loadHeroRanking() {
       row.innerHTML = `
         <span class="hr-pos">${idx + 1}</span>
         <div class="hr-icon-wrap">
-          <img src="${coin.image}" class="hr-icon" loading="lazy">
+          <img src="${coin.image}" class="hr-icon" loading="lazy" alt="">
           <span class="hr-symbol">${coin.symbol.toUpperCase()}</span>
         </div>
         <span class="hr-change ${up ? "hr-up" : "hr-down"}">
@@ -2478,169 +2570,36 @@ async function loadHeroRanking() {
       rankWrap.appendChild(row);
     });
 
-    // 🔁 duplicate για endless scroll
+    // duplicate for endless scroll
     rankWrap.innerHTML += rankWrap.innerHTML;
 
+    // start scroll immediately + observer for pause
+    startHeroScroll();
     observeHeroVisibility();
 
   } catch (e) {
     console.warn("Hero ranking error:", e);
+    // skeleton stays, so it never looks "closed"
   }
 }
 
-// ----------------------------------------
-// AUTO SCROLL
-// ----------------------------------------
-function startHeroScroll() {
-  if (!rankBox || heroScrollInterval) return;
-
-  let pos = 0;
-  const speed = 0.4;
-
-  heroScrollInterval = setInterval(() => {
-    pos += speed;
-    const half = rankWrap.scrollHeight / 2;
-    if (pos >= half) pos = 0;
-    rankBox.scrollTop = pos;
-  }, 30);
+// --- Refresh schedule (1 hour) ---
+function startHeroRefresh(){
+  if (heroRefreshInterval) clearInterval(heroRefreshInterval);
+  heroRefreshInterval = setInterval(loadHeroRanking, 60 * 60 * 1000);
 }
 
-function stopHeroScroll() {
-  if (heroScrollInterval) {
-    clearInterval(heroScrollInterval);
-    heroScrollInterval = null;
-  }
-}
-
-// ----------------------------------------
-// VISIBILITY CONTROL
-// ----------------------------------------
-function observeHeroVisibility() {
-  if (heroObserver) heroObserver.disconnect();
-
-  heroObserver = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) startHeroScroll();
-      else stopHeroScroll();
-    });
-  }, { threshold: 0.2 });
-
-  heroObserver.observe(rankBox);
-}
-
-// ----------------------------------------
-// INIT & CLEANUP
-// ----------------------------------------
-document.addEventListener("DOMContentLoaded", loadHeroRanking);
-
-window.addEventListener("pagehide", () => {
-  stopHeroScroll();
-  if (heroObserver) {
-    heroObserver.disconnect();
-    heroObserver = null;
-  }
+// --- Init once ---
+document.addEventListener("DOMContentLoaded", () => {
+  loadHeroRanking();
+  startHeroRefresh();
 });
 
-
-// ========================================
-// AUTO SCROLL
-// ========================================
-function startHeroScroll() {
-  if (!rankBox || heroScrollInterval) return;
-
-  let pos = 0;
-  const speed = 0.4;
-
-  heroScrollInterval = setInterval(() => {
-    pos += speed;
-    const half = rankWrap.scrollHeight / 2;
-    if (pos >= half) pos = 0;
-    rankBox.scrollTop = pos;
-  }, 30);
-}
-
-function stopHeroScroll() {
-  if (heroScrollInterval) {
-    clearInterval(heroScrollInterval);
-    heroScrollInterval = null;
-  }
-}
-
-// ========================================
-// VISIBILITY CONTROL
-// ========================================
-function observeHeroVisibility() {
-  if (heroObserver) heroObserver.disconnect();
-
-  heroObserver = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) startHeroScroll();
-      else stopHeroScroll();
-    });
-  }, { threshold: 0.2 });
-
-  heroObserver.observe(rankBox);
-}
-
-// ========================================
-// CLEANUP
-// ========================================
+// --- Cleanup ---
 window.addEventListener("pagehide", () => {
   stopHeroScroll();
-  if (heroObserver) {
-    heroObserver.disconnect();
-    heroObserver = null;
-  }
-});
-
-// ========================================
-// AUTO SCROLL (SAFE)
-// ========================================
-function startHeroScroll() {
-  if (!rankBox || heroScrollInterval) return;
-
-  let pos = 0;
-  const speed = 0.4;
-
-  heroScrollInterval = setInterval(() => {
-    pos += speed;
-    const half = rankWrap.scrollHeight / 2;
-    if (pos >= half) pos = 0;
-    rankBox.scrollTop = pos;
-  }, 30);
-}
-
-function stopHeroScroll() {
-  if (heroScrollInterval) {
-    clearInterval(heroScrollInterval);
-    heroScrollInterval = null;
-  }
-}
-
-// ========================================
-// START / STOP όταν φαίνεται
-// ========================================
-function observeHeroVisibility() {
-  if (!rankBox) return;
-
   if (heroObserver) heroObserver.disconnect();
-
-  heroObserver = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) startHeroScroll();
-      else stopHeroScroll();
-    });
-  }, { threshold: 0.2 });
-
-  heroObserver.observe(rankBox);
-}
-
-// ========================================
-// CLEANUP
-// ========================================
-window.addEventListener("pagehide", () => {
-  stopHeroScroll();
-  heroObserver && heroObserver.disconnect();
+  if (heroRefreshInterval) clearInterval(heroRefreshInterval);
 });
 
 // ========================================
@@ -2748,7 +2707,7 @@ function startPrices() {
   }
 
   fetchPrices(); // άμεσο load
-  pricesInterval = setInterval(fetchPrices, 90000);
+ pricesInterval = setInterval(fetchPrices, 20 * 60 * 1000); // 20 λεπτά
 }
 
 function stopPrices() {
@@ -2864,6 +2823,8 @@ document.addEventListener("click", e => {
   window.addEventListener("load", () => {
     window.scrollTo(0, 0);
   });
+
 </script>
+
 </body>
 </html>
