@@ -2465,7 +2465,7 @@ document.querySelectorAll("#mobile-menu a").forEach(link => {
 });
 
 // ========================================
-// HERO RANKING – Top 50 coins (STABLE)
+// HERO RANKING – Top 50 coins (STABLE + RETRY + TIMEOUT + CACHE)
 // ========================================
 const rankBox  = document.querySelector(".hero-rank-box");
 const rankWrap = document.getElementById("hero-rank-inner");
@@ -2474,14 +2474,31 @@ let heroScrollInterval = null;
 let heroObserver = null;
 let heroRefreshInterval = null;
 
-rankBox.scrollTop = 0;
+const sleep = (ms) => new Promise(r => setTimeout(r, ms));
+
+async function fetchWithTimeout(url, options = {}, ms = 8000) {
+  const controller = new AbortController();
+  const id = setTimeout(() => controller.abort(), ms);
+  try {
+    return await fetch(url, { ...options, signal: controller.signal });
+  } finally {
+    clearTimeout(id);
+  }
+}
+
+// --- CACHE (show last good data if API fails) ---
+function getCachedHero() {
+  try { return JSON.parse(localStorage.getItem("ck-hero-cache")); } catch { return null; }
+}
+function setCachedHero(data) {
+  localStorage.setItem("ck-hero-cache", JSON.stringify({ t: Date.now(), data }));
+}
 
 // --- Skeleton so it looks "open" instantly ---
 function renderHeroSkeleton(count = 12){
   if (!rankWrap) return;
   rankWrap.innerHTML = "";
-
-  for(let i=0;i<count;i++){
+  for (let i = 0; i < count; i++){
     const row = document.createElement("div");
     row.className = "hero-rank-row skeleton";
     row.innerHTML = `
@@ -2492,6 +2509,36 @@ function renderHeroSkeleton(count = 12){
     `;
     rankWrap.appendChild(row);
   }
+}
+
+// --- Render data into rows ---
+function renderHeroRows(data){
+  if (!rankWrap) return;
+
+  rankWrap.innerHTML = "";
+
+  data.forEach((coin, idx) => {
+    const change = coin.price_change_percentage_24h ?? 0;
+    const up = change >= 0;
+
+    const row = document.createElement("div");
+    row.className = "hero-rank-row";
+    row.innerHTML = `
+      <span class="hr-pos">${idx + 1}</span>
+      <div class="hr-icon-wrap">
+        <img src="${coin.image}" class="hr-icon" loading="lazy" alt="">
+        <span class="hr-symbol">${coin.symbol.toUpperCase()}</span>
+      </div>
+      <span class="hr-change ${up ? "hr-up" : "hr-down"}">
+        ${up ? "▲" : "▼"} ${change.toFixed(2)}%
+      </span>
+      <span class="hr-price">$${Number(coin.current_price).toLocaleString("en-US",{ maximumFractionDigits: 2 })}</span>
+    `;
+    rankWrap.appendChild(row);
+  });
+
+  // duplicate for endless scroll
+  rankWrap.innerHTML += rankWrap.innerHTML;
 }
 
 // --- Auto scroll ---
@@ -2516,7 +2563,6 @@ function stopHeroScroll() {
   }
 }
 
-// --- Pause when not visible (optional but good) ---
 function observeHeroVisibility() {
   if (!rankBox) return;
   if (heroObserver) heroObserver.disconnect();
@@ -2531,62 +2577,63 @@ function observeHeroVisibility() {
   heroObserver.observe(rankBox);
 }
 
-// --- Load data ---
+// --- Load data with retry + timeout + fallback cache ---
 async function loadHeroRanking() {
   if (!rankBox || !rankWrap) return;
 
   stopHeroScroll();
-  renderHeroSkeleton(); // always looks open
+  rankBox.scrollTop = 0;
 
-  try {
-    const res = await fetch(
-      "https://api.coingecko.com/api/v3/coins/markets" +
-      "?vs_currency=usd&order=market_cap_desc&per_page=50&page=1&sparkline=false",
-      { cache: "no-store" }
-    );
+  // show skeleton immediately
+  renderHeroSkeleton();
 
-    const data = await res.json();
-    rankWrap.innerHTML = "";
+  const url = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=50&page=1&sparkline=false";
 
-    data.forEach((coin, idx) => {
-      const change = coin.price_change_percentage_24h ?? 0;
-      const up = change >= 0;
+  for (let attempt = 1; attempt <= 2; attempt++) {
+    try {
+      const res = await fetchWithTimeout(url, { cache: "no-store" }, 8000);
 
-      const row = document.createElement("div");
-      row.className = "hero-rank-row";
-      row.innerHTML = `
-        <span class="hr-pos">${idx + 1}</span>
-        <div class="hr-icon-wrap">
-          <img src="${coin.image}" class="hr-icon" loading="lazy" alt="">
-          <span class="hr-symbol">${coin.symbol.toUpperCase()}</span>
-        </div>
-        <span class="hr-change ${up ? "hr-up" : "hr-down"}">
-          ${up ? "▲" : "▼"} ${change.toFixed(2)}%
-        </span>
-        <span class="hr-price">
-          $${coin.current_price.toLocaleString("en-US",{ maximumFractionDigits: 2 })}
-        </span>
-      `;
-      rankWrap.appendChild(row);
-    });
+      if (res.status === 429) throw new Error("Rate limited (429)");
+      if (!res.ok) throw new Error("HTTP " + res.status);
 
-    // duplicate for endless scroll
-    rankWrap.innerHTML += rankWrap.innerHTML;
+      const data = await res.json();
+      if (!Array.isArray(data) || data.length === 0) throw new Error("Invalid data");
 
-    // start scroll immediately + observer for pause
+      // cache good data
+      setCachedHero(data);
+
+      renderHeroRows(data);
+      startHeroScroll();
+      observeHeroVisibility();
+      return;
+
+    } catch (e) {
+      console.warn("Hero ranking failed attempt:", attempt, e);
+      if (attempt < 2) await sleep(1200);
+    }
+  }
+
+  // fallback to cache if available
+  const cached = getCachedHero();
+  if (cached?.data && Array.isArray(cached.data) && cached.data.length) {
+    renderHeroRows(cached.data);
     startHeroScroll();
     observeHeroVisibility();
-
-  } catch (e) {
-    console.warn("Hero ranking error:", e);
-    // skeleton stays, so it never looks "closed"
+    return;
   }
+
+  // final fallback message (never stuck on skeleton forever)
+  rankWrap.innerHTML = `
+    <div class="hero-rank-row" style="justify-content:center; opacity:.85;">
+      Δεν φορτώνουν δεδομένα τώρα — δοκίμασε refresh.
+    </div>
+  `;
 }
 
-// --- Refresh schedule (1 hour) ---
+// --- Refresh schedule ---
 function startHeroRefresh(){
   if (heroRefreshInterval) clearInterval(heroRefreshInterval);
-  heroRefreshInterval = setInterval(loadHeroRanking, 60 * 60 * 1000);
+  heroRefreshInterval = setInterval(loadHeroRanking, 60 * 60 * 1000); // 1 ώρα
 }
 
 // --- Init once ---
@@ -2635,9 +2682,8 @@ gSearch.addEventListener("input", renderGlossary);
 document.addEventListener("languageChanged", renderGlossary);
 renderGlossary();
 
-
 // ========================================
-// LIVE PRICES – CoinGecko (SAFE)
+// LIVE PRICES – CoinGecko (STABLE + RETRY + TIMEOUT + CACHE + SKELETON)
 // ========================================
 const coins = [
   { id: "bitcoin",  symbol: "BTC" },
@@ -2648,11 +2694,42 @@ const coins = [
 let pricesInterval = null;
 
 function formatEur(n) {
-  return "€" + new Intl.NumberFormat("el-GR", {
-    maximumFractionDigits: 2
-  }).format(n);
+  return "€" + new Intl.NumberFormat("el-GR", { maximumFractionDigits: 2 }).format(n);
 }
 
+// --- CACHE ---
+function getCachedPrices() {
+  try { return JSON.parse(localStorage.getItem("ck-prices-cache")); } catch { return null; }
+}
+function setCachedPrices(data) {
+  localStorage.setItem("ck-prices-cache", JSON.stringify({ t: Date.now(), data }));
+}
+
+// --- SKELETON RENDER ---
+function renderMarketSkeleton() {
+  const wrap = document.getElementById("market-cards");
+  if (!wrap) return;
+
+  wrap.innerHTML = "";
+  coins.forEach(c => {
+    const card = document.createElement("article");
+    card.className = "card market-card";
+    card.innerHTML = `
+      <div class="row">
+        <h4>${c.symbol}</h4>
+        <span class="chip" style="opacity:.55;">…</span>
+      </div>
+      <div class="price" style="opacity:.55;">—</div>
+      <div class="row muted" style="opacity:.55;">
+        <span>USD: —</span>
+        <span>24h …</span>
+      </div>
+    `;
+    wrap.appendChild(card);
+  });
+}
+
+// --- NORMAL RENDER ---
 function renderMarket(data) {
   const wrap = document.getElementById("market-cards");
   if (!wrap) return;
@@ -2677,7 +2754,7 @@ function renderMarket(data) {
       </div>
       <div class="price">${formatEur(d.eur)}</div>
       <div class="row muted">
-        <span>USD: $${d.usd.toFixed(2)}</span>
+        <span>USD: $${Number(d.usd).toFixed(2)}</span>
         <span>24h ${up ? "▲" : "▼"}</span>
       </div>
     `;
@@ -2685,29 +2762,63 @@ function renderMarket(data) {
   });
 }
 
-async function fetchPrices() {
-  try {
-    const ids = coins.map(c => c.id).join(",");
-    const url =
-      `https://api.coingecko.com/api/v3/simple/price` +
-      `?ids=${ids}&vs_currencies=usd,eur&include_24hr_change=true`;
+// --- LOAD WITH RETRY + TIMEOUT + CACHE ---
+async function fetchPricesStable() {
+  renderMarketSkeleton();
 
-    const res = await fetch(url, { cache: "no-store" });
-    const data = await res.json();
-    renderMarket(data);
-  } catch (e) {
-    console.warn("CoinGecko error:", e);
+  const ids = coins.map(c => c.id).join(",");
+  const url =
+    `https://api.coingecko.com/api/v3/simple/price` +
+    `?ids=${ids}&vs_currencies=usd,eur&include_24hr_change=true`;
+
+  for (let attempt = 1; attempt <= 2; attempt++) {
+    try {
+      const res = await fetchWithTimeout(url, { cache: "no-store" }, 8000);
+
+      if (res.status === 429) throw new Error("Rate limited (429)");
+      if (!res.ok) throw new Error("HTTP " + res.status);
+
+      const data = await res.json();
+
+      // basic validation
+      const ok = coins.every(c => data?.[c.id] && typeof data[c.id].eur === "number");
+      if (!ok) throw new Error("Invalid price data");
+
+      setCachedPrices(data);
+      renderMarket(data);
+      return;
+
+    } catch (e) {
+      console.warn("Prices failed attempt:", attempt, e);
+      if (attempt < 2) await new Promise(r => setTimeout(r, 1200));
+    }
+  }
+
+  // fallback to cache
+  const cached = getCachedPrices();
+  if (cached?.data) {
+    renderMarket(cached.data);
+    return;
+  }
+
+  // final fallback (no infinite skeleton)
+  const wrap = document.getElementById("market-cards");
+  if (wrap) {
+    wrap.innerHTML = `
+      <article class="card market-card">
+        <h4>Live Prices</h4>
+        <p class="muted">Δεν φορτώνουν δεδομένα τώρα — δοκίμασε refresh.</p>
+      </article>
+    `;
   }
 }
 
+// --- SCHEDULE ---
 function startPrices() {
-  if (pricesInterval) {
-    clearInterval(pricesInterval);
-    pricesInterval = null;
-  }
+  if (pricesInterval) clearInterval(pricesInterval);
 
-  fetchPrices(); // άμεσο load
- pricesInterval = setInterval(fetchPrices, 20 * 60 * 1000); // 20 λεπτά
+  fetchPricesStable(); // immediate
+  pricesInterval = setInterval(fetchPricesStable, 20 * 60 * 1000); // 20 λεπτά
 }
 
 function stopPrices() {
