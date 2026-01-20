@@ -1642,6 +1642,17 @@ html:not(.lang-ready) [data-i18n],
 html:not(.lang-ready) [data-i18n-placeholder]{
   visibility: hidden; /* κρατάει χώρο, δεν “σπάει” layout */
 }
+
+
+
+
+
+html:not(.theme-ready) #site-logo,
+html:not(.theme-ready) #theme-icon,
+html:not(.theme-ready) #auth-icon,
+html:not(.theme-ready) #lang-icon{
+  visibility: hidden;
+}
 </style>
 
 
@@ -2177,7 +2188,7 @@ function applyTheme(isLight){
     root.classList.add("light-theme");   // ✅
     document.body.classList.add("light-theme"); // (κρατά το για να μη σπάσουν παλιά selectors)
     localStorage.setItem("ck-theme","light");
-
+    
     if (themeIcon) themeIcon.src = "./IMG_5299.png";
     if (themeLabel) themeLabel.textContent = "Light";
     if (siteLogo) siteLogo.src = "./logo.png";
@@ -2206,6 +2217,7 @@ document.documentElement.classList.add("theme-ready");
   });
 }
 
+document.documentElement.classList.add("theme-ready");
 
 // =========================
 // BURGER (index only)
