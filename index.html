@@ -1297,40 +1297,6 @@ body.light-theme .more-guides:hover{
   }
 }
 
-@media (max-width: 520px){
-  .more-guides{
-    display:flex;
-    flex-direction:column;
-    align-items:center;   /* 👈 κέντρο */
-    justify-content:center;
-    text-align:center;    /* 👈 κέντρο το κείμενο */
-    gap:8px;
-
-    width:150px;
-    padding:14px;
-  }
-
-  .more-guides .mg-text{
-    max-width:10ch;
-    line-height:1.05;
-  }
-
-  .more-guides .mg-arrow{
-    display:flex;
-    align-items:center;
-    justify-content:center; /* 👈 κέντρο και το βελάκι */
-  }
-}
-
-
-
-
-
-
-
-
-
-
 
 /* ===== PREFOOTER LIVE GRADIENT ===== */
 .prefooter{
@@ -2144,6 +2110,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const themeLabel = document.getElementById("theme-label");
   const siteLogo   = document.getElementById("site-logo");
 
+
+
+
   function applyTheme(isLight){
     if (isLight) {
       document.body.classList.add("light-theme");
@@ -2163,12 +2132,14 @@ document.addEventListener("DOMContentLoaded", () => {
   applyTheme(localStorage.getItem("ck-theme") === "light");
 
   if (themeBtn) {
-    themeBtn.addEventListener("click", () => {
-      applyTheme(!document.body.classList.contains("light-theme"));
-      // αν το i18n/theme images βασίζονται σε event:
-      document.dispatchEvent(new Event("themeChanged"));
-    });
-  }
+  themeBtn.addEventListener("click", () => {
+    applyTheme(!document.body.classList.contains("light-theme"));
+    document.dispatchEvent(new Event("themeChanged"));
+
+    // ✅ refresh TradingView theme
+    setTimeout(refreshTradingViewTheme, 80);
+  });
+}
 
   // =========================
   // BURGER (index only)
@@ -2514,51 +2485,91 @@ document.addEventListener("DOMContentLoaded", () => {
   startPrices();
   window.addEventListener("pagehide", stopPrices);
 
-  // =========================================
-  // TRADINGVIEW (index only)
-  // =========================================
-  let tvWidget = null;
+// ========================================
+// TradingView Chart (theme-safe)
+// ========================================
+let tvWidget = null;
 
-  function loadTradingView(symbol) {
-    if (typeof TradingView === "undefined") return;
-    if (tvWidget && typeof tvWidget.remove === "function") tvWidget.remove();
+function getTvTheme() {
+  return document.body.classList.contains("light-theme") ? "light" : "dark";
+}
 
-    tvWidget = new TradingView.widget({
-      autosize: true,
-      symbol,
-      interval: "60",
-      timezone: "Europe/Athens",
-      theme: document.body.classList.contains("light-theme") ? "light" : "dark",
-      style: "1",
-      locale: "en",
-      toolbar_bg: "#0f1216",
-      enable_publishing: false,
-      hide_legend: false,
-      container_id: "tradingview_chart"
-    });
+function getTvToolbarBg() {
+  return document.body.classList.contains("light-theme") ? "#ffffff" : "#0f1216";
+}
+
+function loadTradingView(symbol) {
+  const el = document.getElementById("tradingview_chart");
+  if (!el) return;
+  if (typeof TradingView === "undefined") return;
+
+  // remove old widget first
+  if (tvWidget && typeof tvWidget.remove === "function") {
+    tvWidget.remove();
   }
 
-  (function loadTV(){
-    const el = document.getElementById("tradingview_chart");
-    if (!el) return;
+  // then clear container
+  el.innerHTML = "";
 
-    const s = document.createElement("script");
-    s.src = "https://s3.tradingview.com/tv.js";
-    s.onload = () => loadTradingView("BINANCE:BTCUSDT");
-    document.body.appendChild(s);
-  })();
-
-  document.addEventListener("click", (e) => {
-    const btn = e.target.closest(".pair");
-    if (!btn) return;
-
-    document.querySelectorAll(".pair").forEach(b => b.classList.remove("active"));
-    btn.classList.add("active");
-
-    loadTradingView(btn.dataset.symbol);
+  tvWidget = new TradingView.widget({
+    autosize: true,
+    symbol: symbol || "BINANCE:BTCUSDT",
+    interval: "60",
+    timezone: "Europe/Athens",
+    theme: getTvTheme(),
+    style: "1",
+    locale: "en",
+    toolbar_bg: getTvToolbarBg(),
+    enable_publishing: false,
+    hide_legend: false,
+    container_id: "tradingview_chart"
   });
+}
+
+// φορτώνει το tv.js μία φορά
+(function loadTV() {
+  const el = document.getElementById("tradingview_chart");
+  if (!el) return;
+
+  if (window.__tv_loaded) {
+    loadTradingView("BINANCE:BTCUSDT");
+    return;
+  }
+
+  const s = document.createElement("script");
+  s.src = "https://s3.tradingview.com/tv.js";
+  s.onload = () => {
+    window.__tv_loaded = true;
+    loadTradingView("BINANCE:BTCUSDT");
+  };
+  document.body.appendChild(s);
+})();
+
+// αλλαγή pair
+document.addEventListener("click", (e) => {
+  const btn = e.target.closest(".pair");
+  if (!btn) return;
+
+  document.querySelectorAll(".pair").forEach(b => b.classList.remove("active"));
+  btn.classList.add("active");
+
+  loadTradingView(btn.dataset.symbol);
+});
+
+// theme refresh helper
+function refreshTradingViewTheme() {
+  const active = document.querySelector(".pair.active");
+  const symbol = active?.dataset.symbol || "BINANCE:BTCUSDT";
+  loadTradingView(symbol);
+}
+
+// σύνδεση με το ΥΠΑΡΧΟΝ themeBtn listener (ΜΗΝ βάλεις δεύτερο listener)
+document.addEventListener("themeChanged", () => {
+  if (window.__tv_loaded) setTimeout(refreshTradingViewTheme, 80);
+});
 
 });
+
 </script>
 
 <script>
