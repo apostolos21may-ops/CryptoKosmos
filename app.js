@@ -4,6 +4,14 @@
 // ========================================
 
 
+if (window.__CK_APP_BOOTED__) {
+  console.warn("app.js already booted");
+} else {
+  window.__CK_APP_BOOTED__ = true;
+
+  // ...όλο το app.js εδώ...
+}
+
 // ==========================
 // 1) LOAD USER FROM STORAGE
 // ==========================
@@ -74,6 +82,8 @@ if (themeBtn) {
         applyTheme(isLight);
     });
 }
+
+document.dispatchEvent(new Event("themeChanged"));
 
 
 // ==========================
@@ -264,167 +274,6 @@ setupPasswordToggle("login-pass", "login-pass-toggle");
 setupPasswordToggle("signup-pass1", "signup-pass1-toggle");
 setupPasswordToggle("signup-pass2", "signup-pass2-toggle");
 
-
-// ==========================
-// 6) HERO RANKING (ONLY INDEX)
-// ==========================
-const rankBox = document.querySelector(".hero-rank-box");
-const rankWrap = document.getElementById("hero-rank-inner");
-
-async function loadHeroRanking() {
-    if (!rankBox || !rankWrap) return; // don't load on blockchain.html
-
-    try {
-        const res = await fetch(
-            "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=50&page=1&sparkline=false"
-        );
-        const data = await res.json();
-        rankWrap.innerHTML = "";
-
-        data.forEach((coin, idx) => {
-            const row = document.createElement("div");
-            row.className = "hero-rank-row";
-            row.innerHTML = `
-                <span class="hr-pos">${idx + 1}</span>
-                <div class="hr-icon-wrap">
-                    <img src="${coin.image}" class="hr-icon">
-                    <span class="hr-symbol">${coin.symbol.toUpperCase()}</span>
-                </div>
-                <span class="hr-change ${coin.price_change_percentage_24h >= 0 ? "hr-up" : "hr-down"}">
-                  ${coin.price_change_percentage_24h >= 0 ? "▲" : "▼"} 
-                  ${coin.price_change_percentage_24h.toFixed(2)}%
-                </span>
-                <span class="hr-price">$${coin.current_price.toLocaleString()}</span>
-            `;
-            rankWrap.appendChild(row);
-        });
-
-        rankWrap.innerHTML += rankWrap.innerHTML;
-        startHeroScroll();
-    } catch (err) {
-        console.warn("Hero ranking error:", err);
-    }
-}
-
-function startHeroScroll() {
-    if (!rankBox || !rankWrap) return;
-    let pos = 0;
-    setInterval(() => {
-        pos += 0.45;
-        if (pos >= rankWrap.scrollHeight / 2) pos = 0;
-        rankBox.scrollTop = pos;
-    }, 30);
-}
-
-loadHeroRanking();
-
-
-// ==========================
-// 7) TRADINGVIEW (ONLY INDEX)
-// ==========================
-if (document.getElementById("tradingview_chart")) {
-    const s = document.createElement("script");
-    s.src = "https://s3.tradingview.com/tv.js";
-    s.onload = () =>
-        new TradingView.widget({
-            autosize: true,
-            symbol: "BINANCE:BTCUSDT",
-            interval: "60",
-            timezone: "Europe/Athens",
-            theme: "dark",
-            style: "1",
-            toolbar_bg: "#0f1216",
-            container_id: "tradingview_chart",
-        });
-    document.body.appendChild(s);
-}
-
-// ========================================
-// Glossary (ασφαλές για όλες τις σελίδες)
-// ========================================
-const TERMS = [
-  {k:"Blockchain", v:"Κοινόχρηστο ψηφιακό βιβλίο συναλλαγών — ασφαλές, διαφανές, αποκεντρωμένο."},
-  {k:"Wallet",     v:"Πορτοφόλι crypto: custodial ή non-custodial."},
-  {k:"Seed phrase",v:"12/24 λέξεις ανάκτησης. Μην τη μοιράζεσαι ποτέ."},
-  {k:"Gas/Fees",   v:"Κόστη για την εκτέλεση συναλλαγών στο blockchain."},
-  {k:"DCA",        v:"Σταδιακές αγορές για μείωση ρίσκου."},
-  {k:"DeFi",       v:"Αποκεντρωμένα χρηματοοικονομικά."},
-  {k:"NFT",        v:"Μοναδικά ψηφιακά assets."},
-  {k:"SOL",        v:"Το νόμισμα του δικτύου Solana."}
-];
-
-const gList   = document.getElementById("glossary-list");
-const gSearch = document.getElementById("glossary-search");
-
-function renderTerms(q) {
-  // Αν η σελίδα δεν έχει γλωσσάρι, απλά μην κάνεις τίποτα
-  if (!gList) return;
-
-  const query = (q || "").toLowerCase();
-  gList.innerHTML = "";
-
-  TERMS
-    .filter(t => (t.k + " " + t.v).toLowerCase().includes(query))
-    .forEach(t => {
-      const el = document.createElement("div");
-      el.className = "term";
-      el.innerHTML = `<h5>${t.k}</h5><p class="muted">${t.v}</p>`;
-      gList.appendChild(el);
-    });
-}
-
-// Μόνο αν υπάρχει λίστα στη σελίδα (π.χ. index.html)
-if (gList) {
-  renderTerms("");
-}
-
-// Μόνο αν υπάρχει search input
-if (gSearch) {
-  gSearch.addEventListener("input", e => renderTerms(e.target.value));
-}
-
-// ===============================
-// CLEAN BURGER MENU (CSS ONLY)
-// ===============================
-
-const burger = document.getElementById("menu-toggle");
-const mobileMenu = document.getElementById("mobile-menu");
-
-function closeBurger() {
-  burger.classList.remove("open");
-  mobileMenu.classList.remove("open");
-}
-
-// Toggle open/close
-burger.addEventListener("click", () => {
-  burger.classList.toggle("open");
-  mobileMenu.classList.toggle("open");
-});
-
-// Close burger on modal close
-document.addEventListener("click", (e) => {
-  if (e.target.classList.contains("modal-backdrop")) {
-    closeBurger();
-  }
-});
-
-// When pressing login in mobile menu
-document.getElementById("mobile-auth-btn")?.addEventListener("click", () => {
-  document.getElementById("auth-btn")?.click();
-  closeBurger();
-});
-
-// When pressing theme in mobile menu
-document.getElementById("mobile-theme-toggle")?.addEventListener("click", () => {
-  document.getElementById("theme-toggle")?.click();
-  closeBurger();
-});
-
-// When login/signup/verify modals close
-document.getElementById("login-close")?.addEventListener("click", closeBurger);
-document.querySelector(".signup-close")?.addEventListener("click", closeBurger);
-document.querySelector(".verify-close")?.addEventListener("click", closeBurger);
-
 // ================================
 // ARTICLE IMAGE THEME SWITCH
 // ================================
@@ -488,3 +337,63 @@ document.dispatchEvent(new Event("themeChanged"));
 
   document.addEventListener("DOMContentLoaded", applyArticleImageTheme);
   document.addEventListener("themeChanged", applyArticleImageTheme); // αν κάνεις dispatch
+
+
+
+  // ========================================
+// HOME ONLY INIT (index.html)
+// ========================================
+window.initHome = function initHome() {
+  // TradingView
+  if (document.getElementById("tradingview_chart")) {
+    const s = document.createElement("script");
+    s.src = "https://s3.tradingview.com/tv.js";
+    s.onload = () => {
+      window.__tvWidget = new TradingView.widget({
+        autosize: true,
+        symbol: "BINANCE:BTCUSDT",
+        interval: "60",
+        timezone: "Europe/Athens",
+        theme: document.body.classList.contains("light-theme") ? "light" : "dark",
+        style: "1",
+        toolbar_bg: "#0f1216",
+        enable_publishing: false,
+        hide_legend: false,
+        container_id: "tradingview_chart"
+      });
+    };
+    document.body.appendChild(s);
+
+    // αλλαγή pair
+    document.addEventListener("click", (e) => {
+      const btn = e.target.closest(".pair");
+      if (!btn) return;
+      document.querySelectorAll(".pair").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+
+      // αν υπάρχει widget, κάνε reload με νέο symbol
+      if (window.TradingView) {
+        // πιο safe: ξαναφτιάχνουμε widget
+        document.getElementById("tradingview_chart").innerHTML = "";
+        window.__tvWidget = new TradingView.widget({
+          autosize: true,
+          symbol: btn.dataset.symbol,
+          interval: "60",
+          timezone: "Europe/Athens",
+          theme: document.body.classList.contains("light-theme") ? "light" : "dark",
+          style: "1",
+          toolbar_bg: "#0f1216",
+          enable_publishing: false,
+          hide_legend: false,
+          container_id: "tradingview_chart"
+        });
+      }
+    });
+  }
+
+  // Live prices (τρέχει μόνο αν υπάρχει το market-cards)
+  if (typeof startPrices === "function") startPrices();
+
+  // Hero ranking (τρέχει μόνο αν υπάρχει το hero-rank-inner)
+  if (typeof loadHeroRanking === "function") loadHeroRanking();
+};

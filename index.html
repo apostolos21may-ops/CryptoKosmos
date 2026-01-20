@@ -16,7 +16,7 @@
 <link rel="preload" as="image" href="./IMG_5300.png">
   <!-- Favicon & logo -->
   <link rel="icon" href="./logo.png" type="image/png" />
-<script src="translations.js"></script>
+
   <style>
 
 /* =========================================
@@ -2960,9 +2960,6 @@ document.addEventListener("click", e => {
   });
 </script>
 
-<script src="./app.js"></script>
-<script src="./i18n.js"></script>
-
 <script>
   // Αν ανοίγει/κάνει reload με #guides / #market κλπ, γύρνα στην κορυφή
   window.addEventListener("load", () => {
@@ -2983,6 +2980,16 @@ document.addEventListener("click", e => {
 
 </script>
 
+<script src="./translations.js" defer></script>
+<script src="./i18n.js" defer></script>
+<script src="./app.js" defer></script>
+
+<script defer>
+  // ✅ Home-only init (Live Prices + Hero + TradingView)
+  document.addEventListener("DOMContentLoaded", () => {
+    if (typeof initHome === "function") initHome();  // θα το φτιάξουμε πιο κάτω
+  });
+</script>
 
 </body>
 </html>
