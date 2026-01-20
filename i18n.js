@@ -63,6 +63,9 @@
     document.dispatchEvent(new Event("languageChanged"));
   }
 
+document.documentElement.classList.add("lang-ready");
+document.dispatchEvent(new Event("languageApplied"));
+
   // =====================================================
   // 5) TRANSLATE MODALS (LOGIN / SIGNUP / VERIFY)
   // =====================================================

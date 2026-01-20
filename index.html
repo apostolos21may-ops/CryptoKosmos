@@ -17,6 +17,18 @@
 
 
 
+
+<script>
+  (function () {
+    try {
+      const lang = localStorage.getItem("ck-lang") || "el";
+      document.documentElement.lang = (lang === "en") ? "en" : "el";
+      // απλά για state
+      document.documentElement.dataset.lang = lang;
+    } catch(e) {}
+  })();
+</script>
+
 <script>
   (function () {
     try {
@@ -1623,6 +1635,12 @@ body.light-theme .search::placeholder{
 html.light-theme .term,
 body.light-theme .term{
   background:#fff;
+}
+
+/* ΜΗ δείχνεις i18n κείμενα μέχρι να εφαρμοστεί η γλώσσα */
+html:not(.lang-ready) [data-i18n],
+html:not(.lang-ready) [data-i18n-placeholder]{
+  visibility: hidden; /* κρατάει χώρο, δεν “σπάει” layout */
 }
 </style>
 
