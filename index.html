@@ -2128,800 +2128,437 @@ body.light-theme .more-guides:hover{
 </div>
 
 <script>
-// ========================================
-// FOOTER YEAR
-// ========================================
-document.getElementById("year").textContent = new Date().getFullYear();
+document.addEventListener("DOMContentLoaded", () => {
 
+  // =========================
+  // FOOTER YEAR
+  // =========================
+  const yearEl = document.getElementById("year");
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-// ========================================
-// LOGIN ELEMENTS
-// ========================================
-const authBtn   = document.getElementById("auth-btn");
-const authLabel = document.getElementById("auth-label");
-const authIcon  = document.getElementById("auth-icon");
+  // =========================
+  // THEME (index only)
+  // =========================
+  const themeBtn   = document.getElementById("theme-toggle");
+  const themeIcon  = document.getElementById("theme-icon");
+  const themeLabel = document.getElementById("theme-label");
+  const siteLogo   = document.getElementById("site-logo");
 
-const loginModal = document.getElementById("login-modal");
-const loginClose = document.getElementById("login-close");
-const loginForm  = document.getElementById("login-form");
-const noAccountMsg = document.getElementById("no-account");
-const signupBtn  = document.getElementById("signup-btn");
-
-const signupModal   = document.getElementById("signup-modal");
-const signupClose   = document.querySelector(".signup-close");
-const signupCreate  = document.getElementById("signup-create");
-const backToLogin   = document.getElementById("back-to-login");
-const signupError   = document.getElementById("signup-error");
-
-const verifyModal   = document.getElementById("verify-modal");
-const verifyClose   = document.querySelector(".verify-close");
-const verifySubmit  = document.getElementById("verify-submit");
-const verifyError   = document.getElementById("verify-error");
-
-// ========================================
-// GLOBAL STATE (SAFE)
-// ========================================
-let currentUser = null;
-let tempUser = null;
-let verificationCode = null;
-
-// ========================================
-// USER STORAGE
-// ========================================
-function loadUser() {
-  try {
-    return JSON.parse(localStorage.getItem("ck-user"));
-  } catch {
-    return null;
+  function applyTheme(isLight){
+    if (isLight) {
+      document.body.classList.add("light-theme");
+      localStorage.setItem("ck-theme","light");
+      if (themeIcon) themeIcon.src = "./IMG_5299.png";
+      if (themeLabel) themeLabel.textContent = "Light";
+      if (siteLogo) siteLogo.src = "./logo.png";
+    } else {
+      document.body.classList.remove("light-theme");
+      localStorage.setItem("ck-theme","dark");
+      if (themeIcon) themeIcon.src = "./IMG_5300.png";
+      if (themeLabel) themeLabel.textContent = "Dark";
+      if (siteLogo) siteLogo.src = "./black logo.png";
+    }
   }
-}
 
-function saveUser(user) {
-  if (user) localStorage.setItem("ck-user", JSON.stringify(user));
-  else localStorage.removeItem("ck-user");
-}
+  applyTheme(localStorage.getItem("ck-theme") === "light");
 
-
-// ========================================
-// AUTH UI
-// ========================================
-function updateAuthUI() {
-  if (!authBtn) return;
-
-  if (currentUser) {
-    authLabel.textContent = "Logout";
-    authBtn.dataset.state = "logout";
-    authIcon.src = "./IMG_5367.png";
-  } else {
-    authLabel.textContent = "Login";
-    authBtn.dataset.state = "login";
-    authIcon.src = "./IMG_5301.png";
+  if (themeBtn) {
+    themeBtn.addEventListener("click", () => {
+      applyTheme(!document.body.classList.contains("light-theme"));
+      // αν το i18n/theme images βασίζονται σε event:
+      document.dispatchEvent(new Event("themeChanged"));
+    });
   }
-}
 
-currentUser = loadUser();
-updateAuthUI();
-
-
-function closeBurgerMenu() {
+  // =========================
+  // BURGER (index only)
+  // =========================
   const menuToggle = document.getElementById("menu-toggle");
   const mobileMenu = document.getElementById("mobile-menu");
+  const mobileTheme = document.getElementById("mobile-theme-toggle");
 
-  if (!menuToggle || !mobileMenu) return;
+  function closeBurger(){
+    if (!menuToggle || !mobileMenu) return;
+    menuToggle.classList.remove("open");
+    mobileMenu.classList.remove("open");
+  }
 
-  menuToggle.classList.remove("open");  // γυρνάει το X σε ≡
-  mobileMenu.classList.remove("open");  // κλείνει το burger panel
-}
+  if (menuToggle && mobileMenu) {
+    menuToggle.addEventListener("click", () => {
+      menuToggle.classList.toggle("open");
+      mobileMenu.classList.toggle("open");
+    });
 
-// ========================================
-// LOGIN OPEN/CLOSE
-// ========================================
-function openLogin() {
-  loginForm && loginForm.reset();
-  noAccountMsg.style.display = "none";
-  signupBtn.style.display = "none";
+    // close when clicking mobile links
+    document.querySelectorAll("#mobile-menu a").forEach(a => {
+      a.addEventListener("click", closeBurger);
+    });
+  }
 
-  signupModal.classList.add("hidden");
-  verifyModal.classList.add("hidden");
+  if (mobileTheme && themeBtn) {
+    mobileTheme.addEventListener("click", () => {
+      themeBtn.click();
+      closeBurger();
+    });
+  }
 
-  loginModal.classList.remove("hidden");
-}
+  document.querySelectorAll(".modal-backdrop, .modal-close").forEach(el => {
+    el.addEventListener("click", closeBurger);
+  });
 
-function closeLogin() {
-  loginModal.classList.add("hidden");
-  loginForm && loginForm.reset();
-}
-
-if (authBtn) {
-  authBtn.addEventListener("click", () => {
-    if (authBtn.dataset.state === "login") openLogin();
-    else {
-      currentUser = null;
-      saveUser(null);
-      updateAuthUI();
+  // =========================
+  // UTIL: fetch with timeout
+  // =========================
+  async function fetchWithTimeout(url, options = {}, ms = 8000) {
+    const controller = new AbortController();
+    const id = setTimeout(() => controller.abort(), ms);
+    try {
+      return await fetch(url, { ...options, signal: controller.signal });
+    } finally {
+      clearTimeout(id);
     }
-  });
-}
-
-if (loginClose) loginClose.addEventListener("click", () => {
-    closeLogin();
-    closeBurgerMenu();
-});
-
-loginModal.addEventListener("click", e => {
-  if (e.target.classList.contains("modal-backdrop")) {
-      closeLogin();
-      closeBurgerMenu();
   }
-});
+  const sleep = (ms) => new Promise(r => setTimeout(r, ms));
 
+  // ============================================================
+  // HERO RANKING (transform scroll, cache, retry, flicker-free)
+  // ============================================================
+  const rankWrap = document.getElementById("hero-rank-inner");
 
-// ========================================
-// LOGIN SUBMIT
-// ========================================
-if (loginForm) {
-  loginForm.addEventListener("submit", e => {
-    e.preventDefault();
+  let heroBooted = false;
+  let heroRefreshInterval = null;
 
-    const email = document.getElementById("login-email").value.trim();
-    const pass  = document.getElementById("login-pass").value.trim();
-    const saved = loadUser();
+  let heroRAF = null;
+  let heroLastT = 0;
+  let heroPos = 0;
 
-    if (!saved || saved.email !== email || saved.pass !== pass) {
-      noAccountMsg.style.display = "block";
-      signupBtn.style.display = "block";
-      return;
+  function getCachedHero() {
+    try { return JSON.parse(localStorage.getItem("ck-hero-cache")); } catch { return null; }
+  }
+  function setCachedHero(data) {
+    localStorage.setItem("ck-hero-cache", JSON.stringify({ t: Date.now(), data }));
+  }
+
+  function renderHeroSkeleton(count = 12){
+    if (!rankWrap) return;
+    rankWrap.innerHTML = "";
+    for (let i = 0; i < count; i++){
+      const row = document.createElement("div");
+      row.className = "hero-rank-row skeleton";
+      row.innerHTML = `
+        <div class="sk-bar w1"></div>
+        <div class="sk-bar w2"></div>
+        <div class="sk-bar w3"></div>
+        <div class="sk-bar w4"></div>
+      `;
+      rankWrap.appendChild(row);
     }
-
-    currentUser = saved;
-    updateAuthUI();
-    closeLogin();
-  });
-}
-
-
-// ========================================
-// SIGNUP FLOW
-// ========================================
-signupBtn.addEventListener("click", () => {
-  closeLogin();
-  noAccountMsg.style.display = "none";
-  signupModal.classList.remove("hidden");
-});
-
-signupClose.addEventListener("click", () => {
-    signupModal.classList.add("hidden");
-    closeBurgerMenu();   // 🟩 RESET BURGER
-});
-
-signupModal.addEventListener("click", e => {
-    if (e.target.classList.contains("modal-backdrop")) {
-        signupModal.classList.add("hidden");
-        closeBurgerMenu();   // 🟩 RESET BURGER
-    }
-});
-
-
-backToLogin.addEventListener("click", () => {
-  signupModal.classList.add("hidden");
-  openLogin();
-});
-
-signupCreate.addEventListener("click", () => {
-  const email = document.getElementById("signup-email").value.trim();
-  const p1    = document.getElementById("signup-pass1").value.trim();
-  const p2    = document.getElementById("signup-pass2").value.trim();
-
-  if (!email || !p1 || !p2) return;
-
-  if (p1 !== p2) {
-    signupError.style.display = "block";
-    return;
+    heroPos = 0;
+    rankWrap.style.transform = "translateY(0px)";
   }
 
-  signupError.style.display = "none";
+  function renderHeroFromData(data){
+    if (!rankWrap) return;
 
-  verificationCode = String(Math.floor(100000 + Math.random() * 900000));
-  console.log("Verification:", verificationCode);
+    const prevPos = heroPos || 0;
+    rankWrap.innerHTML = "";
 
-  tempUser = { email, pass: p1 };
+    data.forEach((coin, idx) => {
+      const change = Number(coin.price_change_percentage_24h ?? 0);
+      const up = change >= 0;
 
-  signupModal.classList.add("hidden");
-  verifyModal.classList.remove("hidden");
-});
+      const row = document.createElement("div");
+      row.className = "hero-rank-row";
+      row.innerHTML = `
+        <span class="hr-pos">${idx + 1}</span>
+        <div class="hr-icon-wrap">
+          <img src="${coin.image}" class="hr-icon" loading="lazy" alt="">
+          <span class="hr-symbol">${String(coin.symbol || "").toUpperCase()}</span>
+        </div>
+        <span class="hr-change ${up ? "hr-up" : "hr-down"}">
+          ${up ? "▲" : "▼"} ${change.toFixed(2)}%
+        </span>
+        <span class="hr-price">
+          $${Number(coin.current_price || 0).toLocaleString("en-US",{ maximumFractionDigits: 2 })}
+        </span>
+      `;
+      rankWrap.appendChild(row);
+    });
 
+    // duplicate
+    rankWrap.innerHTML += rankWrap.innerHTML;
 
-// ========================================
-// VERIFY FLOW
-// ========================================
-verifyClose.addEventListener("click", () => {
-    verifyModal.classList.add("hidden");
-    closeBurgerMenu();  // 🟩 RESET BURGER
-});
+    requestAnimationFrame(() => {
+      const half = rankWrap.scrollHeight / 2;
+      heroPos = half > 0 ? (prevPos % half) : 0;
+      rankWrap.style.transform = `translateY(${-heroPos}px)`;
 
-verifyModal.addEventListener("click", e => {
-    if (e.target.classList.contains("modal-backdrop")) {
-        verifyModal.classList.add("hidden");
-        closeBurgerMenu(); // 🟩 RESET BURGER
-    }
-});
-
-verifySubmit.addEventListener("click", () => {
-  const code = document.getElementById("verify-code").value.trim();
-  if (code !== verificationCode) {
-    verifyError.style.display = "block";
-    return;
+      stopHeroScroll();
+      startHeroScroll();
+    });
   }
 
-  saveUser(tempUser);
-  currentUser = tempUser;
-  updateAuthUI();
-  verifyModal.classList.add("hidden");
+  function startHeroScroll(){
+    if (!rankWrap) return;
+    if (heroRAF) return;
 
-  alert("Ο λογαριασμός δημιουργήθηκε!");
-});
+    heroLastT = performance.now();
 
+    const tick = (t) => {
+      const dt = t - heroLastT;
+      heroLastT = t;
 
-// ========================================
-// PASSWORD EYE (images)
-// ========================================
-function setupPasswordToggle(inputId, iconId) {
-  const input = document.getElementById(inputId);
-  const icon  = document.getElementById(iconId);
-  if (!input || !icon) return;
+      const half = rankWrap.scrollHeight / 2;
+      if (!half || half < 50) {
+        heroRAF = requestAnimationFrame(tick);
+        return;
+      }
 
-  icon.addEventListener("click", () => {
-    const show = input.type === "password";
-    input.type = show ? "text" : "password";
-    icon.src = show ? "./IMG_5381.png" : "./IMG_5380.png";
-  });
-}
+      heroPos += 0.4 * (dt / 16.67);
+      if (heroPos >= half) heroPos = 0;
 
-setupPasswordToggle("login-pass", "login-pass-toggle");
-setupPasswordToggle("signup-pass1", "signup-pass1-toggle");
-setupPasswordToggle("signup-pass2", "signup-pass2-toggle");
-
-
-// ========================================
-// THEME TOGGLE (CLEAN VERSION)
-// ========================================
-const themeBtn   = document.getElementById("theme-toggle");
-const themeIcon  = document.getElementById("theme-icon");
-const themeLabel = document.getElementById("theme-label");
-const siteLogo   = document.getElementById("site-logo");
-const menuIcon   = document.getElementById("menu-icon");
-
-let isLight = localStorage.getItem("ck-theme") === "light";
-
-function applyTheme() {
-  if (isLight) {
-    document.body.classList.add("light-theme");
-    themeIcon.src = "./IMG_5299.png";
-    themeLabel.textContent = "Light";
-    siteLogo.src = "./logo.png";
-    menuIcon && (menuIcon.src = "./IMG_5423.png");
-  } else {
-    document.body.classList.remove("light-theme");
-    themeIcon.src = "./IMG_5300.png";
-    themeLabel.textContent = "Dark";
-    siteLogo.src = "./black logo.png";
-    menuIcon && (menuIcon.src = "./IMG_5422.png");
-  }
-}
-
-applyTheme();
-
-if (themeBtn) {
-  themeBtn.addEventListener("click", () => {
-    isLight = !isLight;
-    localStorage.setItem("ck-theme", isLight ? "light" : "dark");
-    applyTheme();
-  });
-}
-
-// ========================================
-// CLEAN BURGER MENU SYSTEM
-// ========================================
-const menuToggle = document.getElementById("menu-toggle");
-const mobileMenu = document.getElementById("mobile-menu");
-const mobileTheme = document.getElementById("mobile-theme-toggle");
-const mobileAuth  = document.getElementById("mobile-auth-btn");
-
-// 🔥 Reset burger back to ≡
-function resetBurger() {
-  menuToggle.classList.remove("open");
-  mobileMenu.classList.remove("open");
-}
-
-// 🔥 Ανοίγει / Κλείνει burger
-if (menuToggle) {
-  menuToggle.addEventListener("click", () => {
-    menuToggle.classList.toggle("open");
-    mobileMenu.classList.toggle("open");
-  });
-}
-
-// 🔥 Mobile → Αλλαγή Θέματος
-if (mobileTheme) {
-  mobileTheme.addEventListener("click", () => {
-    themeBtn.click();  // χρησιμοποιεί το κεντρικό theme button
-    resetBurger();
-  });
-}
-
-// 🔥 Mobile → Login
-if (mobileAuth) {
-  mobileAuth.addEventListener("click", () => {
-    authBtn.click();
-    resetBurger();
-  });
-}
-
-// 🔥 Κλείσιμο modals = reset burger
-document.querySelectorAll(".modal-backdrop, .modal-close").forEach(el => {
-  el.addEventListener("click", resetBurger);
-});
-
-// 🔥 Κλείσιμο burger όταν πατάς κάποιο link του mobile menu
-document.querySelectorAll("#mobile-menu a").forEach(link => {
-  link.addEventListener("click", () => {
-    resetBurger();
-  });
-});
-
-// ========================================
-// HERO RANKING – Top 50 coins
-// STABLE + RETRY + TIMEOUT + CACHE + FLICKER-FREE + NO-FREEZE (TRANSFORM SCROLL)
-// ========================================
-const rankBox  = document.querySelector(".hero-rank-box");
-const rankWrap = document.getElementById("hero-rank-inner");
-
-let heroRefreshInterval = null;
-let heroBooted = false;
-
-// transform-scroll state
-let heroRAF = null;
-let heroLastT = 0;
-let heroPos = 0; // pixels moved
-
-const sleep = (ms) => new Promise(r => setTimeout(r, ms));
-
-async function fetchWithTimeout(url, options = {}, ms = 8000) {
-  const controller = new AbortController();
-  const id = setTimeout(() => controller.abort(), ms);
-  try {
-    return await fetch(url, { ...options, signal: controller.signal });
-  } finally {
-    clearTimeout(id);
-  }
-}
-
-// -------------------------
-// Cache
-// -------------------------
-function getCachedHero() {
-  try { return JSON.parse(localStorage.getItem("ck-hero-cache")); } catch { return null; }
-}
-function setCachedHero(data) {
-  localStorage.setItem("ck-hero-cache", JSON.stringify({ t: Date.now(), data }));
-}
-
-// -------------------------
-// UI: Skeleton
-// -------------------------
-function renderHeroSkeleton(count = 12){
-  if (!rankWrap) return;
-  rankWrap.innerHTML = "";
-  for (let i = 0; i < count; i++){
-    const row = document.createElement("div");
-    row.className = "hero-rank-row skeleton";
-    row.innerHTML = `
-      <div class="sk-bar w1"></div>
-      <div class="sk-bar w2"></div>
-      <div class="sk-bar w3"></div>
-      <div class="sk-bar w4"></div>
-    `;
-    rankWrap.appendChild(row);
-  }
-  // reset animation position
-  heroPos = 0;
-  rankWrap.style.transform = "translateY(0px)";
-}
-
-// -------------------------
-// UI: Render Data
-// -------------------------
-function renderHeroFromData(data) {
-  if (!rankWrap) return;
-
-  // κρατάμε pos και το “ταιριάζουμε” στο νέο half
-  const prevPos = heroPos || 0;
-
-  rankWrap.innerHTML = "";
-
-  data.forEach((coin, idx) => {
-    const change = Number(coin.price_change_percentage_24h ?? 0);
-    const up = change >= 0;
-
-    const row = document.createElement("div");
-    row.className = "hero-rank-row";
-    row.innerHTML = `
-      <span class="hr-pos">${idx + 1}</span>
-      <div class="hr-icon-wrap">
-        <img src="${coin.image}" class="hr-icon" loading="lazy" alt="">
-        <span class="hr-symbol">${String(coin.symbol || "").toUpperCase()}</span>
-      </div>
-      <span class="hr-change ${up ? "hr-up" : "hr-down"}">
-        ${up ? "▲" : "▼"} ${change.toFixed(2)}%
-      </span>
-      <span class="hr-price">
-        $${Number(coin.current_price || 0).toLocaleString("en-US",{ maximumFractionDigits: 2 })}
-      </span>
-    `;
-    rankWrap.appendChild(row);
-  });
-
-  // duplicate για endless scroll
-  rankWrap.innerHTML += rankWrap.innerHTML;
-
-  // δώσε 1 frame να “μετρήσει” σωστά το νέο scrollHeight
-  requestAnimationFrame(() => {
-    const half = rankWrap.scrollHeight / 2;
-    heroPos = half > 0 ? (prevPos % half) : 0;
-    rankWrap.style.transform = `translateY(${-heroPos}px)`;
-
-    // restart animation (fix freeze)
-    stopHeroScroll();
-    startHeroScroll();
-  });
-}
-
-// -------------------------
-// Transform Auto Scroll
-// -------------------------
-function startHeroScroll(){
-  if (!rankWrap) return;
-  if (heroRAF) return;
-
-  heroLastT = performance.now();
-
-  const tick = (t) => {
-    const dt = t - heroLastT;
-    heroLastT = t;
-
-    const half = rankWrap.scrollHeight / 2;
-
-    // αν δεν έχει height ακόμα, συνέχισε
-    if (!half || half < 50) {
+      rankWrap.style.transform = `translateY(${-heroPos}px)`;
       heroRAF = requestAnimationFrame(tick);
-      return;
-    }
+    };
 
-    // speed: 0.4px per frame @60fps
-    heroPos += 0.4 * (dt / 16.67);
-
-    if (heroPos >= half) heroPos = 0;
-
-    rankWrap.style.transform = `translateY(${-heroPos}px)`;
     heroRAF = requestAnimationFrame(tick);
-  };
+  }
 
-  heroRAF = requestAnimationFrame(tick);
-}
-
-function stopHeroScroll(){
-  if (heroRAF) {
-    cancelAnimationFrame(heroRAF);
+  function stopHeroScroll(){
+    if (heroRAF) cancelAnimationFrame(heroRAF);
     heroRAF = null;
   }
-}
 
-// Σταθερό restart όταν ξαναγυρνάς στο tab
-document.addEventListener("visibilitychange", () => {
-  if (document.visibilityState === "visible") {
-    stopHeroScroll();
-    requestAnimationFrame(() => startHeroScroll());
-  } else {
-    stopHeroScroll();
-  }
-});
+  document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === "visible") {
+      stopHeroScroll();
+      requestAnimationFrame(startHeroScroll);
+    } else {
+      stopHeroScroll();
+    }
+  });
 
-// -------------------------
-// Load data
-// -------------------------
-async function loadHeroRanking() {
-  if (!rankWrap) return;
+  async function loadHeroRanking(){
+    if (!rankWrap) return;
 
-  const cached = getCachedHero();
-  const hasCache = !!cached?.data && Array.isArray(cached.data) && cached.data.length;
+    const cached = getCachedHero();
+    const hasCache = !!cached?.data && Array.isArray(cached.data) && cached.data.length;
 
-  // 1) First paint (μία φορά)
-  if (!heroBooted) {
-    if (hasCache) renderHeroFromData(cached.data);
-    else renderHeroSkeleton();
-    heroBooted = true;
-    startHeroScroll(); // ξεκίνα αμέσως
-  }
+    if (!heroBooted) {
+      if (hasCache) renderHeroFromData(cached.data);
+      else renderHeroSkeleton();
+      heroBooted = true;
+      startHeroScroll();
+    }
 
-  const url =
-    "https://api.coingecko.com/api/v3/coins/markets" +
-    "?vs_currency=usd&order=market_cap_desc&per_page=50&page=1&sparkline=false";
+    const url =
+      "https://api.coingecko.com/api/v3/coins/markets" +
+      "?vs_currency=usd&order=market_cap_desc&per_page=50&page=1&sparkline=false";
 
-  // 2) Fetch με retry
-  for (let attempt = 1; attempt <= 2; attempt++) {
-    try {
-      const res = await fetchWithTimeout(url, { cache: "no-store" }, 8000);
-      if (res.status === 429) throw new Error("Rate limited (429)");
-      if (!res.ok) throw new Error("HTTP " + res.status);
+    for (let attempt = 1; attempt <= 2; attempt++) {
+      try {
+        const res = await fetchWithTimeout(url, { cache: "no-store" }, 8000);
+        if (res.status === 429) throw new Error("Rate limited (429)");
+        if (!res.ok) throw new Error("HTTP " + res.status);
 
-      const data = await res.json();
-      if (!Array.isArray(data) || data.length === 0) throw new Error("Invalid data");
+        const data = await res.json();
+        if (!Array.isArray(data) || data.length === 0) throw new Error("Invalid data");
 
-      setCachedHero(data);
-      renderHeroFromData(data);
-      return;
+        setCachedHero(data);
+        renderHeroFromData(data);
+        return;
 
-    } catch (e) {
-      console.warn("Hero ranking failed attempt:", attempt, e);
-      if (attempt < 2) await sleep(1200);
+      } catch (e) {
+        console.warn("Hero ranking failed:", attempt, e);
+        if (attempt < 2) await sleep(1200);
+      }
     }
   }
 
-  // fail: δεν αλλάζουμε τίποτα (μένει ό,τι ήδη φαίνεται)
-}
+  function startHeroRefresh(){
+    if (heroRefreshInterval) clearInterval(heroRefreshInterval);
+    heroRefreshInterval = setInterval(loadHeroRanking, 60 * 60 * 1000);
+  }
 
-function startHeroRefresh(){
-  if (heroRefreshInterval) clearInterval(heroRefreshInterval);
-  heroRefreshInterval = setInterval(loadHeroRanking, 60 * 60 * 1000);
-}
-
-document.addEventListener("DOMContentLoaded", () => {
   loadHeroRanking();
   startHeroRefresh();
-});
 
-window.addEventListener("pagehide", () => {
-  stopHeroScroll();
-  if (heroRefreshInterval) clearInterval(heroRefreshInterval);
-});
-
-
-// ========================================
-// Glossary with full i18n support
-// ========================================
-const gList   = document.getElementById("glossary-list");
-const gSearch = document.getElementById("glossary-search");
-
-function renderGlossary() {
-  const lang = localStorage.getItem("ck-lang") || "el";
-  const terms = window.TRANSLATIONS[lang].glossary_terms;
-  const query = (gSearch.value || "").toLowerCase();
-
-  gList.innerHTML = "";
-
-  Object.keys(terms)
-    .filter(key =>
-      key.toLowerCase().includes(query) ||
-      terms[key].toLowerCase().includes(query)
-    )
-    .forEach(key => {
-      const div = document.createElement("div");
-      div.className = "term";
-      div.innerHTML = `
-        <h5>${key}</h5>
-        <p class="muted">${terms[key]}</p>
-      `;
-      gList.appendChild(div);
-    });
-}
-
-gSearch.addEventListener("input", renderGlossary);
-document.addEventListener("languageChanged", renderGlossary);
-renderGlossary();
-
-// ========================================
-// LIVE PRICES – CoinGecko (STABLE + RETRY + TIMEOUT + CACHE + SKELETON)
-// ========================================
-const coins = [
-  { id: "bitcoin",  symbol: "BTC" },
-  { id: "ethereum", symbol: "ETH" },
-  { id: "solana",   symbol: "SOL" }
-];
-
-let pricesInterval = null;
-
-function formatEur(n) {
-  return "€" + new Intl.NumberFormat("el-GR", { maximumFractionDigits: 2 }).format(n);
-}
-
-// --- CACHE ---
-function getCachedPrices() {
-  try { return JSON.parse(localStorage.getItem("ck-prices-cache")); } catch { return null; }
-}
-function setCachedPrices(data) {
-  localStorage.setItem("ck-prices-cache", JSON.stringify({ t: Date.now(), data }));
-}
-
-// --- SKELETON RENDER ---
-function renderMarketSkeleton() {
-  const wrap = document.getElementById("market-cards");
-  if (!wrap) return;
-
-  wrap.innerHTML = "";
-  coins.forEach(c => {
-    const card = document.createElement("article");
-    card.className = "card market-card";
-    card.innerHTML = `
-      <div class="row">
-        <h4>${c.symbol}</h4>
-        <span class="chip" style="opacity:.55;">…</span>
-      </div>
-      <div class="price" style="opacity:.55;">—</div>
-      <div class="row muted" style="opacity:.55;">
-        <span>USD: —</span>
-        <span>24h …</span>
-      </div>
-    `;
-    wrap.appendChild(card);
+  window.addEventListener("pagehide", () => {
+    stopHeroScroll();
+    if (heroRefreshInterval) clearInterval(heroRefreshInterval);
   });
-}
 
-// --- NORMAL RENDER ---
-function renderMarket(data) {
-  const wrap = document.getElementById("market-cards");
-  if (!wrap) return;
+  // =========================================
+  // LIVE PRICES (stable, cache, skeleton)
+  // =========================================
+  const coins = [
+    { id: "bitcoin",  symbol: "BTC" },
+    { id: "ethereum", symbol: "ETH" },
+    { id: "solana",   symbol: "SOL" }
+  ];
 
-  wrap.innerHTML = "";
+  let pricesInterval = null;
+  let pricesBooted = false;
 
-  coins.forEach(c => {
-    const d = data[c.id];
-    if (!d) return;
-
-    const change = typeof d.eur_24h_change === "number" ? d.eur_24h_change : 0;
-    const up = change >= 0;
-
-    const card = document.createElement("article");
-    card.className = "card market-card";
-    card.innerHTML = `
-      <div class="row">
-        <h4>${c.symbol}</h4>
-        <span class="chip ${up ? "up" : "down"}">
-          ${change.toFixed(2)}%
-        </span>
-      </div>
-      <div class="price">${formatEur(d.eur)}</div>
-      <div class="row muted">
-        <span>USD: $${Number(d.usd).toFixed(2)}</span>
-        <span>24h ${up ? "▲" : "▼"}</span>
-      </div>
-    `;
-    wrap.appendChild(card);
-  });
-}
-
-let pricesBooted = false; // για να δείχνουμε skeleton μόνο την 1η φορά
-
-async function fetchPricesStable() {
-  // Skeleton μόνο την 1η φορά (ή αν δεν υπάρχει cache)
-  const cached = getCachedPrices();
-  const hasCache = !!cached?.data;
-
-  if (!pricesBooted) {
-    if (hasCache) {
-      renderMarket(cached.data); // δείξε άμεσα κάτι, χωρίς skeleton
-    } else {
-      renderMarketSkeleton(); // 1ο load χωρίς cache -> skeleton
-    }
-    pricesBooted = true;
+  function formatEur(n) {
+    return "€" + new Intl.NumberFormat("el-GR", { maximumFractionDigits: 2 }).format(n);
   }
 
-  const ids = coins.map(c => c.id).join(",");
-  const url =
-    `https://api.coingecko.com/api/v3/simple/price` +
-    `?ids=${ids}&vs_currencies=usd,eur&include_24hr_change=true`;
-
-  for (let attempt = 1; attempt <= 2; attempt++) {
-    try {
-      const res = await fetchWithTimeout(url, { cache: "no-store" }, 8000);
-
-      if (res.status === 429) throw new Error("Rate limited (429)");
-      if (!res.ok) throw new Error("HTTP " + res.status);
-
-      const data = await res.json();
-
-      const ok = coins.every(c => data?.[c.id] && typeof data[c.id].eur === "number");
-      if (!ok) throw new Error("Invalid price data");
-
-      setCachedPrices(data);
-
-      // ✅ εδώ γίνεται το “silent update” (χωρίς να ξανακάνουμε skeleton)
-      renderMarket(data);
-      return;
-
-    } catch (e) {
-      console.warn("Prices failed attempt:", attempt, e);
-      if (attempt < 2) await new Promise(r => setTimeout(r, 1200));
-    }
+  function getCachedPrices() {
+    try { return JSON.parse(localStorage.getItem("ck-prices-cache")); } catch { return null; }
+  }
+  function setCachedPrices(data) {
+    localStorage.setItem("ck-prices-cache", JSON.stringify({ t: Date.now(), data }));
   }
 
-  // Αν αποτύχει, απλά κρατάμε τα παλιά (cache/ό,τι ήδη φαίνεται)
-  // και ΔΕΝ το γυρνάμε σε skeleton.
-  if (!hasCache) {
+  function renderMarketSkeleton() {
     const wrap = document.getElementById("market-cards");
-    if (wrap) {
-      wrap.innerHTML = `
-        <article class="card market-card">
-          <h4>Live Prices</h4>
-          <p class="muted">Δεν φορτώνουν δεδομένα τώρα — δοκίμασε refresh.</p>
-        </article>
+    if (!wrap) return;
+
+    wrap.innerHTML = "";
+    coins.forEach(c => {
+      const card = document.createElement("article");
+      card.className = "card market-card";
+      card.innerHTML = `
+        <div class="row">
+          <h4>${c.symbol}</h4>
+          <span class="chip" style="opacity:.55;">…</span>
+        </div>
+        <div class="price" style="opacity:.55;">—</div>
+        <div class="row muted" style="opacity:.55;">
+          <span>USD: —</span>
+          <span>24h …</span>
+        </div>
       `;
+      wrap.appendChild(card);
+    });
+  }
+
+  function renderMarket(data) {
+    const wrap = document.getElementById("market-cards");
+    if (!wrap) return;
+
+    wrap.innerHTML = "";
+
+    coins.forEach(c => {
+      const d = data[c.id];
+      if (!d) return;
+
+      const change = typeof d.eur_24h_change === "number" ? d.eur_24h_change : 0;
+      const up = change >= 0;
+
+      const card = document.createElement("article");
+      card.className = "card market-card";
+      card.innerHTML = `
+        <div class="row">
+          <h4>${c.symbol}</h4>
+          <span class="chip ${up ? "up" : "down"}">${change.toFixed(2)}%</span>
+        </div>
+        <div class="price">${formatEur(d.eur)}</div>
+        <div class="row muted">
+          <span>USD: $${Number(d.usd).toFixed(2)}</span>
+          <span>24h ${up ? "▲" : "▼"}</span>
+        </div>
+      `;
+      wrap.appendChild(card);
+    });
+  }
+
+  async function fetchPricesStable() {
+    const cached = getCachedPrices();
+    const hasCache = !!cached?.data;
+
+    if (!pricesBooted) {
+      if (hasCache) renderMarket(cached.data);
+      else renderMarketSkeleton();
+      pricesBooted = true;
+    }
+
+    const ids = coins.map(c => c.id).join(",");
+    const url =
+      `https://api.coingecko.com/api/v3/simple/price` +
+      `?ids=${ids}&vs_currencies=usd,eur&include_24hr_change=true`;
+
+    for (let attempt = 1; attempt <= 2; attempt++) {
+      try {
+        const res = await fetchWithTimeout(url, { cache: "no-store" }, 8000);
+        if (res.status === 429) throw new Error("Rate limited (429)");
+        if (!res.ok) throw new Error("HTTP " + res.status);
+
+        const data = await res.json();
+        const ok = coins.every(c => data?.[c.id] && typeof data[c.id].eur === "number");
+        if (!ok) throw new Error("Invalid price data");
+
+        setCachedPrices(data);
+        renderMarket(data);
+        return;
+
+      } catch (e) {
+        console.warn("Prices failed:", attempt, e);
+        if (attempt < 2) await sleep(1200);
+      }
     }
   }
-}
 
-// --- SCHEDULE ---
-function startPrices() {
-  if (pricesInterval) clearInterval(pricesInterval);
+  function startPrices(){
+    if (pricesInterval) clearInterval(pricesInterval);
+    fetchPricesStable();
+    pricesInterval = setInterval(fetchPricesStable, 20 * 60 * 1000);
+  }
 
-  fetchPricesStable(); // immediate
-  pricesInterval = setInterval(fetchPricesStable, 20 * 60 * 1000); // 20 λεπτά
-}
-
-function stopPrices() {
-  if (pricesInterval) {
-    clearInterval(pricesInterval);
+  function stopPrices(){
+    if (pricesInterval) clearInterval(pricesInterval);
     pricesInterval = null;
   }
-}
 
-document.addEventListener("DOMContentLoaded", startPrices);
-window.addEventListener("pagehide", stopPrices);
+  startPrices();
+  window.addEventListener("pagehide", stopPrices);
 
-// ========================================
-// TradingView Chart
-// ========================================
-let tvWidget = null;
+  // =========================================
+  // TRADINGVIEW (index only)
+  // =========================================
+  let tvWidget = null;
 
-function loadTradingView(symbol) {
-  if (typeof TradingView === "undefined") return;
+  function loadTradingView(symbol) {
+    if (typeof TradingView === "undefined") return;
+    if (tvWidget && typeof tvWidget.remove === "function") tvWidget.remove();
 
-  if (tvWidget && typeof tvWidget.remove === "function") {
-    tvWidget.remove();
+    tvWidget = new TradingView.widget({
+      autosize: true,
+      symbol,
+      interval: "60",
+      timezone: "Europe/Athens",
+      theme: document.body.classList.contains("light-theme") ? "light" : "dark",
+      style: "1",
+      locale: "en",
+      toolbar_bg: "#0f1216",
+      enable_publishing: false,
+      hide_legend: false,
+      container_id: "tradingview_chart"
+    });
   }
 
-  tvWidget = new TradingView.widget({
-    autosize: true,
-    symbol,
-    interval: "60",
-    timezone: "Europe/Athens",
-    theme: "dark",
-    style: "1",
-    locale: "en",
-    toolbar_bg: "#0f1216",
-    enable_publishing: false,
-    hide_legend: false,
-    container_id: "tradingview_chart"
+  (function loadTV(){
+    const el = document.getElementById("tradingview_chart");
+    if (!el) return;
+
+    const s = document.createElement("script");
+    s.src = "https://s3.tradingview.com/tv.js";
+    s.onload = () => loadTradingView("BINANCE:BTCUSDT");
+    document.body.appendChild(s);
+  })();
+
+  document.addEventListener("click", (e) => {
+    const btn = e.target.closest(".pair");
+    if (!btn) return;
+
+    document.querySelectorAll(".pair").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+
+    loadTradingView(btn.dataset.symbol);
   });
-}
 
-(function loadTV() {
-  const s = document.createElement("script");
-  s.src = "https://s3.tradingview.com/tv.js";
-  s.onload = () => loadTradingView("BINANCE:BTCUSDT");
-  document.body.appendChild(s);
-})();
-
-document.addEventListener("click", e => {
-  const btn = e.target.closest(".pair");
-  if (!btn) return;
-
-  document.querySelectorAll(".pair").forEach(b => b.classList.remove("active"));
-  btn.classList.add("active");
-
-  loadTradingView(btn.dataset.symbol);
 });
-
-
 </script>
 
 <script>
@@ -2982,10 +2619,9 @@ document.addEventListener("click", e => {
 
 <script src="./translations.js" defer></script>
 <script src="./i18n.js" defer></script>
-<script src="./app.js" defer></script>
 
 <script defer>
-  // ✅ Home-only init (Live Prices + Hero + TradingView)
+  //  Home-only init (Live Prices + Hero + TradingView)
   document.addEventListener("DOMContentLoaded", () => {
     if (typeof initHome === "function") initHome();  // θα το φτιάξουμε πιο κάτω
   });
