@@ -79,11 +79,6 @@ fees_conclusion:
 guides_more: "Δες περισσότερα →",
 
 
-fees_img: "./image12.png",
-
-
-
-
     /* =======================
            FOOTER
     ======================= */
@@ -216,10 +211,6 @@ fees_conclusion:
   "A “fee” isn’t just one thing. Gas fees pay for on-chain execution, while trading/withdrawal fees belong to platforms. If you manage timing, network choice, slippage, and approvals, you can significantly reduce total costs.",
 
 guides_more: "See more →",
-
-
-
-fees_img: "./image4.png",
 
     /* FOOTER */
     footer_rights: "All rights reserved.",

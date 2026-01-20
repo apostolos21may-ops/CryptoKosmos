@@ -9,6 +9,11 @@
 <link rel="preload" as="image" href="./IMG_5377.jpg">
 <link rel="preload" as="image" href="./IMG_5542.png">
 <link rel="preload" as="image" href="./IMG_5543.png">
+<link rel="preload" as="image" href="./black logo.png">
+<link rel="preload" as="image" href="./logo.png">
+<link rel="preload" as="image" href="./IMG_5301.png">
+<link rel="preload" as="image" href="./IMG_5299.png">
+<link rel="preload" as="image" href="./IMG_5300.png">
   <!-- Favicon & logo -->
   <link rel="icon" href="./logo.png" type="image/png" />
 <script src="translations.js"></script>
@@ -2465,14 +2470,19 @@ document.querySelectorAll("#mobile-menu a").forEach(link => {
 });
 
 // ========================================
-// HERO RANKING – Top 50 coins (STABLE + RETRY + TIMEOUT + CACHE)
+// HERO RANKING – Top 50 coins
+// STABLE + RETRY + TIMEOUT + CACHE + FLICKER-FREE + NO-FREEZE (TRANSFORM SCROLL)
 // ========================================
 const rankBox  = document.querySelector(".hero-rank-box");
 const rankWrap = document.getElementById("hero-rank-inner");
 
-let heroScrollInterval = null;
-let heroObserver = null;
 let heroRefreshInterval = null;
+let heroBooted = false;
+
+// transform-scroll state
+let heroRAF = null;
+let heroLastT = 0;
+let heroPos = 0; // pixels moved
 
 const sleep = (ms) => new Promise(r => setTimeout(r, ms));
 
@@ -2486,7 +2496,9 @@ async function fetchWithTimeout(url, options = {}, ms = 8000) {
   }
 }
 
-// --- CACHE (show last good data if API fails) ---
+// -------------------------
+// Cache
+// -------------------------
 function getCachedHero() {
   try { return JSON.parse(localStorage.getItem("ck-hero-cache")); } catch { return null; }
 }
@@ -2494,7 +2506,9 @@ function setCachedHero(data) {
   localStorage.setItem("ck-hero-cache", JSON.stringify({ t: Date.now(), data }));
 }
 
-// --- Skeleton so it looks "open" instantly ---
+// -------------------------
+// UI: Skeleton
+// -------------------------
 function renderHeroSkeleton(count = 12){
   if (!rankWrap) return;
   rankWrap.innerHTML = "";
@@ -2509,16 +2523,24 @@ function renderHeroSkeleton(count = 12){
     `;
     rankWrap.appendChild(row);
   }
+  // reset animation position
+  heroPos = 0;
+  rankWrap.style.transform = "translateY(0px)";
 }
 
-// --- Render data into rows ---
-function renderHeroRows(data){
+// -------------------------
+// UI: Render Data
+// -------------------------
+function renderHeroFromData(data) {
   if (!rankWrap) return;
+
+  // κρατάμε pos και το “ταιριάζουμε” στο νέο half
+  const prevPos = heroPos || 0;
 
   rankWrap.innerHTML = "";
 
   data.forEach((coin, idx) => {
-    const change = coin.price_change_percentage_24h ?? 0;
+    const change = Number(coin.price_change_percentage_24h ?? 0);
     const up = change >= 0;
 
     const row = document.createElement("div");
@@ -2527,84 +2549,116 @@ function renderHeroRows(data){
       <span class="hr-pos">${idx + 1}</span>
       <div class="hr-icon-wrap">
         <img src="${coin.image}" class="hr-icon" loading="lazy" alt="">
-        <span class="hr-symbol">${coin.symbol.toUpperCase()}</span>
+        <span class="hr-symbol">${String(coin.symbol || "").toUpperCase()}</span>
       </div>
       <span class="hr-change ${up ? "hr-up" : "hr-down"}">
         ${up ? "▲" : "▼"} ${change.toFixed(2)}%
       </span>
-      <span class="hr-price">$${Number(coin.current_price).toLocaleString("en-US",{ maximumFractionDigits: 2 })}</span>
+      <span class="hr-price">
+        $${Number(coin.current_price || 0).toLocaleString("en-US",{ maximumFractionDigits: 2 })}
+      </span>
     `;
     rankWrap.appendChild(row);
   });
 
-  // duplicate for endless scroll
+  // duplicate για endless scroll
   rankWrap.innerHTML += rankWrap.innerHTML;
-}
 
-// --- Auto scroll ---
-function startHeroScroll() {
-  if (!rankBox || !rankWrap || heroScrollInterval) return;
-
-  let pos = rankBox.scrollTop || 0;
-  const speed = 0.4;
-
-  heroScrollInterval = setInterval(() => {
-    pos += speed;
+  // δώσε 1 frame να “μετρήσει” σωστά το νέο scrollHeight
+  requestAnimationFrame(() => {
     const half = rankWrap.scrollHeight / 2;
-    if (half > 0 && pos >= half) pos = 0;
-    rankBox.scrollTop = pos;
-  }, 30);
+    heroPos = half > 0 ? (prevPos % half) : 0;
+    rankWrap.style.transform = `translateY(${-heroPos}px)`;
+
+    // restart animation (fix freeze)
+    stopHeroScroll();
+    startHeroScroll();
+  });
 }
 
-function stopHeroScroll() {
-  if (heroScrollInterval) {
-    clearInterval(heroScrollInterval);
-    heroScrollInterval = null;
+// -------------------------
+// Transform Auto Scroll
+// -------------------------
+function startHeroScroll(){
+  if (!rankWrap) return;
+  if (heroRAF) return;
+
+  heroLastT = performance.now();
+
+  const tick = (t) => {
+    const dt = t - heroLastT;
+    heroLastT = t;
+
+    const half = rankWrap.scrollHeight / 2;
+
+    // αν δεν έχει height ακόμα, συνέχισε
+    if (!half || half < 50) {
+      heroRAF = requestAnimationFrame(tick);
+      return;
+    }
+
+    // speed: 0.4px per frame @60fps
+    heroPos += 0.4 * (dt / 16.67);
+
+    if (heroPos >= half) heroPos = 0;
+
+    rankWrap.style.transform = `translateY(${-heroPos}px)`;
+    heroRAF = requestAnimationFrame(tick);
+  };
+
+  heroRAF = requestAnimationFrame(tick);
+}
+
+function stopHeroScroll(){
+  if (heroRAF) {
+    cancelAnimationFrame(heroRAF);
+    heroRAF = null;
   }
 }
 
-function observeHeroVisibility() {
-  if (!rankBox) return;
-  if (heroObserver) heroObserver.disconnect();
+// Σταθερό restart όταν ξαναγυρνάς στο tab
+document.addEventListener("visibilitychange", () => {
+  if (document.visibilityState === "visible") {
+    stopHeroScroll();
+    requestAnimationFrame(() => startHeroScroll());
+  } else {
+    stopHeroScroll();
+  }
+});
 
-  heroObserver = new IntersectionObserver(entries => {
-    for (const entry of entries) {
-      if (entry.isIntersecting) startHeroScroll();
-      else stopHeroScroll();
-    }
-  }, { threshold: 0.15 });
-
-  heroObserver.observe(rankBox);
-}
-
-// --- Load data with retry + timeout + fallback cache ---
+// -------------------------
+// Load data
+// -------------------------
 async function loadHeroRanking() {
-  if (!rankBox || !rankWrap) return;
+  if (!rankWrap) return;
 
-  stopHeroScroll();
-  rankBox.scrollTop = 0;
+  const cached = getCachedHero();
+  const hasCache = !!cached?.data && Array.isArray(cached.data) && cached.data.length;
 
-  // show skeleton immediately
-  renderHeroSkeleton();
+  // 1) First paint (μία φορά)
+  if (!heroBooted) {
+    if (hasCache) renderHeroFromData(cached.data);
+    else renderHeroSkeleton();
+    heroBooted = true;
+    startHeroScroll(); // ξεκίνα αμέσως
+  }
 
-  const url = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=50&page=1&sparkline=false";
+  const url =
+    "https://api.coingecko.com/api/v3/coins/markets" +
+    "?vs_currency=usd&order=market_cap_desc&per_page=50&page=1&sparkline=false";
 
+  // 2) Fetch με retry
   for (let attempt = 1; attempt <= 2; attempt++) {
     try {
       const res = await fetchWithTimeout(url, { cache: "no-store" }, 8000);
-
       if (res.status === 429) throw new Error("Rate limited (429)");
       if (!res.ok) throw new Error("HTTP " + res.status);
 
       const data = await res.json();
       if (!Array.isArray(data) || data.length === 0) throw new Error("Invalid data");
 
-      // cache good data
       setCachedHero(data);
-
-      renderHeroRows(data);
-      startHeroScroll();
-      observeHeroVisibility();
+      renderHeroFromData(data);
       return;
 
     } catch (e) {
@@ -2613,41 +2667,24 @@ async function loadHeroRanking() {
     }
   }
 
-  // fallback to cache if available
-  const cached = getCachedHero();
-  if (cached?.data && Array.isArray(cached.data) && cached.data.length) {
-    renderHeroRows(cached.data);
-    startHeroScroll();
-    observeHeroVisibility();
-    return;
-  }
-
-  // final fallback message (never stuck on skeleton forever)
-  rankWrap.innerHTML = `
-    <div class="hero-rank-row" style="justify-content:center; opacity:.85;">
-      Δεν φορτώνουν δεδομένα τώρα — δοκίμασε refresh.
-    </div>
-  `;
+  // fail: δεν αλλάζουμε τίποτα (μένει ό,τι ήδη φαίνεται)
 }
 
-// --- Refresh schedule ---
 function startHeroRefresh(){
   if (heroRefreshInterval) clearInterval(heroRefreshInterval);
-  heroRefreshInterval = setInterval(loadHeroRanking, 60 * 60 * 1000); // 1 ώρα
+  heroRefreshInterval = setInterval(loadHeroRanking, 60 * 60 * 1000);
 }
 
-// --- Init once ---
 document.addEventListener("DOMContentLoaded", () => {
   loadHeroRanking();
   startHeroRefresh();
 });
 
-// --- Cleanup ---
 window.addEventListener("pagehide", () => {
   stopHeroScroll();
-  if (heroObserver) heroObserver.disconnect();
   if (heroRefreshInterval) clearInterval(heroRefreshInterval);
 });
+
 
 // ========================================
 // Glossary with full i18n support
@@ -2762,9 +2799,21 @@ function renderMarket(data) {
   });
 }
 
-// --- LOAD WITH RETRY + TIMEOUT + CACHE ---
+let pricesBooted = false; // για να δείχνουμε skeleton μόνο την 1η φορά
+
 async function fetchPricesStable() {
-  renderMarketSkeleton();
+  // Skeleton μόνο την 1η φορά (ή αν δεν υπάρχει cache)
+  const cached = getCachedPrices();
+  const hasCache = !!cached?.data;
+
+  if (!pricesBooted) {
+    if (hasCache) {
+      renderMarket(cached.data); // δείξε άμεσα κάτι, χωρίς skeleton
+    } else {
+      renderMarketSkeleton(); // 1ο load χωρίς cache -> skeleton
+    }
+    pricesBooted = true;
+  }
 
   const ids = coins.map(c => c.id).join(",");
   const url =
@@ -2780,11 +2829,12 @@ async function fetchPricesStable() {
 
       const data = await res.json();
 
-      // basic validation
       const ok = coins.every(c => data?.[c.id] && typeof data[c.id].eur === "number");
       if (!ok) throw new Error("Invalid price data");
 
       setCachedPrices(data);
+
+      // ✅ εδώ γίνεται το “silent update” (χωρίς να ξανακάνουμε skeleton)
       renderMarket(data);
       return;
 
@@ -2794,22 +2844,18 @@ async function fetchPricesStable() {
     }
   }
 
-  // fallback to cache
-  const cached = getCachedPrices();
-  if (cached?.data) {
-    renderMarket(cached.data);
-    return;
-  }
-
-  // final fallback (no infinite skeleton)
-  const wrap = document.getElementById("market-cards");
-  if (wrap) {
-    wrap.innerHTML = `
-      <article class="card market-card">
-        <h4>Live Prices</h4>
-        <p class="muted">Δεν φορτώνουν δεδομένα τώρα — δοκίμασε refresh.</p>
-      </article>
-    `;
+  // Αν αποτύχει, απλά κρατάμε τα παλιά (cache/ό,τι ήδη φαίνεται)
+  // και ΔΕΝ το γυρνάμε σε skeleton.
+  if (!hasCache) {
+    const wrap = document.getElementById("market-cards");
+    if (wrap) {
+      wrap.innerHTML = `
+        <article class="card market-card">
+          <h4>Live Prices</h4>
+          <p class="muted">Δεν φορτώνουν δεδομένα τώρα — δοκίμασε refresh.</p>
+        </article>
+      `;
+    }
   }
 }
 
@@ -2936,6 +2982,7 @@ document.addEventListener("click", e => {
   });
 
 </script>
+
 
 </body>
 </html>
