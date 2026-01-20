@@ -2141,41 +2141,57 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 }
 
-  // =========================
-  // BURGER (index only)
-  // =========================
-  const menuToggle = document.getElementById("menu-toggle");
-  const mobileMenu = document.getElementById("mobile-menu");
-  const mobileTheme = document.getElementById("mobile-theme-toggle");
 
-  function closeBurger(){
-    if (!menuToggle || !mobileMenu) return;
-    menuToggle.classList.remove("open");
-    mobileMenu.classList.remove("open");
-  }
+// =========================
+// BURGER (index only)
+// =========================
+const menuToggle  = document.getElementById("menu-toggle");
+const mobileMenu  = document.getElementById("mobile-menu");
+const mobileTheme = document.getElementById("mobile-theme-toggle");
+const mobileAuth  = document.getElementById("mobile-auth-btn"); // ✅ add
+const mobileLang  = document.getElementById("mobile-lang-toggle"); // ✅ optional (αν έχεις)
 
-  if (menuToggle && mobileMenu) {
-    menuToggle.addEventListener("click", () => {
-      menuToggle.classList.toggle("open");
-      mobileMenu.classList.toggle("open");
-    });
+function closeBurger() {
+  if (!menuToggle || !mobileMenu) return;
+  menuToggle.classList.remove("open");
+  mobileMenu.classList.remove("open");
+}
 
-    // close when clicking mobile links
-    document.querySelectorAll("#mobile-menu a").forEach(a => {
-      a.addEventListener("click", closeBurger);
-    });
-  }
-
-  if (mobileTheme && themeBtn) {
-    mobileTheme.addEventListener("click", () => {
-      themeBtn.click();
-      closeBurger();
-    });
-  }
-
-  document.querySelectorAll(".modal-backdrop, .modal-close").forEach(el => {
-    el.addEventListener("click", closeBurger);
+if (menuToggle && mobileMenu) {
+  menuToggle.addEventListener("click", () => {
+    menuToggle.classList.toggle("open");
+    mobileMenu.classList.toggle("open");
   });
+
+  // close when clicking mobile links
+  mobileMenu.querySelectorAll("a").forEach(a => {
+    a.addEventListener("click", closeBurger);
+  });
+
+  // ✅ close burger when pressing mobile LOGIN
+  mobileAuth?.addEventListener("click", () => {
+    closeBurger();                 // κλείσε πρώτα το burger
+    document.getElementById("auth-btn")?.click(); // άνοιξε login (με το ίδιο handler)
+  });
+
+  // ✅ optional: close burger when pressing mobile LANG
+  mobileLang?.addEventListener("click", () => {
+    closeBurger();
+    document.getElementById("lang-toggle")?.click();
+  });
+}
+
+if (mobileTheme && themeBtn) {
+  mobileTheme.addEventListener("click", () => {
+    closeBurger();   // ✅ κλείσε πρώτα
+    themeBtn.click();
+  });
+}
+
+// close burger if any modal closes
+document.querySelectorAll(".modal-backdrop, .modal-close").forEach(el => {
+  el.addEventListener("click", closeBurger);
+});
 
   // =========================
   // UTIL: fetch with timeout
@@ -2190,6 +2206,40 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
   const sleep = (ms) => new Promise(r => setTimeout(r, ms));
+
+
+// ========================================
+// Glossary with full i18n support
+// ========================================
+const gList   = document.getElementById("glossary-list");
+const gSearch = document.getElementById("glossary-search");
+
+function renderGlossary() {
+  const lang = localStorage.getItem("ck-lang") || "el";
+  const terms = window.TRANSLATIONS[lang].glossary_terms;
+  const query = (gSearch.value || "").toLowerCase();
+
+  gList.innerHTML = "";
+
+  Object.keys(terms)
+    .filter(key =>
+      key.toLowerCase().includes(query) ||
+      terms[key].toLowerCase().includes(query)
+    )
+    .forEach(key => {
+      const div = document.createElement("div");
+      div.className = "term";
+      div.innerHTML = `
+        <h5>${key}</h5>
+        <p class="muted">${terms[key]}</p>
+      `;
+      gList.appendChild(div);
+    });
+}
+
+gSearch.addEventListener("input", renderGlossary);
+document.addEventListener("languageChanged", renderGlossary);
+renderGlossary();
 
   // ============================================================
   // HERO RANKING (transform scroll, cache, retry, flicker-free)
@@ -2618,6 +2668,196 @@ document.addEventListener("themeChanged", () => {
   });
 
 </script>
+<script>
+// ==========================
+// LOGIN / SIGNUP / VERIFY (INDEX)
+// ==========================
+function loadUser() {
+  try { return JSON.parse(localStorage.getItem("ck-user")) || null; }
+  catch { return null; }
+}
+function saveUser(user) {
+  if (user) localStorage.setItem("ck-user", JSON.stringify(user));
+  else localStorage.removeItem("ck-user");
+}
+
+let currentUser = loadUser();
+
+const authBtn   = document.getElementById("auth-btn");
+const authLabel = document.getElementById("auth-label");
+const authIcon  = document.getElementById("auth-icon");
+
+function updateAuthUI() {
+  if (!authBtn || !authLabel || !authIcon) return;
+
+  if (currentUser) {
+    authLabel.textContent = "Logout";
+    authBtn.dataset.state = "logout";
+    authIcon.src = "./IMG_5367.png";
+  } else {
+    authLabel.textContent = "Login";
+    authBtn.dataset.state = "login";
+    authIcon.src = "./IMG_5301.png";
+  }
+}
+updateAuthUI();
+
+// Modals
+const loginModal  = document.getElementById("login-modal");
+const signupModal = document.getElementById("signup-modal");
+const verifyModal = document.getElementById("verify-modal");
+
+const loginForm    = document.getElementById("login-form");
+const noAccountMsg = document.getElementById("no-account");
+
+// ⚠️ ΠΙΑΝΟΥΜΕ ΤΟ SIGNUP BUTTON ΜΟΝΟ ΜΕΣΑ ΣΤΟ LOGIN MODAL
+const signupBtnModal = loginModal?.querySelector("#signup-btn");
+
+const backToLogin   = document.getElementById("back-to-login");
+const signupCreate  = document.getElementById("signup-create");
+const verifySubmit  = document.getElementById("verify-submit");
+
+const signupError = document.getElementById("signup-error");
+const verifyError = document.getElementById("verify-error");
+
+const loginClose  = document.getElementById("login-close");
+const signupClose = document.querySelector(".signup-close");
+const verifyClose = document.querySelector(".verify-close");
+
+// temp state
+let tempUser = null;
+let verificationCode = null;
+
+// Helpers
+function show(el){ el && el.classList.remove("hidden"); }
+function hide(el){ el && el.classList.add("hidden"); }
+
+function openLogin() {
+  if (!loginModal) return;
+  loginForm?.reset();
+  if (noAccountMsg) noAccountMsg.style.display = "none";
+  if (signupBtnModal) signupBtnModal.style.display = "none";
+  hide(signupModal); hide(verifyModal);
+  show(loginModal);
+}
+function closeLogin(){ hide(loginModal); }
+
+function openSignup(){
+  if (signupError) signupError.style.display = "none";
+  hide(loginModal); hide(verifyModal);
+  show(signupModal);
+}
+function closeSignup(){ hide(signupModal); }
+
+function openVerify(){
+  if (verifyError) verifyError.style.display = "none";
+  const v = document.getElementById("verify-code");
+  if (v) v.value = "";
+  hide(loginModal); hide(signupModal);
+  show(verifyModal);
+}
+function closeVerify(){ hide(verifyModal); }
+
+// Auth button: Login / Logout
+authBtn?.addEventListener("click", () => {
+  if (authBtn.dataset.state === "login") openLogin();
+  else {
+    currentUser = null;
+    saveUser(null);
+    updateAuthUI();
+  }
+});
+
+// Close buttons
+loginClose?.addEventListener("click", closeLogin);
+signupClose?.addEventListener("click", closeSignup);
+verifyClose?.addEventListener("click", closeVerify);
+
+// Click outside modal (backdrop)
+document.addEventListener("click", (e) => {
+  if (e.target.classList?.contains("modal-backdrop")) {
+    closeLogin(); closeSignup(); closeVerify();
+  }
+});
+
+// Login submit
+loginForm?.addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  const email = document.getElementById("login-email")?.value.trim();
+  const pass  = document.getElementById("login-pass")?.value.trim();
+  const saved = loadUser();
+
+  if (!saved || saved.email !== email || saved.pass !== pass) {
+    if (noAccountMsg) noAccountMsg.style.display = "block";
+    if (signupBtnModal) signupBtnModal.style.display = "block";
+    return;
+  }
+
+  currentUser = saved;
+  updateAuthUI();
+  closeLogin();
+});
+
+// Go to signup (button inside login modal)
+signupBtnModal?.addEventListener("click", () => {
+  if (noAccountMsg) noAccountMsg.style.display = "none";
+  if (signupBtnModal) signupBtnModal.style.display = "none";
+  openSignup();
+});
+
+// Back to login
+backToLogin?.addEventListener("click", () => {
+  closeSignup();
+  openLogin();
+});
+
+// Create account -> open verify
+signupCreate?.addEventListener("click", () => {
+  const email = document.getElementById("signup-email")?.value.trim();
+  const pass1 = document.getElementById("signup-pass1")?.value.trim();
+  const pass2 = document.getElementById("signup-pass2")?.value.trim();
+
+  if (!email || !pass1 || !pass2) return;
+
+  if (pass1 !== pass2) {
+    if (signupError) signupError.style.display = "block";
+    return;
+  }
+  if (signupError) signupError.style.display = "none";
+
+  verificationCode = String(Math.floor(100000 + Math.random() * 900000));
+  console.log("Verification:", verificationCode);
+
+  tempUser = { email, pass: pass1 };
+  openVerify();
+});
+
+// Verify submit
+verifySubmit?.addEventListener("click", () => {
+  const code = document.getElementById("verify-code")?.value.trim();
+
+  if (code !== verificationCode) {
+    if (verifyError) verifyError.style.display = "block";
+    return;
+  }
+
+  if (verifyError) verifyError.style.display = "none";
+  saveUser(tempUser);
+  currentUser = tempUser;
+  updateAuthUI();
+  closeVerify();
+  alert("Ο λογαριασμός δημιουργήθηκε!");
+});
+
+// Mobile auth button
+document.getElementById("mobile-auth-btn")?.addEventListener("click", () => {
+  authBtn?.click();
+  closeBurger?.();
+});
+
+</script>
+
 <script>
   if ("scrollRestoration" in history) {
     history.scrollRestoration = "manual";
