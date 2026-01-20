@@ -14,6 +14,18 @@
 <link rel="preload" as="image" href="./IMG_5301.png">
 <link rel="preload" as="image" href="./IMG_5299.png">
 <link rel="preload" as="image" href="./IMG_5300.png">
+
+
+
+<script>
+  (function () {
+    try {
+      const t = localStorage.getItem("ck-theme");
+      if (t === "light") document.documentElement.classList.add("light-theme");
+    } catch(e) {}
+  })();
+</script>
+
   <!-- Favicon & logo -->
   <link rel="icon" href="./logo.png" type="image/png" />
 
@@ -32,16 +44,6 @@
   --brand2:#7b61ff; 
   --accent:#35d0a7; 
   --border:#222a33;
-}
-
-/* Light theme */
-body.light-theme {
-  --bg:#f7fafc;
-  --bg-alt:#edf2f7;
-  --card:#ffffff;
-  --text:#0f172a;
-  --muted:#64748b;
-  --border:#d0d7e2;
 }
 
 /* =========================================
@@ -81,9 +83,9 @@ a{
   -webkit-backdrop-filter:blur(6px);
   border-bottom:1px solid var(--border);
 }
-body.light-theme .site-header{
-  background:rgba(255,255,255,.9);
-}
+
+html.light-theme .site-header,
+body.light-theme .site-header{ background:rgba(255,255,255,.9); }
 
 .header-inner{
   display:flex;
@@ -1585,6 +1587,21 @@ body.light-theme .more-guides:hover{
 .sk-bar.w2{ width: 90px; }
 .sk-bar.w3{ width: 60px; }
 .sk-bar.w4{ width: 70px; margin-left:auto; }
+
+
+
+/* Light theme */
+html.light-theme,
+body.light-theme {
+  --bg:#f7fafc;
+  --bg-alt:#edf2f7;
+  --card:#ffffff;
+  --text:#0f172a;
+  --muted:#64748b;
+  --border:#d0d7e2;
+}
+
+html:not(.theme-ready) .header-actions { visibility: hidden; }
 </style>
 
 
@@ -2113,23 +2130,30 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-  function applyTheme(isLight){
-    if (isLight) {
-      document.body.classList.add("light-theme");
-      localStorage.setItem("ck-theme","light");
-      if (themeIcon) themeIcon.src = "./IMG_5299.png";
-      if (themeLabel) themeLabel.textContent = "Light";
-      if (siteLogo) siteLogo.src = "./logo.png";
-    } else {
-      document.body.classList.remove("light-theme");
-      localStorage.setItem("ck-theme","dark");
-      if (themeIcon) themeIcon.src = "./IMG_5300.png";
-      if (themeLabel) themeLabel.textContent = "Dark";
-      if (siteLogo) siteLogo.src = "./black logo.png";
-    }
-  }
+function applyTheme(isLight){
+  const root = document.documentElement; // ✅ html
 
-  applyTheme(localStorage.getItem("ck-theme") === "light");
+  if (isLight) {
+    root.classList.add("light-theme");   // ✅
+    document.body.classList.add("light-theme"); // (κρατά το για να μη σπάσουν παλιά selectors)
+    localStorage.setItem("ck-theme","light");
+
+    if (themeIcon) themeIcon.src = "./IMG_5299.png";
+    if (themeLabel) themeLabel.textContent = "Light";
+    if (siteLogo) siteLogo.src = "./logo.png";
+
+  } else {
+    root.classList.remove("light-theme"); // ✅
+    document.body.classList.remove("light-theme");
+    localStorage.setItem("ck-theme","dark");
+
+    if (themeIcon) themeIcon.src = "./IMG_5300.png";
+    if (themeLabel) themeLabel.textContent = "Dark";
+    if (siteLogo) siteLogo.src = "./black logo.png";
+  }
+}
+applyTheme(localStorage.getItem("ck-theme") === "light");
+document.documentElement.classList.add("theme-ready");
 
   if (themeBtn) {
   themeBtn.addEventListener("click", () => {
@@ -2138,6 +2162,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // ✅ refresh TradingView theme
     setTimeout(refreshTradingViewTheme, 80);
+
   });
 }
 
