@@ -1656,7 +1656,1053 @@ html:not(.theme-ready) #lang-icon{
 
 .hero-rank-box { min-height: 440px; }
 .hero-rank-inner { min-height: 380px; }
+
+
+
+
+
+
+
+
+
+
+
+/* =========================
+   PREFOOTER NEWS (CLEAN BASE)
+========================= */
+.prefooter-news{
+  max-width:1100px;
+  margin: 22px auto 0;
+  padding: 16px 16px 6px;
+}
+
+/* Head */
+.pn-head{
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom:14px;
+}
+
+.pn-title{
+  margin:0;
+  font-size:14px;
+  letter-spacing:.25px;
+  font-weight:900;
+  color: rgba(255,255,255,.92);
+}
+
+.pn-sub{
+  margin:0;
+  font-size:12px;
+  color: rgba(255,255,255,.70);
+}
+
+/* Grid */
+.pn-grid{
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap:14px;
+}
+
+/* =========================
+   CARD BASE (applies to all)
+========================= */
+.pn-card{
+  position:relative;
+  overflow:hidden;
+  border-radius:16px;
+  text-decoration:none;
+
+  background: rgba(15,18,22,.38);
+  border: 1px solid rgba(255,255,255,.10);
+
+  box-shadow: 0 10px 26px rgba(0,0,0,.25);
+  transition: transform .18s ease, border-color .18s ease, background .18s ease, box-shadow .18s ease;
+}
+
+.pn-card:hover{
+  transform: translateY(-2px);
+  border-color: rgba(91,180,255,.55);
+  box-shadow: 0 16px 34px rgba(0,0,0,.35);
+}
+
+.pn-card:focus-visible{
+  outline: 2px solid rgba(91,180,255,.85);
+  outline-offset: 3px;
+}
+
+/* Image base */
+.pn-thumb{
+  display:block;
+  width:100%;
+  height:240px;
+  object-fit:cover;
+}
+
+/* =========================
+   Overlay gradient
+   IMPORTANT: exclude hero card (hero has its own overlay)
+========================= */
+.pn-card:not(.pn-card--hero)::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0,0,0,0.10) 0%,
+    rgba(0,0,0,0.20) 45%,
+    rgba(0,0,0,0.72) 100%
+  );
+  opacity: .9;
+  transition: opacity .18s ease, background .18s ease;
+  z-index:1;
+}
+
+.pn-card:not(.pn-card--hero):hover::after{
+  opacity: 1;
+  background: linear-gradient(
+    to bottom,
+    rgba(0,0,0,0.18) 0%,
+    rgba(0,0,0,0.28) 45%,
+    rgba(0,0,0,0.78) 100%
+  );
+}
+
+/* keep content above overlay */
+.pn-card > *{
+  position:relative;
+  z-index:2;
+}
+
+/* =========================
+   Kicker (shared style)
+========================= */
+.pn-kicker{
+  display:inline-flex;
+  width:max-content;
+  padding:6px 10px;
+  border-radius:999px;
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:.2px;
+
+  color: rgba(255,255,255,.92);
+  background: rgba(40,120,255,.72);
+  border: 1px solid rgba(255,255,255,.25);
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.pn-kicker--top{
+  position:absolute;
+  top:14px;
+  left:14px;
+}
+
+/* =========================
+   Bottom text (cards 2-3)
+========================= */
+.pn-text-bottom{
+  position:absolute;
+  left:14px;
+  right:14px;
+  bottom:14px;
+  padding:10px 12px;
+
+  border-radius:14px;
+  background: rgba(0,0,0,.35);
+  border: 1px solid rgba(255,255,255,.10);
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.pn-text-bottom h5{
+  margin:0 0 4px;
+  font-size:14px;
+  line-height:1.2;
+  color: rgba(255,255,255,.95);
+}
+
+.pn-text-bottom p{
+  margin:0;
+  font-size:12px;
+  line-height:1.35;
+  color: rgba(255,255,255,.75);
+}
+
+/* =========================
+   Read button base (shared)
+========================= */
+.pn-read--btn{
+  padding:10px 14px;
+  border-radius:14px;
+
+  background: rgba(0,0,0,.35);
+  border: 1px solid rgba(91,180,255,.35);
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  font-size:12px;
+  font-weight:800;
+  color: rgba(91,180,255,.95);
+}
+
+/* =========================
+   Hover reveal ONLY for non-hero cards
+   (hero controls its own fade via .pn-slide.is-active)
+========================= */
+.pn-card:not(.pn-card--hero) .pn-kicker--top,
+.pn-card:not(.pn-card--hero) .pn-read--btn{
+  opacity: 0;
+  transform: translateY(6px);
+  pointer-events: none;
+  transition: opacity .18s ease, transform .18s ease;
+}
+
+.pn-card:not(.pn-card--hero):hover .pn-kicker--top,
+.pn-card:not(.pn-card--hero):hover .pn-read--btn{
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* touch: show always (non-hero only) */
+@media (hover: none){
+  .pn-card:not(.pn-card--hero) .pn-kicker--top,
+  .pn-card:not(.pn-card--hero) .pn-read--btn{
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+  }
+}
+
+/* =========================
+   LIGHT THEME
+========================= */
+html.light-theme .pn-title,
+body.light-theme .pn-title{ color: rgba(15,23,42,.92); }
+
+html.light-theme .pn-sub,
+body.light-theme .pn-sub{ color: rgba(15,23,42,.65); }
+
+html.light-theme .pn-card,
+body.light-theme .pn-card{
+  background: rgba(255,255,255,.80);
+  border: 1px solid rgba(0,0,0,.10);
+  box-shadow: 0 10px 22px rgba(0,0,0,.10);
+}
+
+html.light-theme .pn-card:hover,
+body.light-theme .pn-card:hover{
+  border-color: rgba(53,92,255,.45);
+  box-shadow: 0 16px 30px rgba(0,0,0,.14);
+}
+
+/* light overlay only for non-hero */
+html.light-theme .pn-card:not(.pn-card--hero)::after,
+body.light-theme .pn-card:not(.pn-card--hero)::after{
+  background: linear-gradient(
+    to bottom,
+    rgba(255,255,255,0.05) 0%,
+    rgba(0,0,0,0.05) 45%,
+    rgba(0,0,0,0.35) 100%
+  );
+  opacity: 1;
+}
+
+html.light-theme .pn-text-bottom,
+body.light-theme .pn-text-bottom{
+  background: rgba(255,255,255,.72);
+  border: 1px solid rgba(0,0,0,.10);
+}
+
+html.light-theme .pn-text-bottom h5,
+body.light-theme .pn-text-bottom h5{ color: rgba(15,23,42,.95); }
+
+html.light-theme .pn-text-bottom p,
+body.light-theme .pn-text-bottom p { color: rgba(15,23,42,.70); }
+
+html.light-theme .pn-kicker,
+body.light-theme .pn-kicker{
+  color: rgba(15,23,42,.95);
+  background: rgba(180,210,255,.70);
+  border: 1px solid rgba(53,92,255,.25);
+}
+
+html.light-theme .pn-read--btn,
+body.light-theme .pn-read--btn{
+  background: rgba(255,255,255,.55);
+  border: 1px solid rgba(53,92,255,.35);
+  color: rgba(53,92,255,.95);
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media (max-width: 980px){
+  .pn-grid{ grid-template-columns: repeat(2, 1fr); }
+  .pn-head{ flex-direction:column; align-items:flex-start; }
+}
+
+@media (max-width: 560px){
+  .pn-grid{ grid-template-columns: 1fr; }
+  .prefooter-news{ padding: 14px 12px 6px; }
+  .pn-thumb{ height: 220px; }
+}
+
+
+
+
+
+
+
+    
+
+
+
+
+/* =========================
+   NEWS HERO CARD (CLEAN)
+   (works with .pn-hero-slider)
+========================= */
+.pn-card--hero{
+  position: relative;
+  overflow: hidden;
+  padding: 0;
+  border-radius: 16px;
+}
+
+/* image */
+.pn-card--hero .pn-thumb{
+  display: block;
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+  border-radius: 16px;
+  border: 0;
+}
+
+/* soft overlay for readability (always) */
+.pn-card--hero::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:16px;
+  background: linear-gradient(
+    to bottom,
+    rgba(0,0,0,0.10) 0%,
+    rgba(0,0,0,0.25) 45%,
+    rgba(0,0,0,0.72) 100%
+  );
+  z-index: 2;
+  pointer-events:none;
+}
+
+/* inner shadow (hover only on desktop) */
+@media (hover:hover){
+  .pn-card--hero::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    border-radius:16px;
+    opacity:0;
+    transition: opacity .18s ease;
+    box-shadow:
+      inset 0 0 0 1px rgba(255,255,255,.10),
+      inset 0 0 45px rgba(0,0,0,.55),
+      inset 0 0 140px rgba(0,0,0,.55);
+    z-index: 3;
+    pointer-events:none;
+  }
+  .pn-card--hero:hover::after{ opacity:1; }
+}
+
+/* ====== Elements positioning (above overlays) ====== */
+.pn-card--hero .pn-kicker--top{
+  position:absolute;
+  top: 14px;
+  right: 14px;
+  left: auto;
+  z-index: 25;
+
+  padding:6px 10px;
+  border-radius:999px;
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:.2px;
+
+  color: rgba(255,255,255,.92);
+  background: rgba(40,120,255,.78);
+  border: 1px solid rgba(255,255,255,.22);
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.pn-card--hero .pn-hero-title{
+  position:absolute;
+  top: 14px;
+  left: 14px;
+  z-index: 25;
+
+  font-size: 44px;
+  font-weight: 900;
+  letter-spacing: .5px;
+  line-height: 1;
+
+  color: rgba(255,255,255,.92);
+  text-shadow: 0 10px 26px rgba(0,0,0,.45);
+  pointer-events:none;
+}
+
+/* read button */
+.pn-card--hero .pn-read--btn{
+  position:absolute;
+  left: 14px;
+  bottom: 14px;
+  z-index: 25;
+
+  padding: 10px 14px;
+  border-radius: 14px;
+  background: rgba(0,0,0,.35);
+  border: 1px solid rgba(91,180,255,.35);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  font-size:12px;
+  font-weight:800;
+  color: rgba(91,180,255,.95);
+}
+
+/* overlay text container */
+.pn-card--hero .pn-overlay{
+  position:absolute;
+  left: 14px;
+  right: 14px;
+  bottom: 52px;
+  z-index: 25;
+}
+
+/* title + bullets style */
+.pn-card--hero .pn-title-onimg{
+  margin: 0 0 8px;
+  font-size: 16px;
+  line-height: 1.15;
+  font-weight: 900;
+  color: rgba(255,255,255,.96);
+  text-shadow: 0 6px 18px rgba(0,0,0,.55);
+}
+
+.pn-card--hero .pn-bullets{
+  list-style:none;
+  margin:0;
+  padding:0;
+  display:grid;
+  gap:6px;
+  max-width:520px;
+}
+
+.pn-card--hero .pn-bullets li{
+  font-size: 13px;
+  font-weight: 800;
+  color: rgba(255,255,255,.92);
+  text-shadow: 0 6px 18px rgba(0,0,0,.55);
+}
+
+/* =========================
+   THE IMPORTANT PART:
+   Fade/slide ONLY on active slide
+========================= */
+.pn-slide .pn-hero-title,
+.pn-slide .pn-kicker--top,
+.pn-slide .pn-read--btn,
+.pn-slide .pn-overlay,
+.pn-slide .pn-title-onimg,
+.pn-slide .pn-bullets li{
+  opacity: 0;
+  transform: translateX(18px);
+  transition: opacity .55s ease, transform .55s ease;
+  will-change: opacity, transform;
+}
+
+/* reveal when slide is active */
+.pn-slide.is-active .pn-hero-title,
+.pn-slide.is-active .pn-kicker--top,
+.pn-slide.is-active .pn-read--btn,
+.pn-slide.is-active .pn-overlay,
+.pn-slide.is-active .pn-title-onimg{
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* bullets stagger */
+.pn-slide.is-active .pn-bullets li{
+  opacity: 1;
+  transform: translateX(0);
+}
+.pn-slide.is-active .pn-bullets li:nth-child(1){ transition-delay: .06s; }
+.pn-slide.is-active .pn-bullets li:nth-child(2){ transition-delay: .14s; }
+.pn-slide.is-active .pn-bullets li:nth-child(3){ transition-delay: .22s; }
+
+/* touch devices: μην κρύβεις CTA/badge λόγω hover */
+@media (hover:none){
+  .pn-card--hero .pn-kicker--top,
+  .pn-card--hero .pn-read--btn{
+    opacity: 1;
+    transform: none;
+  }
+}
+
+
+
+
+
+
+
+
+/* =========================
+   HERO SLIDER (FINAL CLEAN)
+========================= */
+.pn-hero-slider{
+  position: relative;
+  overflow: hidden;
+}
+
+/* container των slides */
+.pn-hero-slider .pn-slides{
+  position: relative;
+  width: 100%;
+  height: 240px; /* ίδιο ύψος με .pn-thumb */
+}
+
+/* κάθε slide */
+.pn-hero-slider .pn-slide{
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transform: translateX(18px);
+  pointer-events: none;
+  transition: opacity .45s ease, transform .45s ease;
+}
+
+/* active */
+.pn-hero-slider .pn-slide.is-active{
+  opacity: 1;
+  transform: translateX(0);
+  pointer-events: auto;
+}
+
+/* exit */
+.pn-hero-slider .pn-slide.is-exit-left{
+  opacity: 0;
+  transform: translateX(-22px);
+}
+
+/* =========================
+   CONTROLS (next + dots)
+========================= */
+.pn-hero-slider .pn-next,
+.pn-hero-slider .pn-dots{
+  opacity: 0;
+  transform: translateY(6px);
+  pointer-events: none;
+  transition: opacity .18s ease, transform .18s ease;
+}
+
+/* desktop hover: δείξε controls */
+@media (hover:hover){
+  .pn-hero-slider:hover .pn-next,
+  .pn-hero-slider:hover .pn-dots{
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+}
+
+/* touch: πάντα visible */
+@media (hover:none){
+  .pn-hero-slider .pn-next,
+  .pn-hero-slider .pn-dots{
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+  }
+}
+
+/* NEXT button */
+.pn-hero-slider .pn-next{
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.16);
+  background: rgba(0,0,0,.28);
+  color: rgba(255,255,255,.92);
+  font-size: 28px;
+  line-height: 1;
+  font-weight: 900;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  z-index: 30;
+}
+
+.pn-hero-slider .pn-next:hover{
+  border-color: rgba(91,180,255,.55);
+}
+
+/* DOTS */
+.pn-hero-slider .pn-dots{
+  position: absolute;
+  left: 50%;
+  bottom: 10px;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 30;
+}
+
+.pn-hero-slider .pn-dot{
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.25);
+  background: rgba(255,255,255,.18);
+  padding: 0;
+  cursor: pointer;
+}
+
+.pn-hero-slider .pn-dot.is-active{
+  background: rgba(91,180,255,.95);
+  border-color: rgba(91,180,255,.55);
+}
+
+
+.pn-hero-slider .pn-next{
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.pn-hero-slider .pn-dots{
+  left: 50%;
+  bottom: 10px;
+  transform: translateX(-50%);
+}
+
+/* όταν κάνεις hover, ΜΗΝ ξαναγράφεις transform (σπάει το centering) */
+.pn-hero-slider:hover .pn-next{
+  animation: pnPop .18s ease-out both;
+}
+@keyframes pnPop{
+  from{ transform: translateY(-50%) scale(.96); }
+  to  { transform: translateY(-50%) scale(1); }
+}
+
+.pn-hero-slider:hover .pn-dots{
+  animation: pnDotsUp .18s ease-out both;
+}
+@keyframes pnDotsUp{
+  from{ transform: translateX(-50%) translateY(4px); }
+  to  { transform: translateX(-50%) translateY(0); }
+}
+
+/* =========================
+   LAYERING (πάνω από overlay)
+========================= */
+.pn-hero-slider .pn-kicker--top,
+.pn-hero-slider .pn-read--btn,
+.pn-hero-slider .pn-hero-title,
+.pn-hero-slider .pn-overlay{
+  z-index: 25;
+  position: absolute;
+}
+
+
+
+
+
+
+
+
+/* =========================
+   HERO hover reveal (Market + Read)
+========================= */
+.pn-card--hero .pn-kicker--top,
+.pn-card--hero .pn-read--btn{
+  opacity: 0;
+  transform: translateY(8px);
+  pointer-events: none;
+  transition: opacity .18s ease, transform .18s ease;
+}
+
+/* εμφανίζονται ΜΟΝΟ στο hover */
+.pn-card--hero:hover .pn-kicker--top,
+.pn-card--hero:hover .pn-read--btn{
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* touch: πάντα visible */
+@media (hover:none){
+  .pn-card--hero .pn-kicker--top,
+  .pn-card--hero .pn-read--btn{
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+  }
+}
+
+
+
+
+
+
+/* =========================
+   HERO overlay text — show ONLY on hover
+========================= */
+.pn-card--hero .pn-overlay{
+  opacity: 0;
+  transform: translateX(24px);
+  transition: opacity .45s ease, transform .45s ease;
+  will-change: opacity, transform;
+  pointer-events: none;
+}
+
+.pn-card--hero .pn-title-onimg{
+  opacity: 0;
+  transform: translateX(24px);
+  transition: opacity .45s ease, transform .45s ease;
+}
+
+.pn-card--hero .pn-bullets li{
+  opacity: 0;
+  transform: translateX(24px);
+  transition: opacity .45s ease, transform .45s ease;
+}
+
+/* ΜΟΝΟ όταν κάνεις hover στο hero card */
+.pn-card--hero:hover .pn-overlay{
+  opacity: 1;
+  transform: translateX(0);
+  pointer-events: auto;
+}
+
+.pn-card--hero:hover .pn-title-onimg{
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.pn-card--hero:hover .pn-bullets li{
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.pn-card--hero:hover .pn-bullets li:nth-child(1){ transition-delay: .06s; }
+.pn-card--hero:hover .pn-bullets li:nth-child(2){ transition-delay: .14s; }
+.pn-card--hero:hover .pn-bullets li:nth-child(3){ transition-delay: .22s; }
+
+/* touch: πάντα visible */
+@media (hover:none){
+  .pn-card--hero .pn-overlay,
+  .pn-card--hero .pn-title-onimg,
+  .pn-card--hero .pn-bullets li{
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+    transition: none;
+  }
+}
+
+
+
+
+/* βοηθάει να ξαναξεκινάνε transitions στο hover */
+.pn-hover-reset .pn-overlay,
+.pn-hover-reset .pn-title-onimg,
+.pn-hover-reset .pn-bullets li{
+  transition: none !important;
+}
+
+
+
+
+/* =========================================
+   ONLY h5 title on image: hover-only + re-animates on slide change
+========================================= */
+
+/* default hidden */
+.pn-hero-slider .pn-title-onimg{
+  opacity: 0;
+  transform: translateX(18px);
+  transition: opacity .35s ease, transform .35s ease;
+  pointer-events: none;
+}
+
+/* show only when hovering the slider AND the slide is active */
+@media (hover:hover){
+  .pn-hero-slider:hover .pn-slide.is-active .pn-title-onimg{
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* touch devices: no hover -> always visible */
+@media (hover:none){
+  .pn-hero-slider .pn-title-onimg{
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+    transition: none;
+  }
+}
+
+
+
+/* Show ONLY when hover + active slide */
+.pn-hero-slider:hover .pn-kicker--top,
+.pn-hero-slider:hover .pn-read--btn{
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+  pointer-events: auto !important;
+}
+
+.pn-hero-slider:hover .pn-slide.is-active .pn-title-onimg,
+.pn-hero-slider:hover .pn-slide.is-active .pn-bullets li{
+  opacity: 1 !important;
+  transform: translateX(0) !important;
+  pointer-events: auto !important;
+}
+
+.pn-hero-slider:hover .pn-slide.is-active .pn-bullets li:nth-child(1){ transition-delay: .05s !important; }
+.pn-hero-slider:hover .pn-slide.is-active .pn-bullets li:nth-child(2){ transition-delay: .13s !important; }
+.pn-hero-slider:hover .pn-slide.is-active .pn-bullets li:nth-child(3){ transition-delay: .21s !important; }
+
+@media (hover: none){
+  .pn-hero-slider .pn-kicker--top,
+  .pn-hero-slider .pn-read--btn,
+  .pn-hero-slider .pn-title-onimg,
+  .pn-hero-slider .pn-bullets li{
+    opacity: 1 !important;
+    transform: none !important;
+    pointer-events: auto !important;
+    transition: none !important;
+  }
+}
+
+
+
+
+/* =========================================
+   ΜΟΝΟ τα h5.pn-title-onimg να είναι hover-only
+   (βάλε το στο ΤΕΛΟΣ)
+========================================= */
+
+/* default: κρυφό (μόνο ο τίτλος) */
+.pn-hero-slider .pn-title-onimg{
+  opacity: 0 !important;
+  transform: translateX(18px) !important;
+  transition: opacity .25s ease, transform .25s ease !important;
+  pointer-events: none !important;
+}
+
+/* στο hover: εμφανίζεται */
+.pn-hero-slider:hover .pn-title-onimg{
+  opacity: 1 !important;
+  transform: translateX(0) !important;
+}
+
+/* touch devices: μόνιμα visible (δεν υπάρχει hover) */
+@media (hover: none){
+  .pn-hero-slider .pn-title-onimg{
+    opacity: 1 !important;
+    transform: none !important;
+    pointer-events: auto !important;
+    transition: none !important;
+  }
+}
+
+
+
+
+
+/* =========================================
+   FINAL FIX: Market + Read = hover-only (desktop)
+   (βάλε το ΣΤΟ ΤΕΛΟΣ)
+========================================= */
+
+/* default hidden */
+.pn-hero-slider .pn-kicker--top,
+.pn-hero-slider .pn-read--btn{
+  opacity: 0 !important;
+  transform: translateY(8px) !important;
+  pointer-events: none !important;
+  transition: opacity .18s ease, transform .18s ease !important;
+}
+
+/* show ONLY on hover (desktop) */
+@media (hover:hover){
+  .pn-hero-slider:hover .pn-kicker--top,
+  .pn-hero-slider:hover .pn-read--btn{
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+    pointer-events: auto !important;
+  }
+}
+
+/* touch devices: no hover, so keep visible */
+@media (hover:none){
+  .pn-hero-slider .pn-kicker--top,
+  .pn-hero-slider .pn-read--btn{
+    opacity: 1 !important;
+    transform: none !important;
+    pointer-events: auto !important;
+    transition: none !important;
+  }
+}
+
+
+/* όταν μπαίνεις στην ενότητα, ξαναπαίζουν transitions */
+.prefooter-news.is-inview .pn-slide.is-active .pn-title-onimg,
+.prefooter-news.is-inview .pn-slide.is-active .pn-bullets li{
+  /* δεν αλλάζουμε visibility εδώ (αυτό το ελέγχει το hover σου) */
+  will-change: opacity, transform;
+}
+
+/* reset helper (το χρησιμοποιεί το JS) */
+.pn-hover-reset .pn-title-onimg,
+.pn-hover-reset .pn-bullets li{
+  transition: none !important;
+}
+
+
+
+
+
+
+
+/* =========================================
+   SCROLL REVEAL (News in-view)
+   Παίζει κάθε φορά που μπαίνεις στην ενότητα
+========================================= */
+
+/* default (εκτός view): κρυφά */
+.prefooter-news .pn-slide.is-active .pn-overlay,
+.prefooter-news .pn-slide.is-active .pn-title-onimg,
+.prefooter-news .pn-slide.is-active .pn-bullets li{
+  opacity: 0;
+  transform: translateX(24px);
+}
+
+/* όταν μπει στο view: εμφανίζονται με transition */
+.prefooter-news.is-inview .pn-slide.is-active .pn-overlay,
+.prefooter-news.is-inview .pn-slide.is-active .pn-title-onimg{
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity .45s ease, transform .45s ease;
+}
+
+.prefooter-news.is-inview .pn-slide.is-active .pn-bullets li{
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity .45s ease, transform .45s ease;
+}
+
+/* stagger στα bullets */
+.prefooter-news.is-inview .pn-slide.is-active .pn-bullets li:nth-child(1){ transition-delay: .06s; }
+.prefooter-news.is-inview .pn-slide.is-active .pn-bullets li:nth-child(2){ transition-delay: .14s; }
+.prefooter-news.is-inview .pn-slide.is-active .pn-bullets li:nth-child(3){ transition-delay: .22s; }
+
+/* touch: πάντα visible (αν θες). Αν δεν το θες, σβήστο */
+@media (hover:none){
+  .prefooter-news .pn-slide.is-active .pn-overlay,
+  .prefooter-news .pn-slide.is-active .pn-title-onimg,
+  .prefooter-news .pn-slide.is-active .pn-bullets li{
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+
+
+
+
+
+
+/* extra text line για mini slides */
+.pn-desc-onimg{
+  margin: 0;
+  font-size: 12.5px;
+  line-height: 1.35;
+  font-weight: 700;
+  color: rgba(255,255,255,.82);
+  text-shadow: 0 6px 18px rgba(0,0,0,.55);
+}
+
+/* =========================
+   Hover-only για Market + Διάβασε
+   (ισχύει για ΟΛΑ τα pn-slider cards)
+========================= */
+.pn-slider .pn-kicker--top,
+.pn-slider .pn-read--btn{
+  opacity: 0;
+  transform: translateY(8px);
+  pointer-events: none;
+  transition: opacity .18s ease, transform .18s ease;
+}
+
+@media (hover:hover){
+  .pn-slider:hover .pn-kicker--top,
+  .pn-slider:hover .pn-read--btn{
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+}
+
+@media (hover:none){
+  .pn-slider .pn-kicker--top,
+  .pn-slider .pn-read--btn{
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+  }
+}
+
+/* =========================
+   Scroll reveal (όπως έκανες πριν)
+   Τίτλος + περιγραφή να παίζουν όταν μπαίνεις στο News section
+   (μόνο για ACTIVE slide)
+========================= */
+.prefooter-news .pn-slider .pn-slide.is-active .pn-title-onimg,
+.prefooter-news .pn-slider .pn-slide.is-active .pn-desc-onimg{
+  opacity: 0;
+  transform: translateX(24px);
+}
+
+.prefooter-news.is-inview .pn-slider .pn-slide.is-active .pn-title-onimg,
+.prefooter-news.is-inview .pn-slider .pn-slide.is-active .pn-desc-onimg{
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity .45s ease, transform .45s ease;
+}
+
+/* μικρό stagger: πρώτα title, μετά desc */
+.prefooter-news.is-inview .pn-slider .pn-slide.is-active .pn-desc-onimg{
+  transition-delay: .10s;
+}
 </style>
+
+
+
 
 
 
@@ -1947,9 +2993,7 @@ html:not(.theme-ready) #lang-icon{
   <div class="prefooter-inner">
     <div class="pf-col">
       <h4>CryptoKosmos</h4>
-      <p class="pf-muted">
-        Quick links & updates από το crypto σύμπαν.
-      </p>
+      <p class="pf-muted">Quick links & updates από το crypto σύμπαν.</p>
     </div>
 
     <div class="pf-col">
@@ -1968,8 +3012,254 @@ html:not(.theme-ready) #lang-icon{
     </div>
   </div>
 
+  <!-- Divider γραμμή -->
   <div class="prefooter-divider"></div>
+
+ <!-- ================= NEWS ================= -->
+<div class="prefooter-news">
+  <div class="pn-head">
+    <h4 class="pn-title" data-i18n="news_title">News</h4>
+    <p class="pn-sub" data-i18n="news_subtitle">3 γρήγορα άρθρα που αξίζουν</p>
+  </div>
+
+  <div class="pn-grid">
+
+  <!-- Card 1 (HERO SLIDER) -->
+<a class="pn-card pn-card--img pn-card--hero pn-hero-slider pn-slider"
+   href="./news/article1.html"
+   aria-label="Featured market article">
+
+  <div class="pn-slides">
+
+    <!-- SLIDE 1 -->
+    <article class="pn-slide is-active" data-href="./news/article1.html">
+      <img class="pn-thumb" src="./bitcoinweekly.png" alt="Bitcoin weekly">
+
+      <span class="pn-kicker pn-kicker--top">Market</span>
+      <span class="pn-hero-title">BITCOIN</span>
+
+      <div class="pn-overlay">
+        <h5 class="pn-title-onimg">Bitcoin: τι κοιτάμε αυτή την εβδομάδα</h5>
+        <ul class="pn-bullets">
+          <li>FOMC Meeting Minutes</li>
+          <li>Inflation Data (CPI/PPI)</li>
+          <li>Whale Movements / Exchanges</li>
+        </ul>
+      </div>
+
+      <span class="pn-read pn-read--btn">Διάβασε</span>
+    </article>
+
+    <!-- SLIDE 2 -->
+    <article class="pn-slide" data-href="./news/article2.html">
+      <img class="pn-thumb" src="./weeklymarketoutlook.png" alt="Weekly market outlook">
+
+      <span class="pn-kicker pn-kicker--top">Market</span>
+      <span class="pn-hero-title">OUTLOOK</span>
+
+      <div class="pn-overlay">
+        <h5 class="pn-title-onimg">Market Outlook: 3 πράγματα που μπορούν να κουνήσουν την αγορά</h5>
+        <ul class="pn-bullets">
+          <li>CPI / FOMC / Jobs (ό,τι “σκάσει”)</li>
+          <li>DXY &amp; yields: αν ανεβαίνουν, πιέζουν risk</li>
+          <li>ETF flows + exchange inflows: χρήμα μέσα/έξω</li>
+        </ul>
+      </div>
+
+      <span class="pn-read pn-read--btn">Διάβασε</span>
+    </article>
+
+    <!-- SLIDE 3 -->
+    <article class="pn-slide" data-href="./news/article3.html">
+      <img class="pn-thumb" src="./weeklyalts.png" alt="Weekly alts">
+
+      <span class="pn-kicker pn-kicker--top">Altcoins</span>
+      <span class="pn-hero-title">ALTS</span>
+
+      <div class="pn-overlay">
+        <h5 class="pn-title-onimg">Altcoins: τι ξεχωρίζει αυτή την εβδομάδα</h5>
+        <ul class="pn-bullets">
+          <li>Funding rates &amp; OI</li>
+          <li>Rotation: majors → alts</li>
+          <li>Narratives &amp; catalysts</li>
+        </ul>
+      </div>
+
+      <span class="pn-read pn-read--btn">Διάβασε</span>
+    </article>
+
+  </div>
+
+  <!-- Controls -->
+  <button class="pn-next" type="button" aria-label="Next article">›</button>
+
+  <div class="pn-dots" role="tablist" aria-label="Featured articles">
+    <button class="pn-dot is-active" type="button" aria-label="Slide 1"></button>
+    <button class="pn-dot" type="button" aria-label="Slide 2"></button>
+    <button class="pn-dot" type="button" aria-label="Slide 3"></button>
+  </div>
+
+</a>
+
+<!-- Card 2 (HERO SLIDER - GUIDES) -->
+<a class="pn-card pn-card--img pn-card--hero pn-hero-slider pn-slider"
+   href="./news/article2.html"
+   aria-label="Featured guides article">
+
+  <div class="pn-slides">
+
+    <!-- SLIDE 1 -->
+    <article class="pn-slide is-active" data-href="./news/article2.html">
+      <img class="pn-thumb" src="./seedphrase.png" alt="Seed phrase guide">
+
+      <span class="pn-kicker pn-kicker--top">Guides</span>
+      <span class="pn-hero-title">SEED</span>
+
+      <div class="pn-overlay">
+        <h5 class="pn-title-onimg">Seed phrase: τα 5 λάθη που καίνε wallets</h5>
+        <ul class="pn-bullets">
+          <li>Μην το γράφεις σε notes / cloud</li>
+          <li>Μην το στέλνεις ποτέ σε κανέναν</li>
+          <li>Κάνε test restore (offline)</li>
+        </ul>
+      </div>
+
+      <span class="pn-read pn-read--btn">Διάβασε</span>
+    </article>
+
+    <!-- SLIDE 2 -->
+    <article class="pn-slide" data-href="./news/article4.html">
+      <img class="pn-thumb" src="./phishing.png" alt="Phishing guide">
+
+      <span class="pn-kicker pn-kicker--top">Guides</span>
+      <span class="pn-hero-title">SAFE</span>
+
+      <div class="pn-overlay">
+        <h5 class="pn-title-onimg">Phishing: 3 checks πριν πατήσεις link</h5>
+        <ul class="pn-bullets">
+          <li>Domain / spelling (copycats)</li>
+          <li>Approvals: τι ζητάει να υπογράψεις</li>
+          <li>Wallet prompts: “drain” patterns</li>
+        </ul>
+      </div>
+
+      <span class="pn-read pn-read--btn">Διάβασε</span>
+    </article>
+
+    <!-- SLIDE 3 -->
+    <article class="pn-slide" data-href="./news/article5.html">
+      <img class="pn-thumb" src="./coldwallet.png" alt="Cold wallet basics">
+
+      <span class="pn-kicker pn-kicker--top">Guides</span>
+      <span class="pn-hero-title">COLD</span>
+
+      <div class="pn-overlay">
+        <h5 class="pn-title-onimg">Cold wallet: setup χωρίς λάθη (quick steps)</h5>
+        <ul class="pn-bullets">
+          <li>Initialize offline + ενημέρωση firmware</li>
+          <li>2 backups seed (σε 2 μέρη)</li>
+          <li>Small test transfer πρώτα</li>
+        </ul>
+      </div>
+
+      <span class="pn-read pn-read--btn">Διάβασε</span>
+    </article>
+
+  </div>
+
+  <!-- Controls -->
+  <button class="pn-next" type="button" aria-label="Next article">›</button>
+
+  <div class="pn-dots" role="tablist" aria-label="Guides articles">
+    <button class="pn-dot is-active" type="button" aria-label="Slide 1"></button>
+    <button class="pn-dot" type="button" aria-label="Slide 2"></button>
+    <button class="pn-dot" type="button" aria-label="Slide 3"></button>
+  </div>
+</a>
+
+    <!-- Card 3 (HERO SLIDER - ALTCOINS) -->
+<a class="pn-card pn-card--img pn-card--hero pn-hero-slider pn-slider"
+   href="./news/article3.html"
+   aria-label="Featured altcoins article">
+
+  <div class="pn-slides">
+
+    <!-- SLIDE 1 -->
+    <article class="pn-slide is-active" data-href="./news/article3.html">
+      <img class="pn-thumb" src="./solanafees.png" alt="Solana fees guide">
+
+      <span class="pn-kicker pn-kicker--top">Altcoins</span>
+      <span class="pn-hero-title">SOL</span>
+
+      <div class="pn-overlay">
+        <h5 class="pn-title-onimg">Solana fees &amp; tips για αρχάριους</h5>
+        <ul class="pn-bullets">
+          <li>Τι πληρώνεις σε swaps &amp; transfers</li>
+          <li>Priority fees: πότε χρειάζονται</li>
+          <li>Slippage: πώς να το ρυθμίζεις</li>
+        </ul>
+      </div>
+
+      <span class="pn-read pn-read--btn">Διάβασε</span>
+    </article>
+
+    <!-- SLIDE 2 -->
+    <article class="pn-slide" data-href="./news/article6.html">
+      <img class="pn-thumb" src="./altsrotation.png" alt="Altcoin rotation">
+
+      <span class="pn-kicker pn-kicker--top">Altcoins</span>
+      <span class="pn-hero-title">ROT</span>
+
+      <div class="pn-overlay">
+        <h5 class="pn-title-onimg">Alt rotation: 3 σημάδια ότι “γυρίζει” η αγορά</h5>
+        <ul class="pn-bullets">
+          <li>BTC dominance: πτώση = χώρο για alts</li>
+          <li>Volume σε majors→alts (on-chain/cex)</li>
+          <li>Narratives: ποιο trend τραβάει</li>
+        </ul>
+      </div>
+
+      <span class="pn-read pn-read--btn">Διάβασε</span>
+    </article>
+
+    <!-- SLIDE 3 -->
+    <article class="pn-slide" data-href="./news/article7.html">
+      <img class="pn-thumb" src="./onchainalts.png" alt="On-chain altcoins">
+
+      <span class="pn-kicker pn-kicker--top">Altcoins</span>
+      <span class="pn-hero-title">CHAIN</span>
+
+      <div class="pn-overlay">
+        <h5 class="pn-title-onimg">On-chain checklist: τι κοιτάμε πριν αγοράσουμε alt</h5>
+        <ul class="pn-bullets">
+          <li>Holders / concentration (whales)</li>
+          <li>Liquidity &amp; locked LP</li>
+          <li>Token unlocks &amp; emissions</li>
+        </ul>
+      </div>
+
+      <span class="pn-read pn-read--btn">Διάβασε</span>
+    </article>
+
+  </div>
+
+  <!-- Controls -->
+  <button class="pn-next" type="button" aria-label="Next article">›</button>
+
+  <div class="pn-dots" role="tablist" aria-label="Altcoins articles">
+    <button class="pn-dot is-active" type="button" aria-label="Slide 1"></button>
+    <button class="pn-dot" type="button" aria-label="Slide 2"></button>
+    <button class="pn-dot" type="button" aria-label="Slide 3"></button>
+  </div>
+</a>
+
+  </div><!-- /pn-grid -->
+</div><!-- /prefooter-news -->
+
 </section>
+
+
+
 
   <footer class="site-footer">
   <div class="container">
@@ -3006,6 +4296,8 @@ document.getElementById("mobile-auth-btn")?.addEventListener("click", () => {
 <script src="./translations.js" defer></script>
 <script src="./i18n.js" defer></script>
 
+
+
 <script defer>
   //  Home-only init (Live Prices + Hero + TradingView)
   document.addEventListener("DOMContentLoaded", () => {
@@ -3066,6 +4358,139 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 </script>
 
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const heroCard = document.querySelector(".pn-card--hero");
+  if (!heroCard) return;
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        heroCard.classList.add("is-inview");
+      } else {
+        // αν θες να ξαναπαίζει ΚΑΘΕ φορά που ξανασκρολάρεις:
+        heroCard.classList.remove("is-inview");
+      }
+    });
+  }, { threshold: 0.35 });
+
+  io.observe(heroCard);
+});
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const sliders = Array.from(document.querySelectorAll(".pn-slider"));
+  if (!sliders.length) return;
+
+  sliders.forEach((slider) => {
+    const slides  = Array.from(slider.querySelectorAll(".pn-slide"));
+    const dots    = Array.from(slider.querySelectorAll(".pn-dot"));
+    const nextBtn = slider.querySelector(".pn-next");
+
+    if (slides.length <= 1) return;
+
+    let index = 0;
+    let timer = null;
+    const INTERVAL = 20000;
+
+    function setCardHref(i){
+      const href = slides[i]?.dataset?.href;
+      if (href) slider.setAttribute("href", href);
+    }
+
+    function setActiveDot(i){
+      dots.forEach((d, k) => d.classList.toggle("is-active", k === i));
+    }
+
+    function goTo(newIndex, { fromAuto = false } = {}){
+      if (newIndex === index) return;
+
+      const current = slides[index];
+      const next    = slides[newIndex];
+
+      current.classList.remove("is-active");
+      current.classList.add("is-exit-left");
+
+      next.classList.remove("is-active", "is-exit-left");
+
+      // restart transitions reliably
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          next.classList.add("is-active");
+          setActiveDot(newIndex);
+          setCardHref(newIndex);
+          index = newIndex;
+
+          window.setTimeout(() => current.classList.remove("is-exit-left"), 520);
+          if (!fromAuto) restart();
+        });
+      });
+    }
+
+    function next(){
+      goTo((index + 1) % slides.length);
+    }
+
+    function restart(){
+      if (timer) clearInterval(timer);
+      timer = setInterval(() => goTo((index + 1) % slides.length, { fromAuto: true }), INTERVAL);
+    }
+
+    nextBtn?.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      next();
+    });
+
+    dots.forEach((dot, i) => {
+      dot.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        goTo(i);
+      });
+    });
+
+    // init
+    slides.forEach((s, i) => s.classList.toggle("is-active", i === 0));
+    setActiveDot(0);
+    setCardHref(0);
+    restart();
+
+    document.addEventListener("visibilitychange", () => {
+      if (document.visibilityState === "hidden") {
+        if (timer) clearInterval(timer);
+        timer = null;
+      } else {
+        restart();
+      }
+    });
+  });
+});
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const news = document.querySelector(".prefooter-news");
+  if (!news) return;
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        // μπαίνεις στην ενότητα -> παίξε ξανά
+        news.classList.remove("is-inview");
+        void news.offsetWidth; // force reflow (restart)
+        news.classList.add("is-inview");
+      } else {
+        // βγαίνεις -> reset ώστε να ξαναπαίξει στο επόμενο scroll-in
+        news.classList.remove("is-inview");
+      }
+    });
+  }, { threshold: 0.35 });
+
+  io.observe(news);
+});
+</script>
 
 </body>
 </html>
