@@ -397,3 +397,98 @@ window.initHome = function initHome() {
   // Hero ranking (τρέχει μόνο αν υπάρχει το hero-rank-inner)
   if (typeof loadHeroRanking === "function") loadHeroRanking();
 };
+
+
+
+
+// =========================
+// BURGER (index only) — FIXED
+// =========================
+const menuToggle  = document.getElementById("menu-toggle");
+const mobileMenu  = document.getElementById("mobile-menu");
+const mobileTheme = document.getElementById("mobile-theme-toggle");
+const mobileAuth  = document.getElementById("mobile-auth-btn");
+const mobileLang  = document.getElementById("mobile-lang-toggle");
+
+// Guard: μην ξαναδέσεις listeners αν τρέξει 2 φορές
+if (!window.__ckBurgerBound) {
+  window.__ckBurgerBound = true;
+
+  function closeBurger() {
+    if (!menuToggle || !mobileMenu) return;
+    menuToggle.classList.remove("open");
+    mobileMenu.classList.remove("open");
+    mobileMenu.setAttribute("aria-hidden", "true");
+  }
+
+  function openBurger() {
+    if (!menuToggle || !mobileMenu) return;
+    menuToggle.classList.add("open");
+    mobileMenu.classList.add("open");
+    mobileMenu.setAttribute("aria-hidden", "false");
+  }
+
+  function toggleBurger() {
+    if (!menuToggle || !mobileMenu) return;
+    const isOpen = mobileMenu.classList.contains("open");
+    isOpen ? closeBurger() : openBurger();
+  }
+
+  // κάνε το διαθέσιμο global (για άλλα scripts)
+  window.closeBurger = closeBurger;
+
+  // Toggle burger
+  if (menuToggle && mobileMenu) {
+    menuToggle.addEventListener("click", (e) => {
+      e.preventDefault();
+      toggleBurger();
+    });
+
+    // close όταν πατάς link μέσα στο mobile menu
+    mobileMenu.querySelectorAll("a").forEach(a => {
+      a.addEventListener("click", () => closeBurger());
+    });
+  }
+
+  // Mobile THEME → κλείσε burger + κάνε click στο desktop theme
+  if (mobileTheme && window.themeBtn) {
+    mobileTheme.addEventListener("click", (e) => {
+      e.preventDefault();
+      closeBurger();
+      window.themeBtn.click();
+    });
+  } else if (mobileTheme && typeof themeBtn !== "undefined" && themeBtn) {
+    // fallback αν themeBtn είναι στη scope σου
+    mobileTheme.addEventListener("click", (e) => {
+      e.preventDefault();
+      closeBurger();
+      themeBtn.click();
+    });
+  }
+
+  // Mobile LOGIN → κλείσε burger + άνοιξε login μέσω του auth-btn (ενιαίο handler)
+  mobileAuth?.addEventListener("click", (e) => {
+    e.preventDefault();
+    closeBurger();
+    document.getElementById("auth-btn")?.click();
+  });
+
+  // ❌ ΣΗΜΑΝΤΙΚΟ:
+  // ΔΕΝ βάζουμε εδώ listener για mobileLang που να πατάει lang-toggle
+  // γιατί έχεις ήδη το σωστό lang script στο τέλος (toggleLang()).
+  // Άρα εδώ μόνο κλείνουμε burger (προαιρετικά).
+  mobileLang?.addEventListener("click", () => {
+    // άστο να το χειριστεί το language script σου
+    closeBurger();
+  });
+
+  // close burger όταν κλείνει modal (backdrop / close)
+  document.querySelectorAll(".modal-backdrop, .modal-close").forEach(el => {
+    el.addEventListener("click", () => closeBurger());
+  });
+
+  // close με ESC
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeBurger();
+  });
+}
