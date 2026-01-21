@@ -1722,7 +1722,7 @@ html:not(.theme-ready) #lang-icon{
   </div>
 </header>
 
-<div id="mobile-menu" class="mobile-menu">
+<div id="mobile-menu" class="mobile-menu" aria-hidden="true">
 
   <!-- LINKS -->
   <a href="#market"   data-i18n="nav_market">Αγορά</a>
@@ -1733,23 +1733,22 @@ html:not(.theme-ready) #lang-icon{
   <hr>
 
   <!-- THEME BUTTON -->
-  <button id="mobile-theme-toggle" class="mobile-btn" data-i18n="mobile_theme">
+  <button id="mobile-theme-toggle" class="mobile-btn" type="button" data-i18n="mobile_theme">
     Αλλαγή Θέματος
   </button>
 
   <!-- LOGIN BUTTON -->
-  <button id="mobile-auth-btn" class="mobile-btn" data-i18n="login">
+  <button id="mobile-auth-btn" class="mobile-btn" type="button" data-i18n="login">
     Login
   </button>
 
   <!-- LANGUAGE BUTTON -->
-  <button id="mobile-lang-toggle" class="mobile-btn">
-    <img id="mobile-lang-icon" class="icon-img" src="./IMG_5542.png">
-    <span id="mobile-lang-label">GR</span>
+  <button id="mobile-lang-toggle" class="mobile-btn" type="button" aria-label="Language toggle">
+    <img id="mobile-lang-icon" class="icon-img" src="./IMG_5542.png" alt="">
+    <span id="mobile-lang-label" data-i18n="lang_short">GR</span>
   </button>
 
 </div>
-
 
 <!-- 🔥🔥🔥 ΤΟ ΝΕΟ HERO ΜΕ ΤΟ 3D PANEL 🔥🔥🔥 -->
 <section class="hero">
@@ -1767,7 +1766,11 @@ html:not(.theme-ready) #lang-icon{
   <div class="hero-rank-row skeleton"><div class="sk-bar w1"></div><div class="sk-bar w2"></div><div class="sk-bar w3"></div><div class="sk-bar w4"></div></div>
   <div class="hero-rank-row skeleton"><div class="sk-bar w1"></div><div class="sk-bar w2"></div><div class="sk-bar w3"></div><div class="sk-bar w4"></div></div>
   <div class="hero-rank-row skeleton"><div class="sk-bar w1"></div><div class="sk-bar w2"></div><div class="sk-bar w3"></div><div class="sk-bar w4"></div></div>
-  
+ <div class="hero-rank-row skeleton"><div class="sk-bar w1"></div><div class="sk-bar w2"></div><div class="sk-bar w3"></div><div class="sk-bar w4"></div></div>
+  <div class="hero-rank-row skeleton"><div class="sk-bar w1"></div><div class="sk-bar w2"></div><div class="sk-bar w3"></div><div class="sk-bar w4"></div></div>
+  <div class="hero-rank-row skeleton"><div class="sk-bar w1"></div><div class="sk-bar w2"></div><div class="sk-bar w3"></div><div class="sk-bar w4"></div></div>
+  <div class="hero-rank-row skeleton"><div class="sk-bar w1"></div><div class="sk-bar w2"></div><div class="sk-bar w3"></div><div class="sk-bar w4"></div></div>
+
 
         <!-- Τα rows μπαίνουν αυτόματα με JS -->
       </div>
@@ -2234,55 +2237,96 @@ document.documentElement.classList.add("theme-ready");
 document.documentElement.classList.add("theme-ready");
 
 // =========================
-// BURGER (index only)
+// BURGER (index only) — FIXED
 // =========================
 const menuToggle  = document.getElementById("menu-toggle");
 const mobileMenu  = document.getElementById("mobile-menu");
 const mobileTheme = document.getElementById("mobile-theme-toggle");
-const mobileAuth  = document.getElementById("mobile-auth-btn"); // ✅ add
-const mobileLang  = document.getElementById("mobile-lang-toggle"); // ✅ optional (αν έχεις)
+const mobileAuth  = document.getElementById("mobile-auth-btn");
+const mobileLang  = document.getElementById("mobile-lang-toggle");
 
-function closeBurger() {
-  if (!menuToggle || !mobileMenu) return;
-  menuToggle.classList.remove("open");
-  mobileMenu.classList.remove("open");
-}
+// Guard: μην ξαναδέσεις listeners αν τρέξει 2 φορές
+if (!window.__ckBurgerBound) {
+  window.__ckBurgerBound = true;
 
-if (menuToggle && mobileMenu) {
-  menuToggle.addEventListener("click", () => {
-    menuToggle.classList.toggle("open");
-    mobileMenu.classList.toggle("open");
-  });
+  function closeBurger() {
+    if (!menuToggle || !mobileMenu) return;
+    menuToggle.classList.remove("open");
+    mobileMenu.classList.remove("open");
+    mobileMenu.setAttribute("aria-hidden", "true");
+  }
 
-  // close when clicking mobile links
-  mobileMenu.querySelectorAll("a").forEach(a => {
-    a.addEventListener("click", closeBurger);
-  });
+  function openBurger() {
+    if (!menuToggle || !mobileMenu) return;
+    menuToggle.classList.add("open");
+    mobileMenu.classList.add("open");
+    mobileMenu.setAttribute("aria-hidden", "false");
+  }
 
-  // ✅ close burger when pressing mobile LOGIN
-  mobileAuth?.addEventListener("click", () => {
-    closeBurger();                 // κλείσε πρώτα το burger
-    document.getElementById("auth-btn")?.click(); // άνοιξε login (με το ίδιο handler)
-  });
+  function toggleBurger() {
+    if (!menuToggle || !mobileMenu) return;
+    const isOpen = mobileMenu.classList.contains("open");
+    isOpen ? closeBurger() : openBurger();
+  }
 
-  // ✅ optional: close burger when pressing mobile LANG
-  mobileLang?.addEventListener("click", () => {
+  // κάνε το διαθέσιμο global (για άλλα scripts)
+  window.closeBurger = closeBurger;
+
+  // Toggle burger
+  if (menuToggle && mobileMenu) {
+    menuToggle.addEventListener("click", (e) => {
+      e.preventDefault();
+      toggleBurger();
+    });
+
+    // close όταν πατάς link μέσα στο mobile menu
+    mobileMenu.querySelectorAll("a").forEach(a => {
+      a.addEventListener("click", () => closeBurger());
+    });
+  }
+
+  // Mobile THEME → κλείσε burger + κάνε click στο desktop theme
+  if (mobileTheme && window.themeBtn) {
+    mobileTheme.addEventListener("click", (e) => {
+      e.preventDefault();
+      closeBurger();
+      window.themeBtn.click();
+    });
+  } else if (mobileTheme && typeof themeBtn !== "undefined" && themeBtn) {
+    // fallback αν themeBtn είναι στη scope σου
+    mobileTheme.addEventListener("click", (e) => {
+      e.preventDefault();
+      closeBurger();
+      themeBtn.click();
+    });
+  }
+
+  // Mobile LOGIN → κλείσε burger + άνοιξε login μέσω του auth-btn (ενιαίο handler)
+  mobileAuth?.addEventListener("click", (e) => {
+    e.preventDefault();
     closeBurger();
-    document.getElementById("lang-toggle")?.click();
+    document.getElementById("auth-btn")?.click();
+  });
+
+  // ❌ ΣΗΜΑΝΤΙΚΟ:
+  // ΔΕΝ βάζουμε εδώ listener για mobileLang που να πατάει lang-toggle
+  // γιατί έχεις ήδη το σωστό lang script στο τέλος (toggleLang()).
+  // Άρα εδώ μόνο κλείνουμε burger (προαιρετικά).
+  mobileLang?.addEventListener("click", () => {
+    // άστο να το χειριστεί το language script σου
+    closeBurger();
+  });
+
+  // close burger όταν κλείνει modal (backdrop / close)
+  document.querySelectorAll(".modal-backdrop, .modal-close").forEach(el => {
+    el.addEventListener("click", () => closeBurger());
+  });
+
+  // close με ESC
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeBurger();
   });
 }
-
-if (mobileTheme && themeBtn) {
-  mobileTheme.addEventListener("click", () => {
-    closeBurger();   // ✅ κλείσε πρώτα
-    themeBtn.click();
-  });
-}
-
-// close burger if any modal closes
-document.querySelectorAll(".modal-backdrop, .modal-close").forEach(el => {
-  el.addEventListener("click", closeBurger);
-});
 
   // =========================
   // UTIL: fetch with timeout
@@ -2968,6 +3012,60 @@ document.getElementById("mobile-auth-btn")?.addEventListener("click", () => {
     if (typeof initHome === "function") initHome();  // θα το φτιάξουμε πιο κάτω
   });
 </script>
+
+
+
+<script defer>
+document.addEventListener("DOMContentLoaded", () => {
+
+  const deskBtn = document.getElementById("lang-toggle");
+  const mobBtn  = document.getElementById("mobile-lang-toggle");
+
+  function getLang(){
+    return localStorage.getItem("ck-lang") || "el";
+  }
+
+  function setLang(next){
+    localStorage.setItem("ck-lang", next);
+
+    // αν στο i18n.js έχεις function applyTranslations/applyLanguage χρησιμοποίησέ τη
+    if (typeof window.applyLanguage === "function") {
+      window.applyLanguage(next);
+    } else if (typeof window.applyTranslations === "function") {
+      window.applyTranslations(next);
+    }
+
+    // ενημέρωσε labels (GR/EN)
+    const deskLabel = document.getElementById("lang-label");
+    const mobLabel  = document.getElementById("mobile-lang-label");
+    if (deskLabel) deskLabel.textContent = next === "en" ? "EN" : "GR";
+    if (mobLabel)  mobLabel.textContent  = next === "en" ? "EN" : "GR";
+
+    // πες στο υπόλοιπο site ότι άλλαξε (εσύ το χρησιμοποιείς ήδη)
+    document.dispatchEvent(new Event("languageChanged"));
+    document.dispatchEvent(new Event("languageApplied"));
+  }
+
+  function toggleLang(){
+    const cur = getLang();
+    const next = (cur === "en") ? "el" : "en";
+    setLang(next);
+  }
+
+  // κάνε init μια φορά στο load
+  setLang(getLang());
+
+  // listeners
+  deskBtn?.addEventListener("click", toggleLang);
+  mobBtn?.addEventListener("click", () => {
+    // κλείσε burger αν υπάρχει global closeBurger
+    if (typeof window.closeBurger === "function") window.closeBurger();
+    toggleLang();
+  });
+
+});
+</script>
+
 
 </body>
 </html>
