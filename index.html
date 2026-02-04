@@ -48,6 +48,22 @@
   })();
 </script>
 
+
+<script>
+(function () {
+  try {
+    let lang = (localStorage.getItem("ck-lang") || "el").toLowerCase();
+    if (lang === "gr") lang = "el";
+    if (lang !== "el" && lang !== "en") lang = "el";
+
+    localStorage.setItem("ck-lang", lang);
+    document.documentElement.lang = lang;
+    document.documentElement.dataset.lang = lang;
+  } catch(e) {}
+})();
+</script>
+
+
   <!-- Favicon & logo -->
   <link rel="icon" href="./logo.png" type="image/png" />
 
@@ -2801,7 +2817,7 @@ body.light-theme .pn-read--btn{
   <!-- LANGUAGE BUTTON -->
   <button id="mobile-lang-toggle" class="mobile-btn" type="button" aria-label="Language toggle">
     <img id="mobile-lang-icon" class="icon-img" src="./IMG_5542.png" alt="">
-    <span id="mobile-lang-label" data-i18n="lang_short">GR</span>
+   <span id="mobile-lang-label">GR</span>
   </button>
 
 </div>
@@ -2854,6 +2870,12 @@ body.light-theme .pn-read--btn{
 
   </div>
 </section>
+
+
+<!-- ✅ TICKER (static, no auto-scroll) -->
+<div class="ck-ticker" data-ticker>
+  <div class="ck-ticker__inner" data-ticker-inner></div>
+</div>
 
   <!-- MARKET -->
 <section id="market" class="section">
@@ -2996,279 +3018,258 @@ body.light-theme .pn-read--btn{
   </div>
 </section>
 
+
 <!-- ================= PRE-FOOTER (IMPACT) ================= -->
 <section class="prefooter">
   <div class="prefooter-glow"></div>
 
   <div class="prefooter-inner">
     <div class="pf-col">
-      <h4>CryptoKosmos</h4>
-      <p class="pf-muted">Quick links & updates από το crypto σύμπαν.</p>
+      <h4 data-i18n="pf_brand_title">CryptoKosmos</h4>
+      <p class="pf-muted" data-i18n="pf_brand_sub">Quick links & updates από το crypto σύμπαν.</p>
     </div>
 
     <div class="pf-col">
-      <h4>Explore</h4>
-      <a href="#market" class="pf-link">Market</a>
-      <a href="#charts" class="pf-link">Trends</a>
-      <a href="#guides" class="pf-link">Guides</a>
-      <a href="#glossary" class="pf-link">Glossary</a>
+      <h4 data-i18n="pf_explore_title">Explore</h4>
+      <a href="#market" class="pf-link" data-i18n="pf_explore_market">Market</a>
+      <a href="#charts" class="pf-link" data-i18n="pf_explore_trends">Trends</a>
+      <a href="#guides" class="pf-link" data-i18n="pf_explore_guides">Guides</a>
+      <a href="#glossary" class="pf-link" data-i18n="pf_explore_glossary">Glossary</a>
     </div>
 
     <div class="pf-col">
-      <h4>Social</h4>
-      <a href="https://x.com/CryptoKosmosApp" class="pf-link" target="_blank" rel="noopener">X / Twitter</a>
-      <a href="https://www.instagram.com/cryptokosmos.app/" class="pf-link" target="_blank" rel="noopener">Instagram</a>
-      <a href="mailto:cryptokosmos.news@gmail.com" class="pf-link">Email</a>
+      <h4 data-i18n="pf_social_title">Social</h4>
+      <a href="https://x.com/CryptoKosmosApp" class="pf-link" target="_blank" rel="noopener" data-i18n="pf_social_x">X / Twitter</a>
+      <a href="https://www.instagram.com/cryptokosmos.app/" class="pf-link" target="_blank" rel="noopener" data-i18n="pf_social_ig">Instagram</a>
+      <a href="mailto:cryptokosmos.news@gmail.com" class="pf-link" data-i18n="pf_social_email">Email</a>
     </div>
   </div>
 
-  <!-- Divider γραμμή -->
   <div class="prefooter-divider"></div>
 
- <!-- ================= NEWS ================= -->
-<div class="prefooter-news">
-  <div class="pn-head">
-    <h4 class="pn-title" data-i18n="news_title">News</h4>
-    <p class="pn-sub" data-i18n="news_subtitle">3 γρήγορα άρθρα που αξίζουν</p>
-  </div>
+  <!-- ================= NEWS ================= -->
+  <div class="prefooter-news">
+    <div class="pn-head">
+      <h4 class="pn-title" data-i18n="news_title">News</h4>
+      <p class="pn-sub" data-i18n="news_subtitle">3 γρήγορα άρθρα που αξίζουν</p>
+    </div>
 
-  <div class="pn-grid">
+    <div class="pn-grid">
 
-  <!-- Card 1 (HERO SLIDER) -->
-<a class="pn-card pn-card--img pn-card--hero pn-hero-slider pn-slider"
-   href="./news/article1.html"
-   aria-label="Featured market article">
+      <!-- Card 1 (HERO SLIDER) -->
+      <a class="pn-card pn-card--img pn-card--hero pn-hero-slider pn-slider"
+         href="./news/article1.html"
+         aria-label="Featured market article"
+         data-i18n-aria="pf_news_card1_aria">
 
-  <div class="pn-slides">
+        <div class="pn-slides">
+          <article class="pn-slide is-active" data-href="./news/bitcoinweekly.html">
+            <img class="pn-thumb" src="./bitcoinweekly.png" alt="Bitcoin weekly">
 
-    <!-- SLIDE 1 -->
-    <article class="pn-slide is-active" data-href="./news/article1.html">
-      <img class="pn-thumb" src="./bitcoinweekly.png" alt="Bitcoin weekly">
+            <span class="pn-kicker pn-kicker--top" data-i18n="pf_tag_market">Market</span>
+            <span class="pn-hero-title">BITCOIN</span>
 
-      <span class="pn-kicker pn-kicker--top">Market</span>
-      <span class="pn-hero-title">BITCOIN</span>
+            <div class="pn-overlay">
+              <h5 class="pn-title-onimg" data-i18n="pf_c1_s1_title">Bitcoin: τι κοιτάμε αυτή την εβδομάδα</h5>
+              <ul class="pn-bullets">
+                <li data-i18n="pf_c1_s1_b1">FOMC Meeting Minutes</li>
+                <li data-i18n="pf_c1_s1_b2">Inflation Data (CPI/PPI)</li>
+                <li data-i18n="pf_c1_s1_b3">Whale Movements / Exchanges</li>
+              </ul>
+            </div>
 
-      <div class="pn-overlay">
-        <h5 class="pn-title-onimg">Bitcoin: τι κοιτάμε αυτή την εβδομάδα</h5>
-        <ul class="pn-bullets">
-          <li>FOMC Meeting Minutes</li>
-          <li>Inflation Data (CPI/PPI)</li>
-          <li>Whale Movements / Exchanges</li>
-        </ul>
-      </div>
+            <span class="pn-read pn-read--btn" data-i18n="pf_read">Διάβασε</span>
+          </article>
 
-      <span class="pn-read pn-read--btn">Διάβασε</span>
-    </article>
+          <article class="pn-slide" data-href="./news/weeklymarketoutlook.html">
+            <img class="pn-thumb" src="./weeklymarketoutlook.png" alt="Weekly market outlook">
 
-    <!-- SLIDE 2 -->
-    <article class="pn-slide" data-href="./news/article2.html">
-      <img class="pn-thumb" src="./weeklymarketoutlook.png" alt="Weekly market outlook">
+            <span class="pn-kicker pn-kicker--top" data-i18n="pf_tag_market">Market</span>
+            <span class="pn-hero-title">OUTLOOK</span>
 
-      <span class="pn-kicker pn-kicker--top">Market</span>
-      <span class="pn-hero-title">OUTLOOK</span>
+            <div class="pn-overlay">
+              <h5 class="pn-title-onimg" data-i18n="pf_c1_s2_title">Market Outlook: 3 πράγματα που μπορούν να κουνήσουν την αγορά</h5>
+              <ul class="pn-bullets">
+                <li data-i18n="pf_c1_s2_b1">CPI / FOMC / Jobs (ό,τι “σκάσει”)</li>
+                <li data-i18n="pf_c1_s2_b2">DXY &amp; yields: αν ανεβαίνουν, πιέζουν risk</li>
+                <li data-i18n="pf_c1_s2_b3">ETF flows + exchange inflows: χρήμα μέσα/έξω</li>
+              </ul>
+            </div>
 
-      <div class="pn-overlay">
-        <h5 class="pn-title-onimg">Market Outlook: 3 πράγματα που μπορούν να κουνήσουν την αγορά</h5>
-        <ul class="pn-bullets">
-          <li>CPI / FOMC / Jobs (ό,τι “σκάσει”)</li>
-          <li>DXY &amp; yields: αν ανεβαίνουν, πιέζουν risk</li>
-          <li>ETF flows + exchange inflows: χρήμα μέσα/έξω</li>
-        </ul>
-      </div>
+            <span class="pn-read pn-read--btn" data-i18n="pf_read">Διάβασε</span>
+          </article>
 
-      <span class="pn-read pn-read--btn">Διάβασε</span>
-    </article>
+          <article class="pn-slide" data-href="./news/weeklyalts.html">
+            <img class="pn-thumb" src="./weeklyalts.png" alt="Weekly alts">
 
-    <!-- SLIDE 3 -->
-    <article class="pn-slide" data-href="./news/article3.html">
-      <img class="pn-thumb" src="./weeklyalts.png" alt="Weekly alts">
+            <span class="pn-kicker pn-kicker--top" data-i18n="pf_tag_altcoins">Altcoins</span>
+            <span class="pn-hero-title">ALTS</span>
 
-      <span class="pn-kicker pn-kicker--top">Altcoins</span>
-      <span class="pn-hero-title">ALTS</span>
+            <div class="pn-overlay">
+              <h5 class="pn-title-onimg" data-i18n="pf_c1_s3_title">Altcoins: τι ξεχωρίζει αυτή την εβδομάδα</h5>
+              <ul class="pn-bullets">
+                <li data-i18n="pf_c1_s3_b1">Funding rates &amp; OI</li>
+                <li data-i18n="pf_c1_s3_b2">Rotation: majors → alts</li>
+                <li data-i18n="pf_c1_s3_b3">Narratives &amp; catalysts</li>
+              </ul>
+            </div>
 
-      <div class="pn-overlay">
-        <h5 class="pn-title-onimg">Altcoins: τι ξεχωρίζει αυτή την εβδομάδα</h5>
-        <ul class="pn-bullets">
-          <li>Funding rates &amp; OI</li>
-          <li>Rotation: majors → alts</li>
-          <li>Narratives &amp; catalysts</li>
-        </ul>
-      </div>
+            <span class="pn-read pn-read--btn" data-i18n="pf_read">Διάβασε</span>
+          </article>
+        </div>
 
-      <span class="pn-read pn-read--btn">Διάβασε</span>
-    </article>
+        <button class="pn-next" type="button" aria-label="Next article" data-i18n-aria="pf_next">›</button>
 
-  </div>
+        <div class="pn-dots" role="tablist" aria-label="Featured articles" data-i18n-aria="pf_dots_featured">
+          <button class="pn-dot is-active" type="button" aria-label="Slide 1" data-i18n-aria="pf_slide_1"></button>
+          <button class="pn-dot" type="button" aria-label="Slide 2" data-i18n-aria="pf_slide_2"></button>
+          <button class="pn-dot" type="button" aria-label="Slide 3" data-i18n-aria="pf_slide_3"></button>
+        </div>
+      </a>
 
-  <!-- Controls -->
-  <button class="pn-next" type="button" aria-label="Next article">›</button>
+      <!-- Card 2 (GUIDES) -->
+      <a class="pn-card pn-card--img pn-card--hero pn-hero-slider pn-slider"
+         href="./news/article2.html"
+         aria-label="Featured guides article"
+         data-i18n-aria="pf_news_card2_aria">
 
-  <div class="pn-dots" role="tablist" aria-label="Featured articles">
-    <button class="pn-dot is-active" type="button" aria-label="Slide 1"></button>
-    <button class="pn-dot" type="button" aria-label="Slide 2"></button>
-    <button class="pn-dot" type="button" aria-label="Slide 3"></button>
-  </div>
+        <div class="pn-slides">
+          <article class="pn-slide is-active" data-href="./news/seedphrase.html">
+            <img class="pn-thumb" src="./seedphrase.png" alt="Seed phrase guide">
 
-</a>
+            <span class="pn-kicker pn-kicker--top" data-i18n="pf_tag_guides">Guides</span>
+            <span class="pn-hero-title">SEED</span>
 
-<!-- Card 2 (HERO SLIDER - GUIDES) -->
-<a class="pn-card pn-card--img pn-card--hero pn-hero-slider pn-slider"
-   href="./news/article2.html"
-   aria-label="Featured guides article">
+            <div class="pn-overlay">
+              <h5 class="pn-title-onimg" data-i18n="pf_c2_s1_title">Seed phrase: τα 5 λάθη που καίνε wallets</h5>
+              <ul class="pn-bullets">
+                <li data-i18n="pf_c2_s1_b1">Μην το γράφεις σε notes / cloud</li>
+                <li data-i18n="pf_c2_s1_b2">Μην το στέλνεις ποτέ σε κανέναν</li>
+                <li data-i18n="pf_c2_s1_b3">Κάνε test restore (offline)</li>
+              </ul>
+            </div>
 
-  <div class="pn-slides">
+            <span class="pn-read pn-read--btn" data-i18n="pf_read">Διάβασε</span>
+          </article>
 
-    <!-- SLIDE 1 -->
-    <article class="pn-slide is-active" data-href="./news/article2.html">
-      <img class="pn-thumb" src="./seedphrase.png" alt="Seed phrase guide">
+          <article class="pn-slide" data-href="./news/phishing.html">
+            <img class="pn-thumb" src="./phishing.png" alt="Phishing guide">
 
-      <span class="pn-kicker pn-kicker--top">Guides</span>
-      <span class="pn-hero-title">SEED</span>
+            <span class="pn-kicker pn-kicker--top" data-i18n="pf_tag_guides">Guides</span>
+            <span class="pn-hero-title">SAFE</span>
 
-      <div class="pn-overlay">
-        <h5 class="pn-title-onimg">Seed phrase: τα 5 λάθη που καίνε wallets</h5>
-        <ul class="pn-bullets">
-          <li>Μην το γράφεις σε notes / cloud</li>
-          <li>Μην το στέλνεις ποτέ σε κανέναν</li>
-          <li>Κάνε test restore (offline)</li>
-        </ul>
-      </div>
+            <div class="pn-overlay">
+              <h5 class="pn-title-onimg" data-i18n="pf_c2_s2_title">Phishing: 3 checks πριν πατήσεις link</h5>
+              <ul class="pn-bullets">
+                <li data-i18n="pf_c2_s2_b1">Domain / spelling (copycats)</li>
+                <li data-i18n="pf_c2_s2_b2">Approvals: τι ζητάει να υπογράψεις</li>
+                <li data-i18n="pf_c2_s2_b3">Wallet prompts: “drain” patterns</li>
+              </ul>
+            </div>
 
-      <span class="pn-read pn-read--btn">Διάβασε</span>
-    </article>
+            <span class="pn-read pn-read--btn" data-i18n="pf_read">Διάβασε</span>
+          </article>
 
-    <!-- SLIDE 2 -->
-    <article class="pn-slide" data-href="./news/article4.html">
-      <img class="pn-thumb" src="./phishing.png" alt="Phishing guide">
+          <article class="pn-slide" data-href="./news/coldwallet.html">
+            <img class="pn-thumb" src="./coldwallet.png" alt="Cold wallet basics">
 
-      <span class="pn-kicker pn-kicker--top">Guides</span>
-      <span class="pn-hero-title">SAFE</span>
+            <span class="pn-kicker pn-kicker--top" data-i18n="pf_tag_guides">Guides</span>
+            <span class="pn-hero-title">COLD</span>
 
-      <div class="pn-overlay">
-        <h5 class="pn-title-onimg">Phishing: 3 checks πριν πατήσεις link</h5>
-        <ul class="pn-bullets">
-          <li>Domain / spelling (copycats)</li>
-          <li>Approvals: τι ζητάει να υπογράψεις</li>
-          <li>Wallet prompts: “drain” patterns</li>
-        </ul>
-      </div>
+            <div class="pn-overlay">
+              <h5 class="pn-title-onimg" data-i18n="pf_c2_s3_title">Cold wallet: setup χωρίς λάθη (quick steps)</h5>
+              <ul class="pn-bullets">
+                <li data-i18n="pf_c2_s3_b1">Initialize offline + ενημέρωση firmware</li>
+                <li data-i18n="pf_c2_s3_b2">2 backups seed (σε 2 μέρη)</li>
+                <li data-i18n="pf_c2_s3_b3">Small test transfer πρώτα</li>
+              </ul>
+            </div>
 
-      <span class="pn-read pn-read--btn">Διάβασε</span>
-    </article>
+            <span class="pn-read pn-read--btn" data-i18n="pf_read">Διάβασε</span>
+          </article>
+        </div>
 
-    <!-- SLIDE 3 -->
-    <article class="pn-slide" data-href="./news/article5.html">
-      <img class="pn-thumb" src="./coldwallet.png" alt="Cold wallet basics">
+        <button class="pn-next" type="button" aria-label="Next article" data-i18n-aria="pf_next">›</button>
+        <div class="pn-dots" role="tablist" aria-label="Guides articles" data-i18n-aria="pf_dots_guides">
+          <button class="pn-dot is-active" type="button" aria-label="Slide 1" data-i18n-aria="pf_slide_1"></button>
+          <button class="pn-dot" type="button" aria-label="Slide 2" data-i18n-aria="pf_slide_2"></button>
+          <button class="pn-dot" type="button" aria-label="Slide 3" data-i18n-aria="pf_slide_3"></button>
+        </div>
+      </a>
 
-      <span class="pn-kicker pn-kicker--top">Guides</span>
-      <span class="pn-hero-title">COLD</span>
+      <!-- Card 3 (ALTCOINS) -->
+      <a class="pn-card pn-card--img pn-card--hero pn-hero-slider pn-slider"
+         href="./news/article3.html"
+         aria-label="Featured altcoins article"
+         data-i18n-aria="pf_news_card3_aria">
 
-      <div class="pn-overlay">
-        <h5 class="pn-title-onimg">Cold wallet: setup χωρίς λάθη (quick steps)</h5>
-        <ul class="pn-bullets">
-          <li>Initialize offline + ενημέρωση firmware</li>
-          <li>2 backups seed (σε 2 μέρη)</li>
-          <li>Small test transfer πρώτα</li>
-        </ul>
-      </div>
+        <div class="pn-slides">
+          <article class="pn-slide is-active" data-href="./news/solanafees.html">
+            <img class="pn-thumb" src="./solanafees.png" alt="Solana fees guide">
 
-      <span class="pn-read pn-read--btn">Διάβασε</span>
-    </article>
+            <span class="pn-kicker pn-kicker--top" data-i18n="pf_tag_altcoins">Altcoins</span>
+            <span class="pn-hero-title">SOL</span>
 
-  </div>
+            <div class="pn-overlay">
+              <h5 class="pn-title-onimg" data-i18n="pf_c3_s1_title">Solana fees &amp; tips για αρχάριους</h5>
+              <ul class="pn-bullets">
+                <li data-i18n="pf_c3_s1_b1">Τι πληρώνεις σε swaps &amp; transfers</li>
+                <li data-i18n="pf_c3_s1_b2">Priority fees: πότε χρειάζονται</li>
+                <li data-i18n="pf_c3_s1_b3">Slippage: πώς να το ρυθμίζεις</li>
+              </ul>
+            </div>
 
-  <!-- Controls -->
-  <button class="pn-next" type="button" aria-label="Next article">›</button>
+            <span class="pn-read pn-read--btn" data-i18n="pf_read">Διάβασε</span>
+          </article>
 
-  <div class="pn-dots" role="tablist" aria-label="Guides articles">
-    <button class="pn-dot is-active" type="button" aria-label="Slide 1"></button>
-    <button class="pn-dot" type="button" aria-label="Slide 2"></button>
-    <button class="pn-dot" type="button" aria-label="Slide 3"></button>
-  </div>
-</a>
+          <article class="pn-slide" data-href="./news/altsrotation.html">
+            <img class="pn-thumb" src="./altsrotation.png" alt="Altcoin rotation">
 
-    <!-- Card 3 (HERO SLIDER - ALTCOINS) -->
-<a class="pn-card pn-card--img pn-card--hero pn-hero-slider pn-slider"
-   href="./news/article3.html"
-   aria-label="Featured altcoins article">
+            <span class="pn-kicker pn-kicker--top" data-i18n="pf_tag_altcoins">Altcoins</span>
+            <span class="pn-hero-title">ROT</span>
 
-  <div class="pn-slides">
+            <div class="pn-overlay">
+              <h5 class="pn-title-onimg" data-i18n="pf_c3_s2_title">Alt rotation: 3 σημάδια ότι “γυρίζει” η αγορά</h5>
+              <ul class="pn-bullets">
+                <li data-i18n="pf_c3_s2_b1">BTC dominance: πτώση = χώρο για alts</li>
+                <li data-i18n="pf_c3_s2_b2">Volume σε majors→alts (on-chain/cex)</li>
+                <li data-i18n="pf_c3_s2_b3">Narratives: ποιο trend τραβάει</li>
+              </ul>
+            </div>
 
-    <!-- SLIDE 1 -->
-    <article class="pn-slide is-active" data-href="./news/article3.html">
-      <img class="pn-thumb" src="./solanafees.png" alt="Solana fees guide">
+            <span class="pn-read pn-read--btn" data-i18n="pf_read">Διάβασε</span>
+          </article>
 
-      <span class="pn-kicker pn-kicker--top">Altcoins</span>
-      <span class="pn-hero-title">SOL</span>
+          <article class="pn-slide" data-href="./news/onchainalts.html">
+            <img class="pn-thumb" src="./onchainalts.png" alt="On-chain altcoins">
 
-      <div class="pn-overlay">
-        <h5 class="pn-title-onimg">Solana fees &amp; tips για αρχάριους</h5>
-        <ul class="pn-bullets">
-          <li>Τι πληρώνεις σε swaps &amp; transfers</li>
-          <li>Priority fees: πότε χρειάζονται</li>
-          <li>Slippage: πώς να το ρυθμίζεις</li>
-        </ul>
-      </div>
+            <span class="pn-kicker pn-kicker--top" data-i18n="pf_tag_altcoins">Altcoins</span>
+            <span class="pn-hero-title">CHAIN</span>
 
-      <span class="pn-read pn-read--btn">Διάβασε</span>
-    </article>
+            <div class="pn-overlay">
+              <h5 class="pn-title-onimg" data-i18n="pf_c3_s3_title">On-chain checklist: τι κοιτάμε πριν αγοράσουμε alt</h5>
+              <ul class="pn-bullets">
+                <li data-i18n="pf_c3_s3_b1">Holders / concentration (whales)</li>
+                <li data-i18n="pf_c3_s3_b2">Liquidity &amp; locked LP</li>
+                <li data-i18n="pf_c3_s3_b3">Token unlocks &amp; emissions</li>
+              </ul>
+            </div>
 
-    <!-- SLIDE 2 -->
-    <article class="pn-slide" data-href="./news/article6.html">
-      <img class="pn-thumb" src="./altsrotation.png" alt="Altcoin rotation">
+            <span class="pn-read pn-read--btn" data-i18n="pf_read">Διάβασε</span>
+          </article>
+        </div>
 
-      <span class="pn-kicker pn-kicker--top">Altcoins</span>
-      <span class="pn-hero-title">ROT</span>
+        <button class="pn-next" type="button" aria-label="Next article" data-i18n-aria="pf_next">›</button>
+        <div class="pn-dots" role="tablist" aria-label="Altcoins articles" data-i18n-aria="pf_dots_altcoins">
+          <button class="pn-dot is-active" type="button" aria-label="Slide 1" data-i18n-aria="pf_slide_1"></button>
+          <button class="pn-dot" type="button" aria-label="Slide 2" data-i18n-aria="pf_slide_2"></button>
+          <button class="pn-dot" type="button" aria-label="Slide 3" data-i18n-aria="pf_slide_3"></button>
+        </div>
+      </a>
 
-      <div class="pn-overlay">
-        <h5 class="pn-title-onimg">Alt rotation: 3 σημάδια ότι “γυρίζει” η αγορά</h5>
-        <ul class="pn-bullets">
-          <li>BTC dominance: πτώση = χώρο για alts</li>
-          <li>Volume σε majors→alts (on-chain/cex)</li>
-          <li>Narratives: ποιο trend τραβάει</li>
-        </ul>
-      </div>
-
-      <span class="pn-read pn-read--btn">Διάβασε</span>
-    </article>
-
-    <!-- SLIDE 3 -->
-    <article class="pn-slide" data-href="./news/article7.html">
-      <img class="pn-thumb" src="./onchainalts.png" alt="On-chain altcoins">
-
-      <span class="pn-kicker pn-kicker--top">Altcoins</span>
-      <span class="pn-hero-title">CHAIN</span>
-
-      <div class="pn-overlay">
-        <h5 class="pn-title-onimg">On-chain checklist: τι κοιτάμε πριν αγοράσουμε alt</h5>
-        <ul class="pn-bullets">
-          <li>Holders / concentration (whales)</li>
-          <li>Liquidity &amp; locked LP</li>
-          <li>Token unlocks &amp; emissions</li>
-        </ul>
-      </div>
-
-      <span class="pn-read pn-read--btn">Διάβασε</span>
-    </article>
-
-  </div>
-
-  <!-- Controls -->
-  <button class="pn-next" type="button" aria-label="Next article">›</button>
-
-  <div class="pn-dots" role="tablist" aria-label="Altcoins articles">
-    <button class="pn-dot is-active" type="button" aria-label="Slide 1"></button>
-    <button class="pn-dot" type="button" aria-label="Slide 2"></button>
-    <button class="pn-dot" type="button" aria-label="Slide 3"></button>
-  </div>
-</a>
-
-  </div><!-- /pn-grid -->
-</div><!-- /prefooter-news -->
-
+    </div><!-- /pn-grid -->
+  </div><!-- /prefooter-news -->
 </section>
-
-
 
 
   <footer class="site-footer">
@@ -4094,7 +4095,7 @@ document.addEventListener("themeChanged", () => {
 </script>
 
 <script>
-  // Αν ανοίγει/κάνει reload με #guides / #market κλπ, γύρνα στην κορυφή
+  // ΔΕΝ ΤΟ ΕΧΩ ΒΑΛΗ Αν ανοίγει/κάνει reload με #guides / #market κλπ, γύρνα στην κορυφή
   window.addEventListener("load", () => {
     if (location.hash) {
       history.replaceState(null, "", location.pathname + location.search); // αφαιρεί το #...
@@ -4303,70 +4304,11 @@ document.getElementById("mobile-auth-btn")?.addEventListener("click", () => {
 
 </script>
 
+
 <script src="./translations.js" defer></script>
 <script src="./i18n.js" defer></script>
 
 
-
-<script defer>
-  //  Home-only init (Live Prices + Hero + TradingView)
-  document.addEventListener("DOMContentLoaded", () => {
-    if (typeof initHome === "function") initHome();  // θα το φτιάξουμε πιο κάτω
-  });
-</script>
-
-
-
-<script defer>
-document.addEventListener("DOMContentLoaded", () => {
-
-  const deskBtn = document.getElementById("lang-toggle");
-  const mobBtn  = document.getElementById("mobile-lang-toggle");
-
-  function getLang(){
-    return localStorage.getItem("ck-lang") || "el";
-  }
-
-  function setLang(next){
-    localStorage.setItem("ck-lang", next);
-
-    // αν στο i18n.js έχεις function applyTranslations/applyLanguage χρησιμοποίησέ τη
-    if (typeof window.applyLanguage === "function") {
-      window.applyLanguage(next);
-    } else if (typeof window.applyTranslations === "function") {
-      window.applyTranslations(next);
-    }
-
-    // ενημέρωσε labels (GR/EN)
-    const deskLabel = document.getElementById("lang-label");
-    const mobLabel  = document.getElementById("mobile-lang-label");
-    if (deskLabel) deskLabel.textContent = next === "en" ? "EN" : "GR";
-    if (mobLabel)  mobLabel.textContent  = next === "en" ? "EN" : "GR";
-
-    // πες στο υπόλοιπο site ότι άλλαξε (εσύ το χρησιμοποιείς ήδη)
-    document.dispatchEvent(new Event("languageChanged"));
-    document.dispatchEvent(new Event("languageApplied"));
-  }
-
-  function toggleLang(){
-    const cur = getLang();
-    const next = (cur === "en") ? "el" : "en";
-    setLang(next);
-  }
-
-  // κάνε init μια φορά στο load
-  setLang(getLang());
-
-  // listeners
-  deskBtn?.addEventListener("click", toggleLang);
-  mobBtn?.addEventListener("click", () => {
-    // κλείσε burger αν υπάρχει global closeBurger
-    if (typeof window.closeBurger === "function") window.closeBurger();
-    toggleLang();
-  });
-
-});
-</script>
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
@@ -4404,9 +4346,14 @@ document.addEventListener("DOMContentLoaded", () => {
     let timer = null;
     const INTERVAL = 20000;
 
+    // ✅ ALWAYS open news links in new tab
     function setCardHref(i){
       const href = slides[i]?.dataset?.href;
-      if (href) slider.setAttribute("href", href);
+      if (!href) return;
+
+      slider.setAttribute("href", href);
+      slider.setAttribute("target", "_blank");
+      slider.setAttribute("rel", "noopener");
     }
 
     function setActiveDot(i){
@@ -4501,6 +4448,7 @@ document.addEventListener("DOMContentLoaded", () => {
   io.observe(news);
 });
 </script>
+
 
 </body>
 </html>

@@ -2,6 +2,83 @@ window.TRANSLATIONS = {
   el: {
 
 
+pf_brand_title: "CryptoKosmos",
+  pf_brand_sub: "Quick links & updates από το crypto σύμπαν.",
+
+  pf_explore_title: "Explore",
+  pf_explore_market: "Market",
+  pf_explore_trends: "Trends",
+  pf_explore_guides: "Guides",
+  pf_explore_glossary: "Glossary",
+
+  pf_social_title: "Social",
+  pf_social_x: "X / Twitter",
+  pf_social_ig: "Instagram",
+  pf_social_email: "Email",
+
+  pf_read: "Διάβασε",
+  pf_tag_market: "Market",
+  pf_tag_guides: "Guides",
+  pf_tag_altcoins: "Altcoins",
+
+  pf_c1_s1_title: "Bitcoin: τι κοιτάμε αυτή την εβδομάδα",
+  pf_c1_s1_b1: "FOMC Meeting Minutes",
+  pf_c1_s1_b2: "Inflation Data (CPI/PPI)",
+  pf_c1_s1_b3: "Whale Movements / Exchanges",
+
+  pf_c1_s2_title: "Market Outlook: 3 πράγματα που μπορούν να κουνήσουν την αγορά",
+  pf_c1_s2_b1: "CPI / FOMC / Jobs (ό,τι “σκάσει”)",
+  pf_c1_s2_b2: "DXY & yields: αν ανεβαίνουν, πιέζουν risk",
+  pf_c1_s2_b3: "ETF flows + exchange inflows: χρήμα μέσα/έξω",
+
+  pf_c1_s3_title: "Altcoins: τι ξεχωρίζει αυτή την εβδομάδα",
+  pf_c1_s3_b1: "Funding rates & OI",
+  pf_c1_s3_b2: "Rotation: majors → alts",
+  pf_c1_s3_b3: "Narratives & catalysts",
+
+  pf_c2_s1_title: "Seed phrase: τα 5 λάθη που καίνε wallets",
+  pf_c2_s1_b1: "Μην το γράφεις σε notes / cloud",
+  pf_c2_s1_b2: "Μην το στέλνεις ποτέ σε κανέναν",
+  pf_c2_s1_b3: "Κάνε test restore (offline)",
+
+  pf_c2_s2_title: "Phishing: 3 checks πριν πατήσεις link",
+  pf_c2_s2_b1: "Domain / spelling (copycats)",
+  pf_c2_s2_b2: "Approvals: τι ζητάει να υπογράψεις",
+  pf_c2_s2_b3: "Wallet prompts: “drain” patterns",
+
+  pf_c2_s3_title: "Cold wallet: setup χωρίς λάθη (quick steps)",
+  pf_c2_s3_b1: "Initialize offline + ενημέρωση firmware",
+  pf_c2_s3_b2: "2 backups seed (σε 2 μέρη)",
+  pf_c2_s3_b3: "Small test transfer πρώτα",
+
+  pf_c3_s1_title: "Solana fees & tips για αρχάριους",
+  pf_c3_s1_b1: "Τι πληρώνεις σε swaps & transfers",
+  pf_c3_s1_b2: "Priority fees: πότε χρειάζονται",
+  pf_c3_s1_b3: "Slippage: πώς να το ρυθμίζεις",
+
+  pf_c3_s2_title: "Alt rotation: 3 σημάδια ότι “γυρίζει” η αγορά",
+  pf_c3_s2_b1: "BTC dominance: πτώση = χώρο για alts",
+  pf_c3_s2_b2: "Volume σε majors→alts (on-chain/cex)",
+  pf_c3_s2_b3: "Narratives: ποιο trend τραβάει",
+
+  pf_c3_s3_title: "On-chain checklist: τι κοιτάμε πριν αγοράσουμε alt",
+  pf_c3_s3_b1: "Holders / concentration (whales)",
+  pf_c3_s3_b2: "Liquidity & locked LP",
+  pf_c3_s3_b3: "Token unlocks & emissions",
+
+  // (προαιρετικά για aria)
+  pf_next: "Επόμενο άρθρο",
+  pf_slide_1: "Slide 1",
+  pf_slide_2: "Slide 2",
+  pf_slide_3: "Slide 3",
+  pf_dots_featured: "Featured άρθρα",
+  pf_dots_guides: "Guides άρθρα",
+  pf_dots_altcoins: "Altcoins άρθρα",
+  pf_news_card1_aria: "Featured market article",
+  pf_news_card2_aria: "Featured guides article",
+  pf_news_card3_aria: "Featured altcoins article",
+
+
 live_prices: "Δες Live Τιμές",
 
 mobile_theme: "Αλλαγή Θέματος",
@@ -300,6 +377,87 @@ glossary_less: "Λιγότερα",
   },
 
   en: {
+
+
+
+pf_brand_title: "CryptoKosmos",
+  pf_brand_sub: "Quick links & updates from the crypto universe.",
+
+  pf_explore_title: "Explore",
+  pf_explore_market: "Market",
+  pf_explore_trends: "Trends",
+  pf_explore_guides: "Guides",
+  pf_explore_glossary: "Glossary",
+
+  pf_social_title: "Social",
+  pf_social_x: "X / Twitter",
+  pf_social_ig: "Instagram",
+  pf_social_email: "Email",
+
+  pf_read: "Read",
+  pf_tag_market: "Market",
+  pf_tag_guides: "Guides",
+  pf_tag_altcoins: "Altcoins",
+
+  pf_c1_s1_title: "Bitcoin: what to watch this week",
+  pf_c1_s1_b1: "FOMC Meeting Minutes",
+  pf_c1_s1_b2: "Inflation Data (CPI/PPI)",
+  pf_c1_s1_b3: "Whale Movements / Exchanges",
+
+  pf_c1_s2_title: "Market Outlook: 3 things that can move the market",
+  pf_c1_s2_b1: "CPI / FOMC / Jobs (anything that hits)",
+  pf_c1_s2_b2: "DXY & yields: rising = pressure on risk",
+  pf_c1_s2_b3: "ETF flows + exchange inflows: money in/out",
+
+  pf_c1_s3_title: "Altcoins: what stands out this week",
+  pf_c1_s3_b1: "Funding rates & OI",
+  pf_c1_s3_b2: "Rotation: majors → alts",
+  pf_c1_s3_b3: "Narratives & catalysts",
+
+  pf_c2_s1_title: "Seed phrase: 5 mistakes that burn wallets",
+  pf_c2_s1_b1: "Don’t store it in notes / cloud",
+  pf_c2_s1_b2: "Never send it to anyone",
+  pf_c2_s1_b3: "Do a test restore (offline)",
+
+  pf_c2_s2_title: "Phishing: 3 checks before you click",
+  pf_c2_s2_b1: "Domain / spelling (copycats)",
+  pf_c2_s2_b2: "Approvals: what you’re asked to sign",
+  pf_c2_s2_b3: "Wallet prompts: “drain” patterns",
+
+  pf_c2_s3_title: "Cold wallet: setup without mistakes (quick steps)",
+  pf_c2_s3_b1: "Initialize offline + update firmware",
+  pf_c2_s3_b2: "2 seed backups (in 2 places)",
+  pf_c2_s3_b3: "Small test transfer first",
+
+  pf_c3_s1_title: "Solana fees & tips for beginners",
+  pf_c3_s1_b1: "What you pay on swaps & transfers",
+  pf_c3_s1_b2: "Priority fees: when you need them",
+  pf_c3_s1_b3: "Slippage: how to set it",
+
+  pf_c3_s2_title: "Alt rotation: 3 signs the market is rotating",
+  pf_c3_s2_b1: "BTC dominance: down = room for alts",
+  pf_c3_s2_b2: "Volume majors→alts (on-chain/cex)",
+  pf_c3_s2_b3: "Narratives: what trend is running",
+
+  pf_c3_s3_title: "On-chain checklist: what to check before buying an alt",
+  pf_c3_s3_b1: "Holders / concentration (whales)",
+  pf_c3_s3_b2: "Liquidity & locked LP",
+  pf_c3_s3_b3: "Token unlocks & emissions",
+
+  // optional aria
+  pf_next: "Next article",
+  pf_slide_1: "Slide 1",
+  pf_slide_2: "Slide 2",
+  pf_slide_3: "Slide 3",
+  pf_dots_featured: "Featured articles",
+  pf_dots_guides: "Guides articles",
+  pf_dots_altcoins: "Altcoins articles",
+  pf_news_card1_aria: "Featured market article",
+  pf_news_card2_aria: "Featured guides article",
+  pf_news_card3_aria: "Featured altcoins article",
+
+
+
 
 live_prices: "View Live Prices",
 

@@ -17,6 +17,33 @@
  <link rel="preload" as="image" href="./IMG_5299.png">
  <link rel="preload" as="image" href="./IMG_5301.png">
 
+
+<script>
+  (function () {
+    // διάβασε τη γλώσσα ΠΡΙΝ ζωγραφίσει το page
+    var lang = localStorage.getItem("ck-lang") || "el"; // ή "en"
+    document.documentElement.setAttribute("lang", lang);
+    document.documentElement.setAttribute("data-lang", lang);
+    document.documentElement.classList.add("lang-" + lang);
+  })();
+</script>
+
+
+<script>
+  (function () {
+    var lang = localStorage.getItem("ck-lang") || "el";
+    document.documentElement.setAttribute("lang", lang);
+    document.documentElement.setAttribute("data-lang", lang);
+    document.documentElement.classList.add("lang-" + lang);
+    document.documentElement.classList.add("lang-ready");
+  })();
+</script>
+
+
+<style>
+  html:not(.lang-ready) body { visibility: hidden; }
+</style>
+
   <style>
    
 
@@ -870,6 +897,176 @@ body:not(.light-theme) .site-header {
   transform: translateZ(0);
 }
 
+.nav, .nav ul {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+
+.nav a, .nav button {
+  white-space: nowrap;
+}
+
+header, .topbar, .nav {
+  min-height: 64px; /* διάλεξε ό,τι ταιριάζει */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* ================= PRE-FOOTER (IMPACT) ================= */
+.prefooter{
+  position: relative;
+  margin-top: 40px;
+  padding: 46px 18px 26px;
+  overflow: hidden;
+
+  border-radius: 22px;
+  background:
+    radial-gradient(900px 280px at 15% 20%, rgba(91,180,255,.16), transparent 65%),
+    radial-gradient(900px 280px at 85% 30%, rgba(123,97,255,.14), transparent 65%),
+    rgba(10,12,16,.55);
+
+  border: 1px solid rgba(255,255,255,.08);
+  box-shadow:
+    0 0 0 1px rgba(91,180,255,.08),
+    0 26px 80px rgba(0,0,0,.55);
+
+  /* fade reveal */
+  opacity: 0;
+  transform: translateY(10px);
+  animation: pfFadeUp .7s ease forwards;
+}
+
+/* soft animated glow behind */
+.prefooter-glow{
+  position:absolute;
+  inset:-120px -120px auto -120px;
+  height: 320px;
+  background: radial-gradient(circle at 30% 40%, rgba(91,180,255,.35), transparent 55%),
+              radial-gradient(circle at 70% 30%, rgba(123,97,255,.30), transparent 55%);
+  filter: blur(18px);
+  opacity: .55;
+  animation: pfGlow 6s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.prefooter-inner{
+  position: relative;
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  gap: 22px;
+  grid-template-columns: 1.1fr 1fr 1fr;
+}
+
+.prefooter h4{
+  margin: 0 0 10px;
+  font-size: 14px;
+  letter-spacing: .25px;
+  font-weight: 800;
+  color: rgba(255,255,255,.92);
+}
+
+.pf-muted{
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.55;
+  color: rgba(255,255,255,.70);
+}
+
+.pf-link{
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 10px 12px;
+  border-radius: 14px;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 13px;
+  color: rgba(255,255,255,.85);
+
+  background: rgba(15,18,22,.38);
+  border: 1px solid rgba(255,255,255,.08);
+
+  transition: transform .18s ease, border-color .18s ease, background .18s ease;
+  margin-bottom: 10px;
+}
+
+.pf-link:hover{
+  transform: translateY(-2px);
+  border-color: rgba(91,180,255,.55);
+  background: rgba(15,18,22,.55);
+}
+
+.prefooter-divider{
+  position: relative;
+  height: 2px;
+  margin: 26px auto 0;
+  max-width: 1100px;
+  border-radius: 999px;
+  background: linear-gradient(90deg,
+    transparent,
+    rgba(91,180,255,.75),
+    rgba(123,97,255,.75),
+    transparent
+  );
+  opacity: .7;
+}
+
+/* animations */
+@keyframes pfFadeUp{
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes pfGlow{
+  0%,100%{ transform: translateY(0); opacity:.55; }
+  50%{ transform: translateY(18px); opacity:.72; }
+}
+
+/* mobile */
+@media (max-width: 720px){
+  .prefooter-inner{
+    grid-template-columns: 1fr;
+  }
+}
+
+
+.hero-anim .fade-right{
+  opacity: 0;
+  transform: translateX(28px);
+  animation: fadeRightIn .75s ease-out forwards;
+  will-change: transform, opacity;
+}
+
+.hero-anim .delay-1{ animation-delay: .10s; }
+.hero-anim .delay-2{ animation-delay: .20s; }
+.hero-anim .delay-3{ animation-delay: .30s; }
+
+@keyframes fadeRightIn{
+  to{
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .hero-anim .fade-right{
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
+
 
 </style>
 </head>
@@ -1012,6 +1209,38 @@ body:not(.light-theme) .site-header {
 
   </div>
 </section>
+
+<!-- ================= PRE-FOOTER (IMPACT) ================= -->
+<section class="prefooter">
+  <div class="prefooter-glow"></div>
+
+  <div class="prefooter-inner">
+    <div class="pf-col">
+      <h4>CryptoKosmos</h4>
+       <p class="pf-muted" data-i18n="pf_brand_sub">Quick links & updates από το crypto σύμπαν.</p>
+    </div>
+
+    <div class="pf-col">
+      <h4>Explore</h4>
+      <a href="#market" class="pf-link">Market</a>
+      <a href="#charts" class="pf-link">Trends</a>
+      <a href="#guides" class="pf-link">Guides</a>
+      <a href="#glossary" class="pf-link">Glossary</a>
+    </div>
+
+    <div class="pf-col">
+      <h4>Social</h4>
+      <a href="https://x.com/CryptoKosmosApp" class="pf-link" target="_blank" rel="noopener">X / Twitter</a>
+      <a href="https://www.instagram.com/cryptokosmos.app/" class="pf-link" target="_blank" rel="noopener">Instagram</a>
+      <a href="mailto:cryptokosmos.news@gmail.com" class="pf-link">Email</a>
+    </div>
+  </div>
+
+  <div class="prefooter-divider"></div>
+</section>
+
+
+
 
 <footer class="site-footer">
   <div class="container">
@@ -1173,296 +1402,157 @@ body:not(.light-theme) .site-header {
 </script>
 
 <script>
-/* =====================================
-   CONFIG
-===================================== */
-const VS = "usd";
+/* =========================
+   HELPERS + CONFIG (πάνω-πάνω)
+========================= */
+const $ = (id) => document.getElementById(id);
+
 const PER_PAGE = 200;
 const TOTAL_PAGES = 10;
 const REFRESH_MS = 30_000;
 
-/* =====================================
-   CACHE
-===================================== */
-const CACHE_KEY = "ck_prices_cache_v4";
-const CACHE_TTL = 2 * 60 * 1000;
+let cgCooldownUntil = 0;
+let hasLoadedOnce = false;
 
-function saveCache(data){
-  try{
-    localStorage.setItem(CACHE_KEY, JSON.stringify({
-      time: Date.now(),
-      data
-    }));
-  }catch(e){}
+function setStatus(text = "", type = "loading") {
+  const el = $("status");
+  if (!el) return;
+  el.textContent = text;
+  el.className = `status ${type}`.trim();
+  el.style.display = text ? "block" : "none";
 }
 
-function loadCache(){
-  try{
-    const raw = localStorage.getItem(CACHE_KEY);
-    if(!raw) return null;
-    const parsed = JSON.parse(raw);
-    if(Date.now() - parsed.time > CACHE_TTL) return null;
-    return parsed.data;
-  }catch(e){
+/* =========================
+   STATE
+========================= */
+let sourceMode = "auto";
+let currentPage = 1;
+let allRows = [];
+
+let abortCtrl = null;
+let requestId = 0;
+
+/* =========================
+   CACHE (per page)
+========================= */
+function cacheKeyCG(vs, page) {
+  return `ck:cg_rows:${vs}:p${page}:pp${PER_PAGE}`;
+}
+
+function readCache(key, maxAgeMs = 30 * 60_000) { // 30'
+  try {
+    const raw = localStorage.getItem(key);
+    if (!raw) return null;
+    const obj = JSON.parse(raw);
+    if (!obj?.t || !obj?.data) return null;
+    if (Date.now() - obj.t > maxAgeMs) return null;
+    return obj.data;
+  } catch {
     return null;
   }
 }
 
-/* =====================================
-   STATE
-===================================== */
-let sourceMode = "auto";
-let currentPage = 1;
-let allRows = [];
-let binanceMap = null;
-
-let abortCtrl = null;
-let requestId = 0;
-let hasLoadedOnce = false;
-
-const prefetchCache = new Map();
-const $ = id => document.getElementById(id);
-
-/* =====================================
-   UI HELPERS
-===================================== */
-function setStatus(text="", type="loading"){
-  const el = $("status");
-  if(!el) return;
-  el.textContent = text;
-  el.className = type;
-  el.style.display = text ? "block" : "none";
+function writeCache(key, data) {
+  try {
+    localStorage.setItem(key, JSON.stringify({ t: Date.now(), data }));
+  } catch {}
 }
 
-function setActiveSource(id){
-  document.querySelectorAll(".segmented button")
-    .forEach(b => b.classList.remove("active"));
-  document.getElementById(id)?.classList.add("active");
+/* =========================
+   UI helpers
+========================= */
+function setActiveSource(id) {
+  document.querySelectorAll(".segmented button").forEach(b => b.classList.remove("active"));
+  const btn = document.getElementById(id);
+  if (btn) btn.classList.add("active");
+
+  const meta = $("meta-source");
+  if (meta) meta.textContent = "Source: " + (id === "src-binance" ? "Binance" : id === "src-coingecko" ? "CoinGecko" : "Auto");
 }
 
-function formatPrice(n){
-  if(n == null || !isFinite(n)) return "—";
-  if(n >= 1000) return "$" + n.toLocaleString(undefined,{maximumFractionDigits:2});
-  if(n >= 1) return "$" + n.toLocaleString(undefined,{maximumFractionDigits:2});
-  if(n >= 0.01) return "$" + n.toLocaleString(undefined,{maximumFractionDigits:4});
-  return "$" + n.toLocaleString(undefined,{maximumFractionDigits:8});
+function formatPrice(n) {
+  const num = Number(n);
+  if (!Number.isFinite(num)) return "—";
+  const abs = Math.abs(num);
+  if (abs >= 1) return "$" + num.toLocaleString(undefined, { maximumFractionDigits: 2 });
+  if (abs >= 0.01) return "$" + num.toLocaleString(undefined, { maximumFractionDigits: 4 });
+  return "$" + num.toLocaleString(undefined, { maximumFractionDigits: 8 });
 }
 
-function chgClass(v){
-  if(!isFinite(v)) return "flat";
-  if(v > 0) return "up";
-  if(v < 0) return "down";
-  return "flat";
+function chgClass(v) {
+  const num = Number(v);
+  if (!Number.isFinite(num)) return "flat";
+  return num > 0 ? "up" : num < 0 ? "down" : "flat";
 }
 
-function arrow(v){
-  if(!isFinite(v)) return "•";
-  return v > 0 ? "▲" : v < 0 ? "▼" : "•";
+function arrow(v) {
+  const num = Number(v);
+  if (!Number.isFinite(num)) return "•";
+  return num > 0 ? "▲" : num < 0 ? "▼" : "•";
 }
 
-/* =====================================
-   FETCHERS
-===================================== */
-async function fetchCoinGecko(page, signal){
-  const url =
-    `https://api.coingecko.com/api/v3/coins/markets` +
-    `?vs_currency=${VS}` +
-    `&order=market_cap_desc` +
-    `&per_page=${PER_PAGE}` +
-    `&page=${page}` +
-    `&sparkline=true` +
-    `&price_change_percentage=24h`;
-
-  const res = await fetch(url, { signal });
-  if(!res.ok) throw new Error("CoinGecko error");
-  return res.json();
-}
-
-async function fetchBinanceMap(){
-  const res = await fetch("https://api.binance.com/api/v3/ticker/24hr");
-  if(!res.ok) return null;
-
-  const arr = await res.json();
-  const map = new Map();
-
-  for(const t of arr){
-    if(t.symbol.endsWith("USDT")){
-      map.set(t.symbol.slice(0,-4), {
-        price: +t.lastPrice,
-        chg: +t.priceChangePercent
-      });
-    }
-  }
-  return map;
-}
-
-/* =====================================
-   DATA MERGE
-===================================== */
-function mergeRows(cg, binMap){
-  return cg.map(c=>{
-    const sym = c.symbol.toUpperCase();
-    const b = binMap?.get(sym);
-
-    return {
-      symbol: sym,
-      name: c.name,
-      icon: c.image,
-      spark: c.sparkline_in_7d?.price || [],
-      cgPrice: c.current_price,
-      cgChg: c.price_change_percentage_24h,
-      price: b ? b.price : c.current_price,
-      chg: b ? b.chg : c.price_change_percentage_24h,
-      source: b ? "binance" : "coingecko"
-    };
-  });
-}
-
-/* =====================================
-   SOURCE MODE
-===================================== */
-function applySource(rows){
-  return rows.map(r=>{
-    if(sourceMode === "coingecko"){
-      return { ...r, price:r.cgPrice, chg:r.cgChg };
-    }
-    if(sourceMode === "binance"){
-      return r.source === "binance" ? r : { ...r, price:r.cgPrice, chg:r.cgChg };
-    }
-    return r;
-  });
-}
-
-/* =====================================
-   SPARKLINE
-===================================== */
-function drawSparkline(data, color){
-  if(!data || data.length < 2) return "";
-
-  const w = 90, h = 28;
-  const min = Math.min(...data);
-  const max = Math.max(...data);
-  const range = max - min || 1;
-
-  const pts = data.map((v,i)=>{
-    const x = (i/(data.length-1))*w;
-    const y = h - ((v-min)/range)*h;
-    return `${x.toFixed(1)},${y.toFixed(1)}`;
-  }).join(" ");
-
-  return `
-    <svg viewBox="0 0 ${w} ${h}">
-      <polyline
-        fill="none"
-        stroke="${color}"
-        stroke-width="1.8"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        points="${pts}" />
-    </svg>`;
-}
-
-/* =====================================
+/* =========================
    RENDER
-===================================== */
-function render(rows){
-  const q = $("q")?.value.trim().toUpperCase() || "";
-  const list = !q ? rows :
-    rows.filter(r =>
-      r.symbol.includes(q) ||
-      r.name.toUpperCase().includes(q)
-    );
+========================= */
+function render(rows) {
+  const input = $("q");
+  const q = (input?.value || "").trim().toUpperCase();
+
+  const safeRows = Array.isArray(rows) ? rows : [];
+  const list = !q ? safeRows : safeRows.filter(r => {
+    const sym = String(r.symbol || "").toUpperCase();
+    const name = String(r.name || "").toUpperCase();
+    return sym.includes(q) || name.includes(q);
+  });
+
+  const metaCount = $("meta-count");
+  if (metaCount) metaCount.textContent = "Coins: " + list.length;
+
+  const listEl = $("list");
+  if (!listEl) return;
 
   const startRank = (currentPage - 1) * PER_PAGE + 1;
-  $("meta-count").textContent = "Coins: " + list.length;
 
-  $("list").innerHTML = list.map((r, i)=>`
-    <div class="price-row">
-      <div class="rank">${startRank + i}</div>
+  listEl.innerHTML = list.map((r, i) => {
+    const chgNum = Number(r.chg);
+    const chgText = Number.isFinite(chgNum) ? chgNum.toFixed(2) + "%" : "—";
 
-      <div class="coin-wrap">
-        <img class="coin-icon" src="${r.icon}" loading="lazy">
-        <div class="name mobile-name">${r.name}</div>
-      </div>
+    const icon = r.icon
+      ? `<img class="coin-icon" src="${r.icon}" loading="lazy" alt="">`
+      : `<div class="coin-icon skeleton"></div>`;
 
-      <div class="sub">
-        <div class="sym">${r.symbol}</div>
-        <div class="name desktop-name">${r.name}</div>
-      </div>
+    return `
+      <div class="price-row">
+        <div class="rank">${startRank + i}</div>
 
-      <div class="chg ${chgClass(r.chg)}">
-        <span class="arrow">${arrow(r.chg)}</span>
-        <span>${r.chg != null ? r.chg.toFixed(2) + "%" : "—"}</span>
-      </div>
+        <div class="coin-wrap">
+          ${icon}
+          <div class="name mobile-name">${r.name || ""}</div>
+        </div>
 
-      <div class="price-wrap">
-        <div class="price">${formatPrice(r.price)}</div>
-        <div class="spark">
-          ${drawSparkline(
-            r.spark,
-            r.chg > 0 ? "#4ade80" : r.chg < 0 ? "#f87171" : "#94a3b8"
-          )}
+        <div class="sub">
+          <div class="sym">${r.symbol || "—"}</div>
+          <div class="name desktop-name">${r.name || ""}</div>
+        </div>
+
+        <div class="chg ${chgClass(chgNum)}">
+          <span class="arrow">${arrow(chgNum)}</span>
+          <span>${chgText}</span>
+        </div>
+
+        <div class="price-wrap">
+          <div class="price">${formatPrice(r.price)}</div>
+          <div class="spark"></div>
         </div>
       </div>
-    </div>
-  `).join("");
+    `;
+  }).join("");
 }
 
-/* =====================================
-   PAGINATION (SMART + …)
-===================================== */
-function renderPagination(){
-  const wrap = document.querySelector(".pages");
-  wrap.innerHTML = "";
+function renderSkeleton(count = PER_PAGE) {
+  const listEl = $("list");
+  if (!listEl) return;
 
-  const isMobile = window.innerWidth <= 600;
-  const total = TOTAL_PAGES;
-  const current = currentPage;
-
-  const addPage = p => {
-    const b = document.createElement("button");
-    b.className = "page-btn" + (p === current ? " active" : "");
-    b.textContent = p;
-    b.onclick = () => goToPage(p);
-    wrap.appendChild(b);
-  };
-
-  const addDots = () => {
-    const s = document.createElement("span");
-    s.className = "dots";
-    s.textContent = "…";
-    wrap.appendChild(s);
-  };
-
-  if(!isMobile){
-    for(let i=1;i<=total;i++) addPage(i);
-  }else{
-    addPage(1);
-    if(current > 3) addDots();
-
-    for(let i=Math.max(2,current-1); i<=Math.min(total-1,current+1); i++){
-      addPage(i);
-    }
-
-    if(current < total-2) addDots();
-    if(total > 1) addPage(total);
-  }
-
-  document.querySelector(".page-btn.prev").disabled = current === 1;
-  document.querySelector(".page-btn.next").disabled = current === total;
-}
-
-function goToPage(p){
-  if(p === currentPage) return;
-  currentPage = p;
-  window.scrollTo({top:0,behavior:"instant"});
-  loadPage(true);
-}
-
-/* =====================================
-   SKELETON
-===================================== */
-function renderSkeleton(count=PER_PAGE){
   const row = `
     <div class="price-row skeleton-row">
       <div class="rank skeleton"></div>
@@ -1477,62 +1567,232 @@ function renderSkeleton(count=PER_PAGE){
       <div class="chg skeleton"></div>
       <div class="price skeleton"></div>
     </div>`;
-  $("list").innerHTML = Array.from({length:count}).map(()=>row).join("");
+
+  listEl.innerHTML = Array.from({ length: count }, () => row).join("");
 }
 
-/* =====================================
-   LOAD
-===================================== */
-async function loadPage(isPageChange=false){
+/* =========================
+   PAGINATION
+========================= */
+function renderPagination() {
+  const wrap = document.querySelector(".pages");
+  if (!wrap) return;
+
+  wrap.innerHTML = "";
+
+  const isMobile = window.innerWidth <= 600;
+  const total = TOTAL_PAGES;
+  const current = currentPage;
+
+  const addPage = p => {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "page-btn" + (p === current ? " active" : "");
+    b.textContent = String(p);
+    b.addEventListener("click", () => goToPage(p));
+    wrap.appendChild(b);
+  };
+
+  const addDots = () => {
+    const s = document.createElement("span");
+    s.className = "dots";
+    s.textContent = "…";
+    wrap.appendChild(s);
+  };
+
+  if (!isMobile) {
+    for (let i = 1; i <= total; i++) addPage(i);
+  } else {
+    addPage(1);
+    if (current > 3) addDots();
+    for (let i = Math.max(2, current - 1); i <= Math.min(total - 1, current + 1); i++) addPage(i);
+    if (current < total - 2) addDots();
+    if (total > 1) addPage(total);
+  }
+
+  const prevBtn = document.querySelector(".page-btn.prev");
+  const nextBtn = document.querySelector(".page-btn.next");
+  if (prevBtn) prevBtn.disabled = current === 1;
+  if (nextBtn) nextBtn.disabled = current === total;
+}
+
+function goToPage(p) {
+  if (p === currentPage) return;
+  currentPage = p;
+  try { window.scrollTo({ top: 0, behavior: "smooth" }); } catch { window.scrollTo(0, 0); }
+  loadPage(true);
+}
+
+/* =========================
+   FETCH (CoinGecko) -> rows normalized + cached
+========================= */
+async function fetchCoinGeckoRows({ vs = "usd", page = 1 } = {}) {
+  const key = cacheKeyCG(vs, page);
+
+  // 1) άμεσο cache
+  const cached = readCache(key);
+  if (cached) {
+    // refresh στο background
+    refreshCoinGeckoInBackground({ vs, page, key }).catch(() => {});
+    return cached;
+  }
+
+  // 2) cooldown
+  if (Date.now() < cgCooldownUntil) throw new Error("RATE_LIMIT");
+
+  // 3) live
+  const url =
+    `https://api.coingecko.com/api/v3/coins/markets` +
+    `?vs_currency=${encodeURIComponent(vs)}` +
+    `&order=market_cap_desc` +
+    `&per_page=${PER_PAGE}` +
+    `&page=${page}` +
+    `&sparkline=false` +
+    `&price_change_percentage=24h`;
+
+  const res = await fetch(url, { cache: "no-store" });
+
+  if (res.status === 429) {
+    const ra = parseInt(res.headers.get("retry-after") || "60", 10);
+    cgCooldownUntil = Date.now() + Math.max(ra, 20) * 1000;
+    throw new Error("RATE_LIMIT");
+  }
+  if (!res.ok) throw new Error(`CG_${res.status}`);
+
+  const data = await res.json();
+
+  const rows = Array.isArray(data) ? data.map(c => ({
+    symbol: String(c?.symbol || "").toUpperCase(),
+    name: String(c?.name || ""),
+    icon: String(c?.image || ""),
+    price: Number(c?.current_price),
+    chg: Number(c?.price_change_percentage_24h),
+  })) : [];
+
+  writeCache(key, rows);
+  return rows;
+}
+
+async function refreshCoinGeckoInBackground({ vs, page, key }) {
+  if (Date.now() < cgCooldownUntil) return;
+
+  const url =
+    `https://api.coingecko.com/api/v3/coins/markets` +
+    `?vs_currency=${encodeURIComponent(vs)}` +
+    `&order=market_cap_desc` +
+    `&per_page=${PER_PAGE}` +
+    `&page=${page}` +
+    `&sparkline=false` +
+    `&price_change_percentage=24h`;
+
+  const res = await fetch(url, { cache: "no-store" });
+  if (res.status === 429) {
+    const ra = parseInt(res.headers.get("retry-after") || "60", 10);
+    cgCooldownUntil = Date.now() + Math.max(ra, 20) * 1000;
+    return;
+  }
+  if (!res.ok) return;
+
+  const data = await res.json();
+  const rows = Array.isArray(data) ? data.map(c => ({
+    symbol: String(c?.symbol || "").toUpperCase(),
+    name: String(c?.name || ""),
+    icon: String(c?.image || ""),
+    price: Number(c?.current_price),
+    chg: Number(c?.price_change_percentage_24h),
+  })) : [];
+
+  writeCache(key, rows);
+
+  const metaUpdated = $("meta-updated");
+  if (metaUpdated) metaUpdated.textContent = "Updated: " + new Date().toLocaleTimeString();
+}
+
+/* =========================
+   LOAD PAGE (ΑΥΤΟ ΣΟΥ ΕΛΕΙΠΕ)
+========================= */
+async function loadPage(isPageChange = false) {
   const token = ++requestId;
-  if(abortCtrl) abortCtrl.abort();
+
+  if (abortCtrl) abortCtrl.abort();
   abortCtrl = new AbortController();
 
-  if(!hasLoadedOnce || isPageChange){
-    renderSkeleton(PER_PAGE);
-  }
+  if (!hasLoadedOnce || isPageChange) renderSkeleton(PER_PAGE);
 
-  setStatus("Φόρτωση τιμών…");
+  setStatus("Φόρτωση τιμών…", "loading");
 
-  try{
-    if(!binanceMap){
-      binanceMap = await fetchBinanceMap().catch(()=>null);
-    }
+  try {
+    const rows = await fetchCoinGeckoRows({ vs: "usd", page: currentPage });
+    if (token !== requestId) return; // ignore παλιό request
 
-    const cg = await fetchCoinGecko(currentPage, abortCtrl.signal);
-    if(token !== requestId) return;
-
-    allRows = mergeRows(cg, binanceMap);
-    render(applySource(allRows));
+    allRows = rows;
+    render(allRows);
     renderPagination();
 
-    $("meta-updated").textContent = "Updated: " + new Date().toLocaleTimeString();
-    $("meta-source").textContent = "Source: " + sourceMode;
-
-    setStatus("");
+    setStatus("", "");
     hasLoadedOnce = true;
 
-  }catch(e){
-    if(e.name !== "AbortError"){
-      setStatus("Αδυναμία σύνδεσης","error");
+    const metaUpdated = $("meta-updated");
+    if (metaUpdated) metaUpdated.textContent = "Updated: " + new Date().toLocaleTimeString();
+  } catch (e) {
+    const cached = readCache(cacheKeyCG("usd", currentPage), 24 * 60 * 60_000); // δέξου και παλιό cache 24h
+    if (cached) {
+      allRows = cached;
+      render(allRows);
+      renderPagination();
+      setStatus("Δεν έγινε ανανέωση — δείχνω cached τιμές.", "warn");
+      hasLoadedOnce = true;
+    } else {
+      setStatus("Αδυναμία σύνδεσης.", "error");
     }
   }
 }
 
-/* =====================================
-   EVENTS & INIT
-===================================== */
-$("src-auto").onclick = ()=>{sourceMode="auto";setActiveSource("src-auto");render(applySource(allRows));};
-$("src-binance").onclick = ()=>{sourceMode="binance";setActiveSource("src-binance");render(applySource(allRows));};
-$("src-coingecko").onclick = ()=>{sourceMode="coingecko";setActiveSource("src-coingecko");render(applySource(allRows));};
-$("q")?.addEventListener("input",()=>render(applySource(allRows)));
+/* =========================
+   INIT + EVENTS
+========================= */
+function bindClick(id, fn) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.addEventListener("click", (e) => { e.preventDefault(); fn(); });
+}
 
-document.querySelector(".page-btn.prev").onclick=()=>{ if(currentPage>1) goToPage(currentPage-1); };
-document.querySelector(".page-btn.next").onclick=()=>{ if(currentPage<TOTAL_PAGES) goToPage(currentPage+1); };
+document.addEventListener("DOMContentLoaded", () => {
+  // source buttons
+  bindClick("src-auto",     () => { sourceMode = "auto";     setActiveSource("src-auto");     render(allRows); });
+  bindClick("src-binance",  () => { sourceMode = "binance";  setActiveSource("src-binance");  render(allRows); });
+  bindClick("src-coingecko",() => { sourceMode = "coingecko";setActiveSource("src-coingecko");render(allRows); });
 
-setActiveSource("src-auto");
-loadPage();
-setInterval(()=>loadPage(false), REFRESH_MS);
+  $("q")?.addEventListener("input", () => render(allRows));
+
+  document.querySelector(".page-btn.prev")?.addEventListener("click", (e) => {
+    e.preventDefault();
+    if (currentPage > 1) goToPage(currentPage - 1);
+  });
+
+  document.querySelector(".page-btn.next")?.addEventListener("click", (e) => {
+    e.preventDefault();
+    if (currentPage < TOTAL_PAGES) goToPage(currentPage + 1);
+  });
+
+  // boot from cache (instant)
+  const cached = readCache(cacheKeyCG("usd", currentPage));
+  if (cached && !hasLoadedOnce) {
+    allRows = cached;
+    render(allRows);
+    renderPagination();
+    setStatus("Δείχνω cached τιμές…", "warn");
+    hasLoadedOnce = true;
+  }
+
+  setActiveSource("src-auto");
+  loadPage(false);
+
+  // refresh loop
+  setInterval(() => {
+    if (document.visibilityState === "visible") loadPage(false);
+  }, REFRESH_MS);
+});
 </script>
 
 <!-- GLOBAL SCRIPTS -->

@@ -6,6 +6,7 @@ window.TRANSLATIONS = {
     ======================= */
     footer_rights: "Όλα τα δικαιώματα διατηρούνται.",
 
+pf_brand_sub: "Quick links & updates από το crypto σύμπαν.",
 
 mobile_home: "Αρχική Σελίδα",
 mobile_theme: "Αλλαγή Θέματος",
@@ -62,6 +63,7 @@ mobile_theme: "Αλλαγή Θέματος",
     /* FOOTER */
     footer_rights: "All rights reserved.",
 
+pf_brand_sub: "Quick links & updates from the crypto universe.",
 
 mobile_home: "Home Page",
 mobile_theme: "Change Theme",

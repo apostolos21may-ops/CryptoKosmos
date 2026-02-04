@@ -492,3 +492,153 @@ if (!window.__ckBurgerBound) {
     if (e.key === "Escape") closeBurger();
   });
 }
+
+
+
+
+
+
+
+
+
+// ===============================
+// GLOBAL NAV (universal) - works in folders + file://
+// ===============================
+(function () {
+  // Αν είσαι ήδη στο index.html, κράτα το ίδιο. Αλλιώς ανέβα 1 επίπεδο (../index.html)
+  const INDEX_URL = /\/index\.html$/.test(location.pathname)
+    ? new URL("index.html", location.href).href
+    : new URL("../index.html", location.href).href;
+
+  function closeBurgerIfOpen() {
+    if (typeof window.closeBurger === "function") {
+      window.closeBurger();
+      return;
+    }
+    document.getElementById("mobile-menu")?.classList.remove("open");
+    document.getElementById("menu-toggle")?.classList.remove("open");
+  }
+
+  function goHome() {
+    window.location.href = INDEX_URL;
+  }
+
+  function goToHref(href) {
+    // ΚΑΝΟΝΙΚΟ resolve relative href (../index.html#market κλπ)
+    window.location.href = new URL(href, window.location.href).href;
+  }
+
+  function bindLogoHome() {
+    const brand = document.querySelector(".brand");
+    const logo = document.getElementById("site-logo");
+    const brandText = document.querySelector(".brand-text");
+
+    // για να δουλεύει και χωρίς JS
+    if (brand && brand.tagName.toLowerCase() === "a") brand.href = INDEX_URL;
+
+    [brand, logo, brandText].filter(Boolean).forEach((el) => {
+      el.style.cursor = "pointer";
+      el.addEventListener("click", (e) => {
+        e.preventDefault();
+        goHome();
+      });
+    });
+  }
+
+  function bindNavLinks() {
+    const links = document.querySelectorAll(".nav a, #mobile-menu a");
+
+    links.forEach((a) => {
+      a.addEventListener("click", (e) => {
+        const href = a.getAttribute("href") || "";
+        if (!href) return;
+
+        // Αν έχει hash, άσε το link να πάει στο ΣΩΣΤΟ URL (relative)
+        if (href.includes("#")) {
+          e.preventDefault();
+          goToHref(href);
+          closeBurgerIfOpen();
+          return;
+        }
+
+        // Αν είναι home-ish link
+        if (href.includes("index.html") || href === "/" || href === "./") {
+          e.preventDefault();
+          goHome();
+          closeBurgerIfOpen();
+        }
+      });
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    bindLogoHome();
+    bindNavLinks();
+  });
+})();
+
+
+
+
+
+// =========================
+// STATIC TICKER (NO SCROLL)
+// =========================
+(function () {
+  const COINS = [
+    { id: "bitcoin",  sym: "BTC" },
+    { id: "ethereum", sym: "ETH" },
+    { id: "solana",   sym: "SOL" },
+  ];
+
+  async function fetchData() {
+    const ids = COINS.map(c => c.id).join(",");
+    const url =
+      `https://api.coingecko.com/api/v3/simple/price` +
+      `?ids=${encodeURIComponent(ids)}` +
+      `&vs_currencies=usd&include_24hr_change=true`;
+
+    const res = await fetch(url);
+    if (!res.ok) throw new Error("ticker fetch failed");
+    return res.json();
+  }
+
+  function fmt(n){
+    if (n == null || !isFinite(n)) return "—";
+    return "$" + n.toLocaleString(undefined, { maximumFractionDigits: 2 });
+  }
+
+  function cls(chg){
+    if (!isFinite(chg)) return "";
+    return chg > 0 ? "up" : chg < 0 ? "down" : "";
+  }
+
+  function render(data){
+    document.querySelectorAll("[data-ticker-inner]").forEach(inner => {
+      inner.innerHTML = COINS.map(c => {
+        const row = data[c.id] || {};
+        const price = row.usd;
+        const chg = row.usd_24h_change;
+        const arrow = isFinite(chg) ? (chg > 0 ? "▲" : chg < 0 ? "▼" : "•") : "•";
+        const pct = isFinite(chg) ? `${chg.toFixed(2)}%` : "";
+        return `
+          <span class="ck-tick ${cls(chg)}">
+            <span class="sym">${c.sym}</span>
+            <span class="p">${fmt(price)}</span>
+            <span class="chg">${arrow} ${pct}</span>
+          </span>
+        `;
+      }).join("");
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", async () => {
+    if (!document.querySelector("[data-ticker]")) return;
+    try {
+      const data = await fetchData();
+      render(data);
+    } catch (e) {
+      console.warn(e);
+    }
+  });
+})();

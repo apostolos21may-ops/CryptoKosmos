@@ -1,0 +1,1157 @@
+<!doctype html>
+<html lang="el">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Weekly ALTS – CryptoKosmos</title>
+
+  <!-- GLOBAL STYLES -->
+  <link rel="stylesheet" href="../styles.css" />
+
+  <!-- PAGE TRANSLATIONS -->
+  <script src="./translations-weeklyalts.js"></script>
+
+
+<link rel="preload" as="image" href="../weeklyalts.png">
+ 
+
+  <style>
+
+
+#auth-icon {
+  width: 20px;
+  height: 20px;
+}
+
+
+     body.article-page {
+      padding: 0;
+    }
+
+    .article-container {
+      max-width: 800px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    /* Desktop: lock widths of header buttons */
+    @media (min-width: 900px) {
+      #theme-toggle {
+        width: 85px;
+        justify-content: center;
+      }
+
+      #auth-btn {
+        width: 85px;
+        justify-content: center;
+      }
+
+      #lang-toggle {
+        width: 70px;
+        justify-content: center;
+      }
+
+      .pill-btn {
+        height: 34px;
+      }
+    }
+
+
+
+
+
+
+
+
+
+.more-guides{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+
+  padding:10px 16px;
+  border-radius:14px;
+
+  background: rgba(15,18,22,.55);
+  border: 1px solid rgba(91,180,255,.35);
+
+  color: var(--text);
+  font-weight:700;
+  font-size:13px;
+  letter-spacing:.2px;
+  text-decoration:none;
+
+  box-shadow:
+    0 0 0 1px rgba(123,97,255,.12),
+    0 10px 26px rgba(0,0,0,.35);
+
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+}
+
+.more-guides:hover{
+  transform: translateY(-2px);
+  border-color: rgba(91,180,255,.75);
+  box-shadow:
+    0 0 0 1px rgba(91,180,255,.18),
+    0 16px 34px rgba(0,0,0,.42);
+}
+
+.more-guides:hover{
+  transform: translateY(-2px);
+  border-color: rgba(91,180,255,.75);
+  box-shadow:
+    0 0 0 1px rgba(91,180,255,.18),
+    0 16px 34px rgba(0,0,0,.42);
+}
+
+/* Arrow pill */
+.mg-arrow{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+
+  width:28px;
+  height:28px;
+
+  border-radius:10px;
+  background: linear-gradient(135deg, rgba(91,180,255,.95), rgba(123,97,255,.95));
+  color:#0f1216;
+
+  font-weight:900;
+  line-height:1;
+
+  box-shadow: 0 10px 22px rgba(91,180,255,.22);
+}
+
+/* Light theme version */
+body.light-theme .more-guides{
+  background: rgba(255,255,255,.85);
+  border: 1px solid rgba(0,0,0,.12);
+  box-shadow:
+    0 0 0 1px rgba(0,0,0,.04),
+    0 10px 22px rgba(0,0,0,.10);
+}
+
+body.light-theme .more-guides:hover{
+  border-color: rgba(53,92,255,.55);
+}
+
+body.light-theme .more-guides{
+  background: rgba(255,255,255,.85);
+  border: 1px solid rgba(0,0,0,.12);
+}
+
+/* Mobile */
+@media (max-width: 520px){
+  .more-guides{
+    padding:9px 12px;
+    font-size:12px;
+    white-space:nowrap;
+  }
+  .mg-arrow{ width:26px; height:26px; border-radius:9px; }
+}
+
+/* ✅ Το "Γύρνα πίσω" να μένει κάτω από την 1η (αριστερή) κάρτα */
+.guides-grid{
+  display:grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap:16px;
+}
+
+.guides-grid > .more-guides{
+  grid-column: 1;        /* 1η στήλη (αριστερά) */
+  justify-self: start;   /* αριστερά μέσα στη στήλη */
+  align-self: end;       /* κάτω στο row του */
+  margin-top: 8px;       /* μικρό κενό από πάνω */
+}
+
+
+
+/* =========================
+   NEWS ARTICLE (bitcoinweekly)
+   Centered + clean typography
+========================= */
+
+.news-article{
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 28px 16px 44px;
+}
+
+/* Header */
+.news-header{
+  text-align: center;
+  margin-bottom: 18px;
+}
+
+.news-kicker{
+  margin: 0 0 10px;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.72);
+}
+
+.news-title{
+  margin: 0 0 12px;
+  font-size: clamp(28px, 4vw, 44px);
+  line-height: 1.08;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  color: rgba(255,255,255,.95);
+  text-wrap: balance;
+}
+
+.news-lead{
+  margin: 0 auto;
+  max-width: 70ch;
+  font-size: clamp(16px, 1.6vw, 18px);
+  line-height: 1.6;
+  color: rgba(255,255,255,.78);
+}
+
+/* Hero */
+.news-hero{
+  margin: 18px auto 26px;
+  max-width: 980px;
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.10);
+  box-shadow: 0 16px 38px rgba(0,0,0,.30);
+  background: rgba(15,18,22,.30);
+}
+
+.news-hero-img{
+  display: block;
+  width: 100%;
+  height: min(420px, 52vw);
+  object-fit: cover;
+}
+
+.news-caption{
+  padding: 10px 14px 12px;
+  font-size: 12px;
+  color: rgba(255,255,255,.65);
+  text-align: center;
+  border-top: 1px solid rgba(255,255,255,.08);
+  background: linear-gradient(to bottom, rgba(0,0,0,.15), rgba(0,0,0,.28));
+}
+
+/* Body */
+.news-body{
+  display: grid;
+  gap: 14px;
+  margin: 0 auto;
+  max-width: 78ch;        /* ωραίο πλάτος ανάγνωσης */
+  text-align: center;     /* κεντράρει τα κείμενα */
+}
+
+.news-h2{
+  margin: 18px 0 0;
+  font-size: clamp(18px, 2.2vw, 22px);
+  line-height: 1.25;
+  font-weight: 900;
+  color: rgba(255,255,255,.92);
+  text-wrap: balance;
+}
+
+.news-p{
+  margin: 0;
+  font-size: clamp(15px, 1.55vw, 18px);
+  line-height: 1.8;
+  color: rgba(255,255,255,.78);
+}
+
+/* Subtle section divider feel */
+.news-h2 + .news-p{
+  margin-top: 6px;
+}
+
+/* Light theme support */
+html.light-theme .news-kicker,
+body.light-theme .news-kicker{ color: rgba(15,23,42,.65); }
+
+html.light-theme .news-title,
+body.light-theme .news-title{ color: rgba(15,23,42,.95); }
+
+html.light-theme .news-lead,
+body.light-theme .news-lead,
+html.light-theme .news-p,
+body.light-theme .news-p{ color: rgba(15,23,42,.75); }
+
+html.light-theme .news-h2,
+body.light-theme .news-h2{ color: rgba(15,23,42,.92); }
+
+html.light-theme .news-hero,
+body.light-theme .news-hero{
+  background: rgba(255,255,255,.75);
+  border: 1px solid rgba(0,0,0,.10);
+  box-shadow: 0 14px 34px rgba(0,0,0,.12);
+}
+
+html.light-theme .news-caption,
+body.light-theme .news-caption{
+  color: rgba(15,23,42,.65);
+  background: linear-gradient(to bottom, rgba(255,255,255,.55), rgba(255,255,255,.75));
+  border-top: 1px solid rgba(0,0,0,.08);
+}
+
+/* Responsive tweaks */
+@media (max-width: 560px){
+  .news-article{ padding: 22px 12px 36px; }
+  .news-body{ text-align: left; } /* στο κινητό διαβάζεται καλύτερα αριστερά */
+  .news-header{ text-align: left; }
+  .news-lead{ margin: 0; }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* =========================
+   READ ALSO — CLEAN (INDEX-LIKE)
+   - photos NOT cropped
+   - Market top-right hover-only
+   - h5 hover-only
+   - bullets animate on scroll (in-view)
+   - inner side shadow on hover
+========================= */
+
+.prefooter-news{
+  max-width:1100px;
+  margin: 22px auto 0;
+  padding: 16px 16px 6px;
+}
+
+/* το grid για το δικό σου HTML: <div class="pn-slides pn-cards"> */
+.pn-cards{
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap:18px;
+}
+
+/* card */
+.pn-card{
+  position:relative;
+  display:block;
+  text-decoration:none;
+
+  height:240px;                 /* μέγεθος σαν το index */
+  border-radius:18px;
+  overflow:hidden;
+
+  background: rgba(15,18,22,.38);
+  border: 1px solid rgba(255,255,255,.10);
+  box-shadow: 0 10px 26px rgba(0,0,0,.25);
+
+  transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
+}
+
+.pn-card:hover{
+  transform: translateY(-2px);
+  border-color: rgba(91,180,255,.55);
+  box-shadow: 0 16px 34px rgba(0,0,0,.35);
+}
+
+.pn-card:focus-visible{
+  outline: 2px solid rgba(91,180,255,.85);
+  outline-offset: 3px;
+}
+
+/* image: ΔΕΝ κόβεται */
+.pn-thumb{
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit: contain;                 /* ✅ όχι crop */
+  object-position: center;
+  background: rgba(0,0,0,.35);         /* ωραίο “letterbox” */
+}
+
+/* gradient overlay (για readability) */
+.pn-card::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0,0,0,.06) 0%,
+    rgba(0,0,0,.18) 45%,
+    rgba(0,0,0,.72) 100%
+  );
+  z-index:1;
+  pointer-events:none;
+}
+
+/* ✅ inner side shadow on hover */
+.pn-card::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:18px;
+  opacity:0;
+  transition: opacity .18s ease;
+  z-index:2;
+  pointer-events:none;
+
+  box-shadow:
+    inset 22px 0 36px rgba(0,0,0,.55),
+    inset -22px 0 36px rgba(0,0,0,.55),
+    inset 0 0 0 1px rgba(255,255,255,.10),
+    inset 0 0 120px rgba(0,0,0,.32);
+}
+@media (hover:hover){
+  .pn-card:hover::after{ opacity:1; }
+}
+
+/* everything above overlays */
+.pn-card > *{
+  position:relative;
+  z-index:3;
+}
+
+/* ====== BIG title always visible (BITCOIN/OUTLOOK/ALTS) ====== */
+.pn-hero-title{
+  position:absolute;
+  top:14px;
+  left:14px;
+
+  font-size:44px;
+  font-weight:900;
+  letter-spacing:.5px;
+  line-height:1;
+
+  color: rgba(255,255,255,.92);
+  text-shadow: 0 10px 26px rgba(0,0,0,.45);
+  pointer-events:none;
+}
+
+/* ====== Market badge TOP-RIGHT hover-only ====== */
+.pn-kicker{
+  display:inline-flex;
+  width:max-content;
+  padding:6px 10px;
+  border-radius:999px;
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:.2px;
+
+  color: rgba(255,255,255,.92);
+  background: rgba(40,120,255,.72);
+  border: 1px solid rgba(255,255,255,.25);
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.pn-kicker--top{
+  position:absolute;
+  top:14px;
+  right:14px;      /* ✅ πάνω δεξιά */
+  left:auto;
+}
+
+/* ====== overlay container ====== */
+.pn-overlay{
+  position:absolute;
+  left:14px;
+  right:14px;
+  bottom:54px;
+}
+
+/* h5 */
+.pn-title-onimg{
+  margin:0 0 8px;
+  font-size:16px;
+  line-height:1.15;
+  font-weight:900;
+  color: rgba(255,255,255,.96);
+  text-shadow: 0 6px 18px rgba(0,0,0,.55);
+}
+
+/* bullets list */
+.pn-bullets{
+  list-style:none;
+  margin:0;
+  padding:0;
+  display:grid;
+  gap:6px;
+  max-width:520px;
+}
+
+.pn-bullets li{
+  font-size:13px;
+  font-weight:800;
+  color: rgba(255,255,255,.92);
+  text-shadow: 0 6px 18px rgba(0,0,0,.55);
+}
+
+/* Read button hover-only */
+.pn-read--btn{
+  position:absolute;
+  left:14px;
+  bottom:14px;
+
+  padding:10px 14px;
+  border-radius:14px;
+
+  background: rgba(0,0,0,.35);
+  border: 1px solid rgba(91,180,255,.35);
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  font-size:12px;
+  font-weight:800;
+  color: rgba(91,180,255,.95);
+}
+
+/* =========================================================
+   VISIBILITY RULES (όπως ζήτησες)
+   - Market + Read: ΜΟΝΟ hover
+   - h5: ΜΟΝΟ hover
+========================================================= */
+.pn-kicker--top,
+.pn-read--btn,
+.pn-title-onimg{
+  opacity:0;
+  transform: translateY(8px);
+  pointer-events:none;
+  transition: opacity .18s ease, transform .18s ease;
+}
+
+@media (hover:hover){
+  .pn-card:hover .pn-kicker--top,
+  .pn-card:hover .pn-read--btn,
+  .pn-card:hover .pn-title-onimg{
+    opacity:1;
+    transform: translateY(0);
+    pointer-events:auto;
+  }
+}
+
+/* touch: δείξτα πάντα (δεν υπάρχει hover) */
+@media (hover:none){
+  .pn-kicker--top,
+  .pn-read--btn,
+  .pn-title-onimg{
+    opacity:1;
+    transform:none;
+    pointer-events:auto;
+    transition:none;
+  }
+}
+
+/* =========================================================
+   SCROLL ANIMATION (μόνο τα bullets)
+   Παίζει όταν το wrapper .prefooter-news πάρει .is-inview
+========================================================= */
+.prefooter-news .pn-bullets li{
+  opacity:0;
+  transform: translateX(22px);
+  transition: opacity .45s ease, transform .45s ease;
+  will-change: opacity, transform;
+}
+
+.prefooter-news.is-inview .pn-bullets li{
+  opacity:1;
+  transform: translateX(0);
+}
+
+/* stagger */
+.prefooter-news.is-inview .pn-bullets li:nth-child(1){ transition-delay:.06s; }
+.prefooter-news.is-inview .pn-bullets li:nth-child(2){ transition-delay:.14s; }
+.prefooter-news.is-inview .pn-bullets li:nth-child(3){ transition-delay:.22s; }
+
+/* responsive */
+@media (max-width:980px){
+  .pn-cards{ grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width:560px){
+  .pn-cards{ grid-template-columns: 1fr; }
+  .pn-card{ height:220px; }
+}
+
+.pn-slide{ position: relative; height: 100%; }
+
+
+/* SAME AS INDEX: image fills card */
+.prefooter-news .pn-card{
+  height: auto;          /* μην το κλειδώνεις εσύ */
+}
+
+.prefooter-news .pn-thumb{
+  height: 240px;         /* ίδιο με index */
+  width: 100%;
+  object-fit: cover;     /* ✅ γεμίζει */
+  object-position: center;
+  background: none;      /* βγάλε το letterbox background */
+}
+
+/* mobile ίδιο με index */
+@media (max-width: 560px){
+  .prefooter-news .pn-thumb{ height: 220px; }
+}
+
+
+
+/* ================= PRE-FOOTER (IMPACT) ================= */
+.prefooter{
+  position: relative;
+  margin-top: 40px;
+  padding: 46px 18px 26px;
+  overflow: hidden;
+
+  border-radius: 22px;
+  background:
+    radial-gradient(900px 280px at 15% 20%, rgba(91,180,255,.16), transparent 65%),
+    radial-gradient(900px 280px at 85% 30%, rgba(123,97,255,.14), transparent 65%),
+    rgba(10,12,16,.55);
+
+  border: 1px solid rgba(255,255,255,.08);
+  box-shadow:
+    0 0 0 1px rgba(91,180,255,.08),
+    0 26px 80px rgba(0,0,0,.55);
+
+  /* fade reveal */
+  opacity: 0;
+  transform: translateY(10px);
+  animation: pfFadeUp .7s ease forwards;
+}
+
+/* soft animated glow behind */
+.prefooter-glow{
+  position:absolute;
+  inset:-120px -120px auto -120px;
+  height: 320px;
+  background: radial-gradient(circle at 30% 40%, rgba(91,180,255,.35), transparent 55%),
+              radial-gradient(circle at 70% 30%, rgba(123,97,255,.30), transparent 55%);
+  filter: blur(18px);
+  opacity: .55;
+  animation: pfGlow 6s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.prefooter-inner{
+  position: relative;
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  gap: 22px;
+  grid-template-columns: 1.1fr 1fr 1fr;
+}
+
+.prefooter h4{
+  margin: 0 0 10px;
+  font-size: 14px;
+  letter-spacing: .25px;
+  font-weight: 800;
+  color: rgba(255,255,255,.92);
+}
+
+.pf-muted{
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.55;
+  color: rgba(255,255,255,.70);
+}
+
+.pf-link{
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 10px 12px;
+  border-radius: 14px;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 13px;
+  color: rgba(255,255,255,.85);
+
+  background: rgba(15,18,22,.38);
+  border: 1px solid rgba(255,255,255,.08);
+
+  transition: transform .18s ease, border-color .18s ease, background .18s ease;
+  margin-bottom: 10px;
+}
+
+.pf-link:hover{
+  transform: translateY(-2px);
+  border-color: rgba(91,180,255,.55);
+  background: rgba(15,18,22,.55);
+}
+
+.prefooter-divider{
+  position: relative;
+  height: 2px;
+  margin: 26px auto 0;
+  max-width: 1100px;
+  border-radius: 999px;
+  background: linear-gradient(90deg,
+    transparent,
+    rgba(91,180,255,.75),
+    rgba(123,97,255,.75),
+    transparent
+  );
+  opacity: .7;
+}
+
+/* animations */
+@keyframes pfFadeUp{
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes pfGlow{
+  0%,100%{ transform: translateY(0); opacity:.55; }
+  50%{ transform: translateY(18px); opacity:.72; }
+}
+
+/* mobile */
+@media (max-width: 720px){
+  .prefooter-inner{
+    grid-template-columns: 1fr;
+  }
+}
+
+
+.hero-anim .fade-right{
+  opacity: 0;
+  transform: translateX(28px);
+  animation: fadeRightIn .75s ease-out forwards;
+  will-change: transform, opacity;
+}
+
+.hero-anim .delay-1{ animation-delay: .10s; }
+.hero-anim .delay-2{ animation-delay: .20s; }
+.hero-anim .delay-3{ animation-delay: .30s; }
+
+@keyframes fadeRightIn{
+  to{
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .hero-anim .fade-right{
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
+  </style>
+</head>
+
+<body class="article-page">
+
+<header class="site-header">
+  <div class="container header-inner">
+
+    <a class="brand" href="./index.html">
+      <img id="site-logo" src="../logo.png" alt="CryptoKosmos logo" class="logo" />
+      <div class="brand-text">
+        <h1>CryptoKosmos</h1>
+        <p class="tagline" data-i18n="header_tagline">Ο παλμός του κόσμου των crypto</p>
+      </div>
+    </a>
+
+    <nav class="nav">
+      <a href="../index.html#market"   data-i18n="nav_market">Αγορά</a>
+      <a href="../index.html#charts"   data-i18n="nav_charts">Τάσεις</a>
+      <a href="../index.html#guides"   data-i18n="nav_guides">Οδηγοί</a>
+      <a href="../index.html#glossary" data-i18n="nav_glossary">Γλωσσάρι</a>
+    </nav>
+
+    <div class="header-actions">
+      <button id="theme-toggle" class="pill-btn">
+        <img id="theme-icon" src="../IMG_5300.png" class="icon-img">
+        <span id="theme-label" data-i18n="theme_dark">Dark</span>
+      </button>
+
+      <button id="auth-btn" class="pill-btn">
+        <img id="auth-icon" src="../IMG_5301.png" class="icon-img">
+        <span id="auth-label" data-i18n="login">Login</span>
+      </button>
+
+      <button id="menu-toggle" class="menu-btn">
+        <span class="burger-line"></span>
+        <span class="burger-line"></span>
+        <span class="burger-line"></span>
+      </button>
+
+      <!-- LANGUAGE BUTTON -->
+      <button id="lang-toggle" class="pill-btn">
+        <img id="lang-icon" class="icon-img" src="../IMG_5542.png">
+        <span id="lang-label">GR</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- MOBILE MENU -->
+<div id="mobile-menu" class="mobile-menu">
+
+  <a href="../index.html#market"   data-i18n="nav_market">Αγορά</a>
+  <a href="../index.html#charts"   data-i18n="nav_charts">Τάσεις</a>
+  <a href="../index.html#guides"   data-i18n="nav_guides">Οδηγοί</a>
+  <a href="../index.html#glossary" data-i18n="nav_glossary">Γλωσσάρι</a>
+
+  <button id="mobile-home-btn" class="mobile-btn" data-i18n="mobile_home">⬅ Αρχική Σελίδα</button>
+  <button id="mobile-theme-toggle" class="mobile-btn" data-i18n="mobile_theme">Αλλαγή Θέματος</button>
+  <button id="mobile-auth-btn" class="mobile-btn" data-i18n="login">Login</button>
+
+  <button id="mobile-lang-toggle" class="mobile-btn">
+    <img id="mobile-lang-icon" class="icon-img" src="../IMG_5542.png">
+    <span id="mobile-lang-label">GR</span>
+  </button>
+
+</div>
+
+
+
+<!-- weeklyalts.html (μόνο το <article> όπως ζήτησες) -->
+<article class="news-article" aria-labelledby="alts-title">
+
+  <!-- Top headline / intro -->
+  <header class="news-header">
+    <p class="news-kicker" data-i18n="wa_kicker">Weekly Alts</p>
+
+    <h1 id="alts-title" class="news-title" data-i18n="wa_title">
+      Altcoins: τι ξεχωρίζει αυτή την εβδομάδα
+    </h1>
+
+    <p class="news-lead" data-i18n="wa_lead">
+      Στα alts η εβδομάδα κρίνεται από 3 πράγματα: αν υπάρχει διάθεση για ρίσκο (BTC stable / market calm),
+      αν βλέπουμε rotation από majors προς alts, και ποια narratives έχουν catalysts (events, upgrades, listings).
+      Όταν αυτά “κουμπώσουν”, τα moves γίνονται γρήγορα και συχνά σε κύματα — πρώτα τα μεγάλα alts και μετά η «ουρά».
+    </p>
+  </header>
+
+  <!-- Hero image -->
+  <figure class="news-hero">
+    <img src="../weeklyalts.png" alt="Weekly alts" class="news-hero-img">
+    <figcaption class="news-caption" data-i18n="wa_caption">
+      Weekly snapshot: rotation, catalysts και πού μπαίνει η ρευστότητα στα alts.
+    </figcaption>
+  </figure>
+
+  <!-- Content -->
+  <section class="news-body">
+
+    <h2 class="news-h2" data-i18n="wa_h2_1">1) Funding rates &amp; OI: πότε “ζεσταίνεται” το trade</h2>
+    <p class="news-p" data-i18n="wa_p_1">
+      Τα funding rates και το open interest (OI) σου δείχνουν πόσο “φορτωμένη” είναι η αγορά. Αν το OI ανεβαίνει
+      γρήγορα μαζί με τιμή, υπάρχει καύσιμο — αλλά και κίνδυνος για squeeze. Υπερβολικά θετικά fundings σημαίνουν
+      ότι πολλοί είναι long και μια γρήγορη διόρθωση μπορεί να καθαρίσει θέσεις απότομα. Αντίθετα, όταν το OI είναι
+      πιο “ήρεμο” και τα fundings ισορροπημένα, οι κινήσεις που ξεκινούν τείνουν να είναι πιο “υγιείς” και να κρατάνε.
+      Κοίτα τη συμπεριφορά γύρω από levels: αν το alt κρατάει μετά από spike, συνήθως υπάρχει πραγματική ζήτηση.
+    </p>
+
+    <h2 class="news-h2" data-i18n="wa_h2_2">2) Rotation: majors → alts (πότε ανοίγει το παράθυρο)</h2>
+    <p class="news-p" data-i18n="wa_p_2">
+      Το κλασικό setup για alts είναι: το BTC σταθεροποιείται (χωρίς μεγάλα wicks), η μεταβλητότητα πέφτει,
+      και η αγορά αρχίζει να ψάχνει “beta” σε Ethereum/μεγάλα alts. Συνήθως βλέπεις πρώτα κίνηση στα πιο ρευστά
+      (ETH, SOL κ.λπ.) και μετά το ενδιαφέρον περνάει σε midcaps και narratives. Το σημαντικό είναι η διάρκεια:
+      αν οι πρώτες διασπάσεις κρατάνε και δεν γυρίζουν άμεσα, τότε το rotation έχει πιθανότητες να συνεχίσει.
+      Αν όμως το BTC κάνει ξαφνικό dump/pump, τα alts συχνά χάνουν δομή πιο γρήγορα.
+    </p>
+
+    <h2 class="news-h2" data-i18n="wa_h2_3">3) Narratives &amp; catalysts: τι “γράφει” την ατζέντα</h2>
+    <p class="news-p" data-i18n="wa_p_3">
+      Σε κάθε φάση της αγοράς υπάρχουν 1–2 narratives που τραβάνε ρευστότητα (π.χ. AI, L2s, DeFi, gaming, memecoins).
+      Αυτό που κάνει τη διαφορά είναι ο καταλύτης: αναβαθμίσεις, releases, airdrops, partnerships, listings ή ένα event
+      που ανεβάζει το ενδιαφέρον. Όταν ένα narrative παίρνει momentum, τείνει να λειτουργεί σαν “καλάθι”:
+      ανεβαίνουν μαζί 2–3 tokens και μετά ακολουθούν τα πιο μικρά. Η πρακτική προσέγγιση είναι να ξεχωρίζεις
+      τα tokens που κρατάνε strength στις διορθώσεις (good pullbacks) και έχουν volume/ρευστότητα.
+    </p>
+
+    <h2 class="news-h2" data-i18n="wa_h2_4">Πρακτικό πλάνο εβδομάδας για alts</h2>
+    <p class="news-p" data-i18n="wa_p_4">
+      Για να το κάνεις απλό: (α) τσέκαρε αν το BTC είναι “ήρεμο” και κρατάει επίπεδα, (β) δες OI/funding για να
+      καταλάβεις αν η αγορά είναι υπερφορτωμένη, (γ) διάλεξε 1–2 narratives με ξεκάθαρο catalyst και κράτα watchlist
+      με 3–5 alts που έχουν volume. Αν δεις καθαρή διάσπαση + συνέχιση χωρίς να χαλάει το BTC, τότε το παράθυρο για
+      alts είναι ανοιχτό. Αν το BTC αρχίσει να κάνει spikes, πας πιο αμυντικά και περιμένεις επιβεβαίωση.
+    </p>
+
+  </section>
+
+</article>
+
+
+<section class="prefooter-news" aria-label="Διάβασε επίσης">
+  <div class="pn-head">
+    <h4 class="pn-title" data-i18n="pf_title">Διάβασε επίσης</h4>
+    <p class="pn-sub" data-i18n="pf_sub">Περισσότερα άρθρα &amp; αναλύσεις</p>
+  </div>
+
+  <div class="pn-grid pn-cards">
+
+    <a class="pn-card" href="./bitcoinweekly.html" target="_blank" rel="noopener">
+      <article class="pn-slide is-active">
+        <img class="pn-thumb" src="../bitcoinweekly.png" alt="Bitcoin weekly">
+
+        <span class="pn-kicker pn-kicker--top" data-i18n="pf_tag_market">Market</span>
+        <span class="pn-hero-title">BITCOIN</span>
+
+        <div class="pn-overlay">
+          <h5 class="pn-title-onimg" data-i18n="pf_c1_s1_title">Bitcoin: τι κοιτάμε αυτή την εβδομάδα</h5>
+          <ul class="pn-bullets">
+            <li data-i18n="pf_c1_s1_b1">FOMC Meeting Minutes</li>
+            <li data-i18n="pf_c1_s1_b2">Inflation Data (CPI/PPI)</li>
+            <li data-i18n="pf_c1_s1_b3">Whale Movements / Exchanges</li>
+          </ul>
+        </div>
+
+        <span class="pn-read pn-read--btn" data-i18n="pf_read">Διάβασε</span>
+      </article>
+    </a>
+
+    <a class="pn-card" href="./weeklymarketoutlook.html" target="_blank" rel="noopener">
+      <article class="pn-slide">
+        <img class="pn-thumb" src="../weeklymarketoutlook.png" alt="Weekly market outlook">
+
+        <span class="pn-kicker pn-kicker--top" data-i18n="pf_tag_market">Market</span>
+        <span class="pn-hero-title">OUTLOOK</span>
+
+        <div class="pn-overlay">
+          <h5 class="pn-title-onimg" data-i18n="pf_c1_s2_title">Market Outlook: 3 πράγματα που μπορούν να κουνήσουν την αγορά</h5>
+          <ul class="pn-bullets">
+            <li data-i18n="pf_c1_s2_b1">CPI / FOMC / Jobs (ό,τι “σκάσει”)</li>
+            <li data-i18n="pf_c1_s2_b2">DXY &amp; yields: αν ανεβαίνουν, πιέζουν risk</li>
+            <li data-i18n="pf_c1_s2_b3">ETF flows + exchange inflows: χρήμα μέσα/έξω</li>
+          </ul>
+        </div>
+
+        <span class="pn-read pn-read--btn" data-i18n="pf_read">Διάβασε</span>
+      </article>
+    </a>
+
+<a class="pn-card" href="./weeklyriskwatch.html" target="_blank" rel="noopener">
+  <article class="pn-slide">
+    <img class="pn-thumb" src="../weeklyriskwatch.png" alt="Weekly risk watch">
+
+    <span class="pn-kicker pn-kicker--top" data-i18n="pf_tag_market">Market</span>
+    <span class="pn-hero-title">RISK</span>
+
+    <div class="pn-overlay">
+      <h5 class="pn-title-onimg" data-i18n="pf_c1_s4_title">Weekly Risk Watch: 3 ρίσκα που μπορούν να αλλάξουν το κλίμα</h5>
+      <ul class="pn-bullets">
+        <li data-i18n="pf_c1_s4_b1">Volatility spikes: VIX / crypto vol</li>
+        <li data-i18n="pf_c1_s4_b2">Liquidity: spreads, depth, funding</li>
+        <li data-i18n="pf_c1_s4_b3">News shocks: geopolitics / regulation</li>
+      </ul>
+    </div>
+
+    <span class="pn-read pn-read--btn" data-i18n="pf_read">Διάβασε</span>
+  </article>
+</a>
+
+  </div>
+</section>
+
+
+<!-- ================= PRE-FOOTER (IMPACT) ================= -->
+<section class="prefooter">
+  <div class="prefooter-glow"></div>
+
+  <div class="prefooter-inner">
+    <div class="pf-col">
+      <h4>CryptoKosmos</h4>
+       <p class="pf-muted" data-i18n="pf_brand_sub">Quick links & updates από το crypto σύμπαν.</p>
+    </div>
+
+    <div class="pf-col">
+      <h4>Explore</h4>
+      <a href="#market" class="pf-link">Market</a>
+      <a href="#charts" class="pf-link">Trends</a>
+      <a href="#guides" class="pf-link">Guides</a>
+      <a href="#glossary" class="pf-link">Glossary</a>
+    </div>
+
+    <div class="pf-col">
+      <h4>Social</h4>
+      <a href="https://x.com/CryptoKosmosApp" class="pf-link" target="_blank" rel="noopener">X / Twitter</a>
+      <a href="https://www.instagram.com/cryptokosmos.app/" class="pf-link" target="_blank" rel="noopener">Instagram</a>
+      <a href="mailto:cryptokosmos.news@gmail.com" class="pf-link">Email</a>
+    </div>
+  </div>
+
+  <div class="prefooter-divider"></div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>© <span id="year"></span> CryptoKosmos —
+      <span data-i18n="footer_rights">Όλα τα δικαιώματα διατηρούνται.</span>
+    </p>
+  </div>
+</footer>
+
+
+<!-- ========= LOGIN MODAL ========= -->
+<div id="login-modal" class="modal hidden">
+  <div class="modal-backdrop"></div>
+  <div class="modal-card">
+
+    <div class="modal-header">
+      <span class="modal-title" data-i18n="login_title">Σύνδεση</span>
+      <button class="modal-close" id="login-close">×</button>
+    </div>
+
+    <form id="login-form">
+      <div class="modal-body">
+
+        <label data-i18n="login_email">Email</label>
+        <input id="login-email" type="email" required placeholder="you@example.com">
+
+        <label data-i18n="login_password">Κωδικός</label>
+        <div class="pass-wrap">
+          <input id="login-pass" type="password" placeholder="••••••••">
+          <img id="login-pass-toggle" class="pass-eye" src="../IMG_5380.png">
+        </div>
+
+      </div>
+
+      <button class="modal-submit" type="submit" data-i18n="login_btn">
+        Σύνδεση
+      </button>
+
+      <p id="no-account" class="modal-hint" style="color:#ffb3b3; display:none;" data-i18n="login_no_account">
+        Δεν έχεις λογαριασμό στο CryptoKosmos.
+      </p>
+
+      <button id="signup-btn" type="button"
+        style="display:none; margin-top:10px; width:100%; padding:10px 14px; border:none; border-radius:14px;
+        background:#1e293b; color:white; font-weight:600; cursor:pointer; border:1px solid rgba(255,255,255,0.25);"
+        data-i18n="login_create_account">
+        Δημιουργία λογαριασμού
+      </button>
+
+    </form>
+
+  </div>
+</div>
+
+
+
+<!-- ========= SIGNUP MODAL ========= -->
+<div id="signup-modal" class="modal hidden">
+  <div class="modal-backdrop"></div>
+
+  <div class="modal-card">
+    <div class="modal-header">
+      <h3 class="modal-title" data-i18n="signup_title">Δημιούργησε λογαριασμό</h3>
+      <button class="modal-close signup-close">×</button>
+    </div>
+
+    <div class="modal-body">
+
+      <label data-i18n="signup_email">Email</label>
+      <input id="signup-email" type="email">
+
+      <label data-i18n="signup_pass1">Κωδικός</label>
+      <div class="pass-wrap">
+        <input id="signup-pass1" type="password" placeholder="••••••••">
+        <img id="signup-pass1-toggle" class="pass-eye" src="../IMG_5380.png">
+      </div>
+
+      <label data-i18n="signup_pass2">Επιβεβαίωση κωδικού</label>
+      <div class="pass-wrap">
+        <input id="signup-pass2" type="password" placeholder="••••••••">
+        <img id="signup-pass2-toggle" class="pass-eye" src="../IMG_5380.png">
+      </div>
+
+      <p id="signup-error" style="color:#ff6b6b; display:none;"
+         data-i18n="signup_error">Οι κωδικοί δεν ταιριάζουν.</p>
+
+      <button id="signup-create" class="modal-submit" data-i18n="signup_btn">
+        Δημιουργία λογαριασμού
+      </button>
+
+      <p class="modal-hint">
+        <span data-i18n="signup_have_account">Έχεις ήδη λογαριασμό;</span>
+        <span id="back-to-login" style="color:#5bb4ff; cursor:pointer;" data-i18n="signup_back">
+          Σύνδεση
+        </span>
+      </p>
+    </div>
+
+  </div>
+</div>
+
+
+
+<!-- ========= VERIFY MODAL ========= -->
+<div id="verify-modal" class="modal hidden">
+  <div class="modal-backdrop"></div>
+
+  <div class="modal-card">
+    <div class="modal-header">
+      <h3 class="modal-title" data-i18n="verify_title">Επαλήθευση Email</h3>
+      <button class="modal-close verify-close">×</button>
+    </div>
+
+    <div class="modal-body">
+
+      <p class="muted" data-i18n="verify_subtitle">
+        Σου στείλαμε έναν 6-ψήφιο κωδικό.
+      </p>
+
+      <label data-i18n="verify_code">Κωδικός</label>
+      <input id="verify-code" type="text" placeholder="123456">
+
+      <p id="verify-error" style="color:#ff6b6b; display:none;"
+         data-i18n="verify_error">Λάθος κωδικός. Προσπάθησε ξανά.</p>
+
+      <button id="verify-submit" class="modal-submit" data-i18n="verify_btn">
+        Επιβεβαίωση
+      </button>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+  document.getElementById("mobile-home-btn")?.addEventListener("click", () => {
+    window.location.href = "../index.html";
+  });
+</script>
+
+<!-- GLOBAL APP -->
+<script src="../app.js" defer></script>
+
+<!-- GLOBAL i18n ENGINE -->
+<script src="../i18n.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const section = document.querySelector(".prefooter-news");
+  if (!section) return;
+
+  const io = new IntersectionObserver(([entry]) => {
+    section.classList.toggle("is-inview", entry.isIntersecting);
+  }, { threshold: 0.25 });
+
+  io.observe(section);
+});
+</script>
+</body>
+</html>
