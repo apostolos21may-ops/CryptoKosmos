@@ -1,9 +1,12 @@
 window.TRANSLATIONS = {
   el: {
 
-
 pf_brand_title: "CryptoKosmos",
   pf_brand_sub: "Quick links & updates από το crypto σύμπαν.",
+
+
+news_subtitlee: "9 γρήγορα άρθρα που αξίζουν",
+
 
   pf_explore_title: "Explore",
   pf_explore_market: "Market",
@@ -21,50 +24,61 @@ pf_brand_title: "CryptoKosmos",
   pf_tag_guides: "Guides",
   pf_tag_altcoins: "Altcoins",
 
-  pf_c1_s1_title: "Bitcoin: τι κοιτάμε αυτή την εβδομάδα",
-  pf_c1_s1_b1: "FOMC Meeting Minutes",
-  pf_c1_s1_b2: "Inflation Data (CPI/PPI)",
-  pf_c1_s1_b3: "Whale Movements / Exchanges",
+pf_c1_wk_title: "Weekly Outlook: τι κινεί την αγορά",
+pf_c1_wk_b1: "Liquidity & βασικά επίπεδα",
+pf_c1_wk_b2: "Macro τόνος",
+pf_c1_wk_b3: "Sentiment & positioning",
 
-  pf_c1_s2_title: "Market Outlook: 3 πράγματα που μπορούν να κουνήσουν την αγορά",
-  pf_c1_s2_b1: "CPI / FOMC / Jobs (ό,τι “σκάσει”)",
-  pf_c1_s2_b2: "DXY & yields: αν ανεβαίνουν, πιέζουν risk",
-  pf_c1_s2_b3: "ETF flows + exchange inflows: χρήμα μέσα/έξω",
+pf_c1_liq_title: "Bitcoin: πού κάθεται η ρευστότητα και γιατί η τιμή πηγαίνει εκεί",
+pf_c1_liq_b1: "Highs & lows: liquidity magnets",
+pf_c1_liq_b2: "Sweeps vs breakouts",
+pf_c1_liq_b3: "Timing μετά το “καθάρισμα”",
 
-  pf_c1_s3_title: "Altcoins: τι ξεχωρίζει αυτή την εβδομάδα",
-  pf_c1_s3_b1: "Funding rates & OI",
-  pf_c1_s3_b2: "Rotation: majors → alts",
-  pf_c1_s3_b3: "Narratives & catalysts",
+pf_c1_rw_title: "Rotation watch: πού μετακινείται το χρήμα",
+pf_c1_rw_b1: "BTC dominance",
+pf_c1_rw_b2: "ETH & majors",
+pf_c1_rw_b3: "Alt leaders",
 
-  pf_c2_s1_title: "Seed phrase: τα 5 λάθη που καίνε wallets",
-  pf_c2_s1_b1: "Μην το γράφεις σε notes / cloud",
-  pf_c2_s1_b2: "Μην το στέλνεις ποτέ σε κανέναν",
-  pf_c2_s1_b3: "Κάνε test restore (offline)",
+   pf_c2_s3_title:
+      "Wallet Drain Scams: πώς αδειάζει ένα wallet χωρίς seed",
 
-  pf_c2_s2_title: "Phishing: 3 checks πριν πατήσεις link",
-  pf_c2_s2_b1: "Domain / spelling (copycats)",
-  pf_c2_s2_b2: "Approvals: τι ζητάει να υπογράψεις",
-  pf_c2_s2_b3: "Wallet prompts: “drain” patterns",
+    pf_c2_s3_b1:
+      "Κακόβουλα signs & approvals",
 
-  pf_c2_s3_title: "Cold wallet: setup χωρίς λάθη (quick steps)",
-  pf_c2_s3_b1: "Initialize offline + ενημέρωση firmware",
-  pf_c2_s3_b2: "2 backups seed (σε 2 μέρη)",
-  pf_c2_s3_b3: "Small test transfer πρώτα",
+    pf_c2_s3_b2:
+      "Fake sites & spoofed dApps",
 
-  pf_c3_s1_title: "Solana fees & tips για αρχάριους",
-  pf_c3_s1_b1: "Τι πληρώνεις σε swaps & transfers",
-  pf_c3_s1_b2: "Priority fees: πότε χρειάζονται",
-  pf_c3_s1_b3: "Slippage: πώς να το ρυθμίζεις",
+    pf_c2_s3_b3:
+      "Κανόνας main vs hot wallet",
 
-  pf_c3_s2_title: "Alt rotation: 3 σημάδια ότι “γυρίζει” η αγορά",
-  pf_c3_s2_b1: "BTC dominance: πτώση = χώρο για alts",
-  pf_c3_s2_b2: "Volume σε majors→alts (on-chain/cex)",
-  pf_c3_s2_b3: "Narratives: ποιο trend τραβάει",
 
-  pf_c3_s3_title: "On-chain checklist: τι κοιτάμε πριν αγοράσουμε alt",
-  pf_c3_s3_b1: "Holders / concentration (whales)",
-  pf_c3_s3_b2: "Liquidity & locked LP",
-  pf_c3_s3_b3: "Token unlocks & emissions",
+  pf_c2_s3_title: "Fake sites: πώς να τα αναγνωρίζεις σε 10s",
+  pf_c2_s3_b1: "Domain & TLD παγίδες",
+  pf_c2_s3_b2: "UI & frontend ασυνέπειες",
+  pf_c2_s3_b3: "Wallet prompts πριν το drain",
+
+
+pf_c2_s4_title: "Permit approvals: το αόρατο approval",
+pf_c2_s4_b1: "Off-chain signatures (χωρίς approve tx)",
+pf_c2_s4_b2: "Κρυφό allowance & delayed drain",
+pf_c2_s4_b3: "Scam frontends & fake “sign”",
+
+  pf_an_s1_title: "Altcoins vs Narratives: γιατί ΔΕΝ ανεβαίνουν όλα μαζί",
+pf_an_s1_b1: "Selective liquidity, όχι ίση κατανομή",
+pf_an_s1_b2: "Rotation μέσα στο ίδιο narrative",
+pf_an_s1_b3: "Γιατί λίγα coins “κερδίζουν”",
+
+ // Slide 2 — Narrative Hype
+  pf_psy_s2_title: "Narrative Hype Checklist: πότε είναι ευκαιρία και πότε παγίδα",
+  pf_psy_s2_b1: "Attention vs πραγματική ζήτηση",
+  pf_psy_s2_b2: "Late-stage narratives",
+  pf_psy_s2_b3: "Πού μπαίνει το smart money",
+
+  // Slide 3 — Altcoin Exit
+  pf_psy_s3_title: "Altcoin Exit Checklist: πότε βγαίνεις πριν γίνει αργά",
+  pf_psy_s3_b1: "Distribution & αδύναμο follow-through",
+  pf_psy_s3_b2: "Narrative exhaustion",
+  pf_psy_s3_b3: "Η ρευστότητα πέφτει & traps",
 
   // (προαιρετικά για aria)
   pf_next: "Επόμενο άρθρο",
@@ -379,9 +393,12 @@ glossary_less: "Λιγότερα",
   en: {
 
 
-
 pf_brand_title: "CryptoKosmos",
   pf_brand_sub: "Quick links & updates from the crypto universe.",
+
+
+news_subtitlee: "9 quick articles worth reading",
+
 
   pf_explore_title: "Explore",
   pf_explore_market: "Market",
@@ -399,40 +416,53 @@ pf_brand_title: "CryptoKosmos",
   pf_tag_guides: "Guides",
   pf_tag_altcoins: "Altcoins",
 
-  pf_c1_s1_title: "Bitcoin: what to watch this week",
-  pf_c1_s1_b1: "FOMC Meeting Minutes",
-  pf_c1_s1_b2: "Inflation Data (CPI/PPI)",
-  pf_c1_s1_b3: "Whale Movements / Exchanges",
+ pf_c1_wk_title: "Weekly Outlook: what moves the market",
+pf_c1_wk_b1: "Liquidity & key levels",
+pf_c1_wk_b2: "Macro tone",
+pf_c1_wk_b3: "Sentiment & positioning",
 
-  pf_c1_s2_title: "Market Outlook: 3 things that can move the market",
-  pf_c1_s2_b1: "CPI / FOMC / Jobs (anything that hits)",
-  pf_c1_s2_b2: "DXY & yields: rising = pressure on risk",
-  pf_c1_s2_b3: "ETF flows + exchange inflows: money in/out",
+pf_c1_liq_title: "Bitcoin: where liquidity sits and why price moves there",
+pf_c1_liq_b1: "Highs & lows: liquidity magnets",
+pf_c1_liq_b2: "Sweeps vs breakouts",
+pf_c1_liq_b3: "Timing after liquidity is cleared",
 
-  pf_c1_s3_title: "Altcoins: what stands out this week",
-  pf_c1_s3_b1: "Funding rates & OI",
-  pf_c1_s3_b2: "Rotation: majors → alts",
-  pf_c1_s3_b3: "Narratives & catalysts",
+pf_c1_rw_title: "Rotation watch: where capital flows",
+pf_c1_rw_b1: "BTC dominance",
+pf_c1_rw_b2: "ETH & majors",
+pf_c1_rw_b3: "Alt leaders",
 
-  pf_c2_s1_title: "Seed phrase: 5 mistakes that burn wallets",
-  pf_c2_s1_b1: "Don’t store it in notes / cloud",
-  pf_c2_s1_b2: "Never send it to anyone",
-  pf_c2_s1_b3: "Do a test restore (offline)",
+   
 
-  pf_c2_s2_title: "Phishing: 3 checks before you click",
-  pf_c2_s2_b1: "Domain / spelling (copycats)",
-  pf_c2_s2_b2: "Approvals: what you’re asked to sign",
-  pf_c2_s2_b3: "Wallet prompts: “drain” patterns",
+pf_c2_s4_title: "Permit approvals: the invisible approval",
+pf_c2_s4_b1: "Off-chain signatures (no approve tx)",
+pf_c2_s4_b2: "Hidden allowance & delayed drain",
+pf_c2_s4_b3: "Scam frontends & fake “sign”",
 
-  pf_c2_s3_title: "Cold wallet: setup without mistakes (quick steps)",
-  pf_c2_s3_b1: "Initialize offline + update firmware",
-  pf_c2_s3_b2: "2 seed backups (in 2 places)",
-  pf_c2_s3_b3: "Small test transfer first",
+
+  pf_c2_s3_title: "Fake sites: how to spot them in 10s",
+  pf_c2_s3_b1: "Domain & TLD traps",
+  pf_c2_s3_b2: "UI & frontend inconsistencies",
+  pf_c2_s3_b3: "Wallet prompts before the drain",
+
+
+
 
   pf_c3_s1_title: "Solana fees & tips for beginners",
   pf_c3_s1_b1: "What you pay on swaps & transfers",
   pf_c3_s1_b2: "Priority fees: when you need them",
   pf_c3_s1_b3: "Slippage: how to set it",
+
+      pf_c2_s3_title:
+      "Wallet Drain Scams: how wallets get drained without seed",
+
+    pf_c2_s3_b1:
+      "Malicious signs & approvals",
+
+    pf_c2_s3_b2:
+      "Fake sites & spoofed dApps",
+
+    pf_c2_s3_b3:
+      "Main vs hot wallet rule",
 
   pf_c3_s2_title: "Alt rotation: 3 signs the market is rotating",
   pf_c3_s2_b1: "BTC dominance: down = room for alts",
@@ -443,6 +473,23 @@ pf_brand_title: "CryptoKosmos",
   pf_c3_s3_b1: "Holders / concentration (whales)",
   pf_c3_s3_b2: "Liquidity & locked LP",
   pf_c3_s3_b3: "Token unlocks & emissions",
+
+  // Slide 2 — Narrative Hype
+  pf_psy_s2_title: "Narrative Hype Checklist: opportunity or trap?",
+  pf_psy_s2_b1: "Attention vs real demand",
+  pf_psy_s2_b2: "Late-stage narratives",
+  pf_psy_s2_b3: "Where smart money steps in",
+
+  // Slide 3 — Altcoin Exit
+  pf_psy_s3_title: "Altcoin Exit Checklist: when to get out early",
+  pf_psy_s3_b1: "Distribution & weak follow-through",
+  pf_psy_s3_b2: "Narrative exhaustion",
+  pf_psy_s3_b3: "Liquidity fades & traps",
+
+pf_an_s1_title: "Altcoins vs Narratives: why NOT everything pumps together",
+pf_an_s1_b1: "Selective liquidity, not equal distribution",
+pf_an_s1_b2: "Rotation within the same narrative",
+pf_an_s1_b3: "Why only a few coins win",
 
   // optional aria
   pf_next: "Next article",

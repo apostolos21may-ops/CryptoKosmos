@@ -5,13 +5,13 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>LIVEprices – CryptoKosmos</title>
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-7DWG18EQLG"></script>
-
   <!-- GLOBAL STYLES -->
   <link rel="stylesheet" href="../styles.css" />
 
   <!-- PAGE TRANSLATIONS -->
   <script src="../translations-prices.js" defer></script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7DWG18EQLG"></script>
 
   <!-- Light/Dark article images preload -->
   <link rel="preload" as="image" href="./IMG_5536.png">
@@ -1419,11 +1419,37 @@ let hasLoadedOnce = false;
 function setStatus(text = "", type = "loading") {
   const el = $("status");
   if (!el) return;
-  el.textContent = text;
+  el.textContent = text || "";
   el.className = `status ${type}`.trim();
   el.style.display = text ? "block" : "none";
 }
 
+
+
+
+
+
+
+
+const memCache = new Map(); // in-memory cache (πολύ γρήγορο)
+const FETCH_TIMEOUT = 12000;
+
+// μικρό helper
+function sleep(ms){ return new Promise(r => setTimeout(r, ms)); }
+
+async function fetchJSON(url, { signal, timeout = FETCH_TIMEOUT } = {}) {
+  const ctrl = new AbortController();
+  const t = setTimeout(() => ctrl.abort(), timeout);
+
+  if (signal) signal.addEventListener("abort", () => ctrl.abort(), { once: true });
+
+  try {
+    const res = await fetch(url, { cache: "no-store", signal: ctrl.signal, headers: { accept: "application/json" } });
+    return res;
+  } finally {
+    clearTimeout(t);
+  }
+}
 /* =========================
    STATE
 ========================= */
@@ -1469,7 +1495,11 @@ function setActiveSource(id) {
   if (btn) btn.classList.add("active");
 
   const meta = $("meta-source");
-  if (meta) meta.textContent = "Source: " + (id === "src-binance" ? "Binance" : id === "src-coingecko" ? "CoinGecko" : "Auto");
+  if (meta) {
+    meta.textContent =
+      "Source: " +
+      (id === "src-binance" ? "Binance" : id === "src-coingecko" ? "CoinGecko" : "Auto");
+  }
 }
 
 function formatPrice(n) {
@@ -1494,6 +1524,33 @@ function arrow(v) {
 }
 
 /* =========================
+   SPARKLINE (safe)
+========================= */
+function drawSparkline(data, color) {
+  if (!Array.isArray(data) || data.length < 2) return "";
+
+  const clean = data.map(Number).filter(Number.isFinite);
+  if (clean.length < 2) return "";
+
+  const w = 90, h = 28;
+  const min = Math.min(...clean);
+  const max = Math.max(...clean);
+  const range = (max - min) || 1;
+
+  const pts = clean.map((v, i) => {
+    const x = (i / (clean.length - 1)) * w;
+    const y = h - ((v - min) / range) * h;
+    return `${x.toFixed(1)},${y.toFixed(1)}`;
+  }).join(" ");
+
+  return `
+    <svg viewBox="0 0 ${w} ${h}" aria-hidden="true" focusable="false">
+      <polyline fill="none" stroke="${color}" stroke-width="1.8"
+        stroke-linecap="round" stroke-linejoin="round" points="${pts}" />
+    </svg>`;
+}
+
+/* =========================
    RENDER
 ========================= */
 function render(rows) {
@@ -1502,7 +1559,7 @@ function render(rows) {
 
   const safeRows = Array.isArray(rows) ? rows : [];
   const list = !q ? safeRows : safeRows.filter(r => {
-    const sym = String(r.symbol || "").toUpperCase();
+    const sym  = String(r.symbol || "").toUpperCase();
     const name = String(r.name || "").toUpperCase();
     return sym.includes(q) || name.includes(q);
   });
@@ -1516,8 +1573,18 @@ function render(rows) {
   const startRank = (currentPage - 1) * PER_PAGE + 1;
 
   listEl.innerHTML = list.map((r, i) => {
-    const chgNum = Number(r.chg);
+    const chgNum  = Number(r.chg);
     const chgText = Number.isFinite(chgNum) ? chgNum.toFixed(2) + "%" : "—";
+
+    const rank = startRank + i;
+
+    const sparkColor =
+      Number.isFinite(chgNum)
+        ? (chgNum > 0 ? "#4ade80" : chgNum < 0 ? "#f87171" : "#94a3b8")
+        : "#94a3b8";
+
+    // ✅ ΔΕΝ σπάει ποτέ
+    const sparkData = Array.isArray(r.spark) ? r.spark : [];
 
     const icon = r.icon
       ? `<img class="coin-icon" src="${r.icon}" loading="lazy" alt="">`
@@ -1525,7 +1592,7 @@ function render(rows) {
 
     return `
       <div class="price-row">
-        <div class="rank">${startRank + i}</div>
+        <div class="rank">${rank}</div>
 
         <div class="coin-wrap">
           ${icon}
@@ -1544,7 +1611,9 @@ function render(rows) {
 
         <div class="price-wrap">
           <div class="price">${formatPrice(r.price)}</div>
-          <div class="spark"></div>
+          <div class="spark">
+            ${rank <= 10 ? drawSparkline(sparkData, sparkColor) : ""}
+          </div>
         </div>
       </div>
     `;
@@ -1628,13 +1697,17 @@ function goToPage(p) {
 /* =========================
    FETCH (CoinGecko) -> rows normalized + cached
 ========================= */
-async function fetchCoinGeckoRows({ vs = "usd", page = 1 } = {}) {
+async function fetchCoinGeckoRows({ vs = "usd", page = 1, signal } = {}) {
   const key = cacheKeyCG(vs, page);
 
-  // 1) άμεσο cache
+  // 0) super fast memory cache
+  if (memCache.has(key)) return memCache.get(key);
+
+  // 1) localStorage cache (instant)
   const cached = readCache(key);
   if (cached) {
-    // refresh στο background
+    memCache.set(key, cached);
+    // background refresh (αλλά όχι συνέχεια)
     refreshCoinGeckoInBackground({ vs, page, key }).catch(() => {});
     return cached;
   }
@@ -1642,7 +1715,7 @@ async function fetchCoinGeckoRows({ vs = "usd", page = 1 } = {}) {
   // 2) cooldown
   if (Date.now() < cgCooldownUntil) throw new Error("RATE_LIMIT");
 
-  // 3) live
+  // 3) live fetch
   const url =
     `https://api.coingecko.com/api/v3/coins/markets` +
     `?vs_currency=${encodeURIComponent(vs)}` +
@@ -1652,7 +1725,7 @@ async function fetchCoinGeckoRows({ vs = "usd", page = 1 } = {}) {
     `&sparkline=false` +
     `&price_change_percentage=24h`;
 
-  const res = await fetch(url, { cache: "no-store" });
+  const res = await fetchJSON(url, { signal });
 
   if (res.status === 429) {
     const ra = parseInt(res.headers.get("retry-after") || "60", 10);
@@ -1669,9 +1742,11 @@ async function fetchCoinGeckoRows({ vs = "usd", page = 1 } = {}) {
     icon: String(c?.image || ""),
     price: Number(c?.current_price),
     chg: Number(c?.price_change_percentage_24h),
+    spark: [] // sparkline=false
   })) : [];
 
   writeCache(key, rows);
+  memCache.set(key, rows);
   return rows;
 }
 
@@ -1702,6 +1777,7 @@ async function refreshCoinGeckoInBackground({ vs, page, key }) {
     icon: String(c?.image || ""),
     price: Number(c?.current_price),
     chg: Number(c?.price_change_percentage_24h),
+    spark: []
   })) : [];
 
   writeCache(key, rows);
@@ -1711,7 +1787,7 @@ async function refreshCoinGeckoInBackground({ vs, page, key }) {
 }
 
 /* =========================
-   LOAD PAGE (ΑΥΤΟ ΣΟΥ ΕΛΕΙΠΕ)
+   LOAD PAGE
 ========================= */
 async function loadPage(isPageChange = false) {
   const token = ++requestId;
@@ -1719,35 +1795,67 @@ async function loadPage(isPageChange = false) {
   if (abortCtrl) abortCtrl.abort();
   abortCtrl = new AbortController();
 
-  if (!hasLoadedOnce || isPageChange) renderSkeleton(PER_PAGE);
+  const key = cacheKeyCG("usd", currentPage);
 
-  setStatus("Φόρτωση τιμών…", "loading");
+  // ✅ Αν υπάρχει cache, ΔΕΝ δείχνουμε skeleton. Δείχνουμε cache αμέσως.
+  const instant = memCache.get(key) || readCache(key);
+  if (instant) {
+    allRows = instant;
+    memCache.set(key, instant);
+    render(allRows);
+    renderPagination();
+    setStatus("Updating…", "warn"); // μικρή ένδειξη, χωρίς “μάζεμα”
+    hasLoadedOnce = true;
+  } else {
+    // ✅ Μόνο αν δεν υπάρχει τίποτα, δείξε skeleton
+    renderSkeleton(PER_PAGE);
+    setStatus("Loading prices…", "loading");
+  }
 
   try {
-    const rows = await fetchCoinGeckoRows({ vs: "usd", page: currentPage });
-    if (token !== requestId) return; // ignore παλιό request
+    // μικρό debounce ώστε αν πατήσει 3 σελίδες γρήγορα να ακυρώνεται πριν ξεκινήσει
+    await sleep(120);
+    if (token !== requestId) return;
+
+    const rows = await fetchCoinGeckoRows({ vs: "usd", page: currentPage, signal: abortCtrl.signal });
+    if (token !== requestId) return;
 
     allRows = rows;
     render(allRows);
     renderPagination();
-
     setStatus("", "");
     hasLoadedOnce = true;
 
-    const metaUpdated = $("meta-updated");
-    if (metaUpdated) metaUpdated.textContent = "Updated: " + new Date().toLocaleTimeString();
+    // ✅ Prefetch next page (βοηθάει ΠΟΛΥ στο “3 σελίδες”)
+    prefetchNext();
+
   } catch (e) {
-    const cached = readCache(cacheKeyCG("usd", currentPage), 24 * 60 * 60_000); // δέξου και παλιό cache 24h
-    if (cached) {
-      allRows = cached;
+    // αν έχουμε ήδη δείξει cache, απλά κράτα το και άλλαξε status
+    const fallback = memCache.get(key) || readCache(key, 24 * 60 * 60_000);
+    if (fallback) {
+      allRows = fallback;
+      memCache.set(key, fallback);
       render(allRows);
       renderPagination();
-      setStatus("Δεν έγινε ανανέωση — δείχνω cached τιμές.", "warn");
+      setStatus("Showing cached data (no refresh).", "warn");
       hasLoadedOnce = true;
     } else {
-      setStatus("Αδυναμία σύνδεσης.", "error");
+      setStatus("Connection failed.", "error");
     }
   }
+}
+
+function prefetchNext() {
+  const next = currentPage + 1;
+  if (next > TOTAL_PAGES) return;
+
+  const key = cacheKeyCG("usd", next);
+  if (memCache.has(key) || readCache(key)) return;
+
+  // background prefetch
+  fetchCoinGeckoRows({ vs: "usd", page: next }).then(rows => {
+    memCache.set(key, rows);
+  }).catch(() => {});
 }
 
 /* =========================
@@ -1760,7 +1868,6 @@ function bindClick(id, fn) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  // source buttons
   bindClick("src-auto",     () => { sourceMode = "auto";     setActiveSource("src-auto");     render(allRows); });
   bindClick("src-binance",  () => { sourceMode = "binance";  setActiveSource("src-binance");  render(allRows); });
   bindClick("src-coingecko",() => { sourceMode = "coingecko";setActiveSource("src-coingecko");render(allRows); });
@@ -1790,7 +1897,6 @@ document.addEventListener("DOMContentLoaded", () => {
   setActiveSource("src-auto");
   loadPage(false);
 
-  // refresh loop
   setInterval(() => {
     if (document.visibilityState === "visible") loadPage(false);
   }, REFRESH_MS);

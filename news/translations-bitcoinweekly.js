@@ -5,32 +5,29 @@ pf_title: "Διάβασε επίσης",
 pf_sub: "Περισσότερα άρθρα & αναλύσεις",
 
 
-    bw_kicker: "Bitcoin Weekly",
-    bw_title: "Bitcoin: τι κοιτάμε αυτή την εβδομάδα",
-    bw_lead: "Μια καθαρή εικόνα για τα 3–4 πράγματα που μπορούν να “γράψουν” την τάση: macro, inflation prints, Fed messaging και flows.",
+   /* =======================
+   WEEKLY OUTLOOK (EL)
+======================= */
 
-    bw_caption: "Weekly snapshot: βασικά επίπεδα, catalysts και ρίσκα.",
+wk_kicker: "Weekly Outlook",
+wk_title: "Τι κοιτάμε αυτή την εβδομάδα στις αγορές crypto",
+wk_lead: "Τα βασικά signals που καθορίζουν τη βραχυπρόθεσμη κατεύθυνση: liquidity, macro drivers, sentiment και positioning.",
+wk_caption: "Weekly framework: επίπεδα, ροή χρήματος και σημεία καμπής.",
 
-    bw_h2_1: "1) Macro: ο “ρυθμός” της εβδομάδας",
-    bw_p_1:
-      "Αυτή την εβδομάδα το Bitcoin συνήθως ακολουθεί το γενικό κλίμα ρίσκου: αν οι αποδόσεις (yields) ανεβαίνουν και το δολάριο δυναμώνει, το market γίνεται πιο “σφιχτό” και η μεταβλητότητα αυξάνεται. Αντίθετα, όταν η πίεση χαλαρώνει, οι αγοραστές βρίσκουν πιο εύκολα χώρο να χτίσουν κίνηση πάνω από τα βασικά επίπεδα.",
+wk_h2_1: "1) Liquidity: πού υπάρχουν τα “εύκολα” levels",
+wk_p_1: "Η αγορά κινείται πρώτα προς τα σημεία όπου υπάρχει συγκεντρωμένη ρευστότητα. Highs, lows και περιοχές με έντονο open interest λειτουργούν σαν μαγνήτες. Αυτή την εβδομάδα έχει σημασία αν το market τραβήξει ρευστότητα πριν χτίσει κατεύθυνση ή αν τη χρησιμοποιήσει ως καύσιμο για συνέχιση της τάσης.",
 
-    bw_h2_2: "2) Inflation prints: τι αλλάζει σε CPI / PPI",
-    bw_p_2:
-      "Τα inflation data λειτουργούν σαν “καύσιμο” για τις προσδοκίες γύρω από τα επιτόκια. Ένα αποτέλεσμα που βγαίνει πιο “hot” από το αναμενόμενο μπορεί να φέρει πιο επιθετικό pricing στις αγορές και να πιέσει τα risk assets. Αντίθετα, μια πιο ήπια μέτρηση συχνά βοηθάει το narrative ότι το tightening τελειώνει και ανοίγει το παράθυρο για πιο σταθερή ανοδική δομή.",
+wk_h2_2: "2) Macro drivers: risk-on ή risk-off",
+wk_p_2: "Τα macro δεδομένα δίνουν τον τόνο, ακόμα κι αν δεν επηρεάζουν άμεσα το crypto. Κινήσεις σε yields, δολάριο και equity indices συχνά προηγούνται της μεταβλητότητας στο BTC. Όταν το περιβάλλον γίνεται πιο “σφιχτό”, οι κινήσεις τείνουν να είναι πιο απότομες και λιγότερο συγχωρητικές.",
 
-    bw_h2_3: "3) Fed / FOMC: η γλώσσα μετράει όσο και οι αριθμοί",
-    bw_p_3:
-      "Πέρα από τα ίδια τα δεδομένα, η “ερμηνεία” είναι το μισό παιχνίδι. Τα πρακτικά και οι δηλώσεις μπορούν να αλλάξουν το κλίμα μέσα σε λεπτά, ειδικά αν οι αγορές νιώσουν ότι η Fed θέλει να κρατήσει τα επιτόκια ψηλά για περισσότερο. Σε τέτοιες στιγμές, το BTC συνήθως κάνει πιο καθαρές κινήσεις (breaks ή rejection) και οι αντιδράσεις στα επίπεδα γίνονται πιο “εκρηκτικές”.",
+wk_h2_3: "3) Sentiment: φόβος ή υπερβολική σιγουριά",
+wk_p_3: "Το sentiment δείχνει αν η αγορά είναι ήδη φορτωμένη προς μία πλευρά. Υπερβολική αισιοδοξία συχνά σημαίνει περιορισμένο upside βραχυπρόθεσμα, ενώ ο φόβος μπορεί να δημιουργεί καλύτερες συνθήκες για σταδιακή συσσώρευση. Η εβδομάδα γίνεται πιο καθαρή όταν το sentiment ευθυγραμμίζεται με τη ροή ρευστότητας.",
 
-    bw_h2_4: "4) Flows & on-chain: πού πάει το χρήμα",
-    bw_p_4:
-      "Τα flows είναι το πιο πρακτικό “σήμα”: όταν βλέπεις εισροές σε ETFs ή γενικά ζήτηση στο spot, η αγορά τείνει να κρατάει καλύτερα τις διορθώσεις. Όταν αυξάνονται τα inflows προς exchanges ή η συμπεριφορά των μεγάλων πορτοφολιών δείχνει διάθεση για ρευστοποίηση, τότε οι κινήσεις μπορεί να γίνουν πιο απότομες. Αυτό είναι το κομμάτι που συχνά επιβεβαιώνει (ή ακυρώνει) το σενάριο του macro.",
+wk_h2_4: "4) Positioning: ποιος είναι ήδη μέσα",
+wk_p_4: "Το positioning δείχνει αν το μεγαλύτερο μέρος των traders έχει ήδη πάρει θέση. Όταν η αγορά είναι υπερβολικά long ή short, αυξάνονται οι πιθανότητες για κινήσεις που “καθαρίζουν” αυτές τις θέσεις. Αυτό συχνά προηγείται μιας πιο σταθερής κίνησης.",
 
-    bw_h2_5: "Τι να προσέξεις πρακτικά",
-    bw_p_5:
-      "Αν θες ένα απλό πλάνο: κοιτάς πρώτα τα σημαντικά επίπεδα της εβδομάδας και μετά βλέπεις αν τα δεδομένα “σπρώχνουν” το market προς διάσπαση ή προς απόρριψη. Η εβδομάδα γίνεται πολύ πιο καθαρή όταν τα macro signals και τα flows δείχνουν προς την ίδια κατεύθυνση.",
-
+wk_h2_5: "Πρακτικό πλαίσιο για την εβδομάδα",
+wk_p_5: "Ξεκίνα από τα βασικά επίπεδα, δες πού συγκεντρώνεται η ρευστότητα και μετά αξιολόγησε αν το macro και το sentiment στηρίζουν διάσπαση ή απόρριψη. Όταν τα signals συμφωνούν, οι κινήσεις τείνουν να είναι πιο καθαρές και λιγότερο θορυβώδεις.",
 
 
 pf_title: "Διάβασε επίσης",
@@ -117,32 +114,32 @@ mobile_theme: "Αλλαγή Θέματος",
     pf_title: "Read also",
 pf_sub: "More articles & insights",
 
-    bw_kicker: "Bitcoin Weekly",
-    bw_title: "Bitcoin: what to watch this week",
-    bw_lead:
-      "A clear view of the 3–4 things that can “set” the trend: macro, inflation prints, Fed messaging, and flows.",
+   
 
-    bw_caption: "Weekly snapshot: key levels, catalysts, and risks.",
 
-    bw_h2_1: "1) Macro: the week’s “tempo”",
-    bw_p_1:
-      "This week, Bitcoin typically follows the broader risk mood: if yields rise and the dollar strengthens, the market gets “tighter” and volatility increases. On the other hand, when pressure eases, buyers find it easier to build momentum above key levels.",
+/* =======================
+   WEEKLY OUTLOOK (EN)
+======================= */
 
-    bw_h2_2: "2) Inflation prints: what changes in CPI / PPI",
-    bw_p_2:
-      "Inflation data acts like “fuel” for expectations around interest rates. A reading that comes in hotter than expected can lead to more aggressive market pricing and pressure risk assets. Conversely, a softer print often supports the narrative that tightening is ending and opens the window for a more stable bullish structure.",
+wk_kicker: "Weekly Outlook",
+wk_title: "What we’re watching this week in crypto markets",
+wk_lead: "The key signals shaping short-term direction: liquidity, macro drivers, sentiment, and positioning.",
+wk_caption: "Weekly framework: key levels, capital flows, and inflection points.",
 
-    bw_h2_3: "3) Fed / FOMC: language matters as much as the numbers",
-    bw_p_3:
-      "Beyond the data itself, interpretation is half the game. Minutes and statements can shift sentiment within minutes—especially if markets feel the Fed wants to keep rates higher for longer. In those moments, BTC often makes cleaner moves (breaks or rejections), and reactions around levels become more “explosive.”",
+wk_h2_1: "1) Liquidity: where the “easy” levels sit",
+wk_p_1: "Markets move first toward areas with concentrated liquidity. Highs, lows, and zones with heavy open interest act as magnets. This week, it matters whether price sweeps liquidity before choosing direction or uses it as fuel for continuation.",
 
-    bw_h2_4: "4) Flows & on-chain: where the money goes",
-    bw_p_4:
-      "Flows are the most practical “signal”: when you see ETF inflows or solid spot demand, the market tends to hold corrections better. When inflows to exchanges increase—or large wallets show signs of distributing—moves can become sharper. This is often the piece that confirms (or invalidates) the macro scenario.",
+wk_h2_2: "2) Macro drivers: risk-on or risk-off",
+wk_p_2: "Macro sets the tone, even when it doesn’t directly target crypto. Moves in yields, the dollar, and equity indices often precede volatility in BTC. When conditions tighten, price action tends to be sharper and less forgiving.",
 
-    bw_h2_5: "What to watch in practice",
-    bw_p_5:
-      "If you want a simple plan: first mark the week’s key levels, then check whether the data “pushes” the market toward a breakout or a rejection. The week becomes much clearer when macro signals and flows point in the same direction.",
+wk_h2_3: "3) Sentiment: fear or overconfidence",
+wk_p_3: "Sentiment shows whether the market is already crowded to one side. Excessive optimism often caps short-term upside, while fear can create better conditions for gradual accumulation. The week becomes clearer when sentiment aligns with liquidity flow.",
+
+wk_h2_4: "4) Positioning: who’s already in",
+wk_p_4: "Positioning reveals how committed traders already are. When markets are overly long or short, the odds increase for moves that flush those positions. These cleanups often come before more sustainable price action.",
+
+wk_h2_5: "A practical framework for the week",
+wk_p_5: "Start with key levels, identify where liquidity sits, then assess whether macro and sentiment support a break or rejection. When signals align, moves tend to be cleaner and less noisy.",
 
 
 
