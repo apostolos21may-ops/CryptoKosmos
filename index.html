@@ -2916,6 +2916,23 @@ body.light-theme .pn-read--btn{
         <span data-i18n="pair_sol">SOL/USDT</span>
       </button>
 
+  <button data-symbol="BINANCE:SUIUSDT" class="pair">
+        <span data-i18n="pair_sol">SUI/USDT</span>
+      </button>
+
+ <button data-symbol="BINANCE:FETUSDT" class="pair">
+        <span data-i18n="pair_sol">FET/USDT</span>
+
+ <button data-symbol="BINANCE:RENDERUSDT" class="pair">
+        <span data-i18n="pair_sol">RENDER/USDT</span>
+      </button>
+
+       <button data-symbol="BINANCE:UNIUSDT" class="pair">
+        <span data-i18n="pair_sol">UNI/USDT</span>
+      </button>
+
+      
+
     </div>
   </div>
 </section>
@@ -3881,14 +3898,21 @@ renderGlossary();
     if (heroRefreshInterval) clearInterval(heroRefreshInterval);
   });
 
-  // =========================================
+  
+
+
+ // =========================================
   // LIVE PRICES (stable, cache, skeleton)
   // =========================================
   const coins = [
-    { id: "bitcoin",  symbol: "BTC" },
-    { id: "ethereum", symbol: "ETH" },
-    { id: "solana",   symbol: "SOL" }
-  ];
+  { id: "bitcoin", symbol: "BTC" },
+  { id: "ethereum", symbol: "ETH" },
+  { id: "solana", symbol: "SOL" },
+  { id: "sui", symbol: "SUI" },
+  { id: "artificial-superintelligence-alliance", symbol: "FET" },
+  { id: "render", symbol: "RENDER" },
+  { id: "uniswap", symbol: "UNI" }
+];
 
   let pricesInterval = null;
   let pricesBooted = false;
@@ -3979,8 +4003,8 @@ renderGlossary();
         if (!res.ok) throw new Error("HTTP " + res.status);
 
         const data = await res.json();
-        const ok = coins.every(c => data?.[c.id] && typeof data[c.id].eur === "number");
-        if (!ok) throw new Error("Invalid price data");
+       const ok = coins.some(c => data?.[c.id] && typeof data[c.id].eur === "number");
+if (!ok) throw new Error("Invalid price data");
 
         setCachedPrices(data);
         renderMarket(data);
@@ -4005,7 +4029,9 @@ renderGlossary();
   }
 
   startPrices();
-  window.addEventListener("pagehide", stopPrices);
+  window.addEventListener("pagehide", stopPrices); 
+
+
 
 // ========================================
 // TradingView Chart (theme-safe)
