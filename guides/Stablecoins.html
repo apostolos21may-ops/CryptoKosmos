@@ -5,475 +5,127 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Stablecoins – CryptoKosmos</title>
 
-  <!-- GLOBAL STYLES -->
-  <link rel="stylesheet" href="../styles.css" />
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-7DWG18EQLG"></script>
 
-  <!-- PAGE TRANSLATIONS -->
-  <script src="../translations-Stablecoins.js" defer></script>
+  <!-- PAGE TRANSLATIONS (φορτώνεται κάτω, πριν το i18n.js) -->
 
   <!-- Light/Dark article images preload -->
   <link rel="preload" as="image" href="../image2.png">
  
 
-  <style>
-
-
-
-#auth-icon {
-  width: 20px;
-  height: 20px;
-}
-
-
-    body.article-page {
-      padding: 0;
-    }
-
-    .article-container {
-      max-width: 800px;
-      margin: auto;
-      padding: 20px;
-    }
-
-    /* Desktop: lock widths of header buttons */
-    @media (min-width: 900px) {
-      #theme-toggle {
-        width: 85px;
-        justify-content: center;
-      }
-
-      #auth-btn {
-        width: 85px;
-        justify-content: center;
-      }
-
-      #lang-toggle {
-        width: 70px;
-        justify-content: center;
-      }
-
-      .pill-btn {
-        height: 34px;
-      }
-    }
-
-
-
-
-
-.more-guides{
-  display:inline-flex;
-  align-items:center;
-  gap:10px;
-
-  padding:10px 16px;
-  border-radius:14px;
-
-  background: rgba(15,18,22,.55);
-  border: 1px solid rgba(91,180,255,.35);
-
-  color: var(--text);
-  font-weight:700;
-  font-size:13px;
-  letter-spacing:.2px;
-  text-decoration:none;
-
-  box-shadow:
-    0 0 0 1px rgba(123,97,255,.12),
-    0 10px 26px rgba(0,0,0,.35);
-
-  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
-}
-
-.more-guides:hover{
-  transform: translateY(-2px);
-  border-color: rgba(91,180,255,.75);
-  box-shadow:
-    0 0 0 1px rgba(91,180,255,.18),
-    0 16px 34px rgba(0,0,0,.42);
-}
-
-.more-guides:hover{
-  transform: translateY(-2px);
-  border-color: rgba(91,180,255,.75);
-  box-shadow:
-    0 0 0 1px rgba(91,180,255,.18),
-    0 16px 34px rgba(0,0,0,.42);
-}
-
-/* Arrow pill */
-.mg-arrow{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-
-  width:28px;
-  height:28px;
-
-  border-radius:10px;
-  background: linear-gradient(135deg, rgba(91,180,255,.95), rgba(123,97,255,.95));
-  color:#0f1216;
-
-  font-weight:900;
-  line-height:1;
-
-  box-shadow: 0 10px 22px rgba(91,180,255,.22);
-}
-
-/* Light theme version */
-body.light-theme .more-guides{
-  background: rgba(255,255,255,.85);
-  border: 1px solid rgba(0,0,0,.12);
-  box-shadow:
-    0 0 0 1px rgba(0,0,0,.04),
-    0 10px 22px rgba(0,0,0,.10);
-}
-
-body.light-theme .more-guides:hover{
-  border-color: rgba(53,92,255,.55);
-}
-
-body.light-theme .more-guides{
-  background: rgba(255,255,255,.85);
-  border: 1px solid rgba(0,0,0,.12);
-}
-
-/* Mobile */
-@media (max-width: 520px){
-  .more-guides{
-    padding:9px 12px;
-    font-size:12px;
-    white-space:nowrap;
-  }
-  .mg-arrow{ width:26px; height:26px; border-radius:9px; }
-}
-
-/* ✅ Το "Γύρνα πίσω" να μένει κάτω από την 1η (αριστερή) κάρτα */
-.guides-grid{
-  display:grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap:16px;
-}
-
-.guides-grid > .more-guides{
-  grid-column: 1;        /* 1η στήλη (αριστερά) */
-  justify-self: start;   /* αριστερά μέσα στη στήλη */
-  align-self: end;       /* κάτω στο row του */
-  margin-top: 8px;       /* μικρό κενό από πάνω */
-}
-
-  </style>
 </head>
 
 <body class="article-page">
 
-<!-- ================= HEADER ================= -->
-<header class="site-header">
-  <div class="container header-inner">
-
-    <a class="brand" href="../index.html">
-      <img id="site-logo" src="../logo.png" alt="CryptoKosmos" class="logo" />
-      <div class="brand-text">
-        <h1>CryptoKosmos</h1>
-        <p class="tagline" data-i18n="header_tagline">Ο παλμός του κόσμου των crypto</p>
-      </div>
-    </a>
-
-    <nav class="nav">
-      <a href="../index.html#market" data-i18n="nav_market">Αγορά</a>
-      <a href="../index.html#charts" data-i18n="nav_charts">Τάσεις</a>
-      <a href="../index.html#guides" data-i18n="nav_guides">Οδηγοί</a>
-      <a href="../index.html#glossary" data-i18n="nav_glossary">Γλωσσάρι</a>
-    </nav>
-
-    <div class="header-actions">
-
-      <button id="theme-toggle" class="pill-btn">
-        <img id="theme-icon" src="../IMG_5300.png" class="icon-img" />
-        <span id="theme-label">Dark</span>
-      </button>
-
-      <button id="auth-btn" class="pill-btn">
-        <img id="auth-icon" src="../IMG_5301.png" class="icon-img" />
-        <span id="auth-label" data-i18n="login">Login</span>
-      </button>
-
-      <button id="menu-toggle" class="menu-btn">
-        <span class="burger-line"></span>
-        <span class="burger-line"></span>
-        <span class="burger-line"></span>
-      </button>
-
-      <button id="lang-toggle" class="pill-btn">
-        <img id="lang-icon" class="icon-img" src="../IMG_5542.png">
-        <span id="lang-label">GR</span>
-      </button>
-
-    </div>
-  </div>
-</header>
-
-<!-- ================= MOBILE MENU ================= -->
-<div id="mobile-menu" class="mobile-menu">
-  <a href="../index.html#market" data-i18n="nav_market">Αγορά</a>
-  <a href="../index.html#charts" data-i18n="nav_charts">Τάσεις</a>
-  <a href="../index.html#guides" data-i18n="nav_guides">Οδηγοί</a>
-  <a href="../index.html#glossary" data-i18n="nav_glossary">Γλωσσάρι</a>
-
-  <button id="mobile-home-btn" class="mobile-btn" data-i18n="mobile_home">
-    Αρχική Σελίδα
-  </button>
-
-  <button id="mobile-theme-toggle" class="mobile-btn" data-i18n="mobile_theme">
-    Αλλαγή Θέματος
-  </button>
-
-  <button id="mobile-auth-btn" class="mobile-btn" data-i18n="login">
-    Login
-  </button>
-
-  <button id="mobile-lang-toggle" class="mobile-btn">
-    <img id="mobile-lang-icon" class="icon-img" src="../IMG_5542.png">
-    <span id="mobile-lang-label">GR</span>
-  </button>
-</div>
+<!-- header.js injects <header>/.mobile-menu/modals here -->
 
 <!-- ================= ARTICLE CONTENT ================= -->
-<div class="article-container">
+<div class="article-wrap">
 
-  <h2 data-i18n="st_title">Τι είναι τα Stablecoins;</h2>
+  <span class="article-eyebrow" data-i18n="st_eyebrow">ΟΔΗΓΟΣ</span>
 
-  <p data-i18n="st_intro">
+  <h2 class="article-title" data-i18n="st_title">Τι είναι τα Stablecoins;</h2>
+
+  <p class="article-lead" data-i18n="st_intro">
     Τα stablecoins είναι κρυπτονομίσματα που έχουν στόχο να κρατάνε σταθερή αξία (συνήθως 1$). Χρησιμοποιούνται πολύ σε trading, μεταφορές χρημάτων και DeFi.
   </p>
 
   <!-- IMAGE WITH DUAL LIGHT/DARK SOURCES -->
-  <img id="article-image"
+  <img class="article-hero-img"
+       id="article-image"
        src="./image2.png"
        data-light-img="./image2.png"
        data-dark-img="./image2.png"
-       alt="Stablecoins"
-       style="width:100%;border-radius:16px;margin:20px 0;">
+       alt="Stablecoins illustration" />
 
-  <h3 data-i18n="st_what_title">Τι σημαίνει “stable”;</h3>
-  <p data-i18n="st_what_text"></p>
+  <h3 data-i18n="st_what_title">Τι σημαίνει «stable»;</h3>
+  <p data-i18n="st_what_text">
+    «Stable» σημαίνει ότι η τιμή του token είναι σχεδιασμένη να παραμένει σταθερή — συνήθως «καρφωμένη» (pegged) σε ένα νόμισμα αναφοράς όπως το δολάριο ΗΠΑ. Σε αντίθεση με το Bitcoin ή το Ethereum, η τιμή ενός stablecoin δεν αναμένεται να ανέβει ή να κατέβει σημαντικά.
+  </p>
 
   <h3 data-i18n="st_types_title">Τύποι stablecoins</h3>
 
   <ol>
-    <li data-i18n="st_type1"></li>
-    <li data-i18n="st_type2"></li>
-    <li data-i18n="st_type3"></li>
-    <li data-i18n="st_type4"></li>
-    <li data-i18n="st_type5"></li>
-    <li data-i18n="st_type6"></li>
+    <li data-i18n="st_type1">Fiat-backed: υποστηρίζονται από αποθέματα fiat νομίσματος (π.χ. USDT, USDC)</li>
+    <li data-i18n="st_type2">Crypto-backed: υποστηρίζονται από άλλα κρυπτονομίσματα με υπερ-εξασφάλιση (π.χ. DAI)</li>
+    <li data-i18n="st_type3">Algorithmic: η σταθερότητα διατηρείται μέσω αλγορίθμων προσφοράς/ζήτησης</li>
+    <li data-i18n="st_type4">Commodity-backed: υποστηρίζονται από φυσικά αγαθά όπως ο χρυσός</li>
+    <li data-i18n="st_type5">Hybrid: συνδυασμός παραπάνω μεθόδων εξασφάλισης</li>
+    <li data-i18n="st_type6">Yield-bearing: stablecoins που αποδίδουν τόκο/απόδοση στον κάτοχο</li>
   </ol>
 
-  <h3 data-i18n="st_peg_title">Τι είναι το “peg” (1$);</h3>
-  <p data-i18n="st_peg_text"></p>
+  <h3 data-i18n="st_peg_title">Τι είναι το «peg» (1$);</h3>
+  <p data-i18n="st_peg_text">
+    Το «peg» είναι η δέσμευση ότι 1 token = 1 μονάδα του νομίσματος αναφοράς (π.χ. 1 USDT ≈ 1$). Ο εκδότης ή το πρωτόκολλο προσπαθεί να διατηρήσει αυτή την ισοτιμία μέσω αποθεμάτων, εξασφαλίσεων ή αλγορίθμων. Όταν η τιμή αποκλίνει σημαντικά από το 1$, μιλάμε για «depeg».
+  </p>
 
   <h3 data-i18n="st_use_title">Πού χρησιμοποιούνται;</h3>
   <ul>
-    <li data-i18n="st_use1"></li>
-    <li data-i18n="st_use2"></li>
-    <li data-i18n="st_use3"></li>
-    <li data-i18n="st_use4"></li>
-    <li data-i18n="st_use5"></li>
-    <li data-i18n="st_use6"></li>
+    <li data-i18n="st_use1">Trading: ως ενδιάμεσο νόμισμα για αγοραπωλησίες χωρίς να βγαίνεις σε fiat</li>
+    <li data-i18n="st_use2">Μεταφορές χρημάτων διεθνώς, με χαμηλό κόστος και ταχύτητα</li>
+    <li data-i18n="st_use3">DeFi: δανεισμός, δανειοδότηση και liquidity pools</li>
+    <li data-i18n="st_use4">Αποθήκη αξίας σε περιόδους μεταβλητότητας (παρκάρισμα κεφαλαίων)</li>
+    <li data-i18n="st_use5">Πληρωμές και μισθοδοσία σε crypto</li>
+    <li data-i18n="st_use6">Είσοδος/έξοδος μεταξύ ανταλλακτηρίων χωρίς τραπεζικές καθυστερήσεις</li>
   </ul>
 
   <h3 data-i18n="st_risks_title">Κίνδυνοι (τι να προσέχεις)</h3>
   <ul>
-    <li data-i18n="st_risk1"></li>
-    <li data-i18n="st_risk2"></li>
-    <li data-i18n="st_risk3"></li>
-    <li data-i18n="st_risk4"></li>
-    <li data-i18n="st_risk5"></li>
-    <li data-i18n="st_risk6"></li>
-    <li data-i18n="st_risk7"></li>
+    <li data-i18n="st_risk1">Ρίσκο «depeg» — το token να χάσει την ισοτιμία 1$</li>
+    <li data-i18n="st_risk2">Ρίσκο αποθεματικών — αμφιβολίες για το αν υπάρχουν πραγματικά τα αποθέματα</li>
+    <li data-i18n="st_risk3">Κανονιστικό ρίσκο — αλλαγές νομοθεσίας που επηρεάζουν τον εκδότη</li>
+    <li data-i18n="st_risk4">Ρίσκο smart contract για crypto-backed και algorithmic stablecoins</li>
+    <li data-i18n="st_risk5">Ρίσκο πλατφόρμας — αν χρησιμοποιείς custodial υπηρεσία</li>
+    <li data-i18n="st_risk6">Ρίσκο ρευστότητας σε λιγότερο γνωστά stablecoins</li>
+    <li data-i18n="st_risk7">Ρίσκο συγκέντρωσης — εξάρτηση από έναν εκδότη ή blockchain</li>
   </ul>
 
   <h3 data-i18n="st_tip_title">Tip</h3>
-  <p><strong data-i18n="st_tip_strong"></strong> <span data-i18n="st_tip_text"></span></p>
+  <p><strong data-i18n="st_tip_strong">Πριν χρησιμοποιήσεις ένα stablecoin:</strong> <span data-i18n="st_tip_text">έλεγξε ποιος το εκδίδει, πώς υποστηρίζεται και αν υπάρχουν πρόσφατα audits αποθεμάτων.</span></p>
 
   <h3 data-i18n="st_check_title">Mini checklist πριν τα χρησιμοποιήσεις</h3>
   <ul>
-    <li data-i18n="st_check1"></li>
-    <li data-i18n="st_check2"></li>
-    <li data-i18n="st_check3"></li>
-    <li data-i18n="st_check4"></li>
-    <li data-i18n="st_check5"></li>
+    <li data-i18n="st_check1">Ποιος είναι ο εκδότης και πού εδρεύει;</li>
+    <li data-i18n="st_check2">Τι το υποστηρίζει (fiat, crypto, αλγόριθμος);</li>
+    <li data-i18n="st_check3">Υπάρχουν πρόσφατα audits/αναφορές αποθεμάτων;</li>
+    <li data-i18n="st_check4">Σε ποια blockchains κυκλοφορεί και πόση ρευστότητα έχει;</li>
+    <li data-i18n="st_check5">Ποιο είναι το ιστορικό του — έχει ξανακάνει depeg;</li>
   </ul>
 
   <h3 data-i18n="st_conclusion_title">Συμπέρασμα</h3>
-  <p data-i18n="st_conclusion"></p>
+  <p data-i18n="st_conclusion">
+    Τα stablecoins είναι ένα από τα πιο χρήσιμα εργαλεία στο crypto — γεφυρώνουν τον κόσμο του fiat με το on-chain οικοσύστημα. Όμως «stable» δεν σημαίνει «χωρίς ρίσκο»: κάνε έρευνα για τον εκδότη και τις εξασφαλίσεις πριν εμπιστευτείς μεγάλα ποσά.
+  </p>
 
-<a href="../guides/MoreGuids.html" class="more-guides" data-i18n="guides_more" aria-label="More guides">
+<div class="cta-row">
+  <a href="../guides/MoreGuids.html" class="more-guides" data-i18n="guides_more" aria-label="More guides">
     Δες περισσότερα <span class="mg-arrow">→</span>
   </a>
+</div>
 
 </div>
 
-<footer class="site-footer">
-  <div class="container">
-    <p>
-      © <span id="year"></span> CryptoKosmos —
-      <span data-i18n="footer_rights">Όλα τα δικαιώματα διατηρούνται.</span>
-    </p>
-  </div>
-</footer>
+<!-- prefooter.js injects .prefooter + <footer> here -->
 
-<div id="login-modal" class="modal hidden">
-  <div class="modal-backdrop"></div>
-  <div class="modal-card">
-
-    <div class="modal-header">
-      <span class="modal-title" data-i18n="login_title">Σύνδεση</span>
-      <button class="modal-close" id="login-close">×</button>
-    </div>
-
-    <form id="login-form">
-      <div class="modal-body">
-
-        <label data-i18n="login_email">Email</label>
-        <input id="login-email" type="email" 
-               data-i18n-placeholder="login_email"
-               placeholder="Email">
-
-        <label data-i18n="login_password">Κωδικός</label>
-        <div class="pass-wrap">
-          <input id="login-pass" type="password"
-                 data-i18n-placeholder="login_password"
-                 placeholder="Password">
-          <img id="login-pass-toggle" class="pass-eye" src="../IMG_5380.png">
-        </div>
-
-      </div>
-
-      <button class="modal-submit" type="submit" data-i18n="login_btn">
-        Σύνδεση
-      </button>
-
-      <p id="no-account"
-         class="modal-hint"
-         style="color:#ffb3b3; display:none;"
-         data-i18n="login_no_account">
-         Δεν έχεις λογαριασμό στο CryptoKosmos.
-      </p>
-
-      <button id="signup-btn" type="button"
-        style="display:none;margin-top:10px;width:100%;padding:10px 14px;border:none;border-radius:14px;
-        background:#1e293b;color:white;font-weight:600;cursor:pointer;border:1px solid rgba(255,255,255,0.25);"
-        data-i18n="login_create_account">
-        Δημιουργία λογαριασμού
-      </button>
-
-    </form>
-  </div>
-</div>
-
-<div id="signup-modal" class="modal hidden">
-  <div class="modal-backdrop"></div>
-  <div class="modal-card">
-
-    <div class="modal-header">
-      <h3 class="modal-title" data-i18n="signup_title">Δημιούργησε λογαριασμό</h3>
-      <button class="modal-close signup-close">×</button>
-    </div>
-
-    <div class="modal-body">
-
-      <label data-i18n="signup_email">Email</label>
-      <input id="signup-email" type="email"
-             data-i18n-placeholder="signup_email"
-             placeholder="Email">
-
-      <label data-i18n="signup_pass1">Κωδικός</label>
-      <div class="pass-wrap">
-        <input id="signup-pass1" type="password"
-               data-i18n-placeholder="signup_pass1"
-               placeholder="Password">
-        <img id="signup-pass1-toggle" class="pass-eye" src="../IMG_5380.png">
-      </div>
-
-      <label data-i18n="signup_pass2">Επιβεβαίωση κωδικού</label>
-      <div class="pass-wrap">
-        <input id="signup-pass2" type="password"
-               data-i18n-placeholder="signup_pass2"
-               placeholder="Confirm Password">
-        <img id="signup-pass2-toggle" class="pass-eye" src="../IMG_5380.png">
-      </div>
-
-      <p id="signup-error"
-         style="color:#ff6b6b; display:none;"
-         data-i18n="signup_error">
-         Οι κωδικοί δεν ταιριάζουν.
-      </p>
-
-      <button id="signup-create" class="modal-submit" data-i18n="signup_btn">
-        Δημιουργία λογαριασμού
-      </button>
-
-      <p class="modal-hint">
-        <span data-i18n="signup_have_account">Έχεις ήδη λογαριασμό;</span>
-        <span id="back-to-login"
-              style="color:#5bb4ff;cursor:pointer;"
-              data-i18n="signup_back">
-          Σύνδεση
-        </span>
-      </p>
-
-    </div>
-  </div>
-</div>
-
-<div id="verify-modal" class="modal hidden">
-  <div class="modal-backdrop"></div>
-  <div class="modal-card">
-
-    <div class="modal-header">
-      <h3 class="modal-title" data-i18n="verify_title">Επαλήθευση Email</h3>
-      <button class="modal-close verify-close">×</button>
-    </div>
-
-    <div class="modal-body">
-
-      <p class="muted" data-i18n="verify_subtitle">
-        Σου στείλαμε έναν 6-ψήφιο κωδικό.
-      </p>
-
-      <label data-i18n="verify_code">Κωδικός</label>
-      <input id="verify-code" type="text"
-             data-i18n-placeholder="verify_code"
-             placeholder="Code">
-
-      <p id="verify-error" style="color:#ff6b6b; display:none;"
-         data-i18n="verify_error">
-         Λάθος κωδικός. Προσπάθησε ξανά.
-      </p>
-
-      <button id="verify-submit" class="modal-submit" data-i18n="verify_btn">
-        Επιβεβαίωση
-      </button>
-
-    </div>
-
-  </div>
-</div>
-
-<!-- YEAR -->
-<script>
-  document.getElementById("year").textContent = new Date().getFullYear();
-  document.getElementById("mobile-home-btn")?.addEventListener("click", () => {
-    window.location.href = "../index.html";
-  });
-</script>
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
 
 <!-- GLOBAL SCRIPTS -->
-<script src="../app.js" defer></script>
-<script src="../i18n.js" defer></script>
+<script src="../header.js" defer></script>
+<script src="../prefooter.js" defer></script>
 
+<!-- PAGE TRANSLATIONS (πρέπει να φορτωθεί ΠΡΙΝ το i18n.js) -->
+<script src="../translations-Stablecoins.js" defer></script>
+
+<script src="../i18n.js" defer></script>
+<script src="../app.js" defer></script>
+
+<!-- GLOBAL STYLES -->
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="../header-theme.css" />
+  <link rel="stylesheet" href="../article-theme.css" />
+<script src="../scroll-on-lang.js"></script>
 </body>
 </html>

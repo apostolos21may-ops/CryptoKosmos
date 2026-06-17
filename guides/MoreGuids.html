@@ -3,559 +3,316 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Solana – CryptoKosmos</title>
+  <title>Όλοι οι Οδηγοί – CryptoKosmos</title>
+  <meta name="description" content="Όλοι οι οδηγοί του CryptoKosmos σε ένα μέρος: blockchain, wallets, Bitcoin, Ethereum, DeFi, NFTs, ασφάλεια, fees και πολλά ακόμα." />
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-7DWG18EQLG"></script>
+  
 
-  <!-- GLOBAL STYLES -->
-  <link rel="stylesheet" href="../styles.css" />
-
-  <!-- PAGE TRANSLATIONS -->
-
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-7DWG18EQLG"></script>
 
   <style>
-     body.article-page {
-      padding: 0;
+    /* ===========================================
+       GUIDES HUB GRID
+    =========================================== */
+    .guides-hub-grid{
+      display:grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap:16px;
+      margin: 28px 0 36px;
     }
 
-    .article-container {
-      max-width: 800px;
-      margin: auto;
-      padding: 20px;
+    /* ===========================================
+       Full .card styling from index.html, scoped
+       to the guides hub so it overrides the plain
+       .card from styles.css and article-theme.css
+    =========================================== */
+    .guides-hub-grid .card{
+      background:
+        radial-gradient(ellipse at 0% 0%, rgba(91,180,255,0.05) 0%, transparent 60%),
+        var(--card);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 18px;
+      padding: 20px 20px 24px;
+      transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
     }
 
-    /* Desktop: lock widths of header buttons */
-    @media (min-width: 900px) {
-      #theme-toggle {
-        width: 85px;
-        justify-content: center;
-      }
-
-      #auth-btn {
-        width: 85px;
-        justify-content: center;
-      }
-
-      #lang-toggle {
-        width: 70px;
-        justify-content: center;
-      }
-
-      .pill-btn {
-        height: 34px;
-      }
+    .guides-hub-grid .card::before{
+      content: "";
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.09), transparent);
     }
 
+    .guides-hub-grid .card:hover{
+      transform: translateY(-3px);
+      border-color: rgba(91,180,255,0.22);
+      box-shadow: 0 12px 36px rgba(0,0,0,0.30), 0 0 24px rgba(91,180,255,0.07);
+    }
 
-#auth-icon {
-  width: 20px;
-  height: 20px;
-}
+    .guides-hub-grid .card h4{
+      margin: 0 0 8px;
+      font-size: 15px;
+      font-weight: 700;
+    }
 
+    .guides-hub-grid .card p{
+      font-size: 13.5px;
+      line-height: 1.6;
+      color: var(--muted);
+      margin: 0;
+    }
 
+    /* Override article-theme.css's .btn so the
+       "Διάβασε / Read" button matches the pill
+       style from the index.html guide cards */
+    .guides-hub-grid .card .btn{
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      margin-top: auto;
+      padding: 9px 16px;
+      background: transparent;
+      border: 1px solid rgba(91,180,255,0.35);
+      border-radius: 999px;
+      color: var(--brand);
+      font-weight: 600;
+      font-size: 13px;
+      transition: background .2s, border-color .2s, color .2s;
+      align-self: flex-start;
+      position: relative;
+      top: 14px;
+    }
 
+    .guides-hub-grid .card .btn:hover{
+      background: var(--brand);
+      color: #0f1216;
+      border-color: var(--brand);
+    }
 
-
-
-
-
-
-
-
-
-
-
-
-
-.more-guides{
-  display:inline-flex;
-  align-items:center;
-  gap:10px;
-
-  padding:10px 16px;
-  border-radius:14px;
-
-  background: rgba(15,18,22,.55);
-  border: 1px solid rgba(91,180,255,.35);
-
-  color: var(--text);
-  font-weight:700;
-  font-size:13px;
-  letter-spacing:.2px;
-  text-decoration:none;
-
-  box-shadow:
-    0 0 0 1px rgba(123,97,255,.12),
-    0 10px 26px rgba(0,0,0,.35);
-
-  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
-}
-
-.more-guides:hover{
-  transform: translateY(-2px);
-  border-color: rgba(91,180,255,.75);
-  box-shadow:
-    0 0 0 1px rgba(91,180,255,.18),
-    0 16px 34px rgba(0,0,0,.42);
-}
-
-.more-guides:hover{
-  transform: translateY(-2px);
-  border-color: rgba(91,180,255,.75);
-  box-shadow:
-    0 0 0 1px rgba(91,180,255,.18),
-    0 16px 34px rgba(0,0,0,.42);
-}
-
-/* Arrow pill */
-.mg-arrow{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-
-  width:28px;
-  height:28px;
-
-  border-radius:10px;
-  background: linear-gradient(135deg, rgba(91,180,255,.95), rgba(123,97,255,.95));
-  color:#0f1216;
-
-  font-weight:900;
-  line-height:1;
-
-  box-shadow: 0 10px 22px rgba(91,180,255,.22);
-}
-
-/* Light theme version */
-body.light-theme .more-guides{
-  background: rgba(255,255,255,.85);
-  border: 1px solid rgba(0,0,0,.12);
-  box-shadow:
-    0 0 0 1px rgba(0,0,0,.04),
-    0 10px 22px rgba(0,0,0,.10);
-}
-
-body.light-theme .more-guides:hover{
-  border-color: rgba(53,92,255,.55);
-}
-
-body.light-theme .more-guides{
-  background: rgba(255,255,255,.85);
-  border: 1px solid rgba(0,0,0,.12);
-}
-
-/* Mobile */
-@media (max-width: 520px){
-  .more-guides{
-    padding:9px 12px;
-    font-size:12px;
-    white-space:nowrap;
-  }
-  .mg-arrow{ width:26px; height:26px; border-radius:9px; }
-}
-
-/* ✅ Το "Γύρνα πίσω" να μένει κάτω από την 1η (αριστερή) κάρτα */
-.guides-grid{
-  display:grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap:16px;
-}
-
-.guides-grid > .more-guides{
-  grid-column: 1;        /* 1η στήλη (αριστερά) */
-  justify-self: start;   /* αριστερά μέσα στη στήλη */
-  align-self: end;       /* κάτω στο row του */
-  margin-top: 8px;       /* μικρό κενό από πάνω */
-}
-
-</style>
+    .guides-hub-cta{
+      display:flex;
+      justify-content:center;
+      margin-top: 8px;
+    }
   </style>
 </head>
 
 <body class="article-page">
 
-<!-- ================= HEADER ================= -->
-<header class="site-header">
-  <div class="container header-inner">
+<!-- header.js injects <header>/.mobile-menu/modals here -->
 
-    <a class="brand" href="../index.html">
-      <img id="site-logo" src="../logo.png" class="logo" />
-      <div class="brand-text">
-        <h1>CryptoKosmos</h1>
-        <p class="tagline" data-i18n="header_tagline">Ο παλμός του κόσμου των crypto</p>
-      </div>
+<div class="article-wrap">
+
+  <span class="article-eyebrow" data-i18n="moreguides_eyebrow">ΟΔΗΓΟΙ</span>
+
+  <h2 class="article-title" data-i18n="moreguides_title">Όλοι οι Οδηγοί</h2>
+
+  <p class="article-lead" data-i18n="moreguides_lead">
+    Όλοι οι οδηγοί του CryptoKosmos σε ένα μέρος — από τα βασικά του blockchain μέχρι risk management και on-chain ανάλυση.
+  </p>
+
+  <!-- GUIDES GRID -->
+  <div class="guides-hub-grid">
+
+    <!-- Blockchain -->
+    <article class="card">
+      <h4 data-i18n="guide_blockchain_title">Τι είναι το Blockchain</h4>
+      <p data-i18n="guide_blockchain_desc">
+        Το «κοινόχρηστο ψηφιακό βιβλίο» που καταγράφει συναλλαγές με ασφάλεια &amp; διαφάνεια.
+      </p>
+      <a href="../guides/blockchain.html" class="btn" data-i18n="read_more">Διάβασε</a>
+    </article>
+
+    <!-- Wallets -->
+    <article class="card">
+      <h4 data-i18n="guide_wallets_title">Wallets: Custodial vs Non-custodial</h4>
+      <p data-i18n="guide_wallets_desc">
+        Ποιες είναι οι διαφορές και πότε διαλέγω το ένα ή το άλλο. Seed phrase &amp; 2FA.
+      </p>
+      <a href="../guides/wallets.html" class="btn" data-i18n="read_more">Διάβασε</a>
+    </article>
+
+    <!-- Solana -->
+    <article class="card">
+      <h4 data-i18n="guide_solana_title">Αγορά Solana με ασφάλεια</h4>
+      <p data-i18n="guide_solana_desc">
+        DCA, alerts, fees, επιλογή ανταλλακτηρίου και πρακτικά tips για αρχή.
+      </p>
+      <a href="../guides/solana.html" class="btn" data-i18n="read_more">Διάβασε</a>
+    </article>
+
+    <!-- Bitcoin -->
+    <article class="card">
+      <h4 data-i18n="guide_bitcoin_title">Τι είναι το Bitcoin</h4>
+      <p data-i18n="guide_bitcoin_desc">
+        Το πρώτο αποκεντρωμένο ψηφιακό νόμισμα. Mining, halving και store of value.
+      </p>
+      <a href="../guides/bitcoin.html" class="btn" data-i18n="read_more">Διάβασε</a>
+    </article>
+
+    <!-- Ethereum -->
+    <article class="card">
+      <h4 data-i18n="guide_ethereum_title">Τι είναι το Ethereum</h4>
+      <p data-i18n="guide_ethereum_desc">
+        Smart contracts, gas fees και το blockchain που έφερε το Web3.
+      </p>
+      <a href="../guides/ethereum.html" class="btn" data-i18n="read_more">Διάβασε</a>
+    </article>
+
+    <!-- DeFi -->
+    <article class="card">
+      <h4 data-i18n="guide_defi_title">Τι είναι το DeFi</h4>
+      <p data-i18n="guide_defi_desc">
+        Δανεισμός, ανταλλαγές και αποδόσεις χωρίς τράπεζες — πώς δουλεύει και τι να προσέχεις.
+      </p>
+      <a href="../guides/DeFi.html" class="btn" data-i18n="read_more">Διάβασε</a>
+    </article>
+
+    <!-- NFT -->
+    <article class="card">
+      <h4 data-i18n="guide_nft_title">Τι είναι τα NFT</h4>
+      <p data-i18n="guide_nft_desc">
+        Μοναδικά ψηφιακά assets, συλλογές και χρησιμότητα — τι αξίζει πραγματικά και τι όχι.
+      </p>
+      <a href="../guides/NFT.html" class="btn" data-i18n="read_more">Διάβασε</a>
+    </article>
+
+    <!-- Security -->
+    <article class="card">
+      <h4 data-i18n="guide_security_title">Ασφάλεια στα Crypto</h4>
+      <p data-i18n="guide_security_desc">
+        Seed phrase, 2FA, phishing και scams — τα βασικά βήματα για να μην την πατήσεις.
+      </p>
+      <a href="../guides/CryptoSecurity.html" class="btn" data-i18n="read_more">Διάβασε</a>
+    </article>
+
+    <!-- Stablecoins -->
+    <article class="card">
+      <h4 data-i18n="guide_stablecoins_title">Τι είναι τα Stablecoins</h4>
+      <p data-i18n="guide_stablecoins_desc">
+        USDT/USDC και γιατί «κρατάνε» τιμή — πλεονεκτήματα, ρίσκα και χρήσεις.
+      </p>
+      <a href="../guides/Stablecoins.html" class="btn" data-i18n="read_more">Διάβασε</a>
+    </article>
+
+    <!-- Fees -->
+    <article class="card">
+      <h4 data-i18n="guide_fees_title">Gas Fees &amp; Προμήθειες</h4>
+      <p data-i18n="guide_fees_desc">
+        Τι πληρώνεις σε κάθε συναλλαγή, γιατί αλλάζει το κόστος και πώς το μειώνεις.
+      </p>
+      <a href="../guides/Gasfees.html" class="btn" data-i18n="read_more">Διάβασε</a>
+    </article>
+
+    <!-- Exchanges -->
+    <article class="card">
+      <h4 data-i18n="guide_exchanges_title">Exchanges: CEX vs DEX</h4>
+      <p data-i18n="guide_exchanges_desc">
+        Ανταλλακτήρια τύπου Binance vs αποκεντρωμένα (DEX) — διαφορές, fees και ασφάλεια.
+      </p>
+      <a href="../guides/exchange.html" class="btn" data-i18n="read_more">Διάβασε</a>
+    </article>
+
+    <!-- Wallet Setup -->
+    <article class="card">
+      <h4 data-i18n="guide_wallet_setup_title">Πώς στήνω Wallet σωστά</h4>
+      <p data-i18n="guide_wallet_setup_desc">
+        Βήμα-βήμα: δημιουργία, backup seed phrase, 2FA και «κανόνες» για αρχή.
+      </p>
+      <a href="../guides/setupwallet.html" class="btn" data-i18n="read_more">Διάβασε</a>
+    </article>
+
+    <!-- Market Cycles -->
+    <article class="card">
+      <h4 data-i18n="guide_cycles_title">Κύκλοι αγοράς &amp; ψυχολογία</h4>
+      <p data-i18n="guide_cycles_desc">
+        Bull / bear market, FOMO, panic selling — πώς να σκέφτεσαι πιο «ψύχραιμα».
+      </p>
+      <a href="../guides/marketcycles.html" class="btn" data-i18n="read_more">Διάβασε</a>
+    </article>
+
+    <!-- Risk Management -->
+    <article class="card">
+      <h4 data-i18n="guide_risk_title">Risk Management στα Crypto</h4>
+      <p data-i18n="guide_risk_desc">
+        Διαχείριση ρίσκου: θέση, stop-loss λογική, diversification και τι να αποφεύγεις.
+      </p>
+      <a href="../guides/risk-management.html" class="btn" data-i18n="read_more">Διάβασε</a>
+    </article>
+
+    <!-- On-chain Basics -->
+    <article class="card">
+      <h4 data-i18n="guide_onchain_title">On-chain δεδομένα (βασικά)</h4>
+      <p data-i18n="guide_onchain_desc">
+        Τι δείχνουν οι κινήσεις στο blockchain: wallets, flows, volume και απλά σημάδια τάσης.
+      </p>
+      <a href="../guides/onchain.html" class="btn" data-i18n="read_more">Διάβασε</a>
+    </article>
+
+  </div>
+
+  <!-- BACK TO HOME -->
+  <div class="guides-hub-cta">
+    <a href="../index.html" class="more-guides" data-i18n="guides_back" aria-label="Back to home">
+      ← Αρχική
     </a>
-
-    <nav class="nav">
-      <a href="../index.html#market" data-i18n="nav_market">Αγορά</a>
-      <a href="../index.html#charts" data-i18n="nav_charts">Τάσεις</a>
-      <a href="../index.html#guides" data-i18n="nav_guides">Οδηγοί</a>
-      <a href="../index.html#glossary" data-i18n="nav_glossary">Γλωσσάρι</a>
-    </nav>
-
-    <div class="header-actions">
-
-      <button id="theme-toggle" class="pill-btn">
-        <img id="theme-icon" src="../IMG_5300.png" class="icon-img" />
-        <span id="theme-label" data-i18n="theme_dark">Dark</span>
-      </button>
-
-      <button id="auth-btn" class="pill-btn">
-        <img id="auth-icon" src="../IMG_5301.png" class="icon-img" />
-        <span id="auth-label" data-i18n="login">Login</span>
-      </button>
-
-      <button id="menu-toggle" class="menu-btn">
-        <span class="burger-line"></span>
-        <span class="burger-line"></span>
-        <span class="burger-line"></span>
-      </button>
-
-      <button id="lang-toggle" class="pill-btn">
-        <img id="lang-icon" class="icon-img" src="../IMG_5542.png">
-        <span id="lang-label">GR</span>
-      </button>
-
-    </div>
   </div>
-</header>
 
-<!-- ================= MOBILE MENU ================= -->
-<div id="mobile-menu" class="mobile-menu">
-  <a href="../index.html#market" data-i18n="nav_market">Αγορά</a>
-  <a href="../index.html#charts" data-i18n="nav_charts">Τάσεις</a>
-  <a href="../index.html#guides" data-i18n="nav_guides">Οδηγοί</a>
-  <a href="../index.html#glossary" data-i18n="nav_glossary">Γλωσσάρι</a>
-
-  <button id="mobile-home-btn" class="mobile-btn" data-i18n="mobile_home">Αρχική</button>
-  <button id="mobile-theme-toggle" class="mobile-btn" data-i18n="mobile_theme">Αλλαγή Θέματος</button>
-  <button id="mobile-auth-btn" class="mobile-btn" data-i18n="login">Login</button>
-
-  <button id="mobile-lang-toggle" class="mobile-btn">
-    <img id="mobile-lang-icon" class="icon-img" src="../IMG_5542.png">
-    <span id="mobile-lang-label">GR</span>
-  </button>
 </div>
 
-<!-- GUIDES -->
-<section id="guides" class="section">
-  <div class="container">
+<!-- prefooter.js injects .prefooter + <footer> here -->
 
-    
-  <h3 data-i18n="guides_title">Οδηγοί για αρχάριους</h3>
-
-    <!-- ΟΡΙΖΟΝΤΙΟ SCROLL -->
-   <div id="guides-cards" class="guides-grid">
-
-      <!-- Blockchain Guide -->
-      <article class="card">
-        <h4 data-i18n="guide_blockchain_title">Τι είναι το Blockchain</h4>
-        <p data-i18n="guide_blockchain_desc">
-          Το “κοινόχρηστο ψηφιακό βιβλίο” που καταγράφει συναλλαγές με ασφάλεια &amp; διαφάνεια.
-        </p>
-        <a href="../guides/blockchain.html" class="btn" data-i18n="read_more">Διάβασε</a>
-      </article>
-
-      <!-- Wallets Guide -->
-      <article class="card">
-        <h4 data-i18n="guide_wallets_title">Wallets: Custodial vs Non-custodial</h4>
-        <p data-i18n="guide_wallets_desc">
-          Ποιες είναι οι διαφορές και πότε διαλέγω το ένα ή το άλλο. Seed phrase &amp; 2FA.
-        </p>
-        <a href="../guides/wallets.html" class="btn" data-i18n="read_more">Διάβασε</a>
-      </article>
-
-      <!-- Solana Guide -->
-      <article class="card">
-        <h4 data-i18n="guide_solana_title">Αγορά Solana με ασφάλεια</h4>
-        <p data-i18n="guide_solana_desc">
-          DCA, alerts, fees, επιλογή ανταλλακτηρίου και πρακτικά tips για αρχή.
-        </p>
-        <a href="../guides/solana.html" class="btn" data-i18n="read_more">Διάβασε</a>
-      </article>
-
-      <!-- Bitcoin Guide -->
-      <article class="card">
-        <h4 data-i18n="guide_bitcoin_title">Τι είναι το Bitcoin</h4>
-        <p data-i18n="guide_bitcoin_desc">
-          Το πρώτο αποκεντρωμένο ψηφιακό νόμισμα. Mining, halving και store of value.
-        </p>
-        <a href="../guides/bitcoin.html" class="btn" data-i18n="read_more">Διάβασε</a>
-      </article>
-
-      <!-- Ethereum Guide -->
-      <article class="card">
-        <h4 data-i18n="guide_ethereum_title">Τι είναι το Ethereum</h4>
-        <p data-i18n="guide_ethereum_desc">
-          Smart contracts, gas fees και το blockchain που έφερε το Web3.
-        </p>
-        <a href="../guides/ethereum.html" class="btn" data-i18n="read_more">Διάβασε</a>
-      </article>
-
-<!-- DeFi Guide -->
-<article class="card">
-  <h4 data-i18n="guide_defi_title">Τι είναι το DeFi</h4>
-  <p data-i18n="guide_defi_desc">
-    Δανεισμός, ανταλλαγές και αποδόσεις χωρίς τράπεζες — πώς δουλεύει και τι να προσέχεις.
-  </p>
-  <a href="../guides/DeFi.html" class="btn" data-i18n="read_more">Διάβασε</a>
-</article>
-
-<!-- NFT Guide -->
-<article class="card">
-  <h4 data-i18n="guide_nft_title">Τι είναι τα NFT</h4>
-  <p data-i18n="guide_nft_desc">
-    Μοναδικά ψηφιακά assets, συλλογές και χρησιμότητα — τι αξίζει πραγματικά και τι όχι.
-  </p>
-  <a href="../guides/NFT.html" class="btn" data-i18n="read_more">Διάβασε</a>
-</article>
-
-<!-- Security Guide -->
-<article class="card">
-  <h4 data-i18n="guide_security_title">Ασφάλεια στα Crypto</h4>
-  <p data-i18n="guide_security_desc">
-    Seed phrase, 2FA, phishing και scams — τα βασικά βήματα για να μην την πατήσεις.
-  </p>
-  <a href="../guides/CryptoSecurity.html" class="btn" data-i18n="read_more">Διάβασε</a>
-</article>
-
-<!-- Stablecoins Guide -->
-<article class="card">
-  <h4 data-i18n="guide_stablecoins_title">Τι είναι τα Stablecoins</h4>
-  <p data-i18n="guide_stablecoins_desc">
-    USDT/USDC και γιατί “κρατάνε” τιμή — πλεονεκτήματα, ρίσκα και χρήσεις.
-  </p>
-  <a href="../guides/Stablecoins.html" class="btn" data-i18n="read_more">Διάβασε</a>
-</article>
-
-<!-- Fees Guide -->
-<article class="card">
-  <h4 data-i18n="guide_fees_title">Gas Fees & Προμήθειες</h4>
-  <p data-i18n="guide_fees_desc">
-    Τι πληρώνεις σε κάθε συναλλαγή, γιατί αλλάζει το κόστος και πώς το μειώνεις.
-  </p>
-  <a href="../guides/Gasfees.html" class="btn" data-i18n="read_more">Διάβασε</a>
-</article>
-
-<!-- Exchanges Guide -->
-<article class="card">
-  <h4 data-i18n="guide_exchanges_title">Exchanges: CEX vs DEX</h4>
-  <p data-i18n="guide_exchanges_desc">
-    Ανταλλακτήρια τύπου Binance vs αποκεντρωμένα (DEX) — διαφορές, fees και ασφάλεια.
-  </p>
-  <a href="../guides/exchange.html" class="btn" data-i18n="read_more">Διάβασε</a>
-</article>
-
-<!-- Wallets Setup Guide -->
-<article class="card">
-  <h4 data-i18n="guide_wallet_setup_title">Πώς στήνω Wallet σωστά</h4>
-  <p data-i18n="guide_wallet_setup_desc">
-    Βήμα-βήμα: δημιουργία, backup seed phrase, 2FA και “κανόνες” για αρχή.
-  </p>
-  <a href="../guides/setupwallet.html" class="btn" data-i18n="read_more">Διάβασε</a>
-</article>
-
-<!-- Market Cycles Guide -->
-<article class="card">
-  <h4 data-i18n="guide_cycles_title">Κύκλοι αγοράς & ψυχολογία</h4>
-  <p data-i18n="guide_cycles_desc">
-    Bull / bear market, FOMO, panic selling — πώς να σκέφτεσαι πιο “ψύχραιμα”.
-  </p>
-  <a href="../guides/marketcycles.html" class="btn" data-i18n="read_more">Διάβασε</a>
-</article>
-
-<!-- Risk Management Guide -->
-<article class="card">
-  <h4 data-i18n="guide_risk_title">Risk Management στα Crypto</h4>
-  <p data-i18n="guide_risk_desc">
-    Διαχείριση ρίσκου: θέση, stop-loss λογική, diversification και τι να αποφεύγεις.
-  </p>
-  <a href="../guides/risk-management.html" class="btn" data-i18n="read_more">Διάβασε</a>
-</article>
-
-
-<!-- On-chain Basics Guide -->
-<article class="card">
-  <h4 data-i18n="guide_onchain_title">On-chain δεδομένα (βασικά)</h4>
-  <p data-i18n="guide_onchain_desc">
-    Τι δείχνουν οι κινήσεις στο blockchain: wallets, flows, volume και απλά σημάδια τάσης.
-  </p>
-  <a href="../guides/onchain.html" class="btn" data-i18n="read_more">Διάβασε</a>
-</article>
-
-
-<a href="../index.html" class="more-guides" data-i18n="guides_more" aria-label="More guides"><span class="mg-arrow">←</span>
-    Γύρνα πίσω 
-  </a>
-
-    </div>
-
-  </div>
-</section>
-
-
-
-
-<!-- ================= FOOTER ================= -->
-<footer class="site-footer">
-  <div class="container">
-    <p>
-      © <span id="year"></span> CryptoKosmos —
-      <span data-i18n="footer_rights">Όλα τα δικαιώματα διατηρούνται.</span>
-    </p>
-  </div>
-</footer>
-
-<!-- ================= LOGIN MODAL ================= -->
-<div id="login-modal" class="modal hidden">
-  <div class="modal-backdrop"></div>
-  <div class="modal-card">
-
-    <div class="modal-header">
-      <span class="modal-title" data-i18n="login_title">Σύνδεση</span>
-      <button class="modal-close" id="login-close">×</button>
-    </div>
-
-    <form id="login-form">
-      <div class="modal-body">
-
-        <label data-i18n="login_email">Email</label>
-        <input id="login-email" type="email"
-               data-i18n-placeholder="login_email"
-               placeholder="Email">
-
-        <label data-i18n="login_password">Κωδικός</label>
-        <div class="pass-wrap">
-          <input id="login-pass" type="password"
-                 data-i18n-placeholder="login_password"
-                 placeholder="Password">
-          <img id="login-pass-toggle" class="pass-eye" src="../IMG_5380.png">
-        </div>
-
-      </div>
-
-      <button class="modal-submit" type="submit" data-i18n="login_btn">
-        Σύνδεση
-      </button>
-
-      <p id="no-account" class="modal-hint" style="color:#ffb3b3; display:none;"
-         data-i18n="login_no_account">
-        Δεν έχεις λογαριασμό στο CryptoKosmos.
-      </p>
-
-      <button id="signup-btn" type="button"
-        style="display:none;margin-top:10px;width:100%;padding:10px 14px;border:none;border-radius:14px;background:#1e293b;color:white;font-weight:600;cursor:pointer;border:1px solid rgba(255,255,255,0.25);"
-        data-i18n="login_create_account">
-        Δημιουργία λογαριασμού
-      </button>
-
-    </form>
-
-  </div>
-</div>
-
-<!-- ================= SIGNUP MODAL ================= -->
-<div id="signup-modal" class="modal hidden">
-  <div class="modal-backdrop"></div>
-
-  <div class="modal-card">
-    <div class="modal-header">
-      <h3 class="modal-title" data-i18n="signup_title">Δημιούργησε λογαριασμό</h3>
-      <button class="modal-close signup-close">×</button>
-    </div>
-
-    <div class="modal-body">
-
-      <label data-i18n="signup_email">Email</label>
-      <input id="signup-email" type="email"
-             data-i18n-placeholder="signup_email"
-             placeholder="Email">
-
-      <label data-i18n="signup_pass1">Κωδικός</label>
-      <div class="pass-wrap">
-        <input id="signup-pass1" type="password"
-               data-i18n-placeholder="signup_pass1"
-               placeholder="Password">
-        <img id="signup-pass1-toggle" class="pass-eye" src="../IMG_5380.png">
-      </div>
-
-      <label data-i18n="signup_pass2">Επιβεβαίωση κωδικού</label>
-      <div class="pass-wrap">
-        <input id="signup-pass2" type="password"
-               data-i18n-placeholder="signup_pass2"
-               placeholder="Confirm Password">
-        <img id="signup-pass2-toggle" class="pass-eye" src="../IMG_5380.png">
-      </div>
-
-      <p id="signup-error" style="color:#ff6b6b; display:none;"
-         data-i18n="signup_error">
-         Οι κωδικοί δεν ταιριάζουν.
-      </p>
-
-      <button id="signup-create" class="modal-submit"
-              data-i18n="signup_btn">
-        Δημιουργία λογαριασμού
-      </button>
-
-      <p class="modal-hint">
-        <span data-i18n="signup_have_account">Έχεις ήδη λογαριασμό;</span>
-        <span id="back-to-login"
-              style="color:#5bb4ff;cursor:pointer;"
-              data-i18n="signup_back">
-          Σύνδεση
-        </span>
-      </p>
-
-    </div>
-  </div>
-</div>
-
-<!-- ================= VERIFY MODAL ================= -->
-<div id="verify-modal" class="modal hidden">
-  <div class="modal-backdrop"></div>
-
-  <div class="modal-card">
-    <div class="modal-header">
-      <h3 class="modal-title" data-i18n="verify_title">Επαλήθευση Email</h3>
-      <button class="modal-close verify-close">×</button>
-    </div>
-
-    <div class="modal-body">
-
-      <p class="muted" data-i18n="verify_subtitle">
-        Σου στείλαμε έναν 6-ψήφιο κωδικό.
-      </p>
-
-      <label data-i18n="verify_code">Κωδικός</label>
-      <input id="verify-code" type="text"
-             data-i18n-placeholder="verify_code"
-             placeholder="Code">
-
-      <p id="verify-error" style="color:#ff6b6b; display:none;"
-         data-i18n="verify_error">
-         Λάθος κωδικός. Προσπάθησε ξανά.
-      </p>
-
-      <button id="verify-submit" class="modal-submit"
-              data-i18n="verify_btn">
-        Επιβεβαίωση
-      </button>
-
-    </div>
-  </div>
-</div>
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
 
 <!-- ================= SCRIPTS ================= -->
 <script>
-  document.getElementById("year").textContent = new Date().getFullYear();
-  document.getElementById("mobile-home-btn")?.addEventListener("click", () => {
-    window.location.href = "../index.html";
-  });
+  const ckYear = document.getElementById("year");
+  if (ckYear) ckYear.textContent = new Date().getFullYear();
 </script>
 
-<script src="../translations-MoreGuids.js"></script>
-<script src="../i18n.js"></script>
+<!-- GLOBAL SCRIPTS -->
+<script src="../header.js" defer></script>
+
+<!-- Προσθήκη του κουμπιού "Αρχική" στο mobile menu (ίδιο με πριν) -->
+<script defer>
+  (function(){
+    const menu = document.getElementById("mobile-menu");
+    if (!menu || document.getElementById("mobile-home-btn")) return;
+
+    const btn = document.createElement("button");
+    btn.id = "mobile-home-btn";
+    btn.className = "mobile-btn";
+    btn.type = "button";
+    btn.setAttribute("data-i18n", "mobile_home");
+    btn.textContent = "Αρχική";
+    btn.addEventListener("click", () => { window.location.href = "../index.html"; });
+
+    const themeBtn = document.getElementById("mobile-theme-toggle");
+    if (themeBtn) menu.insertBefore(btn, themeBtn);
+    else menu.appendChild(btn);
+  })();
+</script>
+
+<script src="../prefooter.js" defer></script>
+
+<!-- PAGE TRANSLATIONS (πρέπει να φορτωθεί ΠΡΙΝ το i18n.js) -->
+<script src="../translations-MoreGuids.js" defer></script>
+
+<script src="../i18n.js" defer></script>
 <script src="../app.js" defer></script>
 
+<!-- GLOBAL STYLES -->
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="../header-theme.css" />
+  <link rel="stylesheet" href="../article-theme.css" />
+<script src="../scroll-on-lang.js"></script>
 </body>
 </html>

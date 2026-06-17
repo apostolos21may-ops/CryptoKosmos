@@ -1,80 +1,99 @@
 window.TRANSLATIONS = {
   el: {
     /* =======================
-          SOLANA CONTENT
+       HEADER / SHARED
     ======================= */
-    sol_title: "Τι είναι η Solana;",
-    sol_intro:
-      "Η Solana είναι ένα προηγμένο, υψηλής απόδοσης blockchain που σχεδιάστηκε για εφαρμογές που απαιτούν ταχύτητα, σταθερότητα και χαμηλές χρεώσεις. Από την κυκλοφορία της, έχει εξελιχθεί σε μία από τις πιο δημοφιλείς πλατφόρμες για DeFi, NFTs και Web3 εφαρμογές.",
-
-    sol_speed_title: "Πόσο γρήγορη είναι η Solana;",
-    sol_speed_text:
-      "Η Solana μπορεί να ξεπεράσει τις 50.000 συναλλαγές το δευτερόλεπτο, χάρη στο Proof-of-History που επιτρέπει την οργάνωση των συναλλαγών πριν καν επιβεβαιωθούν.",
-
-    sol_fees_title: "Γιατί είναι τόσο φθηνή;",
-    sol_fees_text:
-      "Οι χρεώσεις στη Solana είναι σχεδόν πάντα κάτω από $0.001, καθιστώντας την ιδανική για micro-payments, gaming, NFT minting και εφαρμογές μεγάλης κλίμακας.",
-
-    sol_tech_title: "Τι τεχνολογία χρησιμοποιεί;",
-    sol_tech_text:
-      "Η Solana συνδυάζει καινοτομίες που της επιτρέπουν να επιτυγχάνει ακραίες ταχύτητες:",
-    sol_tech1: "Proof-of-History (PoH): Σύστημα χρονοσήμανσης ακριβούς σειράς συναλλαγών.",
-    sol_tech2: "Tower BFT: Μηχανισμός συναίνεσης βασισμένος στο PoH.",
-    sol_tech3: "Sealevel: Παράλληλη εκτέλεση χιλιάδων smart contracts.",
-    sol_tech4: "Gulf Stream: Προώθηση συναλλαγών πριν επιβεβαιωθούν.",
-    sol_tech_outro:
-      "Με αυτές τις τεχνολογίες, η Solana θεωρείται ένα από τα πιο προηγμένα blockchain παγκοσμίως.",
-
-    sol_use_title: "Πού χρησιμοποιείται;",
-    sol_use1: "NFT marketplaces και μεγάλες συλλογές.",
-    sol_use2: "DeFi: δανεισμός, staking, ανταλλακτήρια.",
-    sol_use3: "On-chain gaming και real-time εφαρμογές.",
-    sol_use4: "Άμεσες πληρωμές και micro-transactions.",
-    sol_use5: "Tokenization πραγματικών περιουσιακών στοιχείων.",
-    sol_use6: "Υψηλής απόδοσης Web3 εφαρμογές.",
-
-    sol_pros_title: "Πλεονεκτήματα της Solana",
-    sol_pro1: "Εξαιρετικά υψηλή ταχύτητα συναλλαγών.",
-    sol_pro2: "Πολύ χαμηλές χρεώσεις.",
-    sol_pro3: "Μεγάλη υποστήριξη από developers.",
-    sol_pro4: "Ιδανική για gaming & NFTs.",
-    sol_pro5: "Καινοτόμα αρχιτεκτονική με δυνατότητα scaling.",
-
-    sol_cons_title: "Μειονεκτήματα της Solana",
-    sol_con1: "Έχουν σημειωθεί διακοπές λειτουργίας στο δίκτυο.",
-    sol_con2: "Πολυπλοκότητα στην ανάπτυξη smart contracts.",
-    sol_con3: "Κίνδυνος συγκέντρωσης ισχύος.",
-
-    sol_future_title: "Το μέλλον της Solana",
-    sol_future_text:
-      "Με αναβαθμίσεις, υιοθέτηση και τεράστια ανάπτυξη NFTs και Web3, η Solana αναμένεται να γίνει από τα σημαντικότερα blockchain του μέλλοντος.",
-
-    sol_conclusion_title: "Συμπέρασμα",
-    sol_conclusion:
-      "Η Solana προσφέρει ταχύτητα, χαμηλό κόστος και προηγμένη τεχνολογία, καθιστώντας τη μία από τις πιο υποσχόμενες blockchain πλατφόρμες.",
-
-
-guides_more: "Δες περισσότερα →",
-
-    /* =======================
-           FOOTER
-    ======================= */
-    footer_rights: "Όλα τα δικαιώματα διατηρούνται.",
-
-
-mobile_home: "Αρχική Σελίδα",
-mobile_theme: "Αλλαγή Θέματος",
-
-
-    /* HEADER */
-    header_tagline: "Ο παλμός του κόσμου των crypto",
+    header_tagline: "Διάβασε την αγορά. Μην την ακούς.",
     nav_market: "Αγορά",
     nav_charts: "Τάσεις",
     nav_guides: "Οδηγοί",
     nav_glossary: "Γλωσσάρι",
+    nav_articles: "Άρθρα",
+    theme_dark: "Dark",
+    mobile_theme: "Αλλαγή Θέματος",
+    login: "Login",
+    logout: "Logout",
+    footer_disclaimer: "Εκπαιδευτικό περιεχόμενο μόνο. Δεν αποτελεί επενδυτική συμβουλή.",
 
     /* =======================
-             LOGIN
+       HERO
+    ======================= */
+    sol_eyebrow: "ΟΔΗΓΟΣ",
+    sol_title: "Τι είναι η Solana;",
+    sol_lead:
+      "Η Solana είναι ένα blockchain χτισμένο γύρω από μία ιδέα: ο χρόνος μπορεί να μετρηθεί πριν συμφωνηθεί. Αυτό της επιτρέπει ταχύτητες και κόστος που κανένα άλλο μεγάλο δίκτυο δεν πλησιάζει.",
+
+    /* =======================
+       SPEED & FEES (2-card)
+    ======================= */
+    sol_speed_title: "Ταχύτητα",
+    sol_speed_text: "Πάνω από 50.000 συναλλαγές το δευτερόλεπτο, χάρη στο Proof-of-History.",
+    sol_fees_title: "Κόστος",
+    sol_fees_text: "Σχεδόν πάντα κάτω από $0.001 ανά συναλλαγή — ιδανικό για micro-payments.",
+
+    /* =======================
+       TECHNOLOGY (4-card + outro)
+    ======================= */
+    sol_tech_title: "Η τεχνολογία πίσω από την ταχύτητα",
+    sol_tech_text:
+      "Τέσσερις καινοτομίες συνδυάζονται για να πετύχουν αυτές τις επιδόσεις.",
+
+    sol_tech_poh_title: "Proof-of-History",
+    sol_tech_poh_text: "Σφραγίζει κάθε γεγονός με χρονική σειρά πριν ακόμα επιβεβαιωθεί — γλιτώνει χρόνο σε όλο το δίκτυο.",
+    sol_tech_bft_title: "Tower BFT",
+    sol_tech_bft_text: "Μηχανισμός συναίνεσης που εκμεταλλεύεται το Proof-of-History για ταχύτατη επιβεβαίωση.",
+    sol_tech_sealevel_title: "Sealevel",
+    sol_tech_sealevel_text: "Εκτελεί χιλιάδες smart contracts παράλληλα, αντί ένα-ένα.",
+    sol_tech_gulfstream_title: "Gulf Stream",
+    sol_tech_gulfstream_text: "Προωθεί συναλλαγές στους validators πριν ακόμα κλείσει το τρέχον μπλοκ.",
+
+    sol_tech_outro:
+      "Ο συνδυασμός τους κάνει τη Solana ένα από τα πιο γρήγορα blockchains που λειτουργούν σήμερα.",
+
+    /* =======================
+       USE CASES (pills)
+    ======================= */
+    sol_uses_title: "Πού χρησιμοποιείται",
+    sol_use1: "NFT marketplaces",
+    sol_use2: "DeFi — δανεισμός & ανταλλαγές",
+    sol_use3: "On-chain gaming",
+    sol_use4: "Πληρωμές σε πραγματικό χρόνο",
+    sol_use5: "Tokenization",
+    sol_use6: "Web3 εφαρμογές",
+
+    /* =======================
+       PROS / CONS
+    ======================= */
+    sol_pros_title: "Πλεονεκτήματα",
+    sol_pro1: "Εξαιρετικά υψηλή ταχύτητα συναλλαγών.",
+    sol_pro2: "Πολύ χαμηλό κόστος ανά συναλλαγή.",
+    sol_pro3: "Μεγάλο, ενεργό developer ecosystem.",
+    sol_pro4: "Ιδανική υποδομή για NFTs & gaming.",
+    sol_pro5: "Αρχιτεκτονική σχεδιασμένη για scaling.",
+
+    sol_cons_title: "Μειονεκτήματα",
+    sol_con1: "Έχει καταγράψει διακοπές λειτουργίας στο παρελθόν.",
+    sol_con2: "Η ανάπτυξη smart contracts είναι πιο σύνθετη.",
+    sol_con3: "Μέρος της επικύρωσης συγκεντρώνεται σε λίγους validators.",
+
+    /* =======================
+       FUTURE (callout)
+    ======================= */
+    sol_future_title: "Τι ακολουθεί",
+    sol_future_text:
+      "Με συνεχείς αναβαθμίσεις σταθερότητας και ραγδαία ανάπτυξη στο NFT/Web3 οικοσύστημα, η Solana παραμένει ένα από τα δίκτυα με τη μεγαλύτερη δυναμική.",
+
+    /* =======================
+       CONCLUSION
+    ======================= */
+    sol_conclusion_title: "Το σημαντικό",
+    sol_conclusion:
+      "Η Solana δείχνει τι γίνεται εφικτό όταν σχεδιάζεις ένα blockchain γύρω από την ταχύτητα από την πρώτη μέρα — με το αντίτιμο να είναι μεγαλύτερη πολυπλοκότητα και κάποια ιστορικά downtime.",
+
+    guides_more: "Δες περισσότερα →",
+
+    /* =======================
+       LOGIN
     ======================= */
     login_title: "Σύνδεση",
     login_email: "Email",
@@ -83,9 +102,8 @@ mobile_theme: "Αλλαγή Θέματος",
     login_no_account: "Δεν έχεις λογαριασμό στο CryptoKosmos.",
     login_create_account: "Δημιουργία λογαριασμού",
 
-
     /* =======================
-             SIGNUP
+       SIGNUP
     ======================= */
     signup_title: "Δημιούργησε λογαριασμό",
     signup_email: "Email",
@@ -93,91 +111,98 @@ mobile_theme: "Αλλαγή Θέματος",
     signup_pass2: "Επιβεβαίωση κωδικού",
     signup_error: "Οι κωδικοί δεν ταιριάζουν.",
     signup_btn: "Δημιουργία λογαριασμού",
-    signup_back: "Σύνδεση",
     signup_have_account: "Έχεις ήδη λογαριασμό;",
-
+    signup_back: "Σύνδεση",
 
     /* =======================
-             VERIFY
+       VERIFY
     ======================= */
     verify_title: "Επαλήθευση Email",
     verify_subtitle: "Σου στείλαμε έναν 6-ψήφιο κωδικό.",
     verify_code: "Κωδικός",
     verify_error: "Λάθος κωδικός. Προσπάθησε ξανά.",
-    verify_btn: "Επιβεβαίωση"
+    verify_btn: "Επιβεβαίωση",
   },
 
-  /* ================================================================
-                          ENGLISH VERSION
-  ================================================================ */
+  /* ========================================================
+       ENGLISH TRANSLATIONS
+  ======================================================== */
   en: {
-    /* SOLANA CONTENT */
-    sol_title: "What Is Solana?",
-    sol_intro:
-      "Solana is a high-performance blockchain designed for applications that require speed, scalability, and low fees. It has become one of the leading networks for DeFi, NFTs, and Web3 applications.",
-
-    sol_speed_title: "How Fast Is Solana?",
-    sol_speed_text:
-      "Solana can exceed 50,000 transactions per second thanks to Proof-of-History, which orders transactions before they are validated.",
-
-    sol_fees_title: "Why Are Fees So Low?",
-    sol_fees_text:
-      "Fees on Solana are almost always below $0.001, making it ideal for micro-payments, gaming, NFT minting, and high-volume applications.",
-
-    sol_tech_title: "What Technology Does It Use?",
-    sol_tech_text: "Solana uses several innovations that enable extreme performance:",
-    sol_tech1: "Proof-of-History (PoH): A precise transaction ordering system.",
-    sol_tech2: "Tower BFT: Fast consensus powered by PoH.",
-    sol_tech3: "Sealevel: Parallel execution of smart contracts.",
-    sol_tech4: "Gulf Stream: Transaction forwarding before validation.",
-    sol_tech_outro:
-      "These systems make Solana one of the most advanced and efficient blockchains worldwide.",
-
-    sol_use_title: "Where Is It Used?",
-    sol_use1: "NFT marketplaces and large-scale collections.",
-    sol_use2: "DeFi apps including lending, staking, and exchanges.",
-    sol_use3: "On-chain gaming and real-time apps.",
-    sol_use4: "Instant payments and micro-transactions.",
-    sol_use5: "Tokenization of real-world assets.",
-    sol_use6: "High-performance Web3 applications.",
-
-    sol_pros_title: "Advantages of Solana",
-    sol_pro1: "Extremely high transaction speed.",
-    sol_pro2: "Very low fees.",
-    sol_pro3: "Strong developer ecosystem.",
-    sol_pro4: "Ideal for NFTs and gaming.",
-    sol_pro5: "Innovative, scalable architecture.",
-
-    sol_cons_title: "Disadvantages of Solana",
-    sol_con1: "Has experienced outages.",
-    sol_con2: "Smart contract development can be complex.",
-    sol_con3: "Risk of power concentration.",
-
-    sol_future_title: "The Future of Solana",
-    sol_future_text:
-      "With continuous upgrades and growing adoption, Solana is seen as one of the most promising blockchains for next-generation applications.",
-
-    sol_conclusion_title: "Conclusion",
-    sol_conclusion:
-      "Solana offers exceptional speed, low cost, and advanced technology—making it one of the strongest contenders in the blockchain ecosystem.",
-
-
-guides_more: "See more →",
-
-
-    /* FOOTER */
-    footer_rights: "All rights reserved.",
-
-
-mobile_home: "Home Page",
-mobile_theme: "Change Theme",
-
-    /* HEADER */
-    header_tagline: "The pulse of the crypto world",
+    /* HEADER / SHARED */
+    header_tagline: "Read the market. Don't follow the noise.",
     nav_market: "Market",
     nav_charts: "Trends",
     nav_guides: "Guides",
     nav_glossary: "Glossary",
+    nav_articles: "Articles",
+    theme_dark: "Dark",
+    mobile_theme: "Change Theme",
+    login: "Login",
+    logout: "Logout",
+    footer_disclaimer: "Educational content only. Not financial advice.",
+
+    /* HERO */
+    sol_eyebrow: "GUIDE",
+    sol_title: "What Is Solana?",
+    sol_lead:
+      "Solana is a blockchain built around one idea: time can be measured before it's agreed on. That lets it reach speeds and costs no other major network comes close to.",
+
+    /* SPEED & FEES */
+    sol_speed_title: "Speed",
+    sol_speed_text: "Over 50,000 transactions per second, thanks to Proof-of-History.",
+    sol_fees_title: "Cost",
+    sol_fees_text: "Almost always under $0.001 per transaction — ideal for micro-payments.",
+
+    /* TECHNOLOGY */
+    sol_tech_title: "The tech behind the speed",
+    sol_tech_text:
+      "Four innovations combine to deliver this kind of performance.",
+
+    sol_tech_poh_title: "Proof-of-History",
+    sol_tech_poh_text: "Timestamps every event before it's even confirmed — saving time across the whole network.",
+    sol_tech_bft_title: "Tower BFT",
+    sol_tech_bft_text: "A consensus mechanism that leverages Proof-of-History for fast confirmation.",
+    sol_tech_sealevel_title: "Sealevel",
+    sol_tech_sealevel_text: "Runs thousands of smart contracts in parallel instead of one at a time.",
+    sol_tech_gulfstream_title: "Gulf Stream",
+    sol_tech_gulfstream_text: "Forwards transactions to validators before the current block even closes.",
+
+    sol_tech_outro:
+      "Together, these make Solana one of the fastest blockchains running today.",
+
+    /* USE CASES */
+    sol_uses_title: "Where it's used",
+    sol_use1: "NFT marketplaces",
+    sol_use2: "DeFi — lending & swaps",
+    sol_use3: "On-chain gaming",
+    sol_use4: "Real-time payments",
+    sol_use5: "Tokenization",
+    sol_use6: "Web3 applications",
+
+    /* PROS / CONS */
+    sol_pros_title: "Advantages",
+    sol_pro1: "Extremely high transaction speed.",
+    sol_pro2: "Very low cost per transaction.",
+    sol_pro3: "Large, active developer ecosystem.",
+    sol_pro4: "Great fit for NFTs & gaming.",
+    sol_pro5: "Architecture designed for scaling.",
+
+    sol_cons_title: "Disadvantages",
+    sol_con1: "Has experienced network outages in the past.",
+    sol_con2: "Smart contract development is more complex.",
+    sol_con3: "Validation is partly concentrated among fewer validators.",
+
+    /* FUTURE */
+    sol_future_title: "What's next",
+    sol_future_text:
+      "With ongoing stability upgrades and rapid growth in its NFT/Web3 ecosystem, Solana remains one of the most active networks in crypto.",
+
+    /* CONCLUSION */
+    sol_conclusion_title: "The big picture",
+    sol_conclusion:
+      "Solana shows what's possible when a blockchain is designed around speed from day one — at the cost of added complexity and some past downtime.",
+
+    guides_more: "See more →",
 
     /* LOGIN */
     login_title: "Login",
@@ -187,7 +212,6 @@ mobile_theme: "Change Theme",
     login_no_account: "You don't have a CryptoKosmos account.",
     login_create_account: "Create Account",
 
-
     /* SIGNUP */
     signup_title: "Create an Account",
     signup_email: "Email",
@@ -195,15 +219,14 @@ mobile_theme: "Change Theme",
     signup_pass2: "Confirm Password",
     signup_error: "Passwords do not match.",
     signup_btn: "Create Account",
-    signup_back: "Login",
     signup_have_account: "Already have an account?",
-
+    signup_back: "Login",
 
     /* VERIFY */
     verify_title: "Email Verification",
     verify_subtitle: "We sent you a 6-digit code.",
     verify_code: "Code",
     verify_error: "Incorrect code. Try again.",
-    verify_btn: "Verify"
-  }
+    verify_btn: "Verify",
+  },
 };

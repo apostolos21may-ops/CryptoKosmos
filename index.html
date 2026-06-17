@@ -3,8 +3,36 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>CryptoKosmos — Ο παλμός των crypto</title>
-  <meta name="description" content="CryptoKosmos: Ενημέρωση, ανάλυση και τάσεις στα κρυπτονομίσματα." />
+  <title>CryptoKosmos — Ο παλμός των crypto | Crypto Prices, Analysis & Guides</title>
+  <meta name="description" content="CryptoKosmos: Ζωντανές τιμές crypto, ανάλυση αγοράς και οδηγοί στα ελληνικά. Live crypto prices, market analysis and guides in Greek & English." />
+
+  <!-- ═══ SEO: Canonical & hreflang ═══════════════════════════════════
+       Λέει στη Google ότι αυτή η σελίδα υπάρχει σε EL και EN,
+       ώστε να δείχνει το σωστό αποτέλεσμα στον κατάλληλο χρήστη.
+       ⚠️ Άλλαξε το domain σε αυτό του πραγματικού site.
+  ════════════════════════════════════════════════════════════════════ -->
+  <link rel="canonical" href="https://cryptokosmos.app/" />
+  <link rel="alternate" hreflang="el" href="https://cryptokosmos.app/" />
+  <link rel="alternate" hreflang="en" href="https://cryptokosmos.app/?lang=en" />
+  <link rel="alternate" hreflang="x-default" href="https://cryptokosmos.app/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="CryptoKosmos" />
+  <meta property="og:title" content="CryptoKosmos — Live Crypto Prices, Analysis & Guides" />
+  <meta property="og:description" content="Ζωντανές τιμές crypto, ανάλυση αγοράς και οδηγοί στα ελληνικά. Live crypto prices, market analysis and guides in Greek & English." />
+  <meta property="og:url" content="https://cryptokosmos.app/" />
+  <meta property="og:locale" content="el_GR" />
+  <meta property="og:locale:alternate" content="en_US" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="CryptoKosmos — Live Crypto Prices, Analysis & Guides" />
+  <meta name="twitter:description" content="Ζωντανές τιμές crypto, ανάλυση αγοράς και οδηγοί στα ελληνικά. Live crypto prices, market analysis and guides." />
+  <!-- ★ Space Grotesk — premium crypto/fintech font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=optional" rel="stylesheet">
 <link rel="preload" as="image" href="./IMG_5308.jpg">
 <link rel="preload" as="image" href="./IMG_5377.jpg">
 <link rel="preload" as="image" href="./IMG_5542.png">
@@ -26,46 +54,38 @@
 <link rel="preload" as="image" href="./onchainalts.png">
 <link rel="preload" as="image" href="./altsrotation.png">
 
+
+<!-- Preload top crypto icons για instant hero panel -->
+<link rel="preload" as="image" href="https://assets.coingecko.com/coins/images/1/small/bitcoin.png">
+<link rel="preload" as="image" href="https://assets.coingecko.com/coins/images/279/small/ethereum.png">
+<link rel="preload" as="image" href="https://assets.coingecko.com/coins/images/325/small/Tether.png">
+<link rel="preload" as="image" href="https://assets.coingecko.com/coins/images/825/small/binance-coin-logo.png">
+<link rel="preload" as="image" href="https://assets.coingecko.com/coins/images/6319/small/usdc.png">
+<link rel="preload" as="image" href="https://assets.coingecko.com/coins/images/44/small/xrp-symbol-white-128.png">
+<link rel="preload" as="image" href="https://assets.coingecko.com/coins/images/4128/small/solana.png">
+
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-7DWG18EQLG"></script>
 
 <script>
-  (function () {
-    try {
-      const lang = localStorage.getItem("ck-lang") || "el";
-      document.documentElement.lang = (lang === "en") ? "en" : "el";
-      // απλά για state
-      document.documentElement.dataset.lang = lang;
-    } catch(e) {}
-  })();
-</script>
-
-<script>
-  (function () {
-    try {
-      const t = localStorage.getItem("ck-theme");
-      if (t === "light") document.documentElement.classList.add("light-theme");
-    } catch(e) {}
-  })();
-</script>
-
-
-<script>
-(function () {
-  try {
-    let lang = (localStorage.getItem("ck-lang") || "el").toLowerCase();
-    if (lang === "gr") lang = "el";
-    if (lang !== "el" && lang !== "en") lang = "el";
-
-    localStorage.setItem("ck-lang", lang);
-    document.documentElement.lang = lang;
-    document.documentElement.dataset.lang = lang;
-  } catch(e) {}
+/* ★ Single init: lang + theme (no flash) */
+(function(){
+  try{
+    let lang=(localStorage.getItem("ck-lang")||"el").toLowerCase();
+    if(lang==="gr"||lang!=="en") lang="el";
+    localStorage.setItem("ck-lang",lang);
+    document.documentElement.lang=lang;
+    document.documentElement.dataset.lang=lang;
+    if(localStorage.getItem("ck-theme")==="light")
+      document.documentElement.classList.add("light-theme");
+  }catch(e){}
 })();
 </script>
 
 
   <!-- Favicon & logo -->
   <link rel="icon" href="./logo.png" type="image/png" />
+
+<link rel="stylesheet" href="./header-theme.css">
 
   <style>
 
@@ -90,12 +110,19 @@
 *{
   box-sizing:border-box;
 }
+
+
+
+
+
 html,body{
   margin:0;
   padding:0;
   background:var(--bg);
   color:var(--text);
-  font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  font-family:'Space Grotesk', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   transition:background-color .25s ease,color .25s ease;
 }
 
@@ -110,96 +137,159 @@ a{
 }
 
 /* =========================================
-   HEADER
+   NAVBAR — PREMIUM
 ========================================= */
-.site-header{
-  position:sticky;
-  top:0;
-  z-index:50;
-  background:rgba(15,18,22,.9);
-  backdrop-filter:blur(6px);
-  -webkit-backdrop-filter:blur(6px);
-  border-bottom:1px solid var(--border);
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(10, 13, 20, 0.75);
+  
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  box-shadow: 0 1px 0 rgba(255,255,255,0.04), 0 4px 24px rgba(0,0,0,0.25);
 }
 
 html.light-theme .site-header,
-body.light-theme .site-header{ background:rgba(255,255,255,.9); }
-
-.header-inner{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  height:72px;
-  gap:16px;
+body.light-theme .site-header {
+  background: rgba(255,255,255,0.82);
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+  box-shadow: 0 1px 0 rgba(255,255,255,0.9), 0 4px 20px rgba(0,0,0,0.07);
 }
 
-.brand{
-  display:flex;
-  gap:12px;
-  align-items:center;
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 68px;
+  gap: 16px;
 }
 
-.logo{
-  width:44px;
-  height:44px;
-  border-radius:10px;
-  display:block;
-  object-fit:cover;
+/* BRAND */
+.brand {
+  display: flex;
+  gap: 11px;
+  align-items: center;
+  text-decoration: none;
 }
 
-.brand-text h1{
-  font-size:20px;
-  line-height:1;
-  margin:0;
+.logo {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  display: block;
+  object-fit: cover;
+  border: 1px solid rgba(255,255,255,0.10);
+  box-shadow: 0 2px 12px rgba(91,180,255,0.20);
+  transition: box-shadow .25s, transform .25s;
 }
 
-.tagline{
-  margin:2px 0 0;
-  color:var(--muted);
-  font-size:12px;
+.brand:hover .logo {
+  box-shadow: 0 4px 20px rgba(91,180,255,0.40);
+  transform: scale(1.05);
 }
 
-.nav{
-  display:flex;
-  gap:18px;
-}
-.nav a{
-  padding:8px 10px;
-  border-radius:8px;
-  color:#cfe3ff;
-}
-.nav a:hover{
-  background:var(--bg-alt);
-}
-body.light-theme .nav a{
-  color:#1f2937;
+.brand-text h1 {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1;
+  margin: 0;
+  background: linear-gradient(135deg, #ffffff 40%, rgba(91,180,255,0.85) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
-/* Header actions (theme + login) */
-.header-actions{
-  display:flex;
-  align-items:center;
-  gap:10px;
+body.light-theme .brand-text h1 {
+  background: linear-gradient(135deg, #0f172a 40%, #2563eb 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
 }
 
-.pill-btn{
-  border-radius:999px;
-  border:1px solid var(--border);
-  padding:6px 12px;
-  font-size:13px;
-  background:rgba(15,23,42,0.9);
-  color:var(--text);
-  cursor:pointer;
-  display:inline-flex;
-  align-items:center;
-  gap:6px;
-  transition:.18s ease;
+.tagline {
+  margin: 3px 0 0;
+  color: var(--muted);
+  font-size: 11px;
+  letter-spacing: .2px;
+  opacity: .7;
 }
-body.light-theme .pill-btn{
-  background:#ffffff;
+
+/* NAV LINKS */
+.nav {
+  display: flex;
+  gap: 4px;
 }
-.pill-btn:hover{
-  border-color:var(--brand);
+
+.nav a {
+  padding: 7px 13px;
+  border-radius: 10px;
+  color: rgba(200,220,255,0.75);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: .1px;
+  transition: background .18s, color .18s;
+  text-decoration: none;
+  position: relative;
+}
+
+.nav a:hover {
+  background: rgba(91,180,255,0.09);
+  color: #ffffff;
+}
+
+.nav a.active {
+  color: var(--brand);
+  background: rgba(91,180,255,0.08);
+}
+
+body.light-theme .nav a {
+  color: #374151;
+}
+
+body.light-theme .nav a:hover {
+  background: rgba(37,99,235,0.08);
+  color: #1d4ed8;
+}
+
+/* HEADER ACTIONS */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pill-btn {
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.10);
+  padding: 7px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  background: rgba(255,255,255,0.05);
+  color: var(--text);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: background .18s, border-color .18s, box-shadow .18s;
+  backdrop-filter: blur(8px);
+}
+
+.pill-btn:hover {
+  background: rgba(91,180,255,0.10);
+  border-color: rgba(91,180,255,0.35);
+  box-shadow: 0 0 12px rgba(91,180,255,0.15);
+}
+
+body.light-theme .pill-btn {
+  background: rgba(255,255,255,0.9);
+  border-color: rgba(0,0,0,0.10);
+  color: #1f2937;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+
+body.light-theme .pill-btn:hover {
+  background: #ffffff;
+  border-color: #2563eb;
+  box-shadow: 0 2px 12px rgba(37,99,235,0.15);
 }
 
 /* IMG icons μέσα στα κουμπιά */
@@ -211,143 +301,294 @@ body.light-theme .pill-btn{
   margin-right:4px;
 }
 
+
+
 /* =========================================
    HERO SECTION
 ========================================= */
-.hero{
-  padding:70px 0;
-  border-bottom:1px solid var(--border);
-  background:linear-gradient(180deg,rgba(91,180,255,.05),transparent);
-  perspective:1600px;
+.hero {
+  padding: 80px 0 90px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
 }
 
-.hero-flex{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:40px;
-  perspective:1200px;
+/* Ambient background glows */
+.hero::before {
+  content: "";
+  position: absolute;
+  top: -120px; left: -100px;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(91,180,255,0.09) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero::after {
+  content: "";
+  position: absolute;
+  bottom: -80px; right: -80px;
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(123,97,255,0.09) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero-flex {
+  display: flex;
+justify-content: flex-start;
+  align-items: center;
+  gap: 48px;
+  perspective: 1400px;
+  position: relative;
+  z-index: 1;
 }
 
 /* =========================================
    🔥 PREMIUM 3D CRYPTO PANEL
 ========================================= */
-.hero-rank-box{
-  width:320px;
-  max-height:440px;
-  padding:22px 18px;
-  border-radius:32px;
+.hero-rank-box {
+  width: 340px;
+  max-height: 460px;
+  padding: 0;
+  border-radius: 28px;
+  position: relative;
+  overflow: hidden;
 
+  /* Glassmorphism background */
   background:
-    radial-gradient(circle at 15% 0%,rgba(120,170,255,0.28),transparent 55%),
-    radial-gradient(circle at 85% 100%,rgba(150,110,255,0.28),transparent 55%),
-    linear-gradient(145deg,#0c111b,#0f141f);
+    radial-gradient(ellipse at 10% 0%, rgba(91,180,255,0.18) 0%, transparent 50%),
+    radial-gradient(ellipse at 90% 100%, rgba(123,97,255,0.18) 0%, transparent 50%),
+    linear-gradient(160deg, #0d1220 0%, #0a0d16 100%);
+
+  border: 1px solid rgba(91,180,255,0.20);
 
   box-shadow:
-    0 0 60px rgba(91,180,255,0.28),
-    0 0 130px rgba(123,97,255,0.25),
-    inset 0 0 22px rgba(255,255,255,0.06),
-    0 35px 55px rgba(0,0,0,0.45);
+    0 0 0 1px rgba(255,255,255,0.04) inset,
+    0 0 80px rgba(91,180,255,0.22),
+    0 0 160px rgba(123,97,255,0.16),
+    0 40px 80px rgba(0,0,0,0.55);
 
-  overflow:hidden;
   transform:
-    rotate(6deg)
-    rotateY(35deg)
-    translateX(-25px)
-    scale(0.93);
-  transition:transform .55s ease, box-shadow .55s ease;
-  -webkit-overflow-scrolling:touch;
+    rotate(5deg)
+    rotateY(32deg)
+    translateX(-20px)
+    scale(0.94);
+  transition: transform .6s cubic-bezier(.23,1,.32,1), box-shadow .6s ease, border-color .6s ease;
 }
 
-.hero-rank-box:hover{
-  transform:rotate(0) rotateY(0) translateX(0) scale(1.06);
+/* Shimmer top edge */
+.hero-rank-box::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.18) 40%, rgba(91,180,255,0.35) 60%, transparent 100%);
+  z-index: 3;
+}
+
+/* Fade mask top & bottom */
+.hero-rank-box::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to bottom, rgba(13,18,32,0.85) 0%, transparent 18%, transparent 82%, rgba(10,13,22,0.92) 100%);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.hero-rank-box:hover {
+  transform: rotate(0deg) rotateY(0deg) translateX(0) scale(1.03);
+  border-color: rgba(91,180,255,0.40);
   box-shadow:
-    0 0 100px rgba(91,180,255,0.55),
-    0 0 180px rgba(123,97,255,0.45),
-    inset 0 0 30px rgba(255,255,255,0.10),
-    0 45px 75px rgba(0,0,0,0.65);
+    0 0 0 1px rgba(255,255,255,0.06) inset,
+    0 0 120px rgba(91,180,255,0.38),
+    0 0 220px rgba(123,97,255,0.28),
+    0 50px 100px rgba(0,0,0,0.65);
+}
+
+/* Panel header label */
+.hero-rank-label {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px 10px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--muted);
+  background: linear-gradient(to bottom, rgba(13,18,32,1) 0%, transparent 100%);
+}
+
+.hero-rank-label .live-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: #4ade80;
+  box-shadow: 0 0 8px #4ade80;
+  animation: pulse-dot 2s ease-in-out infinite;
+  display: inline-block;
+  margin-right: 6px;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: .5; transform: scale(0.7); }
 }
 
 /* CRYPTO ROWS */
-.hero-rank-inner{
-  display:flex;
-  flex-direction:column;
-  gap:6px;
+.hero-rank-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 50px 12px 14px;
+  position: relative;
+  z-index: 1;
 }
 
-.hero-rank-row{
-  display:grid;
-  grid-template-columns:28px 120px 1fr 80px;
-  align-items:center;
-  padding:8px 12px;
-  border-radius:14px;
-  background:rgba(10,15,25,0.88);
-  box-shadow:0 8px 18px rgba(0,0,0,0.45);
-  font-size:13px;
+.hero-rank-row {
+  display: grid;
+  grid-template-columns: 24px 1fr auto 76px;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 10px;
+  border-radius: 12px;
+  background: rgba(8,12,22,0.70);
+  border: 1px solid rgba(255,255,255,0.04);
+  font-size: 12.5px;
+  transition: background .2s, border-color .2s;
 }
 
-.hr-pos{
-  opacity:.7;
-}
-.hr-symbol{
-  font-weight:600;
-  text-transform:uppercase;
-}
-.hr-price{
-  text-align:right;
-  font-variant-numeric:tabular-nums;
-}
-.hr-change{
-  text-align:right;
-  font-variant-numeric:tabular-nums;
-  font-weight:600;
-}
-.hr-up{
-  color:#4ade80;
-}
-.hr-down{
-  color:#f97373;
-}
-.hr-icon{
-  width:26px;
-  height:26px;
-  border-radius:50%;
-  margin-right:6px;
+.hero-rank-row:hover {
+  background: rgba(91,180,255,0.07);
+  border-color: rgba(91,180,255,0.15);
 }
 
-/* HERO TEXT */
-.hero-text{
-  flex:1;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
+.hr-pos {
+  opacity: .45;
+  font-size: 11px;
+  font-weight: 600;
 }
 
-.hero-text h2{
-  margin-bottom:12px;
-  font-size:34px;
+.hr-icon-wrap {
+  display: flex;
+  align-items: center;
+  gap: 7px;
 }
 
-.hero-text p{
-  max-width:480px;
-  font-size:16px;
-  line-height:1.6;
-  color:var(--muted);
+.hr-symbol {
+  font-weight: 700;
+  text-transform: uppercase;
+ font-size: 12.5px;
+  letter-spacing: .2px;
+}
+
+.hr-price {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  font-size: 12px;
+  color: var(--text);
+}
+
+.hr-change {
+  text-align: right;
+ font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  font-size: 11.5px;
+  min-width: 60px;
+}
+
+.hr-up   { color: #4ade80; }
+.hr-down { color: #f97373; }
+
+.hr-icon {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.05);
+}
+
+.hr-icon[data-loaded="false"] {
+  visibility: hidden;
+  width: 0;
+  margin: 0;
 }
 
 /* MOBILE */
-@media(max-width:900px){
-  .hero-flex{
-    flex-direction:column;
-    text-align:center;
-    gap:20px;
+@media (max-width: 900px) {
+  .hero-flex {
+    flex-direction: column;
+    text-align: left;
+    gap: 24px;
   }
-
-  .hero-rank-box{
-    margin:auto;
-    transform:rotate(0deg) rotateY(0deg) scale(0.9);
+  .hero-rank-box {
+    margin: auto;
+    transform: rotate(0deg) rotateY(0deg) scale(0.92);
+    width: 300px;
   }
 }
+
+p
+
+
+/* HERO TEXT */
+.hero-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.hero-text h2 {
+  margin: 0 0 16px;
+  font-size: 42px;
+  font-weight: 700;
+  letter-spacing: -1px;
+  line-height: 1.1;
+  background: linear-gradient(135deg, #ffffff 30%, rgba(91,180,255,0.85) 70%, rgba(123,97,255,0.8) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-text p {
+  max-width: 460px;
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--muted);
+  margin: 0 0 10px;
+}
+
+/* Badge "LIVE" πάνω από τον τίτλο */
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  background: rgba(91,180,255,0.10);
+  border: 1px solid rgba(91,180,255,0.25);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--brand);
+  margin-bottom: 20px;
+  width: fit-content;
+}
+.hero-badge .live-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: #4ade80;
+  box-shadow: 0 0 7px #4ade80;
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+
+
 
 /* =========================================
    LIGHT THEME TWEAKS FOR HERO BOX
@@ -390,166 +631,629 @@ body.light-theme .hr-icon {
   filter:none !important;
 }
 
+
+/* =========================================
+   LIGHT THEME — HERO TEXT & PANEL FIXES
+========================================= */
+
+/* Τίτλος: αόρατος στο λευκό φόντο → σκούρο gradient */
+body.light-theme .hero-text h2 {
+  background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 50%, #5b21b6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Badge στο light theme */
+body.light-theme .hero-badge {
+  background: rgba(91,180,255,0.12);
+  border-color: rgba(91,180,255,0.30);
+  color: #2563eb;
+}
+
+/* Panel: fade mask πάνω-κάτω να ταιριάζει με λευκό φόντο */
+body.light-theme .hero-rank-box::after {
+  background:
+    linear-gradient(to bottom, rgba(255,255,255,0.92) 0%, transparent 18%, transparent 82%, rgba(255,255,255,0.95) 100%);
+}
+
+/* Panel shimmer line */
+body.light-theme .hero-rank-box::before {
+  background: linear-gradient(90deg, transparent, rgba(0,0,0,0.06), transparent);
+}
+
+/* Panel label */
+body.light-theme .hero-rank-label {
+  background: linear-gradient(to bottom, rgba(255,255,255,1) 0%, transparent 100%);
+  color: #64748b;
+}
+
+/* Panel glow σε light mode — πιο subtle */
+body.light-theme .hero-rank-box {
+  box-shadow:
+    0 0 40px rgba(91,180,255,0.12),
+    0 0 80px rgba(123,97,255,0.08),
+    0 20px 60px rgba(0,0,0,0.10);
+  border-color: rgba(91,180,255,0.20);
+}
+
+/* Rows στο light mode */
+body.light-theme .hero-rank-row {
+  background: rgba(255,255,255,0.85);
+  border-color: rgba(0,0,0,0.06);
+}
+
+body.light-theme .hero-rank-row:hover {
+  background: rgba(91,180,255,0.07);
+  border-color: rgba(91,180,255,0.20);
+}
+
+
+
 /* =========================================
    SECTIONS & CARDS
 ========================================= */
-.section{
-  padding:40px 0;
+.section {
+  padding: 60px 0;
 }
 
-.section.alt{
-  background:var(--bg-alt);
+.section.alt {
+  background: var(--bg-alt);
+  position: relative;
 }
 
-h3{
-  margin:0 0 18px;
-  font-size:22px;
+h3 {
+  margin: 0 0 28px;
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -.4px;
+  position: relative;
+  display: inline-block;
 }
 
-.cards{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:16px;
+h3::after {
+  content: "";
+  position: absolute;
+  bottom: -8px; left: 0;
+  width: 40px; height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--brand), var(--brand2));
 }
 
-.card{
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:14px;
-  padding:16px;
-  transition:background-color .25s ease, border-color .25s ease;
+.card {
+  background:
+    radial-gradient(ellipse at 0% 0%, rgba(91,180,255,0.05) 0%, transparent 60%),
+    var(--card);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 18px;
+ padding: 20px 20px 24px;
+  transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
-.card h4{
-  margin:0 0 6px;
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.09), transparent);
 }
 
-.card .btn{
-  display:inline-block;
-  margin-top:10px;
-  background:linear-gradient(135deg,var(--brand),var(--brand2));
-  padding:8px 12px;
-  border-radius:10px;
-  color:#0f1216;
-  font-weight:600;
+.card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(91,180,255,0.22);
+  box-shadow: 0 12px 36px rgba(0,0,0,0.30), 0 0 24px rgba(91,180,255,0.07);
+}
+
+.card h4 {
+  margin: 0 0 8px;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.card p {
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--muted);
+  margin: 0;
+}
+
+.card .btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: auto;
+  padding: 9px 16px;
+  background: transparent;
+  border: 1px solid rgba(91,180,255,0.35);
+  border-radius: 999px;
+  color: var(--brand);
+  font-weight: 600;
+  font-size: 13px;
+  transition: background .2s, border-color .2s, color .2s;
+  align-self: flex-start;
+  position: relative;
+  top: 14px;
+}
+
+.card .btn:hover {
+  background: var(--brand);
+  color: #0f1216;
+  border-color: var(--brand);
 }
 
 /* =========================================
-   MARKET CARDS
+   MARKET — LUXURY CARDS
 ========================================= */
-.market-card{
-  display:flex;
-  flex-direction:column;
-  gap:8px;
+.market-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  position: relative;
+  overflow: hidden;
+  padding: 0 !important;
+  border: 1px solid rgba(91,180,255,0.12) !important;
+  border-radius: 20px !important;
+  background:
+    radial-gradient(ellipse at 0% 0%, rgba(91,180,255,0.07) 0%, transparent 60%),
+    radial-gradient(ellipse at 100% 100%, rgba(123,97,255,0.07) 0%, transparent 60%),
+    var(--card) !important;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.04) inset,
+    0 8px 32px rgba(0,0,0,0.28),
+    0 2px 8px rgba(0,0,0,0.18);
+  transition: transform .28s ease, box-shadow .28s ease, border-color .28s ease !important;
+  cursor: default;
 }
 
-.price{
-  font-size:24px;
-  font-weight:700;
+.market-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.10), transparent);
 }
 
-.row{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
+.market-card:hover {
+  transform: translateY(-4px) scale(1.012);
+  border-color: rgba(91,180,255,0.32) !important;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.06) inset,
+    0 16px 48px rgba(0,0,0,0.36),
+    0 0 32px rgba(91,180,255,0.10);
 }
 
-.chip{
-  font-weight:600;
-  border-radius:10px;
-  padding:4px 8px;
+/* Inner padding wrapper */
+.mc-inner {
+  padding: 20px 20px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
 }
 
-.up{
-  background:#0d2d1f;
-  color:#6fffce;
+/* Top row: coin logo + name + chip */
+.mc-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
-.down{
-  background:#2d1414;
-  color:#ff8c8c;
+.mc-coin-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
-.muted{
-  color:var(--muted);
-  font-size:13px;
+.mc-logo {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.06);
+  object-fit: cover;
+  border: 1px solid rgba(255,255,255,0.08);
 }
 
-.note{
-  margin-top:8px;
+.mc-name {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: .3px;
+  margin: 0;
+}
+
+.mc-fullname {
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 1px;
+  font-weight: 400;
+}
+
+/* Price */
+.mc-price {
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -.5px;
+  font-variant-numeric: tabular-nums;
+  background: linear-gradient(135deg, var(--text) 60%, rgba(232,237,242,0.5));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1.1;
+}
+
+/* USD sub-price */
+.mc-sub {
+  font-size: 12px;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+  margin-top: -4px;
+}
+
+/* Bottom bar */
+.mc-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px 14px;
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+
+.mc-volume {
+  font-size: 11px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: .5px;
+}
+
+/* Chip */
+.chip {
+  font-weight: 700;
+  border-radius: 999px;
+  padding: 4px 10px;
+  font-size: 12px;
+  letter-spacing: .2px;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.up {
+  background: rgba(74,222,128,0.12);
+  color: #4ade80;
+  border: 1px solid rgba(74,222,128,0.25);
+}
+
+.down {
+  background: rgba(249,115,115,0.12);
+  color: #f97373;
+  border: 1px solid rgba(249,115,115,0.20);
+}
+
+/* Accent line at bottom of card (color = up/down) */
+.mc-bar {
+  height: 3px;
+  width: 100%;
+  border-radius: 0 0 20px 20px;
+  background: linear-gradient(90deg, var(--brand), var(--brand2));
+  opacity: .55;
+  transition: opacity .28s;
+}
+.market-card:hover .mc-bar { opacity: 1; }
+.mc-bar.bar-up   { background: linear-gradient(90deg,#35d0a7,#4ade80); }
+.mc-bar.bar-down { background: linear-gradient(90deg,#f97373,#ff4f4f); }
+
+/* Light theme overrides */
+body.light-theme .market-card {
+  border-color: rgba(91,180,255,0.18) !important;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+}
+body.light-theme .mc-price {
+  background: linear-gradient(135deg,#0f172a,#334155);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+body.light-theme .up  { background: rgba(22,163,74,0.10);  color: #16a34a; border-color: rgba(22,163,74,0.25); }
+body.light-theme .down{ background: rgba(220,38,38,0.10);  color: #dc2626; border-color: rgba(220,38,38,0.20); }
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.muted {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.note {
+  margin-top: 8px;
 }
 
 /* =========================================
    CHARTS
 ========================================= */
-.chart-wrap{
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:14px;
-  padding:8px;
+.chart-wrap {
+  background: var(--card);
+  border: 1px solid rgba(91,180,255,0.14);
+  border-radius: 20px;
+  padding: 12px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.22), 0 0 0 1px rgba(255,255,255,0.03) inset;
+  overflow: hidden;
+  position: relative;
 }
 
-.pairs{
-  display:flex;
-  gap:8px;
-  margin-top:10px;
-  flex-wrap:wrap;
+.chart-wrap::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(91,180,255,0.25), transparent);
+  z-index: 1;
 }
 
-.pair{
-  background:#12161c;
-  color:#cfe3ff;
-  border:1px solid var(--border);
-  padding:8px 10px;
-  border-radius:10px;
-  cursor:pointer;
+.pairs {
+  display: flex;
+  gap: 8px;
+  margin-top: 14px;
+  flex-wrap: wrap;
 }
-body.light-theme .pair{
-  background:#e5edff;
-  color:#1f2937;
+
+.pair {
+  background: rgba(18,22,28,0.8);
+  color: #a8c4e0;
+  border: 1px solid rgba(255,255,255,0.07);
+  padding: 7px 14px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  transition: background .2s, border-color .2s, color .2s, box-shadow .2s;
 }
+
+body.light-theme .pair {
+  background: #e5edff;
+  color: #1f2937;
+}
+
 .pair.active,
-.pair:hover{
-  border-color:#355cff;
+.pair:hover {
+  border-color: var(--brand);
+  color: var(--brand);
+  background: rgba(91,180,255,0.08);
+  box-shadow: 0 0 12px rgba(91,180,255,0.15);
 }
 
 /* =========================================
    GLOSSARY
 ========================================= */
-.search{
-  width:100%;
-  padding:12px;
-  border-radius:12px;
-  border:1px solid var(--border);
-  background:#0f1319;
-  color:var(--text);
-  margin-bottom:16px;
+.search {
+  width: 100%;
+  padding: 13px 16px;
+  border-radius: 14px;
+  border: 1px solid rgba(91,180,255,0.18);
+  background: rgba(15,19,25,0.8);
+  color: var(--text);
+  margin-bottom: 20px;
+  font-family: inherit;
+  font-size: 14px;
+  transition: border-color .2s, box-shadow .2s;
+  outline: none;
 }
 
-.glossary{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:12px;
+.search:focus {
+  border-color: rgba(91,180,255,0.45);
+  box-shadow: 0 0 0 3px rgba(91,180,255,0.10);
 }
 
-.term{
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:12px;
-  padding:12px;
+body.light-theme .search { background: #ffffff; }
+
+.glossary {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
 }
 
-.term h5{
-  margin:0 0 6px;
+.term {
+  background:
+    radial-gradient(ellipse at 100% 0%, rgba(123,97,255,0.06) 0%, transparent 60%),
+    var(--card);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 16px;
+  padding: 16px 18px;
+  transition: border-color .2s, transform .2s, box-shadow .2s;
+}
+
+.term:hover {
+  border-color: rgba(123,97,255,0.25);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.20);
+}
+
+.term h5 {
+  margin: 0 0 6px;
+  font-size: 14px;
+  font-weight: 700;
+  background: linear-gradient(90deg, var(--brand), var(--brand2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.term p {
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--muted);
+  margin: 0;
+}
+
+
+
+/* =========================================
+   GLOSSARY WRAPPER & TOGGLE
+========================================= */
+#glossary-wrapper {
+  position: relative;
+  overflow: hidden;
+  max-height: 420px;
+  transition: max-height 0.45s ease;
+}
+
+#glossary-wrapper.expanded {
+  max-height: 9999px;
+  overflow: visible;
+}
+
+#glossary-wrapper.collapsed::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 60px;
+  background: linear-gradient(to bottom, transparent, var(--bg-alt));
+  pointer-events: none;
+}
+
+.glossary-toggle {
+  margin-top: 16px;
+  background: none;
+  border: none;
+  color: var(--brand);
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 0;
+  font-family: inherit;
+  transition: opacity .2s;
+}
+
+.glossary-toggle:hover {
+  opacity: .75;
 }
 
 /* =========================================
-   FOOTER
+   WATCHLIST — ADD COIN BUTTON & MODAL
 ========================================= */
-.site-footer{
-  padding:28px 0;
-  border-top:1px solid var(--border);
-  text-align:center;
+.market-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.market-header h3 { margin: 0; }
+
+.add-coin-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: 1.5px solid var(--brand);
+  background: transparent;
+  color: var(--brand);
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background .2s, color .2s, transform .2s;
+}
+.add-coin-btn:hover {
+  background: var(--brand);
+  color: #0f1216;
+  transform: translateY(-1px);
+}
+.add-coin-btn.hidden { display: none !important; }
+
+/* Coin result rows in modal */
+.coin-result-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: rgba(255,255,255,.05);
+  border: 1px solid var(--border);
+  transition: background .18s, border-color .18s;
+}
+.coin-result-row:hover { background: rgba(91,180,255,.08); border-color: var(--brand); }
+.coin-result-left { display: flex; align-items: center; gap: 10px; }
+.coin-result-left img { width: 28px; height: 28px; border-radius: 50%; }
+.coin-result-name { font-weight: 600; font-size: 14px; }
+.coin-result-sym  { font-size: 12px; color: var(--muted); text-transform: uppercase; }
+
+.coin-result-add {
+  padding: 5px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--brand);
+  background: transparent;
+  color: var(--brand);
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background .18s, color .18s;
+  white-space: nowrap;
+}
+.coin-result-add:hover { background: var(--brand); color: #0f1216; }
+.coin-result-add.added { border-color: #4ade80; color: #4ade80; cursor: default; }
+.coin-result-add.added:hover { background: transparent; }
+
+/* Remove ✕ on market cards */
+.card-remove {
+  position: absolute;
+  top: 8px; right: 10px;
+  background: transparent;
+  border: none;
+  color: var(--muted);
+  font-size: 16px;
+  cursor: pointer;
+  line-height: 1;
+  transition: color .18s;
+  padding: 2px 4px;
+  border-radius: 6px;
+}
+.card-remove:hover { color: #f97373; background: rgba(249,115,115,.1); }
+.market-card { position: relative; }
+
+body.light-theme .coin-result-row { background: rgba(0,0,0,.03); }
+body.light-theme .add-coin-btn:hover { color: #fff; }
+
+/* =========================================
+   END WATCHLIST CSS
+========================================= */
+.site-footer {
+  padding: 36px 0;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  text-align: center;
+  background: linear-gradient(to bottom, var(--bg), rgba(10,12,18,1));
+  position: relative;
+}
+
+.site-footer::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 200px; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(91,180,255,0.4), transparent);
+}
+
+.site-footer p {
+  font-size: 13px;
+  color: var(--muted);
+  margin: 0 0 6px;
+}
+
+.site-footer .muted {
+  font-size: 12px;
+  opacity: .6;
 }
 
 /* =========================================
@@ -766,44 +1470,70 @@ body:not(.light-theme) .modal-card{
    BURGER BUTTON — CLEAN & FINAL VERSION
 ============================================ */
 
-/* The icon itself */
+/* =========================================
+   BURGER BUTTON — PREMIUM
+========================================= */
 .menu-btn {
-  display: none;               /* Hidden on desktop */
+  display: none;
   position: relative;
-  width: 34px;
-  height: 26px;
-  border: none;
-  background: transparent;
+  width: 42px;
+  height: 42px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   cursor: pointer;
   padding: 0;
   z-index: 300;
+  transition: background .18s, border-color .18s, box-shadow .18s;
 }
 
-/* The 3 lines */
+.menu-btn:hover {
+  background: rgba(91,180,255,0.10);
+  border-color: rgba(91,180,255,0.35);
+  box-shadow: 0 0 12px rgba(91,180,255,0.15);
+}
+
+body.light-theme .menu-btn {
+  background: rgba(255,255,255,0.9);
+  border-color: rgba(0,0,0,0.10);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+
+body.light-theme .menu-btn:hover {
+  border-color: #2563eb;
+  box-shadow: 0 2px 12px rgba(37,99,235,0.15);
+}
+
 .burger-line {
   position: absolute;
-  left: 0;
-  width: 100%;
-  height: 3px;
+  left: 50%;
+  width: 18px;
+  height: 2px;
+  border-radius: 2px;
   background: var(--text);
-  border-radius: 4px;
-  transition: 0.35s ease;
+  transform: translateX(-50%);
+  transition: 0.3s ease, background .25s ease;
 }
 
-/* Line positions */
-.burger-line:nth-child(1) { top: 0; }
-.burger-line:nth-child(2) { top: 50%; transform: translateY(-50%); }
-.burger-line:nth-child(3) { bottom: 0; }
+body.light-theme .burger-line {
+  background: linear-gradient(90deg, var(--brand), var(--brand2));
+}
+
+.burger-line:nth-child(1) { top: 14px; }
+.burger-line:nth-child(2) { top: 20px; }
+.burger-line:nth-child(3) { top: 26px; }
 
 /* ----- OPEN → X Animation ----- */
 .menu-btn.open .burger-line:nth-child(1) {
-  transform: translateY(11px) rotate(45deg);
+  transform: translateX(-50%) translateY(6px) rotate(45deg);
 }
 .menu-btn.open .burger-line:nth-child(2) {
   opacity: 0;
 }
 .menu-btn.open .burger-line:nth-child(3) {
-  transform: translateY(-11px) rotate(-45deg);
+  transform: translateX(-50%) translateY(-6px) rotate(-45deg);
 }
 
 /* ============================================
@@ -811,92 +1541,139 @@ body:not(.light-theme) .modal-card{
 ============================================ */
 @media (max-width: 850px) {
   .menu-btn {
-    display: block;            /* Show burger */
+    display: block;
   }
 
   .nav {
-    display: none !important;  /* Hide desktop nav */
+    display: none !important;
   }
 
   .header-actions .pill-btn {
-    display: none !important;  /* Hide theme + login desktop */
+    display: none !important;
   }
 }
 
 /* =========================================
-   MOBILE MENU — PREMIUM CRYPTO STYLE
+   MOBILE MENU — PREMIUM GLASS
 ========================================= */
 .mobile-menu {
   position: fixed;
-  top: 70px;
+  top: 78px;
   left: 14px;
   right: 14px;
 
   display: none;
   flex-direction: column;
-  gap: 18px;
+  gap: 4px;
 
-  padding: 22px 20px;
+  padding: 14px;
 
-  background: rgba(255,255,255,0.12);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
+  background:
+    radial-gradient(ellipse at 0% 0%, rgba(91,180,255,0.10) 0%, transparent 55%),
+    radial-gradient(ellipse at 100% 100%, rgba(123,97,255,0.10) 0%, transparent 55%),
+    rgba(10,13,20,0.85);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
 
   border-radius: 22px;
-  border: 1px solid rgba(255,255,255,0.25);
+  border: 1px solid rgba(255,255,255,0.08);
 
-  box-shadow: 0 14px 45px rgba(0,0,0,0.35);
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.04) inset,
+    0 20px 60px rgba(0,0,0,0.50),
+    0 0 40px rgba(91,180,255,0.08);
 
   z-index: 999;
 
-  transform: translateY(-20px);
+  transform: translateY(-12px) scale(0.98);
   opacity: 0;
-  transition: 0.35s ease;
+  pointer-events: none;
+  transition: transform .35s cubic-bezier(.23,1,.32,1), opacity .3s ease;
 }
 
 body.light-theme .mobile-menu {
-  background: rgba(255,255,255,0.8);
-  border: 1px solid rgba(0,0,0,0.1);
+  background:
+    radial-gradient(ellipse at 0% 0%, rgba(91,180,255,0.06) 0%, transparent 55%),
+    radial-gradient(ellipse at 100% 100%, rgba(123,97,255,0.06) 0%, transparent 55%),
+    rgba(255,255,255,0.92);
+  border: 1px solid rgba(0,0,0,0.08);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.12);
 }
 
 /* OPEN ANIMATION */
 .mobile-menu.open {
   display: flex;
-  transform: translateY(0);
+  transform: translateY(0) scale(1);
   opacity: 1;
+  pointer-events: auto;
 }
 
 /* LINKS */
 .mobile-menu a {
-  font-size: 20px;
-  padding: 12px 0;
-  color: var(--text);
-  font-weight: 500;
-  border-bottom: 1px solid rgba(255,255,255,0.15);
-}
-
-body.light-theme .mobile-menu a {
-  border-bottom: 1px solid rgba(0,0,0,0.12);
-}
-
-/* BUTTONS */
-.mobile-btn {
-  padding: 14px;
-  border-radius: 14px;
-  border: none;
-
-  background: linear-gradient(135deg, var(--brand), var(--brand2));
-  color: #fff;
-
-  text-align: center;
   font-size: 16px;
   font-weight: 600;
+  padding: 13px 14px;
+  border-radius: 14px;
+  color: var(--text);
+  transition: background .18s ease, color .18s ease;
+}
 
-  box-shadow: 0 6px 14px rgba(0,0,0,0.25);
+.mobile-menu a:hover,
+.mobile-menu a:active {
+  background: rgba(91,180,255,0.10);
+  color: var(--brand);
+}
+
+body.light-theme .mobile-menu a:hover,
+body.light-theme .mobile-menu a:active {
+  background: rgba(37,99,235,0.08);
+  color: #2563eb;
+}
+
+/* DIVIDER */
+.mobile-menu hr {
+  border: none;
+  height: 1px;
+  margin: 8px 6px;
+  background: linear-gradient(90deg, transparent, rgba(91,180,255,0.30), rgba(123,97,255,0.30), transparent);
+  opacity: .7;
+}
+
+/* ACTION BUTTONS (Theme / Login / Lang) */
+.mobile-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;   /* ← ΝΕΟ */
+  gap: 10px;
+
+  padding: 13px 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.08);
+
+  background: rgba(255,255,255,0.04);
+  color: var(--text);
+
+  text-align: center;        /* ← άλλαξε από left σε center */
+  font-size: 15px;
+  font-weight: 600;
+
+  transition: background .18s ease, border-color .18s ease;
+}
+
+.mobile-btn:hover {
+  background: rgba(91,180,255,0.08);
+  border-color: rgba(91,180,255,0.30);
 }
 
 body.light-theme .mobile-btn {
-  color: #fff !important;
+  background: rgba(0,0,0,0.03);
+  border-color: rgba(0,0,0,0.08);
+  color: var(--text) !important;
+}
+
+body.light-theme .mobile-btn:hover {
+  background: rgba(37,99,235,0.06);
+  border-color: rgba(37,99,235,0.25);
 }
 
 /* ============================================
@@ -1072,64 +1849,6 @@ html, body {
   height: 20px;
 }
 
-
-/* Glossary height control */
-.glossary.collapsed {
-  max-height: 420px; /* ~10 όροι */
-  overflow: hidden;
-  transition: max-height 0.4s ease;
-}
-
-.glossary.expanded {
-  max-height: 3000px;
-}
-
-/* Button */
-.glossary-toggle {
-  margin-top: 14px;
-  background: none;
-  border: none;
-  color: #6aa9ff;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-.glossary-toggle:hover {
-  text-decoration: underline;
-}
-
-/* GLOSSARY EXPAND FIX (NO FOOTER OVERLAP) */
-#glossary-wrapper {
-  overflow: hidden;
-  max-height: 420px; /* ~10 όροι */
-  transition: max-height 0.45s ease;
-}
-
-#glossary-wrapper.expanded {
-  max-height: none;
-}
-
-#glossary-wrapper.collapsed::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 40px;
-  background: linear-gradient(
-    to bottom,
-    rgba(18,22,28,0),
-    var(--bg-alt)
-  );
-  pointer-events: none;
-}
-
-#glossary-wrapper {
-  position: relative;
-}
-
-
-
 /* ===============================
    HORIZONTAL GUIDES SCROLL
 ================================ */
@@ -1164,33 +1883,54 @@ html, body {
 
 
 
-
 .cta-prices {
-  display: inline-flex;          /* καλύτερο από inline-block */
+  display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: 8px;
 
-  padding: 12px 26px;            /* 👈 εδώ το μάζεμα */
-  min-width: 200px;              /* όχι τεράστιο */
-  max-width: 220px;
+  padding: 14px 30px;
+  border-radius: 14px;
 
-  border-radius: 12px;           /* λίγο πιο “σφιχτό” */
-  background: linear-gradient(135deg, #6a5cff, #4f8cff);
+  background: linear-gradient(135deg, #5b7fff 0%, #7b61ff 50%, #5bb4ff 100%);
+  background-size: 200% 200%;
   color: #fff;
-  font-weight: 600;
+  font-weight: 700;
   font-size: 15px;
+  letter-spacing: .2px;
 
   text-decoration: none;
-  margin-top: 28px;
+  margin-top: 30px;
+  width: fit-content;
 
-  box-shadow: 0 6px 22px rgba(90,120,255,0.35);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.15) inset,
+    0 8px 28px rgba(91,100,255,0.45),
+    0 2px 8px rgba(0,0,0,0.25);
+
+  transition: transform .22s ease, box-shadow .22s ease, background-position .4s ease;
+  animation: cta-gradient-shift 4s ease infinite;
+}
+
+@keyframes cta-gradient-shift {
+  0%,100% { background-position: 0% 50%; }
+  50%      { background-position: 100% 50%; }
 }
 
 .cta-prices:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 30px rgba(90,120,255,0.45);
+  transform: translateY(-3px) scale(1.02);
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.20) inset,
+    0 14px 40px rgba(91,100,255,0.60),
+    0 4px 12px rgba(0,0,0,0.30);
 }
+
+.cta-prices::after {
+  content: "→";
+  font-size: 16px;
+  transition: transform .2s ease;
+}
+.cta-prices:hover::after { transform: translateX(3px); }
 
 
 
@@ -1347,28 +2087,17 @@ body.light-theme .more-guides:hover{
   background: rgba(10,12,16,.55);
 }
 
-.prefooter::before{
-  content:"";
-  position:absolute;
-  inset:0;
-
+.prefooter::before {
+  content: "";
+  position: absolute;
+  inset: 0;
   background:
-    radial-gradient(900px 280px at 15% 20%, rgba(91,180,255,.18), transparent 65%),
-    radial-gradient(900px 280px at 85% 30%, rgba(123,97,255,.16), transparent 65%),
-    linear-gradient(120deg,
-      rgba(91,180,255,.30),
-      rgba(123,97,255,.22),
-      rgba(91,180,255,.18)
-    );
-
-  background-size: 140% 140%;
-  animation: pfGradientMove 10s ease-in-out infinite;
-  filter: saturate(1.15);
-  opacity: .95;
-
-  pointer-events:none;
-  z-index:0;
+    radial-gradient(900px 400px at 15% 0%, rgba(91,180,255,.08), transparent 65%),
+    radial-gradient(700px 400px at 85% 100%, rgba(123,97,255,.07), transparent 65%);
+  pointer-events: none;
+  z-index: 0;
 }
+
 
 /* keep content above */
 .prefooter-inner,
@@ -1377,21 +2106,18 @@ body.light-theme .more-guides:hover{
   z-index: 2;
 }
 
-/* moving glow (your existing glow can stay, but upgrade it) */
-.prefooter-glow{
-  position:absolute;
-  inset:-140px -140px auto -140px;
-  height: 360px;
-
+.prefooter-glow {
+  position: absolute;
+  inset: -100px -100px auto -100px;
+  height: 280px;
   background:
-    radial-gradient(circle at 20% 40%, rgba(91,180,255,.40), transparent 55%),
-    radial-gradient(circle at 70% 30%, rgba(123,97,255,.34), transparent 55%);
-
-  filter: blur(22px);
-  opacity: .55;
-  animation: pfGlowDrift 7s ease-in-out infinite;
-  pointer-events:none;
-  z-index:1;
+    radial-gradient(circle at 25% 40%, rgba(91,180,255,.12), transparent 55%),
+    radial-gradient(circle at 75% 30%, rgba(123,97,255,.10), transparent 55%);
+  filter: blur(28px);
+  opacity: .6;
+  animation: pfGlowDrift 8s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 1;
 }
 
 /* shimmer line on divider */
@@ -1446,25 +2172,24 @@ body.light-theme .more-guides:hover{
   }
 }
 
-/* ================= PRE-FOOTER (IMPACT) ================= */
-.prefooter{
+
+
+
+.prefooter {
   position: relative;
   margin-top: 40px;
-  padding: 46px 18px 26px;
+  padding: 46px 18px 30px;
   overflow: hidden;
-
-  border-radius: 22px;
+  border-radius: 24px;
   background:
-    radial-gradient(900px 280px at 15% 20%, rgba(91,180,255,.16), transparent 65%),
-    radial-gradient(900px 280px at 85% 30%, rgba(123,97,255,.14), transparent 65%),
-    rgba(10,12,16,.55);
-
-  border: 1px solid rgba(255,255,255,.08);
+    radial-gradient(ellipse at 10% 0%, rgba(91,180,255,.07) 0%, transparent 55%),
+    radial-gradient(ellipse at 90% 100%, rgba(123,97,255,.06) 0%, transparent 55%),
+    rgba(12,15,22,.70);
+  border: 1px solid rgba(255,255,255,.07);
   box-shadow:
-    0 0 0 1px rgba(91,180,255,.08),
-    0 26px 80px rgba(0,0,0,.55);
-
-  /* fade reveal */
+    0 0 0 1px rgba(255,255,255,.03) inset,
+    0 30px 80px rgba(0,0,0,.45);
+  backdrop-filter: blur(12px);
   opacity: 0;
   transform: translateY(10px);
   animation: pfFadeUp .7s ease forwards;
@@ -1492,12 +2217,13 @@ body.light-theme .more-guides:hover{
   grid-template-columns: 1.1fr 1fr 1fr;
 }
 
-.prefooter h4{
-  margin: 0 0 10px;
-  font-size: 14px;
-  letter-spacing: .25px;
-  font-weight: 800;
-  color: rgba(255,255,255,.92);
+.prefooter h4 {
+  margin: 0 0 12px;
+  font-size: 11px;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: rgba(255,255,255,.40);
 }
 
 .pf-muted{
@@ -1507,44 +2233,42 @@ body.light-theme .more-guides:hover{
   color: rgba(255,255,255,.70);
 }
 
-.pf-link{
+.pf-link {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-
-  padding: 10px 12px;
-  border-radius: 14px;
+  gap: 8px;
+  padding: 9px 14px;
+  border-radius: 999px;
   text-decoration: none;
-  font-weight: 700;
+  font-weight: 600;
   font-size: 13px;
-  color: rgba(255,255,255,.85);
-
-  background: rgba(15,18,22,.38);
-  border: 1px solid rgba(255,255,255,.08);
-
-  transition: transform .18s ease, border-color .18s ease, background .18s ease;
-  margin-bottom: 10px;
+  color: rgba(255,255,255,.80);
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.09);
+  transition: transform .18s ease, border-color .18s ease, background .18s ease, color .18s ease;
+  margin-bottom: 8px;
 }
 
-.pf-link:hover{
+.pf-link:hover {
   transform: translateY(-2px);
-  border-color: rgba(91,180,255,.55);
-  background: rgba(15,18,22,.55);
+  border-color: rgba(91,180,255,.45);
+  background: rgba(91,180,255,.09);
+  color: #fff;
 }
 
-.prefooter-divider{
+.prefooter-divider {
   position: relative;
-  height: 2px;
-  margin: 26px auto 0;
+  height: 1px;
+  margin: 28px auto 0;
   max-width: 1100px;
   border-radius: 999px;
   background: linear-gradient(90deg,
     transparent,
-    rgba(91,180,255,.75),
-    rgba(123,97,255,.75),
+    rgba(91,180,255,.35),
+    rgba(123,97,255,.35),
     transparent
   );
-  opacity: .7;
+  opacity: .5;
 }
 
 /* animations */
@@ -2761,6 +3485,7 @@ body.light-theme .pn-read--btn{
       <a href="#charts"   data-i18n="nav_charts">Τάσεις</a>
       <a href="#guides"   data-i18n="nav_guides">Οδηγοί</a>
       <a href="#glossary" data-i18n="nav_glossary">Γλωσσάρι</a>
+       <a href="./articles.html" data-i18n="nav_articles">Άρθρα</a>
     </nav>
 
     <div class="header-actions">
@@ -2810,9 +3535,9 @@ body.light-theme .pn-read--btn{
   </button>
 
   <!-- LOGIN BUTTON -->
-  <button id="mobile-auth-btn" class="mobile-btn" type="button" data-i18n="login">
+  <button id="mobile-auth-btn" class="mobile-btn" type="button">
     Login
-  </button>
+</button>
 
   <!-- LANGUAGE BUTTON -->
   <button id="mobile-lang-toggle" class="mobile-btn" type="button" aria-label="Language toggle">
@@ -2827,7 +3552,11 @@ body.light-theme .pn-read--btn{
   <div class="container hero-flex">
 
     <!-- ΑΡΙΣΤΕΡΑ: 3D Crypto Panel -->
-    <div class="hero-rank-box">
+   <div class="hero-rank-box">
+      <div class="hero-rank-label">
+        <span><span class="live-dot"></span>Top Coins</span>
+        <span>24h %</span>
+      </div>
      
 <div class="hero-rank-inner" id="hero-rank-inner">
   <div class="hero-rank-row skeleton"><div class="sk-bar w1"></div><div class="sk-bar w2"></div><div class="sk-bar w3"></div><div class="sk-bar w4"></div></div>
@@ -2851,11 +3580,15 @@ body.light-theme .pn-read--btn{
     <!-- ΔΕΞΙΑ: Κείμενο -->
 <div class="hero-text hero-anim">
 
-  <h2 class="fade-right" data-i18n="hero_title">Καλώς ήρθες στο CryptoKosmos</h2>
+  <div class="hero-badge fade-right">
+    <span class="live-dot"></span>
+    Live Data
+  </div>
+
+  <h2 class="fade-right" data-i18n="hero_title">Crypto χωρίς φλυαρία.</h2>
 
   <p class="fade-right delay-1" data-i18n="hero_line1">
-    To CryptoKosmos είναι η πιο απλή και ασφαλής ελληνική πλατφόρμα για να βλέπεις ζωντανές τιμές,
-    να καταλαβαίνεις τάσεις και να μπαίνεις στον κόσμο των crypto χωρίς πονοκέφαλο.
+    Ζωντανές τιμές, ανάλυση αγοράς και οδηγοί — στα ελληνικά, χωρίς περιττά.
   </p>
 
   <p class="fade-right delay-2" data-i18n="hero_line2">
@@ -2877,22 +3610,28 @@ body.light-theme .pn-read--btn{
   <div class="ck-ticker__inner" data-ticker-inner></div>
 </div>
 
-  <!-- MARKET -->
+<!-- MARKET -->
 <section id="market" class="section">
   <div class="container">
 
-    <h3 data-i18n="market_title">Ζωντανές τιμές</h3>
+    <div class="market-header">
+      <h3 data-i18n="market_title">Ζωντανές τιμές</h3>
+      <!-- Κουμπί προσθήκης — εμφανίζεται μόνο αν είσαι logged in -->
+      <button id="add-coin-btn" class="add-coin-btn hidden" title="Προσθήκη νομίσματος">
+        + <span data-i18n="watchlist_add">Προσθήκη</span>
+      </button>
+    </div>
 
     <div id="market-cards" class="scroll-x"></div>
 
     <p class="muted note" data-i18n="market_source">
-      Πηγή τιμών: CoinGecko (ανανεώνεται αυτόματα).
+      Πηγή: CoinGecko — ανανεώνεται αυτόματα.
     </p>
 
   </div>
 </section>
 
-  <!-- CHARTS -->
+<!-- CHARTS -->
 <section id="charts" class="section alt">
   <div class="container">
 
@@ -2902,40 +3641,30 @@ body.light-theme .pn-read--btn{
       <div id="tradingview_chart" style="height:420px;"></div>
     </div>
 
-    <div class="pairs">
-
-      <button data-symbol="BINANCE:BTCUSDT" class="pair active">
-        <span data-i18n="pair_btc">BTC/USDT</span>
-      </button>
-
-      <button data-symbol="BINANCE:ETHUSDT" class="pair">
-        <span data-i18n="pair_eth">ETH/USDT</span>
-      </button>
-
-      <button data-symbol="BINANCE:SOLUSDT" class="pair">
-        <span data-i18n="pair_sol">SOL/USDT</span>
-      </button>
-
-  <button data-symbol="BINANCE:SUIUSDT" class="pair">
-        <span data-i18n="pair_sol">SUI/USDT</span>
-      </button>
-
- <button data-symbol="BINANCE:FETUSDT" class="pair">
-        <span data-i18n="pair_sol">FET/USDT</span>
-
- <button data-symbol="BINANCE:RENDERUSDT" class="pair">
-        <span data-i18n="pair_sol">RENDER/USDT</span>
-      </button>
-
-       <button data-symbol="BINANCE:UNIUSDT" class="pair">
-        <span data-i18n="pair_sol">UNI/USDT</span>
-      </button>
-
-      
-
+    <!-- Pairs: default + dynamic από watchlist -->
+    <div class="pairs" id="chart-pairs">
+      <button data-symbol="BINANCE:BTCUSDT" data-id="bitcoin" class="pair active">BTC/USDT</button>
+      <button data-symbol="BINANCE:ETHUSDT" data-id="ethereum" class="pair">ETH/USDT</button>
+      <button data-symbol="BINANCE:SOLUSDT" data-id="solana" class="pair">SOL/USDT</button>
     </div>
+
   </div>
 </section>
+
+<!-- ADD COIN MODAL -->
+<div id="add-coin-modal" class="modal hidden">
+  <div class="modal-backdrop"></div>
+  <div class="modal-card" style="max-width:440px;">
+    <div class="modal-header">
+      <span class="modal-title" id="add-coin-title">Προσθήκη νομίσματος</span>
+      <button class="modal-close" id="add-coin-close">×</button>
+    </div>
+    <div class="modal-body">
+      <input id="coin-search-input" class="search" placeholder="Αναζήτηση (π.χ. Cardano, ADA...)" style="margin-bottom:12px;" />
+      <div id="coin-search-results" style="max-height:320px;overflow-y:auto;display:flex;flex-direction:column;gap:8px;"></div>
+    </div>
+  </div>
+</div>
 
  <!-- GUIDES -->
 <section id="guides" class="section">
@@ -3066,7 +3795,7 @@ body.light-theme .pn-read--btn{
 
   <div class="prefooter-divider"></div>
 
-  <!-- ================= NEWS ================= -->
+<!-- ================= NEWS ================= -->
   <div class="prefooter-news">
     <div class="pn-head">
       <h4 class="pn-title" data-i18n="news_title">News</h4>
@@ -3075,49 +3804,28 @@ body.light-theme .pn-read--btn{
 
     <div class="pn-grid">
 
-      <!-- Card 1 (HERO SLIDER) -->
+      <!-- Card 1 (HERO SLIDER — Market this week) -->
       <a class="pn-card pn-card--img pn-card--hero pn-hero-slider pn-slider"
-         href="./news/article1.html"
+         href="./news/strategybtcsale.html"
          aria-label="Featured market article"
          data-i18n-aria="pf_news_card1_aria">
 
         <div class="pn-slides">
-      
-         <article class="pn-slide" data-href="./news/cryptomarketthisweek.html">
-  <img class="pn-thumb" src="./cryptomarket.png" alt="Crypto weekly outlook">
+
+         <article class="pn-slide" data-href="./news/strategybtcsale.html">
+  <img class="pn-thumb" src="./strategysale.png" alt="Strategy Bitcoin sale news">
 
   <span class="pn-kicker pn-kicker--top" data-i18n="pf_tag_market">Market</span>
-  <span class="pn-hero-title">OUTLOOK</span>
+  <span class="pn-hero-title">SELL</span>
 
   <div class="pn-overlay">
-    <h5 class="pn-title-onimg" data-i18n="pf_c1_wk_title">
-      Weekly Outlook: τι κινεί την αγορά
+    <h5 class="pn-title-onimg" data-i18n="pf_c1_ss_title">
+      Όταν ο «never sell» πούλησε: τι μαθαίνουμε από τη Strategy
     </h5>
     <ul class="pn-bullets">
-      <li data-i18n="pf_c1_wk_b1">Liquidity & key levels</li>
-      <li data-i18n="pf_c1_wk_b2">Macro tone</li>
-      <li data-i18n="pf_c1_wk_b3">Sentiment & positioning</li>
-    </ul>
-  </div>
-
-  <span class="pn-read pn-read--btn" data-i18n="pf_read">Διάβασε</span>
-</article>
-
-       
-<article class="pn-slide" data-href="./news/bitcointhisweek.html">
-  <img class="pn-thumb" src="./bitcointhisweek.png" alt="Bitcoin liquidity">
-
-  <span class="pn-kicker pn-kicker--top" data-i18n="pf_tag_market">Market</span>
-  <span class="pn-hero-title">LIQUIDITY</span>
-
-  <div class="pn-overlay">
-    <h5 class="pn-title-onimg" data-i18n="pf_c1_liq_title">
-      Bitcoin: πού κάθεται η ρευστότητα και γιατί η τιμή πηγαίνει εκεί
-    </h5>
-    <ul class="pn-bullets">
-      <li data-i18n="pf_c1_liq_b1">Highs & lows: liquidity magnets</li>
-      <li data-i18n="pf_c1_liq_b2">Sweeps vs breakouts</li>
-      <li data-i18n="pf_c1_liq_b3">Timing μετά το “καθάρισμα”</li>
+      <li data-i18n="pf_c1_ss_b1">ETF outflow streak ρεκόρ</li>
+      <li data-i18n="pf_c1_ss_b2">Symbolism vs μέγεθος</li>
+      <li data-i18n="pf_c1_ss_b3">Πώς διαβάζεις τίτλους χωρίς πανικό</li>
     </ul>
   </div>
 
@@ -3125,20 +3833,41 @@ body.light-theme .pn-read--btn{
 </article>
 
 
-<article class="pn-slide" data-href="./news/rotationwatch.html">
-  <img class="pn-thumb" src="./rotationwatch.png" alt="Rotation watch">
+<article class="pn-slide" data-href="./news/tetherflip.html">
+  <img class="pn-thumb" src="./tetherflip.png" alt="Tether overtakes Ethereum market cap">
 
   <span class="pn-kicker pn-kicker--top" data-i18n="pf_tag_market">Market</span>
-  <span class="pn-hero-title">ROTATION</span>
+  <span class="pn-hero-title">FLIP</span>
 
   <div class="pn-overlay">
-    <h5 class="pn-title-onimg" data-i18n="pf_c1_rw_title">
-      Rotation watch: πού μετακινείται το χρήμα
+    <h5 class="pn-title-onimg" data-i18n="pf_c1_tf_title">
+      Το Tether «πέρασε» το Ethereum: τι σημαίνει αυτό το ρεκόρ
     </h5>
     <ul class="pn-bullets">
-      <li data-i18n="pf_c1_rw_b1">BTC dominance</li>
-      <li data-i18n="pf_c1_rw_b2">ETH &amp; majors</li>
-      <li data-i18n="pf_c1_rw_b3">Alt leaders</li>
+      <li data-i18n="pf_c1_tf_b1">Market cap stablecoin vs network</li>
+      <li data-i18n="pf_c1_tf_b2">Πού πάει το κεφάλαιο</li>
+      <li data-i18n="pf_c1_tf_b3">Πώς διαβάζεις extreme προβλέψεις</li>
+    </ul>
+  </div>
+
+  <span class="pn-read pn-read--btn" data-i18n="pf_read">Διάβασε</span>
+</article>
+
+
+<article class="pn-slide" data-href="./news/xrpetfflows.html">
+  <img class="pn-thumb" src="./xrpetfflows.png" alt="XRP ETF inflows vs price">
+
+  <span class="pn-kicker pn-kicker--top" data-i18n="pf_tag_market">Market</span>
+  <span class="pn-hero-title">FLOW</span>
+
+  <div class="pn-overlay">
+    <h5 class="pn-title-onimg" data-i18n="pf_c1_xr_title">
+      6 εβδομάδες εισροών στα XRP ETFs ενώ η τιμή πέφτει
+    </h5>
+    <ul class="pn-bullets">
+      <li data-i18n="pf_c1_xr_b1">Flows vs price</li>
+      <li data-i18n="pf_c1_xr_b2">Capital rotation</li>
+      <li data-i18n="pf_c1_xr_b3">Sentiment ως contrarian σήμα</li>
     </ul>
   </div>
 
@@ -3156,27 +3885,28 @@ body.light-theme .pn-read--btn{
         </div>
       </a>
 
-      <!-- Card 2 (GUIDES) -->
+      <!-- Card 2 (HERO SLIDER — Macro & companies this week) -->
       <a class="pn-card pn-card--img pn-card--hero pn-hero-slider pn-slider"
-         href="./news/article2.html"
-         aria-label="Featured guides article"
+         href="./news/spacexipo.html"
+         aria-label="Featured macro article"
          data-i18n-aria="pf_news_card2_aria">
 
         <div class="pn-slides">
-         <article class="pn-slide" data-href="./news/walletdrain.html">
-  <img class="pn-thumb" src="./walletdrain.png" alt="Wallet drain scams guide">
 
-  <span class="pn-kicker pn-kicker--top" data-i18n="pf_tag_guides">Guides</span>
-  <span class="pn-hero-title">DRAIN</span>
+         <article class="pn-slide" data-href="./news/spacexipo.html">
+  <img class="pn-thumb" src="./spacexipo.png" alt="SpaceX IPO and tokenized stocks">
+
+  <span class="pn-kicker pn-kicker--top" data-i18n="pf_tag_market">Market</span>
+  <span class="pn-hero-title">IPO</span>
 
   <div class="pn-overlay">
-    <h5 class="pn-title-onimg" data-i18n="pf_c2_s3_title">
-      Wallet Drain Scams: πώς αδειάζει ένα wallet χωρίς seed
+    <h5 class="pn-title-onimg" data-i18n="pf_c2_ts_title">
+      Το IPO της SpaceX «μπήκε» στο crypto: tokenized μετοχές &amp; perpetuals
     </h5>
     <ul class="pn-bullets">
-      <li data-i18n="pf_c2_s3_b1">Malicious signs &amp; approvals</li>
-      <li data-i18n="pf_c2_s3_b2">Fake sites &amp; spoofed dApps</li>
-      <li data-i18n="pf_c2_s3_b3">Hot vs main wallet rule</li>
+      <li data-i18n="pf_c2_ts_b1">Tokenized stocks vs perpetuals</li>
+      <li data-i18n="pf_c2_ts_b2">Liquidity &amp; supply risk</li>
+      <li data-i18n="pf_c2_ts_b3">AI narrative &amp; xAI</li>
     </ul>
   </div>
 
@@ -3184,123 +3914,121 @@ body.light-theme .pn-read--btn{
 </article>
 
 
-<article class="pn-slide" data-href="./news/securityguide.html">
-  <img class="pn-thumb" src="./fakesite.png" alt="Fake sites & spoofed frontends guide">
+<article class="pn-slide" data-href="./news/bitminetreasury.html">
+  <img class="pn-thumb" src="./bitminetreasury.png" alt="BitMine Ethereum treasury">
 
-  <span class="pn-kicker pn-kicker--top" data-i18n="pf_tag_guides">Guides</span>
-  <span class="pn-hero-title">FAKE</span>
+  <span class="pn-kicker pn-kicker--top" data-i18n="pf_tag_market">Market</span>
+  <span class="pn-hero-title">ETH</span>
 
   <div class="pn-overlay">
-    <h5 class="pn-title-onimg" data-i18n="pf_c2_s3_title">
-      Fake sites: πώς να τα αναγνωρίζεις σε 10s
+    <h5 class="pn-title-onimg" data-i18n="pf_c2_bm_title">
+      $8,66 δισ. «χαρτί»: η μεγαλύτερη ETH treasury στον κόσμο
     </h5>
     <ul class="pn-bullets">
-      <li data-i18n="pf_c2_s3_b1">Domain &amp; TLD traps</li>
-      <li data-i18n="pf_c2_s3_b2">UI &amp; frontend inconsistencies</li>
-      <li data-i18n="pf_c2_s3_b3">Wallet prompts πριν το drain</li>
+      <li data-i18n="pf_c2_bm_b1">Unrealized vs realized loss</li>
+      <li data-i18n="pf_c2_bm_b2">Equity vs χρέος</li>
+      <li data-i18n="pf_c2_bm_b3">NAV &amp; treasury εταιρείες</li>
     </ul>
   </div>
 
   <span class="pn-read pn-read--btn" data-i18n="pf_read">Διάβασε</span>
 </article>
 
-<article class="pn-slide" data-href="./news/walletsecurityguide.html">
-  <img class="pn-thumb" src="./permit.png" alt="Permit approvals EIP-2612 guide">
 
-  <span class="pn-kicker pn-kicker--top" data-i18n="pf_tag_guides">Guides</span>
-  <span class="pn-hero-title">PERMIT</span>
+<article class="pn-slide" data-href="./news/mastercard-stablecoins.html">
+  <img class="pn-thumb" src="./mastercard-stablecoins.png" alt="Mastercard and stablecoins">
+
+  <span class="pn-kicker pn-kicker--top" data-i18n="pf_tag_market">Market</span>
+  <span class="pn-hero-title">PAY</span>
 
   <div class="pn-overlay">
-    <h5 class="pn-title-onimg" data-i18n="pf_c2_s4_title">
-      Permit approvals: το αόρατο approval
+    <h5 class="pn-title-onimg" data-i18n="pf_c2_mc_title">
+      Mastercard &amp; Stablecoins: τι αλλάζει για το crypto τώρα
     </h5>
     <ul class="pn-bullets">
-      <li data-i18n="pf_c2_s4_b1">Off-chain signatures (no approve tx)</li>
-      <li data-i18n="pf_c2_s4_b2">Hidden allowance & delayed drain</li>
-      <li data-i18n="pf_c2_s4_b3">Scam frontends & fake “sign”</li>
+      <li data-i18n="pf_c2_mc_b1">Stablecoins σε mainstream rails</li>
+      <li data-i18n="pf_c2_mc_b2">Agent Pay &amp; payments infra</li>
+      <li data-i18n="pf_c2_mc_b3">Τι σημαίνει για adoption</li>
     </ul>
   </div>
 
   <span class="pn-read pn-read--btn" data-i18n="pf_read">Διάβασε</span>
 </article>
-         
+
         </div>
 
         <button class="pn-next" type="button" aria-label="Next article" data-i18n-aria="pf_next">›</button>
-        <div class="pn-dots" role="tablist" aria-label="Guides articles" data-i18n-aria="pf_dots_guides">
+        <div class="pn-dots" role="tablist" aria-label="Macro articles" data-i18n-aria="pf_dots_macro">
           <button class="pn-dot is-active" type="button" aria-label="Slide 1" data-i18n-aria="pf_slide_1"></button>
           <button class="pn-dot" type="button" aria-label="Slide 2" data-i18n-aria="pf_slide_2"></button>
           <button class="pn-dot" type="button" aria-label="Slide 3" data-i18n-aria="pf_slide_3"></button>
         </div>
       </a>
 
-      <!-- Card 3 (ALTCOINS) -->
-   
+      <!-- Card 3 (HERO SLIDER — Risk, security & altcoins) -->
+      <a class="pn-card pn-card--img pn-card--hero pn-hero-slider pn-slider"
+         href="./news/altcoinguide.html"
+         aria-label="Featured market psychology articles"
+         data-i18n-aria="pf_news_card_psy_aria">
 
-<!-- Card (MARKET PSYCHOLOGY & ALTS) -->
-<a class="pn-card pn-card--img pn-card--hero pn-hero-slider pn-slider"
-   href="./news/marketpsychology.html"
-   aria-label="Featured market psychology articles"
-   data-i18n-aria="pf_news_card_psy_aria">
+        <div class="pn-slides">
 
-  <div class="pn-slides">
-
-   <article class="pn-slide" data-href="./news/altcoins-narratives.html">
-  <img class="pn-thumb" src="./altcoins-narratives.png" alt="Altcoins vs narratives">
+          <article class="pn-slide" data-href="./news/altcoinguide.html">
+  <img class="pn-thumb" src="./altcoinexit.png" alt="Altcoin exit checklist">
 
   <span class="pn-kicker pn-kicker--top" data-i18n="pf_tag_altcoins">Altcoins</span>
-  <span class="pn-hero-title">NARR</span>
+  <span class="pn-hero-title">EXIT</span>
 
   <div class="pn-overlay">
-    <h5 class="pn-title-onimg" data-i18n="pf_an_s1_title">
-      Altcoins vs Narratives: γιατί ΔΕΝ ανεβαίνουν όλα μαζί
+    <h5 class="pn-title-onimg" data-i18n="pf_c3_alt_title">
+      Altcoin Exit Checklist: πότε βγαίνεις πριν γίνει αργά
     </h5>
     <ul class="pn-bullets">
-      <li data-i18n="pf_an_s1_b1">Selective liquidity, όχι ίση κατανομή</li>
-      <li data-i18n="pf_an_s1_b2">Rotation μέσα στο ίδιο narrative</li>
-      <li data-i18n="pf_an_s1_b3">Γιατί λίγα coins “κερδίζουν”</li>
+      <li data-i18n="pf_c3_alt_b1">Partial exits &amp; targets</li>
+      <li data-i18n="pf_c3_alt_b2">Liquidity &amp; volume</li>
+      <li data-i18n="pf_c3_alt_b3">Sentiment shifts</li>
     </ul>
   </div>
 
   <span class="pn-read pn-read--btn" data-i18n="pf_read">Διάβασε</span>
 </article>
 
-    <!-- Slide 2 — Narrative Hype -->
-    <article class="pn-slide" data-href="./news/narrativehype.html">
-      <img class="pn-thumb" src="./narrativehype.png" alt="Narrative hype checklist">
+    <!-- Slide 2 — Geopolitical risk -->
+    <article class="pn-slide" data-href="./news/geopoliticalcrypto.html">
+      <img class="pn-thumb" src="./geopoliticalcrypto.png" alt="Geopolitical risk and crypto markets">
 
       <span class="pn-kicker pn-kicker--top" data-i18n="pf_tag_market">Market</span>
-      <span class="pn-hero-title">HYPE</span>
+      <span class="pn-hero-title">RISK</span>
 
       <div class="pn-overlay">
-        <h5 class="pn-title-onimg" data-i18n="pf_psy_s2_title">
-          Narrative Hype Checklist: πότε είναι ευκαιρία και πότε παγίδα
+        <h5 class="pn-title-onimg" data-i18n="pf_c3_gp_title">
+          Canary in the coal mine: το crypto &amp; τα γεωπολιτικά σοκ
         </h5>
         <ul class="pn-bullets">
-          <li data-i18n="pf_psy_s2_b1">Attention vs πραγματική ζήτηση</li>
-          <li data-i18n="pf_psy_s2_b2">Late-stage narratives</li>
-          <li data-i18n="pf_psy_s2_b3">Πού μπαίνει το smart money</li>
+          <li data-i18n="pf_c3_gp_b1">24/7 markets</li>
+          <li data-i18n="pf_c3_gp_b2">Sell-off &amp; recovery pattern</li>
+          <li data-i18n="pf_c3_gp_b3">Safe haven vs risk asset</li>
         </ul>
       </div>
 
       <span class="pn-read pn-read--btn" data-i18n="pf_read">Διάβασε</span>
     </article>
 
-    <!-- Slide 3 — Altcoin Exit -->
-    <article class="pn-slide" data-href="./news/altcoinguide.html">
-      <img class="pn-thumb" src="./altcoinexit.png" alt="Altcoin exit checklist">
+    <!-- Slide 3 — Bitcoin quantum risk -->
+    <article class="pn-slide" data-href="./news/bitcoinquantum.html">
+      <img class="pn-thumb" src="./bitcoinquantum.png" alt="Bitcoin and quantum computing risk">
 
-      <span class="pn-kicker pn-kicker--top" data-i18n="pf_tag_altcoins">Altcoins</span>
-      <span class="pn-hero-title">EXIT</span>
+      <span class="pn-kicker pn-kicker--top" data-i18n="pf_tag_market">Market</span>
+      <span class="pn-hero-title">QUBIT</span>
 
       <div class="pn-overlay">
-        <h5 class="pn-title-onimg" data-i18n="pf_psy_s3_title">
-          Altcoin Exit Checklist: πότε βγαίνεις πριν γίνει αργά
+        <h5 class="pn-title-onimg" data-i18n="pf_c3_qb_title">
+          Bitcoin &amp; quantum computers: τι λέει η Coinbase για τα νομίσματα του Satoshi
         </h5>
         <ul class="pn-bullets">
-          <li data-i18n="pf_psy_s3_b1">Distribution & weak follow-through</li>
-          <li data-i18n="pf_psy_s3_b2">Narrative exhaustion</li>
-          <li data-i18n="pf_psy_s3_b3">Liquidity fades & traps</li>
+          <li data-i18n="pf_c3_qb_b1">Mining vs υπογραφές</li>
+          <li data-i18n="pf_c3_qb_b2">~7 εκατ. BTC ευάλωτα</li>
+          <li data-i18n="pf_c3_qb_b3">Το δίλημμα του «freeze»</li>
         </ul>
       </div>
 
@@ -3325,13 +4053,12 @@ body.light-theme .pn-read--btn{
 </section>
 
 
-  <footer class="site-footer">
-  <div class="container">
-    <p>
-      © <span id="year"></span> CryptoKosmos — 
-      <span data-i18n="footer_rights">Όλα τα δικαιώματα διατηρούνται.</span>
-    </p>
 
+
+
+<footer class="site-footer">
+  <div class="container">
+    <p>© <span id="year"></span> CryptoKosmos</p>
     <p class="muted" data-i18n="footer_disclaimer">
       Disclaimer: Εκπαιδευτικό περιεχόμενο. Δεν αποτελεί επενδυτική συμβουλή.
     </p>
@@ -3383,7 +4110,7 @@ body.light-theme .pn-read--btn{
 
       <!-- DEMO TEXT -->
       <p class="modal-hint" data-i18n="login_demo">
-        Demo login: δεν στέλνεται τίποτα σε server.
+        Your account is securely stored in the cloud.
       </p>
 
       <!-- NO ACCOUNT -->
@@ -3513,8 +4240,11 @@ body.light-theme .pn-read--btn{
       <input
         id="verify-code"
         type="text"
-        placeholder="123456"
+        inputmode="numeric"
+        maxlength="6"
+        placeholder="_ _ _ _ _ _"
         data-i18n-placeholder="verify_code_placeholder"
+        style="letter-spacing:6px; font-size:22px; text-align:center; font-weight:700;"
       >
 
       <!-- ERROR -->
@@ -3532,843 +4262,23 @@ body.light-theme .pn-read--btn{
   </div>
 </div>
 
-<script>
-document.addEventListener("DOMContentLoaded", () => {
 
-  // =========================
-  // FOOTER YEAR
-  // =========================
-  const yearEl = document.getElementById("year");
-  if (yearEl) yearEl.textContent = new Date().getFullYear();
-
-  // =========================
-  // THEME (index only)
-  // =========================
-  const themeBtn   = document.getElementById("theme-toggle");
-  const themeIcon  = document.getElementById("theme-icon");
-  const themeLabel = document.getElementById("theme-label");
-  const siteLogo   = document.getElementById("site-logo");
-
-
-
-
-function applyTheme(isLight){
-  const root = document.documentElement; // ✅ html
-
-  if (isLight) {
-    root.classList.add("light-theme");   // ✅
-    document.body.classList.add("light-theme"); // (κρατά το για να μη σπάσουν παλιά selectors)
-    localStorage.setItem("ck-theme","light");
-    
-    if (themeIcon) themeIcon.src = "./IMG_5299.png";
-    if (themeLabel) themeLabel.textContent = "Light";
-    if (siteLogo) siteLogo.src = "./logo.png";
-
-  } else {
-    root.classList.remove("light-theme"); // ✅
-    document.body.classList.remove("light-theme");
-    localStorage.setItem("ck-theme","dark");
-
-    if (themeIcon) themeIcon.src = "./IMG_5300.png";
-    if (themeLabel) themeLabel.textContent = "Dark";
-    if (siteLogo) siteLogo.src = "./black logo.png";
-  }
-}
-applyTheme(localStorage.getItem("ck-theme") === "light");
-document.documentElement.classList.add("theme-ready");
-
-  if (themeBtn) {
-  themeBtn.addEventListener("click", () => {
-    applyTheme(!document.body.classList.contains("light-theme"));
-    document.dispatchEvent(new Event("themeChanged"));
-
-    // ✅ refresh TradingView theme
-    setTimeout(refreshTradingViewTheme, 80);
-
-  });
-}
-
-document.documentElement.classList.add("theme-ready");
-
-// =========================
-// BURGER (index only) — FIXED
-// =========================
-const menuToggle  = document.getElementById("menu-toggle");
-const mobileMenu  = document.getElementById("mobile-menu");
-const mobileTheme = document.getElementById("mobile-theme-toggle");
-const mobileAuth  = document.getElementById("mobile-auth-btn");
-const mobileLang  = document.getElementById("mobile-lang-toggle");
-
-// Guard: μην ξαναδέσεις listeners αν τρέξει 2 φορές
-if (!window.__ckBurgerBound) {
-  window.__ckBurgerBound = true;
-
-  function closeBurger() {
-    if (!menuToggle || !mobileMenu) return;
-    menuToggle.classList.remove("open");
-    mobileMenu.classList.remove("open");
-    mobileMenu.setAttribute("aria-hidden", "true");
-  }
-
-  function openBurger() {
-    if (!menuToggle || !mobileMenu) return;
-    menuToggle.classList.add("open");
-    mobileMenu.classList.add("open");
-    mobileMenu.setAttribute("aria-hidden", "false");
-  }
-
-  function toggleBurger() {
-    if (!menuToggle || !mobileMenu) return;
-    const isOpen = mobileMenu.classList.contains("open");
-    isOpen ? closeBurger() : openBurger();
-  }
-
-  // κάνε το διαθέσιμο global (για άλλα scripts)
-  window.closeBurger = closeBurger;
-
-  // Toggle burger
-  if (menuToggle && mobileMenu) {
-    menuToggle.addEventListener("click", (e) => {
-      e.preventDefault();
-      toggleBurger();
-    });
-
-    // close όταν πατάς link μέσα στο mobile menu
-    mobileMenu.querySelectorAll("a").forEach(a => {
-      a.addEventListener("click", () => closeBurger());
-    });
-  }
-
-  // Mobile THEME → κλείσε burger + κάνε click στο desktop theme
-  if (mobileTheme && window.themeBtn) {
-    mobileTheme.addEventListener("click", (e) => {
-      e.preventDefault();
-      closeBurger();
-      window.themeBtn.click();
-    });
-  } else if (mobileTheme && typeof themeBtn !== "undefined" && themeBtn) {
-    // fallback αν themeBtn είναι στη scope σου
-    mobileTheme.addEventListener("click", (e) => {
-      e.preventDefault();
-      closeBurger();
-      themeBtn.click();
-    });
-  }
-
-  // Mobile LOGIN → κλείσε burger + άνοιξε login μέσω του auth-btn (ενιαίο handler)
-  mobileAuth?.addEventListener("click", (e) => {
-    e.preventDefault();
-    closeBurger();
-    document.getElementById("auth-btn")?.click();
-  });
-
-  // ❌ ΣΗΜΑΝΤΙΚΟ:
-  // ΔΕΝ βάζουμε εδώ listener για mobileLang που να πατάει lang-toggle
-  // γιατί έχεις ήδη το σωστό lang script στο τέλος (toggleLang()).
-  // Άρα εδώ μόνο κλείνουμε burger (προαιρετικά).
-  mobileLang?.addEventListener("click", () => {
-    // άστο να το χειριστεί το language script σου
-    closeBurger();
-  });
-
-  // close burger όταν κλείνει modal (backdrop / close)
-  document.querySelectorAll(".modal-backdrop, .modal-close").forEach(el => {
-    el.addEventListener("click", () => closeBurger());
-  });
-
-  // close με ESC
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") closeBurger();
-  });
-}
-
-  // =========================
-  // UTIL: fetch with timeout
-  // =========================
-  async function fetchWithTimeout(url, options = {}, ms = 8000) {
-    const controller = new AbortController();
-    const id = setTimeout(() => controller.abort(), ms);
-    try {
-      return await fetch(url, { ...options, signal: controller.signal });
-    } finally {
-      clearTimeout(id);
-    }
-  }
-  const sleep = (ms) => new Promise(r => setTimeout(r, ms));
-
-
-// ========================================
-// Glossary with full i18n support
-// ========================================
-const gList   = document.getElementById("glossary-list");
-const gSearch = document.getElementById("glossary-search");
-
-function renderGlossary() {
-  const lang = localStorage.getItem("ck-lang") || "el";
-  const terms = window.TRANSLATIONS[lang].glossary_terms;
-  const query = (gSearch.value || "").toLowerCase();
-
-  gList.innerHTML = "";
-
-  Object.keys(terms)
-    .filter(key =>
-      key.toLowerCase().includes(query) ||
-      terms[key].toLowerCase().includes(query)
-    )
-    .forEach(key => {
-      const div = document.createElement("div");
-      div.className = "term";
-      div.innerHTML = `
-        <h5>${key}</h5>
-        <p class="muted">${terms[key]}</p>
-      `;
-      gList.appendChild(div);
-    });
-}
-
-gSearch.addEventListener("input", renderGlossary);
-document.addEventListener("languageChanged", renderGlossary);
-renderGlossary();
-
-  // ============================================================
-  // HERO RANKING (transform scroll, cache, retry, flicker-free)
-  // ============================================================
-  const rankWrap = document.getElementById("hero-rank-inner");
-
-  let heroBooted = false;
-  let heroRefreshInterval = null;
-
-  let heroRAF = null;
-  let heroLastT = 0;
-  let heroPos = 0;
-
-  function getCachedHero() {
-    try { return JSON.parse(localStorage.getItem("ck-hero-cache")); } catch { return null; }
-  }
-  function setCachedHero(data) {
-    localStorage.setItem("ck-hero-cache", JSON.stringify({ t: Date.now(), data }));
-  }
-
-  function renderHeroSkeleton(count = 12){
-    if (!rankWrap) return;
-    rankWrap.innerHTML = "";
-    for (let i = 0; i < count; i++){
-      const row = document.createElement("div");
-      row.className = "hero-rank-row skeleton";
-      row.innerHTML = `
-        <div class="sk-bar w1"></div>
-        <div class="sk-bar w2"></div>
-        <div class="sk-bar w3"></div>
-        <div class="sk-bar w4"></div>
-      `;
-      rankWrap.appendChild(row);
-    }
-    heroPos = 0;
-    rankWrap.style.transform = "translateY(0px)";
-  }
-
-  function renderHeroFromData(data){
-    if (!rankWrap) return;
-
-    const prevPos = heroPos || 0;
-    rankWrap.innerHTML = "";
-
-    data.forEach((coin, idx) => {
-      const change = Number(coin.price_change_percentage_24h ?? 0);
-      const up = change >= 0;
-
-      const row = document.createElement("div");
-      row.className = "hero-rank-row";
-      row.innerHTML = `
-        <span class="hr-pos">${idx + 1}</span>
-        <div class="hr-icon-wrap">
-          <img src="${coin.image}" class="hr-icon" loading="lazy" alt="">
-          <span class="hr-symbol">${String(coin.symbol || "").toUpperCase()}</span>
-        </div>
-        <span class="hr-change ${up ? "hr-up" : "hr-down"}">
-          ${up ? "▲" : "▼"} ${change.toFixed(2)}%
-        </span>
-        <span class="hr-price">
-          $${Number(coin.current_price || 0).toLocaleString("en-US",{ maximumFractionDigits: 2 })}
-        </span>
-      `;
-      rankWrap.appendChild(row);
-    });
-
-    // duplicate
-    rankWrap.innerHTML += rankWrap.innerHTML;
-
-    requestAnimationFrame(() => {
-      const half = rankWrap.scrollHeight / 2;
-      heroPos = half > 0 ? (prevPos % half) : 0;
-      rankWrap.style.transform = `translateY(${-heroPos}px)`;
-
-      stopHeroScroll();
-      startHeroScroll();
-    });
-  }
-
-  function startHeroScroll(){
-    if (!rankWrap) return;
-    if (heroRAF) return;
-
-    heroLastT = performance.now();
-
-    const tick = (t) => {
-      const dt = t - heroLastT;
-      heroLastT = t;
-
-      const half = rankWrap.scrollHeight / 2;
-      if (!half || half < 50) {
-        heroRAF = requestAnimationFrame(tick);
-        return;
-      }
-
-      heroPos += 0.4 * (dt / 16.67);
-      if (heroPos >= half) heroPos = 0;
-
-      rankWrap.style.transform = `translateY(${-heroPos}px)`;
-      heroRAF = requestAnimationFrame(tick);
-    };
-
-    heroRAF = requestAnimationFrame(tick);
-  }
-
-  function stopHeroScroll(){
-    if (heroRAF) cancelAnimationFrame(heroRAF);
-    heroRAF = null;
-  }
-
-  document.addEventListener("visibilitychange", () => {
-    if (document.visibilityState === "visible") {
-      stopHeroScroll();
-      requestAnimationFrame(startHeroScroll);
-    } else {
-      stopHeroScroll();
-    }
-  });
-
-  async function loadHeroRanking(){
-    if (!rankWrap) return;
-
-    const cached = getCachedHero();
-    const hasCache = !!cached?.data && Array.isArray(cached.data) && cached.data.length;
-
-    if (!heroBooted) {
-      if (hasCache) renderHeroFromData(cached.data);
-      else renderHeroSkeleton();
-      heroBooted = true;
-      startHeroScroll();
-    }
-
-    const url =
-      "https://api.coingecko.com/api/v3/coins/markets" +
-      "?vs_currency=usd&order=market_cap_desc&per_page=50&page=1&sparkline=false";
-
-    for (let attempt = 1; attempt <= 2; attempt++) {
-      try {
-        const res = await fetchWithTimeout(url, { cache: "no-store" }, 8000);
-        if (res.status === 429) throw new Error("Rate limited (429)");
-        if (!res.ok) throw new Error("HTTP " + res.status);
-
-        const data = await res.json();
-        if (!Array.isArray(data) || data.length === 0) throw new Error("Invalid data");
-
-        setCachedHero(data);
-        renderHeroFromData(data);
-        return;
-
-      } catch (e) {
-        console.warn("Hero ranking failed:", attempt, e);
-        if (attempt < 2) await sleep(1200);
-      }
-    }
-  }
-
-  function startHeroRefresh(){
-    if (heroRefreshInterval) clearInterval(heroRefreshInterval);
-    heroRefreshInterval = setInterval(loadHeroRanking, 60 * 60 * 1000);
-  }
-
-  loadHeroRanking();
-  startHeroRefresh();
-
-  window.addEventListener("pagehide", () => {
-    stopHeroScroll();
-    if (heroRefreshInterval) clearInterval(heroRefreshInterval);
-  });
-
-  
-
-
- // =========================================
-  // LIVE PRICES (stable, cache, skeleton)
-  // =========================================
-  const coins = [
-  { id: "bitcoin", symbol: "BTC" },
-  { id: "ethereum", symbol: "ETH" },
-  { id: "solana", symbol: "SOL" },
-  { id: "sui", symbol: "SUI" },
-  { id: "artificial-superintelligence-alliance", symbol: "FET" },
-  { id: "render", symbol: "RENDER" },
-  { id: "uniswap", symbol: "UNI" }
-];
-
-  let pricesInterval = null;
-  let pricesBooted = false;
-
-  function formatEur(n) {
-    return "€" + new Intl.NumberFormat("el-GR", { maximumFractionDigits: 2 }).format(n);
-  }
-
-  function getCachedPrices() {
-    try { return JSON.parse(localStorage.getItem("ck-prices-cache")); } catch { return null; }
-  }
-  function setCachedPrices(data) {
-    localStorage.setItem("ck-prices-cache", JSON.stringify({ t: Date.now(), data }));
-  }
-
-  function renderMarketSkeleton() {
-    const wrap = document.getElementById("market-cards");
-    if (!wrap) return;
-
-    wrap.innerHTML = "";
-    coins.forEach(c => {
-      const card = document.createElement("article");
-      card.className = "card market-card";
-      card.innerHTML = `
-        <div class="row">
-          <h4>${c.symbol}</h4>
-          <span class="chip" style="opacity:.55;">…</span>
-        </div>
-        <div class="price" style="opacity:.55;">—</div>
-        <div class="row muted" style="opacity:.55;">
-          <span>USD: —</span>
-          <span>24h …</span>
-        </div>
-      `;
-      wrap.appendChild(card);
-    });
-  }
-
-  function renderMarket(data) {
-    const wrap = document.getElementById("market-cards");
-    if (!wrap) return;
-
-    wrap.innerHTML = "";
-
-    coins.forEach(c => {
-      const d = data[c.id];
-      if (!d) return;
-
-      const change = typeof d.eur_24h_change === "number" ? d.eur_24h_change : 0;
-      const up = change >= 0;
-
-      const card = document.createElement("article");
-      card.className = "card market-card";
-      card.innerHTML = `
-        <div class="row">
-          <h4>${c.symbol}</h4>
-          <span class="chip ${up ? "up" : "down"}">${change.toFixed(2)}%</span>
-        </div>
-        <div class="price">${formatEur(d.eur)}</div>
-        <div class="row muted">
-          <span>USD: $${Number(d.usd).toFixed(2)}</span>
-          <span>24h ${up ? "▲" : "▼"}</span>
-        </div>
-      `;
-      wrap.appendChild(card);
-    });
-  }
-
-  async function fetchPricesStable() {
-    const cached = getCachedPrices();
-    const hasCache = !!cached?.data;
-
-    if (!pricesBooted) {
-      if (hasCache) renderMarket(cached.data);
-      else renderMarketSkeleton();
-      pricesBooted = true;
-    }
-
-    const ids = coins.map(c => c.id).join(",");
-    const url =
-      `https://api.coingecko.com/api/v3/simple/price` +
-      `?ids=${ids}&vs_currencies=usd,eur&include_24hr_change=true`;
-
-    for (let attempt = 1; attempt <= 2; attempt++) {
-      try {
-        const res = await fetchWithTimeout(url, { cache: "no-store" }, 8000);
-        if (res.status === 429) throw new Error("Rate limited (429)");
-        if (!res.ok) throw new Error("HTTP " + res.status);
-
-        const data = await res.json();
-       const ok = coins.some(c => data?.[c.id] && typeof data[c.id].eur === "number");
-if (!ok) throw new Error("Invalid price data");
-
-        setCachedPrices(data);
-        renderMarket(data);
-        return;
-
-      } catch (e) {
-        console.warn("Prices failed:", attempt, e);
-        if (attempt < 2) await sleep(1200);
-      }
-    }
-  }
-
-  function startPrices(){
-    if (pricesInterval) clearInterval(pricesInterval);
-    fetchPricesStable();
-    pricesInterval = setInterval(fetchPricesStable, 20 * 60 * 1000);
-  }
-
-  function stopPrices(){
-    if (pricesInterval) clearInterval(pricesInterval);
-    pricesInterval = null;
-  }
-
-  startPrices();
-  window.addEventListener("pagehide", stopPrices); 
-
-
-
-// ========================================
-// TradingView Chart (theme-safe)
-// ========================================
-let tvWidget = null;
-
-function getTvTheme() {
-  return document.body.classList.contains("light-theme") ? "light" : "dark";
-}
-
-function getTvToolbarBg() {
-  return document.body.classList.contains("light-theme") ? "#ffffff" : "#0f1216";
-}
-
-function loadTradingView(symbol) {
-  const el = document.getElementById("tradingview_chart");
-  if (!el) return;
-  if (typeof TradingView === "undefined") return;
-
-  // remove old widget first
-  if (tvWidget && typeof tvWidget.remove === "function") {
-    tvWidget.remove();
-  }
-
-  // then clear container
-  el.innerHTML = "";
-
-  tvWidget = new TradingView.widget({
-    autosize: true,
-    symbol: symbol || "BINANCE:BTCUSDT",
-    interval: "60",
-    timezone: "Europe/Athens",
-    theme: getTvTheme(),
-    style: "1",
-    locale: "en",
-    toolbar_bg: getTvToolbarBg(),
-    enable_publishing: false,
-    hide_legend: false,
-    container_id: "tradingview_chart"
-  });
-}
-
-// φορτώνει το tv.js μία φορά
-(function loadTV() {
-  const el = document.getElementById("tradingview_chart");
-  if (!el) return;
-
-  if (window.__tv_loaded) {
-    loadTradingView("BINANCE:BTCUSDT");
-    return;
-  }
-
-  const s = document.createElement("script");
-  s.src = "https://s3.tradingview.com/tv.js";
-  s.onload = () => {
-    window.__tv_loaded = true;
-    loadTradingView("BINANCE:BTCUSDT");
-  };
-  document.body.appendChild(s);
-})();
-
-// αλλαγή pair
-document.addEventListener("click", (e) => {
-  const btn = e.target.closest(".pair");
-  if (!btn) return;
-
-  document.querySelectorAll(".pair").forEach(b => b.classList.remove("active"));
-  btn.classList.add("active");
-
-  loadTradingView(btn.dataset.symbol);
-});
-
-// theme refresh helper
-function refreshTradingViewTheme() {
-  const active = document.querySelector(".pair.active");
-  const symbol = active?.dataset.symbol || "BINANCE:BTCUSDT";
-  loadTradingView(symbol);
-}
-
-// σύνδεση με το ΥΠΑΡΧΟΝ themeBtn listener (ΜΗΝ βάλεις δεύτερο listener)
-document.addEventListener("themeChanged", () => {
-  if (window.__tv_loaded) setTimeout(refreshTradingViewTheme, 80);
-});
-
-});
-
-</script>
-
-<script>
-  const wrapper = document.getElementById("glossary-wrapper");
-  const toggleBtn = document.getElementById("glossary-toggle");
-
-  function getLang() {
-    return localStorage.getItem("ck-lang") || "el";
-  }
-
-  function t(key) {
-    const lang = getLang();
-    return (window.TRANSLATIONS?.[lang]?.[key]) || key;
-  }
-
-  function syncGlossaryToggleText() {
-    const expanded = wrapper.classList.contains("expanded");
-    toggleBtn.textContent = expanded ? t("glossary_less") : t("glossary_more");
-    toggleBtn.setAttribute("aria-expanded", expanded ? "true" : "false");
-  }
-
-  toggleBtn.addEventListener("click", () => {
-    const expanded = wrapper.classList.toggle("expanded");
-    wrapper.classList.toggle("collapsed", !expanded);
-    syncGlossaryToggleText();
-  });
-
-  // όταν αλλάζει γλώσσα (εσύ ήδη κάνεις dispatch languageChanged)
-  document.addEventListener("languageChanged", syncGlossaryToggleText);
-
-  // αρχικοποίηση
-  syncGlossaryToggleText();
-
-  window.addEventListener("pageshow", (e) => {
-    if (e.persisted) location.reload();
-  });
-</script>
-
-<script>
-  // ΔΕΝ ΤΟ ΕΧΩ ΒΑΛΗ Αν ανοίγει/κάνει reload με #guides / #market κλπ, γύρνα στην κορυφή
-  window.addEventListener("load", () => {
-    if (location.hash) {
-      history.replaceState(null, "", location.pathname + location.search); // αφαιρεί το #...
-      window.scrollTo({ top: 0, left: 0, behavior: "instant" });
-    }
-  });
-
-</script>
-<script>
-// ==========================
-// LOGIN / SIGNUP / VERIFY (INDEX)
-// ==========================
-function loadUser() {
-  try { return JSON.parse(localStorage.getItem("ck-user")) || null; }
-  catch { return null; }
-}
-function saveUser(user) {
-  if (user) localStorage.setItem("ck-user", JSON.stringify(user));
-  else localStorage.removeItem("ck-user");
-}
-
-let currentUser = loadUser();
-
-const authBtn   = document.getElementById("auth-btn");
-const authLabel = document.getElementById("auth-label");
-const authIcon  = document.getElementById("auth-icon");
-
-function updateAuthUI() {
-  if (!authBtn || !authLabel || !authIcon) return;
-
-  if (currentUser) {
-    authLabel.textContent = "Logout";
-    authBtn.dataset.state = "logout";
-    authIcon.src = "./IMG_5367.png";
-  } else {
-    authLabel.textContent = "Login";
-    authBtn.dataset.state = "login";
-    authIcon.src = "./IMG_5301.png";
-  }
-}
-updateAuthUI();
-
-// Modals
-const loginModal  = document.getElementById("login-modal");
-const signupModal = document.getElementById("signup-modal");
-const verifyModal = document.getElementById("verify-modal");
-
-const loginForm    = document.getElementById("login-form");
-const noAccountMsg = document.getElementById("no-account");
-
-// ⚠️ ΠΙΑΝΟΥΜΕ ΤΟ SIGNUP BUTTON ΜΟΝΟ ΜΕΣΑ ΣΤΟ LOGIN MODAL
-const signupBtnModal = loginModal?.querySelector("#signup-btn");
-
-const backToLogin   = document.getElementById("back-to-login");
-const signupCreate  = document.getElementById("signup-create");
-const verifySubmit  = document.getElementById("verify-submit");
-
-const signupError = document.getElementById("signup-error");
-const verifyError = document.getElementById("verify-error");
-
-const loginClose  = document.getElementById("login-close");
-const signupClose = document.querySelector(".signup-close");
-const verifyClose = document.querySelector(".verify-close");
-
-// temp state
-let tempUser = null;
-let verificationCode = null;
-
-// Helpers
-function show(el){ el && el.classList.remove("hidden"); }
-function hide(el){ el && el.classList.add("hidden"); }
-
-function openLogin() {
-  if (!loginModal) return;
-  loginForm?.reset();
-  if (noAccountMsg) noAccountMsg.style.display = "none";
-  if (signupBtnModal) signupBtnModal.style.display = "none";
-  hide(signupModal); hide(verifyModal);
-  show(loginModal);
-}
-function closeLogin(){ hide(loginModal); }
-
-function openSignup(){
-  if (signupError) signupError.style.display = "none";
-  hide(loginModal); hide(verifyModal);
-  show(signupModal);
-}
-function closeSignup(){ hide(signupModal); }
-
-function openVerify(){
-  if (verifyError) verifyError.style.display = "none";
-  const v = document.getElementById("verify-code");
-  if (v) v.value = "";
-  hide(loginModal); hide(signupModal);
-  show(verifyModal);
-}
-function closeVerify(){ hide(verifyModal); }
-
-// Auth button: Login / Logout
-authBtn?.addEventListener("click", () => {
-  if (authBtn.dataset.state === "login") openLogin();
-  else {
-    currentUser = null;
-    saveUser(null);
-    updateAuthUI();
-  }
-});
-
-// Close buttons
-loginClose?.addEventListener("click", closeLogin);
-signupClose?.addEventListener("click", closeSignup);
-verifyClose?.addEventListener("click", closeVerify);
-
-// Click outside modal (backdrop)
-document.addEventListener("click", (e) => {
-  if (e.target.classList?.contains("modal-backdrop")) {
-    closeLogin(); closeSignup(); closeVerify();
-  }
-});
-
-// Login submit
-loginForm?.addEventListener("submit", (e) => {
-  e.preventDefault();
-
-  const email = document.getElementById("login-email")?.value.trim();
-  const pass  = document.getElementById("login-pass")?.value.trim();
-  const saved = loadUser();
-
-  if (!saved || saved.email !== email || saved.pass !== pass) {
-    if (noAccountMsg) noAccountMsg.style.display = "block";
-    if (signupBtnModal) signupBtnModal.style.display = "block";
-    return;
-  }
-
-  currentUser = saved;
-  updateAuthUI();
-  closeLogin();
-});
-
-// Go to signup (button inside login modal)
-signupBtnModal?.addEventListener("click", () => {
-  if (noAccountMsg) noAccountMsg.style.display = "none";
-  if (signupBtnModal) signupBtnModal.style.display = "none";
-  openSignup();
-});
-
-// Back to login
-backToLogin?.addEventListener("click", () => {
-  closeSignup();
-  openLogin();
-});
-
-// Create account -> open verify
-signupCreate?.addEventListener("click", () => {
-  const email = document.getElementById("signup-email")?.value.trim();
-  const pass1 = document.getElementById("signup-pass1")?.value.trim();
-  const pass2 = document.getElementById("signup-pass2")?.value.trim();
-
-  if (!email || !pass1 || !pass2) return;
-
-  if (pass1 !== pass2) {
-    if (signupError) signupError.style.display = "block";
-    return;
-  }
-  if (signupError) signupError.style.display = "none";
-
-  verificationCode = String(Math.floor(100000 + Math.random() * 900000));
-  console.log("Verification:", verificationCode);
-
-  tempUser = { email, pass: pass1 };
-  openVerify();
-});
-
-// Verify submit
-verifySubmit?.addEventListener("click", () => {
-  const code = document.getElementById("verify-code")?.value.trim();
-
-  if (code !== verificationCode) {
-    if (verifyError) verifyError.style.display = "block";
-    return;
-  }
-
-  if (verifyError) verifyError.style.display = "none";
-  saveUser(tempUser);
-  currentUser = tempUser;
-  updateAuthUI();
-  closeVerify();
-  alert("Ο λογαριασμός δημιουργήθηκε!");
-});
-
-// Mobile auth button
-document.getElementById("mobile-auth-btn")?.addEventListener("click", () => {
-  authBtn?.click();
-  closeBurger?.();
-});
-
-</script>
 
 <script>
   if ("scrollRestoration" in history) {
     history.scrollRestoration = "manual";
   }
   window.addEventListener("load", () => {
-    window.scrollTo(0, 0);
+    // Αν υπάρχει hash (#market, #charts κλπ) από εξωτερικό link,
+    // μην κάνεις scroll-to-top — άφησε τον browser στο σωστό section.
+    if (!location.hash) {
+      window.scrollTo(0, 0);
+    }
   });
 
 </script>
 
 
-<script src="./translations.js" defer></script>
-<script src="./i18n.js" defer></script>
 
 
 
@@ -4496,12 +4406,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const io = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        // μπαίνεις στην ενότητα -> παίξε ξανά
-        news.classList.remove("is-inview");
-        void news.offsetWidth; // force reflow (restart)
         news.classList.add("is-inview");
       } else {
-        // βγαίνεις -> reset ώστε να ξαναπαίξει στο επόμενο scroll-in
         news.classList.remove("is-inview");
       }
     });
@@ -4511,6 +4417,800 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 </script>
 
+<!-- ★ Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<!-- ★ EmailJS SDK -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<!-- ★ App scripts -->
+<script src="./translations.js"></script>
+<script src="./i18n.js"></script>
+<script src="./app.js"></script>
 
-</body>
+
+<script>
+// ★ HOME INIT — φορτώνει prices, hero ranking, tradingview
+document.addEventListener("DOMContentLoaded", function() {
+
+  // ─── FOOTER YEAR ───
+  const yearEl = document.getElementById("year");
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+  // ─── UTIL ───
+  async function fetchWithTimeout(url, opts={}, ms=8000){
+    const ctrl = new AbortController();
+    const id = setTimeout(()=>ctrl.abort(), ms);
+    try { return await fetch(url,{...opts,signal:ctrl.signal}); }
+    finally { clearTimeout(id); }
+  }
+  const sleep = ms => new Promise(r=>setTimeout(r,ms));
+
+  // ─── GLOSSARY ───
+  const gList   = document.getElementById("glossary-list");
+  const gSearch = document.getElementById("glossary-search");
+  if(gList && gSearch){
+    function renderGlossary(){
+      const lang  = localStorage.getItem("ck-lang")||"el";
+      const terms = window.TRANSLATIONS?.[lang]?.glossary_terms;
+      if(!terms) return;
+      const q = (gSearch.value||"").toLowerCase();
+      gList.innerHTML="";
+      Object.keys(terms)
+        .filter(k=>k.toLowerCase().includes(q)||terms[k].toLowerCase().includes(q))
+        .forEach(k=>{
+          const d=document.createElement("div");
+          d.className="term";
+          d.innerHTML=`<h5>${k}</h5><p class="muted">${terms[k]}</p>`;
+          gList.appendChild(d);
+        });
+    }
+    gSearch.addEventListener("input", renderGlossary);
+    document.addEventListener("languageChanged", renderGlossary);
+    renderGlossary();
+  }
+
+  // ─── GLOSSARY TOGGLE ───
+  const wrapper   = document.getElementById("glossary-wrapper");
+  const toggleBtn = document.getElementById("glossary-toggle");
+  if(wrapper && toggleBtn){
+    function syncToggle(){
+      const lang = localStorage.getItem("ck-lang")||"el";
+      const expanded = wrapper.classList.contains("expanded");
+      toggleBtn.textContent = expanded
+        ? (window.TRANSLATIONS?.[lang]?.glossary_less || "Λιγότερα")
+        : (window.TRANSLATIONS?.[lang]?.glossary_more || "Δες περισσότερα");
+      toggleBtn.setAttribute("aria-expanded", expanded?"true":"false");
+    }
+    toggleBtn.addEventListener("click",()=>{
+      const exp = wrapper.classList.toggle("expanded");
+      wrapper.classList.toggle("collapsed",!exp);
+      syncToggle();
+    });
+    document.addEventListener("languageChanged", syncToggle);
+    syncToggle();
+  }
+
+  // ─── HERO RANKING (scrolling crypto panel) ───
+  const rankWrap = document.getElementById("hero-rank-inner");
+  let heroRAF=null, heroPos=0, heroLastT=0, heroBooted=false;
+
+  function getCachedHero(){ try{return JSON.parse(localStorage.getItem("ck-hero-cache"));}catch{return null;} }
+  function setCachedHero(d){ localStorage.setItem("ck-hero-cache",JSON.stringify({t:Date.now(),data:d})); }
+
+  function renderHeroSkeleton(){
+    if(!rankWrap) return;
+    rankWrap.innerHTML="";
+    for(let i=0;i<12;i++){
+      const r=document.createElement("div");
+      r.className="hero-rank-row skeleton";
+      r.innerHTML=`<div class="sk-bar w1"></div><div class="sk-bar w2"></div><div class="sk-bar w3"></div><div class="sk-bar w4"></div>`;
+      rankWrap.appendChild(r);
+    }
+    heroPos=0; rankWrap.style.transform="translateY(0px)";
+  }
+
+  function renderHeroFromData(data){
+    if(!rankWrap) return;
+    rankWrap.innerHTML="";
+    data.forEach((coin,idx)=>{
+      const chg=Number(coin.price_change_percentage_24h??0), up=chg>=0;
+      const r=document.createElement("div");
+      r.className="hero-rank-row";
+      r.innerHTML=`
+        <span class="hr-pos">${idx+1}</span>
+        <div class="hr-icon-wrap">
+         <img src="${coin.image}" class="hr-icon" loading="eager" alt="" onerror="this.style.visibility='hidden';this.style.width='0';this.style.marginRight='0'">
+          <span class="hr-symbol">${String(coin.symbol||"").toUpperCase()}</span>
+        </div>
+        <span class="hr-change ${up?"hr-up":"hr-down"}">${up?"▲":"▼"} ${chg.toFixed(2)}%</span>
+        <span class="hr-price">$${Number(coin.current_price||0).toLocaleString("en-US",{maximumFractionDigits:2})}</span>`;
+      rankWrap.appendChild(r);
+    });
+    rankWrap.innerHTML+=rankWrap.innerHTML;
+    requestAnimationFrame(()=>{
+      const half=rankWrap.scrollHeight/2;
+      heroPos=half>0?(heroPos%half):0;
+      rankWrap.style.transform=`translateY(${-heroPos}px)`;
+      stopHeroScroll(); startHeroScroll();
+    });
+  }
+
+  function startHeroScroll(){
+    if(!rankWrap||heroRAF) return;
+    heroLastT=performance.now();
+    const tick=t=>{
+      const dt=t-heroLastT; heroLastT=t;
+      const half=rankWrap.scrollHeight/2;
+      if(!half||half<50){heroRAF=requestAnimationFrame(tick);return;}
+      heroPos+=0.4*(dt/16.67);
+      if(heroPos>=half) heroPos=0;
+      rankWrap.style.transform=`translateY(${-heroPos}px)`;
+      heroRAF=requestAnimationFrame(tick);
+    };
+    heroRAF=requestAnimationFrame(tick);
+  }
+  function stopHeroScroll(){ if(heroRAF) cancelAnimationFrame(heroRAF); heroRAF=null; }
+
+  document.addEventListener("visibilitychange",()=>{
+    document.visibilityState==="visible" ? startHeroScroll() : stopHeroScroll();
+  });
+
+  async function loadHeroRanking(){
+    if(!rankWrap) return;
+    const cached=getCachedHero();
+    if(!heroBooted){
+      cached?.data?.length ? renderHeroFromData(cached.data) : renderHeroSkeleton();
+      heroBooted=true; startHeroScroll();
+    }
+    const url="https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=50&page=1&sparkline=false";
+    for(let a=1;a<=2;a++){
+      try{
+        const res=await fetchWithTimeout(url,{cache:"no-store"},8000);
+        if(res.status===429) throw new Error("429");
+        if(!res.ok) throw new Error("HTTP "+res.status);
+        const data=await res.json();
+        if(!Array.isArray(data)||!data.length) throw new Error("bad data");
+        setCachedHero(data); renderHeroFromData(data); return;
+      }catch(e){ console.warn("Hero ranking:",a,e); if(a<2) await sleep(1200); }
+    }
+  }
+  loadHeroRanking();
+  setInterval(loadHeroRanking, 60*60*1000);
+
+  // ─── WATCHLIST SYSTEM ───────────────────────────────────────────────
+  // Τα 3 default coins δεν αφαιρούνται ποτέ
+  const DEFAULT_COINS = [
+    { id: "bitcoin",  symbol: "BTC", binance: "BINANCE:BTCUSDT" },
+    { id: "ethereum", symbol: "ETH", binance: "BINANCE:ETHUSDT" },
+    { id: "solana",   symbol: "SOL", binance: "BINANCE:SOLUSDT" },
+  ];
+
+  // Φόρτωση watchlist από localStorage
+  function loadWatchlist() {
+    try {
+      const saved = JSON.parse(localStorage.getItem("ck-watchlist") || "[]");
+      // Πάντα ξεκινάμε με τα defaults
+      const defaults = DEFAULT_COINS.map(c => c.id);
+      const extra = saved.filter(c => !defaults.includes(c.id));
+      return [...DEFAULT_COINS, ...extra];
+    } catch { return [...DEFAULT_COINS]; }
+  }
+
+  function saveWatchlist(list) {
+    // Αποθηκεύουμε μόνο τα extra (όχι τα defaults)
+    const defaults = DEFAULT_COINS.map(c => c.id);
+    const extra = list.filter(c => !defaults.includes(c.id));
+    localStorage.setItem("ck-watchlist", JSON.stringify(extra));
+  }
+
+  function isLoggedIn() { return !!(typeof currentUser !== "undefined" && currentUser); }
+
+  let watchlist = loadWatchlist();
+
+  // ─── MARKET CARDS RENDER ─────────────────────────────────────────────
+  function formatEur(n) {
+    return "€" + new Intl.NumberFormat("el-GR", { maximumFractionDigits: 2 }).format(n);
+  }
+  function getCachedPrices() {
+    try { return JSON.parse(localStorage.getItem("ck-prices-cache")); } catch { return null; }
+  }
+  function setCachedPrices(d) {
+    localStorage.setItem("ck-prices-cache", JSON.stringify({ t: Date.now(), data: d }));
+  }
+
+  function renderMarketSkeleton() {
+    const wrap = document.getElementById("market-cards"); if (!wrap) return;
+    wrap.innerHTML = "";
+    watchlist.forEach(c => {
+      const card = document.createElement("article");
+      card.className = "card market-card";
+      card.innerHTML = `<div class="row"><h4>${c.symbol}</h4><span class="chip" style="opacity:.4">…</span></div><div class="price" style="opacity:.4">—</div><div class="row muted"><span>USD: —</span><span>24h …</span></div>`;
+      wrap.appendChild(card);
+    });
+  }
+
+
+// Coin logos από CoinGecko CDN (fallback για τα 3 defaults + extras από watchlist)
+  const COIN_LOGOS = {
+    bitcoin:      "https://assets.coingecko.com/coins/images/1/small/bitcoin.png",
+    ethereum:     "https://assets.coingecko.com/coins/images/279/small/ethereum.png",
+    solana:       "https://assets.coingecko.com/coins/images/4128/small/solana.png",
+    binancecoin:  "https://assets.coingecko.com/coins/images/825/small/binance-coin-logo.png",
+    ripple:       "https://assets.coingecko.com/coins/images/44/small/xrp-symbol-white-128.png",
+    cardano:      "https://assets.coingecko.com/coins/images/975/small/cardano.png",
+    dogecoin:     "https://assets.coingecko.com/coins/images/5/small/dogecoin.png",
+    "avalanche-2":"https://assets.coingecko.com/coins/images/12559/small/Avalanche_Circle_RedWhite_Trans.png",
+    polkadot:     "https://assets.coingecko.com/coins/images/12171/small/polkadot.png",
+    chainlink:    "https://assets.coingecko.com/coins/images/877/small/chainlink-new-logo.png",
+    sui:          "https://assets.coingecko.com/coins/images/26375/small/sui_asset.jpeg",
+    uniswap:      "https://assets.coingecko.com/coins/images/12504/small/uniswap-uni.png",
+    near:         "https://assets.coingecko.com/coins/images/10365/small/near.jpg",
+  };
+
+  const COIN_NAMES = {
+    bitcoin:"Bitcoin", ethereum:"Ethereum", solana:"Solana",
+    binancecoin:"BNB", ripple:"XRP", cardano:"Cardano",
+    dogecoin:"Dogecoin", "avalanche-2":"Avalanche", polkadot:"Polkadot",
+    chainlink:"Chainlink", sui:"Sui", uniswap:"Uniswap", near:"NEAR",
+  };
+
+  function renderMarket(data) {
+    const wrap = document.getElementById("market-cards"); if (!wrap) return;
+    wrap.innerHTML = "";
+    const loggedIn = isLoggedIn();
+
+    watchlist.forEach(c => {
+      const d = data[c.id]; if (!d) return;
+      const chg = typeof d.eur_24h_change === "number" ? d.eur_24h_change : 0;
+      const up = chg >= 0;
+      const isDefault = DEFAULT_COINS.some(dc => dc.id === c.id);
+      const logo = c.image || COIN_LOGOS[c.id] || "";
+      const fullname = COIN_NAMES[c.id] || c.symbol;
+      const arrow = up ? "▲" : "▼";
+
+      const card = document.createElement("article");
+      card.className = "card market-card";
+      card.dataset.coinId = c.id;
+      card.innerHTML = `
+        ${loggedIn && !isDefault ? `<button class="card-remove" data-id="${c.id}" title="Αφαίρεση">✕</button>` : ""}
+        <div class="mc-inner">
+          <div class="mc-top">
+            <div class="mc-coin-info">
+              ${logo ? `<img class="mc-logo" src="${logo}" alt="${c.symbol}" loading="lazy" onerror="this.style.display='none'">` : ""}
+              <div>
+                <div class="mc-name">${c.symbol}</div>
+                <div class="mc-fullname">${fullname}</div>
+              </div>
+            </div>
+            <span class="chip ${up ? "up" : "down"}">${arrow} ${Math.abs(chg).toFixed(2)}%</span>
+          </div>
+          <div class="mc-price">${formatEur(d.eur)}</div>
+          <div class="mc-sub">≈ $${Number(d.usd).toLocaleString("en-US",{maximumFractionDigits:2})}</div>
+        </div>
+        <div class="mc-footer">
+          <span class="mc-volume">24h change</span>
+          <span style="font-size:12px;color:${up ? "#4ade80" : "#f97373"};font-weight:600;">${arrow} ${Math.abs(chg).toFixed(2)}%</span>
+        </div>
+        <div class="mc-bar ${up ? "bar-up" : "bar-down"}"></div>`;
+
+      wrap.appendChild(card);
+    });
+
+    // Remove button listeners
+    wrap.querySelectorAll(".card-remove").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const id = btn.dataset.id;
+        watchlist = watchlist.filter(c => c.id !== id);
+        saveWatchlist(watchlist);
+        renderChartPairs();
+        if (lastPriceData) renderMarket(lastPriceData);
+        updateAddCoinBtn();
+      });
+    });
+  }
+
+
+  let lastPriceData = null;
+  let pricesBooted = false;
+
+  async function fetchPrices() {
+    const ids = watchlist.map(c => c.id).join(",");
+    const url = `https://api.coingecko.com/api/v3/simple/price?ids=${ids}&vs_currencies=usd,eur&include_24hr_change=true`;
+
+    const cached = getCachedPrices();
+    if (!pricesBooted) {
+      if (cached?.data) { lastPriceData = cached.data; renderMarket(cached.data); }
+      else renderMarketSkeleton();
+      pricesBooted = true;
+    }
+
+    for (let a = 1; a <= 2; a++) {
+      try {
+        const res = await fetchWithTimeout(url, { cache: "no-store" }, 8000);
+        if (res.status === 429) throw new Error("429");
+        if (!res.ok) throw new Error("HTTP " + res.status);
+        const data = await res.json();
+        const ok = watchlist.some(c => data?.[c.id] && typeof data[c.id].eur === "number");
+        if (!ok) throw new Error("bad data");
+        lastPriceData = data;
+        setCachedPrices(data);
+        renderMarket(data);
+        return;
+      } catch (e) { if (a < 2) await sleep(1200); }
+    }
+  }
+  fetchPrices();
+  setInterval(fetchPrices, 20 * 60 * 1000);
+
+  // ─── SHOW/HIDE ADD BUTTON ────────────────────────────────────────────
+  function updateAddCoinBtn() {
+    const btn = document.getElementById("add-coin-btn");
+    if (!btn) return;
+    if (isLoggedIn()) btn.classList.remove("hidden");
+    else btn.classList.add("hidden");
+  }
+  updateAddCoinBtn();
+  document.addEventListener("languageChanged", updateAddCoinBtn);
+
+  // Ενημέρωση όταν αλλάζει το login state
+  const _origUpdateAuthUI = window.updateAuthUI;
+  document.addEventListener("authChanged", () => {
+    updateAddCoinBtn();
+    renderChartPairs();
+    if (lastPriceData) renderMarket(lastPriceData);
+  });
+
+  // ─── CHART PAIRS ─────────────────────────────────────────────────────
+  function renderChartPairs() {
+    const pairsEl = document.getElementById("chart-pairs"); if (!pairsEl) return;
+    const loggedIn = isLoggedIn();
+
+    pairsEl.innerHTML = "";
+    watchlist.forEach((c, i) => {
+      const btn = document.createElement("button");
+      btn.className = "pair" + (i === 0 ? " active" : "");
+      btn.dataset.symbol = c.binance;
+      btn.dataset.id = c.id;
+      const isDefault = DEFAULT_COINS.some(dc => dc.id === c.id);
+
+      btn.innerHTML = `${c.symbol}/USDT${loggedIn && !isDefault ? ` <span class="pair-remove" data-id="${c.id}">✕</span>` : ""}`;
+      pairsEl.appendChild(btn);
+    });
+
+    // Pair click → load chart
+    pairsEl.querySelectorAll(".pair").forEach(btn => {
+      btn.addEventListener("click", (e) => {
+        if (e.target.classList.contains("pair-remove")) return;
+        pairsEl.querySelectorAll(".pair").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        loadTV(btn.dataset.symbol);
+      });
+    });
+
+    // Pair remove
+    pairsEl.querySelectorAll(".pair-remove").forEach(span => {
+      span.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const id = span.dataset.id;
+        watchlist = watchlist.filter(c => c.id !== id);
+        saveWatchlist(watchlist);
+        renderChartPairs();
+        if (lastPriceData) renderMarket(lastPriceData);
+        // Αν αφαιρέθηκε το active, κάνε active το πρώτο
+        const firstPair = pairsEl.querySelector(".pair");
+        if (firstPair && !pairsEl.querySelector(".pair.active")) {
+          firstPair.classList.add("active");
+          loadTV(firstPair.dataset.symbol);
+        }
+      });
+    });
+  }
+  renderChartPairs();
+
+  // ─── ADD COIN MODAL ──────────────────────────────────────────────────
+  const addCoinBtn    = document.getElementById("add-coin-btn");
+  const addCoinModal  = document.getElementById("add-coin-modal");
+  const addCoinClose  = document.getElementById("add-coin-close");
+  const coinSearchInp = document.getElementById("coin-search-input");
+  const coinResults   = document.getElementById("coin-search-results");
+
+  function openAddCoin() {
+    if (!addCoinModal) return;
+    addCoinModal.classList.remove("hidden");
+    coinSearchInp?.focus();
+    searchCoins("");
+  }
+  function closeAddCoin() { addCoinModal?.classList.add("hidden"); }
+
+  addCoinBtn?.addEventListener("click", openAddCoin);
+  addCoinClose?.addEventListener("click", closeAddCoin);
+  addCoinModal?.querySelector(".modal-backdrop")?.addEventListener("click", closeAddCoin);
+
+  // Αναζήτηση coins μέσω CoinGecko
+  let searchTimeout = null;
+  let searchCache = {};
+
+  coinSearchInp?.addEventListener("input", () => {
+    clearTimeout(searchTimeout);
+    searchTimeout = setTimeout(() => searchCoins(coinSearchInp.value.trim()), 350);
+  });
+
+  async function searchCoins(query) {
+    if (!coinResults) return;
+    coinResults.innerHTML = `<div style="text-align:center;color:var(--muted);padding:20px;">🔍 Αναζήτηση…</div>`;
+
+    const lang = localStorage.getItem("ck-lang") || "el";
+
+    // Αν δεν έχει query, δείξε τα top 20 coins
+    const url = query
+      ? `https://api.coingecko.com/api/v3/search?query=${encodeURIComponent(query)}`
+      : `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=20&page=1&sparkline=false`;
+
+    const cacheKey = url;
+    if (searchCache[cacheKey]) { renderCoinResults(searchCache[cacheKey], query, lang); return; }
+
+    try {
+      const res = await fetch(url);
+      const data = await res.json();
+      const coins = query ? (data.coins || []).slice(0, 15) : data;
+      searchCache[cacheKey] = coins;
+      renderCoinResults(coins, query, lang);
+    } catch {
+      coinResults.innerHTML = `<div style="color:#f97373;text-align:center;padding:16px;">❌ Σφάλμα αναζήτησης.</div>`;
+    }
+  }
+
+  function renderCoinResults(coins, query, lang) {
+    if (!coinResults) return;
+    if (!coins.length) {
+      coinResults.innerHTML = `<div style="text-align:center;color:var(--muted);padding:20px;">Δεν βρέθηκαν αποτελέσματα.</div>`;
+      return;
+    }
+
+    const watchlistIds = watchlist.map(c => c.id);
+    coinResults.innerHTML = "";
+
+    coins.forEach(coin => {
+      const id     = coin.id || coin.id;
+      const name   = coin.name;
+      const symbol = (coin.symbol || "").toUpperCase();
+      const img    = coin.large || coin.image || coin.thumb || "";
+      const alreadyIn = watchlistIds.includes(id);
+
+      const row = document.createElement("div");
+      row.className = "coin-result-row";
+      row.innerHTML = `
+        <div class="coin-result-left">
+          ${img ? `<img src="${img}" alt="${symbol}" onerror="this.style.display='none'">` : ""}
+          <div>
+            <div class="coin-result-name">${name}</div>
+            <div class="coin-result-sym">${symbol}</div>
+          </div>
+        </div>
+        <button class="coin-result-add ${alreadyIn ? "added" : ""}"
+                data-id="${id}" data-symbol="${symbol}" data-img="${img}">
+          ${alreadyIn
+            ? (lang === "en" ? "✓ Added" : "✓ Έχει προστεθεί")
+            : (lang === "en" ? "Add" : "Προσθήκη")}
+        </button>`;
+
+      const addBtn = row.querySelector(".coin-result-add");
+      if (!alreadyIn) {
+        addBtn.addEventListener("click", () => {
+          const newCoin = {
+            id,
+            symbol,
+            binance: `BINANCE:${symbol}USDT`,
+            image: img
+          };
+          watchlist.push(newCoin);
+          saveWatchlist(watchlist);
+          fetchPrices();
+          renderChartPairs();
+          addBtn.textContent = lang === "en" ? "✓ Added" : "✓ Έχει προστεθεί";
+          addBtn.classList.add("added");
+        });
+      }
+      coinResults.appendChild(row);
+    });
+  }
+
+  // Ενημέρωση του modal title με i18n
+  document.addEventListener("languageChanged", () => {
+    const title = document.getElementById("add-coin-title");
+    const lang = localStorage.getItem("ck-lang") || "el";
+    if (title) title.textContent = lang === "en" ? "Add coin" : "Προσθήκη νομίσματος";
+    const placeholder = document.getElementById("coin-search-input");
+    if (placeholder) placeholder.placeholder = lang === "en"
+      ? "Search (e.g. Cardano, ADA...)"
+      : "Αναζήτηση (π.χ. Cardano, ADA...)";
+  });
+
+
+
+  // ─── TRADINGVIEW ───
+  let tvWidget=null;
+  function getTvTheme(){ return document.body.classList.contains("light-theme")?"light":"dark"; }
+
+  function loadTV(symbol){
+    const el=document.getElementById("tradingview_chart"); if(!el) return;
+    if(typeof TradingView==="undefined") return;
+    if(tvWidget&&typeof tvWidget.remove==="function") tvWidget.remove();
+    el.innerHTML="";
+    tvWidget=new TradingView.widget({
+      autosize:true, symbol:symbol||"BINANCE:BTCUSDT",
+      interval:"60", timezone:"Europe/Athens",
+      theme:getTvTheme(), style:"1", locale:"en",
+      toolbar_bg:document.body.classList.contains("light-theme")?"#ffffff":"#0f1216",
+      enable_publishing:false, hide_legend:false,
+      container_id:"tradingview_chart"
+    });
+  }
+
+  (function loadTVScript(){
+    const el=document.getElementById("tradingview_chart"); if(!el) return;
+    if(window.__tv_loaded){ loadTV("BINANCE:BTCUSDT"); return; }
+    const s=document.createElement("script");
+    s.src="https://s3.tradingview.com/tv.js";
+    s.onload=()=>{ window.__tv_loaded=true; loadTV("BINANCE:BTCUSDT"); };
+    document.body.appendChild(s);
+  })();
+
+  document.addEventListener("click",e=>{
+    const btn=e.target.closest(".pair"); if(!btn) return;
+    document.querySelectorAll(".pair").forEach(b=>b.classList.remove("active"));
+    btn.classList.add("active");
+    loadTV(btn.dataset.symbol);
+  });
+
+  document.addEventListener("themeChanged",()=>{
+    if(window.__tv_loaded) setTimeout(()=>{
+      const active=document.querySelector(".pair.active");
+      loadTV(active?.dataset.symbol||"BINANCE:BTCUSDT");
+    },80);
+  });
+
+  // ─── NEWS INTERSECTION ───
+  const heroCard=document.querySelector(".pn-card--hero");
+  if(heroCard){
+    new IntersectionObserver((entries)=>{
+      entries.forEach(e=>e.isIntersecting?heroCard.classList.add("is-inview"):heroCard.classList.remove("is-inview"));
+    },{threshold:0.35}).observe(heroCard);
+  }
+
+  const news=document.querySelector(".prefooter-news");
+  if(news){
+    new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+       if(e.isIntersecting){ news.classList.add("is-inview"); }
+        else news.classList.remove("is-inview");
+      });
+    },{threshold:0.35}).observe(news);
+  }
+
+  
+
+});
+</script>
+
+
+
+<script>
+
+// ★ Ticker CSS — scrolling marquee with fade edges
+(function(){
+  if(document.getElementById("ck-ticker-css")) return;
+  const s=document.createElement("style");
+  s.id="ck-ticker-css";
+  s.textContent=`
+    .ck-ticker{
+      width:100%;
+      background:var(--bg-alt,#12161c);
+      border-top:1px solid var(--border,#222a33);
+      border-bottom:1px solid var(--border,#222a33);
+      padding:0;
+      overflow:hidden;
+      position:relative;
+      height:40px;
+      display:flex;
+      align-items:center;
+    }
+    /* Fade edges */
+    .ck-ticker::before,
+    .ck-ticker::after{
+      content:"";
+      position:absolute;
+      top:0;bottom:0;
+      width:80px;
+      z-index:2;
+      pointer-events:none;
+    }
+    .ck-ticker::before{
+      left:0;
+      background:linear-gradient(to right, var(--bg-alt,#12161c), transparent);
+    }
+    .ck-ticker::after{
+      right:0;
+      background:linear-gradient(to left, var(--bg-alt,#12161c), transparent);
+    }
+    body.light-theme .ck-ticker{
+      background:#e8edf5;
+      border-top:1px solid #d0d7e2;
+      border-bottom:1px solid #d0d7e2;
+    }
+    body.light-theme .ck-ticker::before{
+      background:linear-gradient(to right,#e8edf5,transparent);
+    }
+    body.light-theme .ck-ticker::after{
+      background:linear-gradient(to left,#e8edf5,transparent);
+    }
+    .ck-ticker__track{
+      display:flex;
+      align-items:center;
+      gap:0;
+      white-space:nowrap;
+      will-change:transform;
+    }
+    @keyframes ck-scroll{
+      0%  { transform: translateX(0); }
+      100%{ transform: translateX(-50%); }
+    }
+    .ck-ticker__track.running{
+      animation: ck-scroll 40s linear infinite;
+    }
+    .ck-ticker__track:hover{ animation-play-state: paused; }
+    .ck-tick{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding:0 28px;
+      font-size:13px;
+      font-weight:500;
+      white-space:nowrap;
+      border-right:1px solid var(--border,#222a33);
+    }
+    body.light-theme .ck-tick{ border-right-color:#d0d7e2; }
+    .ck-tick .sym{ color:var(--muted,#8ea0b3); font-weight:700; font-size:12px; }
+    .ck-tick .p{ color:var(--text,#e8edf2); font-weight:700; }
+    body.light-theme .ck-tick .sym{ color:#64748b; }
+    body.light-theme .ck-tick .p{ color:#0f172a; }
+    .ck-tick.up .chg{ color:#4ade80; }
+    .ck-tick.down .chg{ color:#f97373; }
+    body.light-theme .ck-tick.up .chg{ color:#16a34a; }
+    body.light-theme .ck-tick.down .chg{ color:#dc2626; }
+    .ck-tick .chg{ font-size:12px; font-weight:600; }
+  `;
+  document.head.appendChild(s);
+})();
+
+// =========================
+// SCROLLING TICKER
+// =========================
+(function () {
+  const COINS = [
+    { id: "bitcoin",                                  sym: "BTC" },
+    { id: "ethereum",                                 sym: "ETH" },
+    { id: "solana",                                   sym: "SOL" },
+    { id: "binancecoin",                              sym: "BNB" },
+    { id: "ripple",                                   sym: "XRP" },
+    { id: "cardano",                                  sym: "ADA" },
+    { id: "avalanche-2",                              sym: "AVAX" },
+    { id: "sui",                                      sym: "SUI" },
+    { id: "dogecoin",                                 sym: "DOGE" },
+    { id: "polkadot",                                 sym: "DOT" },
+    { id: "chainlink",                                sym: "LINK" },
+    { id: "uniswap",                                  sym: "UNI" },
+    { id: "render-token",                             sym: "RENDER" },
+    { id: "near",                                     sym: "NEAR" },
+   
+  ];
+
+  function fmt(n){
+    if (n == null || !isFinite(n)) return "—";
+    if (n >= 1000) return "$" + n.toLocaleString("en-US", { maximumFractionDigits: 0 });
+    if (n >= 1)    return "$" + n.toFixed(2);
+    return "$" + n.toFixed(4);
+  }
+
+  function cls(chg){ return isFinite(chg) ? (chg > 0 ? "up" : chg < 0 ? "down" : "") : ""; }
+
+  function buildHTML(data){
+    return COINS.map(c => {
+      const row = data[c.id] || {};
+      const price = row.usd;
+      const chg = row.usd_24h_change;
+      const arrow = isFinite(chg) ? (chg > 0 ? "▲" : "▼") : "";
+      const pct = isFinite(chg) ? `${Math.abs(chg).toFixed(2)}%` : "";
+      return `<span class="ck-tick ${cls(chg)}">
+        <span class="sym">${c.sym}</span>
+        <span class="p">${fmt(price)}</span>
+        <span class="chg">${arrow} ${pct}</span>
+      </span>`;
+    }).join("");
+  }
+
+  async function fetchData(){
+    // ★ Πρώτα έλεγξε cache (5 λεπτά)
+    try {
+      const cached = JSON.parse(localStorage.getItem("ck-ticker-cache") || "{}");
+      if (cached.t && cached.data && Date.now() - cached.t < 5 * 60 * 1000) {
+        return cached.data;
+      }
+    } catch {}
+
+    const ids = COINS.map(c => c.id).join(",");
+    const url = `https://api.coingecko.com/api/v3/simple/price?ids=${encodeURIComponent(ids)}&vs_currencies=usd&include_24hr_change=true`;
+    const res = await fetch(url);
+    if (!res.ok) throw new Error("ticker fetch failed");
+    const data = await res.json();
+
+    // ★ Αποθήκευσε στο cache
+    try { localStorage.setItem("ck-ticker-cache", JSON.stringify({ t: Date.now(), data })); } catch {}
+    return data;
+  }
+
+  document.addEventListener("DOMContentLoaded", async () => {
+    const ticker = document.querySelector("[data-ticker]");
+    if (!ticker) return;
+
+    ticker.innerHTML = `<div class="ck-ticker__track" data-ticker-inner></div>`;
+    const track = ticker.querySelector(".ck-ticker__track");
+
+    // ★ Πρώτα δείξε cached δεδομένα αμέσως αν υπάρχουν
+    try {
+      const cached = JSON.parse(localStorage.getItem("ck-ticker-cache") || "{}");
+      if (cached.t && cached.data) {
+        track.innerHTML = buildHTML(cached.data) + buildHTML(cached.data);
+        track.classList.add("running");
+      }
+    } catch {}
+
+    try {
+      const data = await fetchData();
+      const html = buildHTML(data);
+      track.innerHTML = html + html;
+      track.classList.add("running");
+
+      setInterval(async () => {
+        try {
+          const fresh = await fetchData();
+          const freshHtml = buildHTML(fresh);
+          track.innerHTML = freshHtml + freshHtml;
+        } catch(e) {}
+      }, 2 * 60 * 1000);
+    } catch(e) {
+      console.warn("Ticker:", e);
+      // ★ Fallback: δείξε static τιμές αν δεν υπάρχει cache ή API
+      if (!track.innerHTML) {
+        const fallback = {
+          bitcoin:  { usd: 0, usd_24h_change: 0 },
+          ethereum: { usd: 0, usd_24h_change: 0 },
+          solana:   { usd: 0, usd_24h_change: 0 },
+        };
+        track.innerHTML = buildHTML(fallback) + buildHTML(fallback);
+        track.classList.add("running");
+      }
+    }
+  });
+})();
+
+</script>
+
+<script>
+/* ★ Scroll to top whenever the language changes */
+document.addEventListener("languageChanged", function () {
+  window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+});
+
+/* Fallback: also catch clicks on the lang toggle buttons directly */
+["lang-toggle", "mobile-lang-toggle"].forEach(function (id) {
+  const btn = document.getElementById(id);
+  if (btn) {
+    btn.addEventListener("click", function () {
+      window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+    });
+  }
+});
+</script>
+
 </html>

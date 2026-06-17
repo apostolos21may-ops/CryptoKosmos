@@ -4,120 +4,231 @@
 // ========================================
 
 
-if (window.__CK_APP_BOOTED__) {
-  console.warn("app.js already booted");
-} else {
-  window.__CK_APP_BOOTED__ = true;
+if (window.__CK_APP_BOOTED__) { /* already loaded */ }
+window.__CK_APP_BOOTED__ = true;
 
-  // ...όλο το app.js εδώ...
+// ★ Debug helper — γράψε ck_debug() στο console
+window.ck_debug = function() {
+    console.group("%c CryptoKosmos Debug", "color:#5bb4ff;font-weight:bold;font-size:14px");
+    console.log("ck-user:", localStorage.getItem("ck-user"));
+    console.log("ck-lang:", localStorage.getItem("ck-lang"));
+    console.log("ck-theme:", localStorage.getItem("ck-theme"));
+    console.log("ck-watchlist:", localStorage.getItem("ck-watchlist"));
+    console.log("pending-code:", sessionStorage.getItem("ck-pending-code"));
+    console.log("pending-user:", sessionStorage.getItem("ck-pending-user"));
+    console.groupEnd();
+};
+
+// ★ EmailJS init
+(function(){
+  try{
+    if(typeof emailjs!=="undefined")
+      emailjs.init({ publicKey: "-xUBLgps3ZQ3VP1TN" });
+  }catch(e){}
+})();
+
+// ★ Toast notification (bilingual)
+function showCKToast(msg, type="success"){
+  const ex=document.getElementById("ck-toast");
+  if(ex) ex.remove();
+  const t=document.createElement("div");
+  t.id="ck-toast";
+  t.textContent=msg;
+  const ok=type==="success";
+  t.style.cssText=`
+    position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(20px);
+    background:${ok?"linear-gradient(135deg,#1a3a2a,#0d2d1f)":"linear-gradient(135deg,#3a1a1a,#2d0d0d)"};
+    color:${ok?"#4ade80":"#f97373"};
+    border:1px solid ${ok?"rgba(74,222,128,.3)":"rgba(249,115,115,.3)"};
+    padding:14px 24px;border-radius:999px;font-size:14px;font-weight:600;
+    box-shadow:0 8px 30px rgba(0,0,0,.5);z-index:9999;
+    font-family:system-ui,sans-serif;
+    opacity:0;transition:opacity .3s ease,transform .3s ease;white-space:nowrap;
+  `;
+  document.body.appendChild(t);
+  requestAnimationFrame(()=>{t.style.opacity="1";t.style.transform="translateX(-50%) translateY(0)";});
+  setTimeout(()=>{
+    t.style.opacity="0";t.style.transform="translateX(-50%) translateY(10px)";
+    setTimeout(()=>t.remove(),350);
+  },3500);
 }
+
+
 
 // ==========================
 // 1) LOAD USER FROM STORAGE
 // ==========================
-function loadUser() {
+// ==========================
+// 1) FIREBASE AUTH + localStorage fallback
+// ==========================
+const _fbConfig = {
+    apiKey: "AIzaSyC6K0qqRG8odUSnni6xpmUSpDaaEYHiuvc",
+    authDomain: "cryptokosmos-1524f.firebaseapp.com",
+    projectId: "cryptokosmos-1524f",
+    storageBucket: "cryptokosmos-1524f.firebasestorage.app",
+    messagingSenderId: "1065352538515",
+    appId: "1:1065352538515:web:18345d24f111e64f7f2066"
+};
+
+let _fbAuth = null;
+let currentUser = null;
+
+function initFirebase() {
     try {
-        return JSON.parse(localStorage.getItem("ck-user")) || null;
-    } catch {
-        return null;
-    }
+        // ★ Εμφάνισε ΑΜΕΣΩΣ την κατάσταση από localStorage (πριν Firebase)
+        const cachedAuth = localStorage.getItem("ck-auth-state");
+        if (cachedAuth === "logged-in") {
+            currentUser = { cached: true }; // placeholder
+            updateAuthUI();
+        }
+
+        if (typeof firebase === "undefined") {
+            try { currentUser = JSON.parse(localStorage.getItem("ck-current-user")) || null; } catch {}
+            updateAuthUI();
+            return;
+        }
+        if (!firebase.apps.length) firebase.initializeApp(_fbConfig);
+        _fbAuth = firebase.auth();
+
+        _fbAuth.setPersistence(firebase.auth.Auth.Persistence.LOCAL).then(() => {
+            _fbAuth.onAuthStateChanged(user => {
+                currentUser = user || null;
+                // ★ Αποθήκευσε κατάσταση για instant display
+                if (user) localStorage.setItem("ck-auth-state", "logged-in");
+                else localStorage.removeItem("ck-auth-state");
+                updateAuthUI();
+                document.dispatchEvent(new Event("authChanged"));
+            });
+        });
+    } catch(e) { console.warn("Firebase:", e); }
 }
+document.addEventListener("DOMContentLoaded", initFirebase);
 
-function saveUser(user) {
-    if (user) localStorage.setItem("ck-user", JSON.stringify(user));
-    else localStorage.removeItem("ck-user");
+// localStorage helpers (fallback for local testing)
+function loadAllUsers() {
+    try { return JSON.parse(localStorage.getItem("ck-users") || "[]"); } catch { return []; }
 }
-
-let currentUser = loadUser();
-
-
-
-
-function closeBurgerMenu() {
-    const menuToggle = document.getElementById("menu-toggle");
-    const mobileMenu = document.getElementById("mobile-menu");
-
-    if (!menuToggle || !mobileMenu) return;
-
-    menuToggle.classList.remove("open"); // το κάνει ≡
-    mobileMenu.classList.remove("open"); // κλείνει το menu
+function saveUserLocal(user) {
+    if (!user) return;
+    const users = loadAllUsers();
+    const idx = users.findIndex(u => u.email === user.email);
+    if (idx >= 0) users[idx] = user; else users.push(user);
+    localStorage.setItem("ck-users", JSON.stringify(users));
 }
-
+function findUserLocal(email, pass) {
+    return loadAllUsers().find(u => u.email === email && u.pass === pass) || null;
+}
+function setCurrentUser(user) {
+    currentUser = user;
+    if (user) localStorage.setItem("ck-current-user", JSON.stringify(user));
+    else localStorage.removeItem("ck-current-user");
+}
 
 // ==========================
-// 2) THEME SYSTEM (GLOBAL)
+// 2) THEME — init immediately (no DOM needed)
 // ==========================
-const themeBtn   = document.getElementById("theme-toggle");
-const themeIcon  = document.getElementById("theme-icon");
-const themeLabel = document.getElementById("theme-label");
-const siteLogo   = document.getElementById("site-logo");
-
 function applyTheme(light) {
+    const root = document.documentElement;
+    const themeIcon  = document.getElementById("theme-icon");
+    const themeLabel = document.getElementById("theme-label");
+    const siteLogo   = document.getElementById("site-logo");
+
+    // Detect path depth for image paths
+    const isSubpage = location.pathname.split("/").filter(Boolean).length > 1 &&
+                      !location.pathname.endsWith("index.html") &&
+                      location.pathname !== "/";
+    const r = isSubpage ? "../" : "./";
 
     if (light) {
+        root.classList.add("light-theme");
         document.body.classList.add("light-theme");
         localStorage.setItem("ck-theme", "light");
-
-        if (themeIcon) themeIcon.src = "./IMG_5299.png";
+        if (themeIcon)  themeIcon.src  = r + "IMG_5299.png";
         if (themeLabel) themeLabel.textContent = "Light";
-        if (siteLogo) siteLogo.src = "./logo.png";
-
+        if (siteLogo)   siteLogo.src   = r + "logo.png";
     } else {
+        root.classList.remove("light-theme");
         document.body.classList.remove("light-theme");
         localStorage.setItem("ck-theme", "dark");
-
-        if (themeIcon) themeIcon.src = "./IMG_5300.png";
+        if (themeIcon)  themeIcon.src  = r + "IMG_5300.png";
         if (themeLabel) themeLabel.textContent = "Dark";
-        if (siteLogo) siteLogo.src = "./black logo.png";
+        if (siteLogo)   siteLogo.src   = r + "black logo.png";
     }
+    document.dispatchEvent(new Event("themeChanged"));
+    // ★ Εμφάνισε τα icons (κρυμμένα μέχρι το theme να φορτώσει)
+    document.documentElement.classList.add("theme-ready");
 }
+window.applyTheme = applyTheme;
 
-// φορτώνει τι είχαμε αποθηκεύσει
+// Apply saved theme immediately
 applyTheme(localStorage.getItem("ck-theme") === "light");
-
-// button toggle
-if (themeBtn) {
-    themeBtn.addEventListener("click", () => {
-        const isLight = !document.body.classList.contains("light-theme");
-        applyTheme(isLight);
-    });
-}
-
-document.dispatchEvent(new Event("themeChanged"));
-
 
 // ==========================
 // 3) LOGIN UI UPDATE
 // ==========================
-const authBtn   = document.getElementById("auth-btn");
-const authLabel = document.getElementById("auth-label");
-const authIcon  = document.getElementById("auth-icon");
+
 
 function updateAuthUI() {
-    if (!authBtn || !authLabel || !authIcon) return;
+    const authBtn   = document.getElementById("auth-btn");
+    const authLabel = document.getElementById("auth-label");
+    const authIcon  = document.getElementById("auth-icon");
+    const mobileAuthBtn = document.getElementById("mobile-auth-btn");
+    if (!authBtn) return;
+
+    const isSubpage = location.pathname.split("/").filter(Boolean).length > 1 &&
+                      !location.pathname.endsWith("index.html") &&
+                      location.pathname !== "/";
+    const r = isSubpage ? "../" : "./";
+
+    const lang = localStorage.getItem("ck-lang") || "el";
+    const dict = window.TRANSLATIONS?.[lang] || {};
 
     if (currentUser) {
-        authLabel.textContent = "Logout";
+        const txt = dict.logout || "Logout";
+        if (authLabel) authLabel.textContent = txt;
+        if (mobileAuthBtn) mobileAuthBtn.textContent = txt;
         authBtn.dataset.state = "logout";
-        authIcon.src = "./IMG_5367.png";
+        if (authIcon) authIcon.src = r + "IMG_5367.png";
     } else {
-        authLabel.textContent = "Login";
+        const txt = dict.login || "Login";
+        if (authLabel) authLabel.textContent = txt;
+        if (mobileAuthBtn) mobileAuthBtn.textContent = txt;
         authBtn.dataset.state = "login";
-        authIcon.src = "./IMG_5301.png";
+        if (authIcon) authIcon.src =
+        r + "IMG_5301.png";
     }
 }
-updateAuthUI();
+document.addEventListener("languageChanged", updateAuthUI);
+document.addEventListener("authChanged", updateAuthUI);
+
+document.addEventListener("languageChanged", updateAuthUI);
+
+// Bind theme button after DOM ready
+document.addEventListener("DOMContentLoaded", () => {
+    // Re-apply after header.js has injected elements
+    applyTheme(localStorage.getItem("ck-theme") === "light");
+    updateAuthUI();
+
+    const themeBtn = document.getElementById("theme-toggle");
+    themeBtn?.addEventListener("click", () => {
+        applyTheme(!document.body.classList.contains("light-theme"));
+    });
+
+  
+});
 
 
 // ==========================
-// 4) LOGIN / SIGNUP / VERIFY
+// 4) LOGIN / SIGNUP / VERIFY (Firebase)
 // ==========================
+document.addEventListener("DOMContentLoaded", function() {
+
 const loginModal  = document.getElementById("login-modal");
 const signupModal = document.getElementById("signup-modal");
 const verifyModal = document.getElementById("verify-modal");
 
-const loginForm  = document.getElementById("login-form");
-const signupBtn  = document.getElementById("signup-btn");
+const loginForm   = document.getElementById("login-form");
+const signupBtn   = document.getElementById("signup-btn");
 const signupClose = document.querySelector(".signup-close");
 const signupCreate = document.getElementById("signup-create");
 const backToLogin = document.getElementById("back-to-login");
@@ -129,16 +240,11 @@ const noAccountMsg = document.getElementById("no-account");
 const signupError  = document.getElementById("signup-error");
 const verifyError  = document.getElementById("verify-error");
 
-let tempUser = null;
-let verificationCode = null;
-
-
-// Helper modal functions
 function openLogin() {
     if (!loginModal) return;
     loginForm?.reset();
-    noAccountMsg && (noAccountMsg.style.display = "none");
-    signupBtn && (signupBtn.style.display = "none");
+    if (noAccountMsg) noAccountMsg.style.display = "none";
+    if (signupBtn)    signupBtn.style.display    = "none";
     signupModal?.classList.add("hidden");
     verifyModal?.classList.add("hidden");
     loginModal.classList.remove("hidden");
@@ -146,133 +252,244 @@ function openLogin() {
 function closeLogin() { loginModal?.classList.add("hidden"); }
 
 function openSignup() {
+    if (signupError) signupError.style.display = "none";
+    loginModal?.classList.add("hidden");
+    verifyModal?.classList.add("hidden");
     signupModal?.classList.remove("hidden");
 }
 function closeSignup() { signupModal?.classList.add("hidden"); }
 
-function openVerify() { verifyModal?.classList.remove("hidden"); }
+function openVerify() {
+    if (verifyError) verifyError.style.display = "none";
+    const v = document.getElementById("verify-code");
+    if (v) v.value = "";
+    loginModal?.classList.add("hidden");
+    signupModal?.classList.add("hidden");
+    verifyModal?.classList.remove("hidden");
+}
 function closeVerify() { verifyModal?.classList.add("hidden"); }
 
-
-// NAVBUTTON LOGIN / LOGOUT
-if (authBtn) {
-    authBtn.addEventListener("click", () => {
-        if (authBtn.dataset.state === "login") openLogin();
-        else {
-            currentUser = null;
-            saveUser(null);
-            updateAuthUI();
+// Auth button
+const authBtnEl = document.getElementById("auth-btn");
+if (authBtnEl) {
+    authBtnEl.addEventListener("click", () => {
+        if (authBtnEl.dataset.state === "login") {
+            openLogin();
+        } else {
+            const lang = localStorage.getItem("ck-lang") || "el";
+            const doLogout = () => {
+                setCurrentUser(null);
+                localStorage.removeItem("ck-auth-state");
+                updateAuthUI();
+                showCKToast(lang === "en" ? "👋 Logged out." : "👋 Αποσυνδέθηκες.");
+                document.dispatchEvent(new Event("authChanged"));
+            };
+            if (_fbAuth) _fbAuth.signOut().then(doLogout); else doLogout();
         }
     });
 }
 
-// Close login modal
 document.getElementById("login-close")?.addEventListener("click", closeLogin);
+signupClose?.addEventListener("click", closeSignup);
+verifyClose?.addEventListener("click", closeVerify);
 
-// Click outside modal
-loginModal?.addEventListener("click", (e) => {
-    if (e.target.classList.contains("modal-backdrop")) closeLogin();
+document.addEventListener("click", (e) => {
+    if (e.target.classList?.contains("modal-backdrop")) {
+        closeLogin(); closeSignup(); closeVerify();
+    }
+});
+document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") { closeLogin(); closeSignup(); closeVerify(); }
 });
 
-// Login submit
-loginForm?.addEventListener("submit", (e) => {
-    e.preventDefault();
-    const email = document.getElementById("login-email").value.trim();
-    const pass  = document.getElementById("login-pass").value.trim();
-    const saved = loadUser();
+// Mobile auth
+document.getElementById("mobile-auth-btn")?.addEventListener("click", () => {
+    authBtnEl?.click();
+});
 
-    if (!saved || saved.email !== email || saved.pass !== pass) {
-        noAccountMsg.style.display = "block";
-        signupBtn.style.display = "block";
-        return;
+// Login submit — Firebase
+loginForm?.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const email = document.getElementById("login-email")?.value.trim();
+    const pass  = document.getElementById("login-pass")?.value.trim();
+    const lang  = localStorage.getItem("ck-lang") || "el";
+    const btn   = loginForm.querySelector(".modal-submit");
+
+    if (!email || !pass) return;
+    if (btn) { btn.disabled = true; btn.textContent = "..."; }
+
+    // Αν _fbAuth δεν είναι έτοιμο ακόμα, περίμενε λίγο
+    if (!_fbAuth && typeof firebase !== "undefined") {
+        try {
+            if (!firebase.apps.length) firebase.initializeApp(_fbConfig);
+            _fbAuth = firebase.auth();
+        } catch(e) {}
     }
 
-    currentUser = saved;
-    updateAuthUI();
-    closeLogin();
+    try {
+        if (_fbAuth) {
+            const result = await _fbAuth.signInWithEmailAndPassword(email, pass);
+            if (result.user) {
+                closeLogin();
+                showCKToast(lang === "en" ? "✅ Welcome back!" : "✅ Καλώς ήρθες!");
+            }
+        } else {
+            const saved = findUserLocal(email, pass);
+            if (!saved) throw new Error("not found");
+            setCurrentUser(saved);
+            updateAuthUI();
+            closeLogin();
+            showCKToast(lang === "en" ? "✅ Welcome back!" : "✅ Καλώς ήρθες!");
+            document.dispatchEvent(new Event("authChanged"));
+        }
+    } catch(err) {
+        console.warn("Login error:", err.code, err.message);
+        if (noAccountMsg) {
+            noAccountMsg.style.display = "block";
+            noAccountMsg.textContent = lang === "en" ? "Wrong email or password." : "Λάθος email ή κωδικός.";
+        }
+        if (signupBtn) signupBtn.style.display = "block";
+    } finally {
+        if (btn) { btn.disabled = false; btn.textContent = "Login →"; }
+    }
 });
 
-// "Δημιουργία λογαριασμού" → Open Signup
 signupBtn?.addEventListener("click", () => {
+    if (noAccountMsg) noAccountMsg.style.display = "none";
+    if (signupBtn)    signupBtn.style.display    = "none";
     closeLogin();
-    noAccountMsg.style.display = "none";
-    signupBtn.style.display = "none";
     openSignup();
 });
 
-// Signup close
-signupClose?.addEventListener("click", closeSignup);
-
-// Back to login
 backToLogin?.addEventListener("click", () => {
     closeSignup();
     openLogin();
 });
 
-// Signup create
-signupCreate?.addEventListener("click", () => {
-    const email = document.getElementById("signup-email").value.trim();
-    const pass1 = document.getElementById("signup-pass1").value.trim();
-    const pass2 = document.getElementById("signup-pass2").value.trim();
+// ★ HYBRID: EmailJS sends code → verify modal → Firebase creates account
+// Κρατάμε προσωρινά τα στοιχεία εγγραφής
+let _pendingEmail = null;
+let _pendingPass  = null;
+let _pendingCode  = null;
+
+signupCreate?.addEventListener("click", async () => {
+    const email = document.getElementById("signup-email")?.value.trim();
+    const pass1 = document.getElementById("signup-pass1")?.value.trim();
+    const pass2 = document.getElementById("signup-pass2")?.value.trim();
+    const lang  = localStorage.getItem("ck-lang") || "el";
 
     if (!email || !pass1 || !pass2) return;
 
     if (pass1 !== pass2) {
-        signupError.style.display = "block";
+        if (signupError) signupError.style.display = "block";
         return;
     }
+    if (signupError) signupError.style.display = "none";
 
-    signupError.style.display = "none";
+    if (signupCreate) {
+        signupCreate.disabled = true;
+        signupCreate.textContent = lang === "en" ? "Sending code..." : "Αποστολή κωδικού...";
+    }
 
-    // fake code
-    verificationCode = String(Math.floor(100000 + Math.random() * 900000));
-    console.log("Verification:", verificationCode);
+    // Δημιουργία 6ψήφιου κωδικού
+    _pendingCode  = String(Math.floor(100000 + Math.random() * 900000));
+    _pendingEmail = email;
+    _pendingPass  = pass1;
 
-    tempUser = { email, pass: pass1 };
+    const templateId = lang === "en" ? "template_anrcp3g" : "template_acp4mua";
+    const expiryTime = new Date(Date.now() + 15*60000).toLocaleTimeString(
+        lang === "en" ? "en-US" : "el-GR",
+        { hour: "2-digit", minute: "2-digit" }
+    );
 
-    closeSignup();
-    openVerify();
+    try {
+        // ── ΒΗΜΑ 1: EmailJS στέλνει τον κωδικό ──
+        if (typeof emailjs !== "undefined") {
+            await emailjs.send("service_yx4k8mg", templateId, {
+                email, passcode: _pendingCode, time: expiryTime
+            });
+        } else {
+            // Dev fallback: δείξε τον κωδικό στο console
+            console.info(`%c[DEV] Code: ${_pendingCode}`, "color:#4ade80;font-size:16px;font-weight:bold;");
+        }
+        // ── ΒΗΜΑ 2: Άνοιξε το verify modal ──
+        closeSignup();
+        openVerify();
+    } catch(err) {
+        console.warn("EmailJS error:", err);
+        // Αν αποτύχει το email, άνοιξε verify και δείξε κωδικό στο console
+        console.info(`%c[FALLBACK] Code: ${_pendingCode}`, "color:#f59e0b;font-size:16px;font-weight:bold;");
+        closeSignup();
+        openVerify();
+    } finally {
+        if (signupCreate) {
+            signupCreate.disabled = false;
+            signupCreate.textContent = lang === "en" ? "Create Account" : "Δημιουργία λογαριασμού";
+        }
+    }
 });
 
-// Verify
-verifySubmit?.addEventListener("click", () => {
-    const code = document.getElementById("verify-code").value.trim();
-    if (code !== verificationCode) {
-        verifyError.style.display = "block";
+// ── ΒΗΜΑ 3: Verify submit → Firebase createUser ──
+verifySubmit?.addEventListener("click", async () => {
+    const code = document.getElementById("verify-code")?.value.trim();
+    const lang = localStorage.getItem("ck-lang") || "el";
+
+    // Έλεγχος κωδικού
+    if (!code || code !== _pendingCode) {
+        if (verifyError) verifyError.style.display = "block";
         return;
     }
-    verifyError.style.display = "none";
+    if (verifyError) verifyError.style.display = "none";
 
-    saveUser(tempUser);
-    currentUser = tempUser;
-    updateAuthUI();
-    closeVerify();
-    alert("Ο λογαριασμός δημιουργήθηκε!");
+    const btn = document.getElementById("verify-submit");
+    if (btn) { btn.disabled = true; btn.textContent = "..."; }
+
+    try {
+        if (_fbAuth) {
+            await _fbAuth.createUserWithEmailAndPassword(_pendingEmail, _pendingPass);
+        } else {
+            const u = { email: _pendingEmail, pass: _pendingPass };
+            saveUserLocal(u); setCurrentUser(u); updateAuthUI();
+            document.dispatchEvent(new Event("authChanged"));
+        }
+        _pendingCode = null; _pendingEmail = null; _pendingPass = null;
+        closeVerify();
+        showCKToast(lang === "en" ? "✅ Account created!" : "✅ Ο λογαριασμός δημιουργήθηκε!");
+    } catch(err) {
+        let msg = lang==="en"?"❌ Error.":"❌ Σφάλμα.";
+        if(err.code==="auth/email-already-in-use") msg=lang==="en"?"⚠️ Email in use.":"⚠️ Το email χρησιμοποιείται.";
+        if(err.code==="auth/weak-password") msg=lang==="en"?"⚠️ 6+ chars needed.":"⚠️ Κωδικός 6+ χαρακτήρες.";
+        showCKToast(msg,"error");
+    } finally {
+        if (btn) {
+            btn.disabled = false;
+            btn.textContent = lang === "en" ? "Verify" : "Επιβεβαίωση";
+        }
+    }
 });
 
-verifyClose?.addEventListener("click", closeVerify);
-
-
-// ==========================
-// 5) PASSWORD EYE (universal)
-// ==========================
+// Password eye toggles
 function setupPasswordToggle(inputId, iconId) {
     const input = document.getElementById(inputId);
     const icon  = document.getElementById(iconId);
     if (!input || !icon) return;
-
     icon.addEventListener("click", () => {
-        const isHidden = input.type === "password";
-        input.type = isHidden ? "text" : "password";
-        icon.src = isHidden ? "./IMG_5381.png" : "./IMG_5380.png";
+        const hidden = input.type === "password";
+        input.type = hidden ? "text" : "password";
+        icon.src = hidden ? "./IMG_5381.png" : "./IMG_5380.png";
     });
 }
-
-// LOGIN
 setupPasswordToggle("login-pass", "login-pass-toggle");
-// SIGNUP
 setupPasswordToggle("signup-pass1", "signup-pass1-toggle");
 setupPasswordToggle("signup-pass2", "signup-pass2-toggle");
+
+}); // END DOMContentLoaded
+
+
+
+// ==========================
+// 5) ARTICLE IMAGE THEME
+// ==========================
 
 // ================================
 // ARTICLE IMAGE THEME SWITCH
@@ -298,7 +515,7 @@ function updateArticleImage() {
   if (target) articleImage.setAttribute("src", target);
 }
 
-themeBtn?.addEventListener("click", () => {
+document.getElementById("theme-toggle")?.addEventListener("click", () => {
   setTimeout(updateArticleImage, 20);
 });
 
@@ -316,7 +533,6 @@ function translateAllHidden() {
   });
 }
 
-document.dispatchEvent(new Event("themeChanged"));
 
 
 
@@ -402,103 +618,52 @@ window.initHome = function initHome() {
 
 
 // =========================
-// BURGER (index only) — FIXED
+// BURGER — works on all pages
 // =========================
-const menuToggle  = document.getElementById("menu-toggle");
-const mobileMenu  = document.getElementById("mobile-menu");
-const mobileTheme = document.getElementById("mobile-theme-toggle");
-const mobileAuth  = document.getElementById("mobile-auth-btn");
-const mobileLang  = document.getElementById("mobile-lang-toggle");
+document.addEventListener("DOMContentLoaded", function() {
+  const menuToggle  = document.getElementById("menu-toggle");
+  const mobileMenu  = document.getElementById("mobile-menu");
+  const mobileTheme = document.getElementById("mobile-theme-toggle");
+  const mobileAuth  = document.getElementById("mobile-auth-btn");
+  const mobileLang  = document.getElementById("mobile-lang-toggle");
 
-// Guard: μην ξαναδέσεις listeners αν τρέξει 2 φορές
-if (!window.__ckBurgerBound) {
-  window.__ckBurgerBound = true;
+  if (!window.__ckBurgerBound) {
+    window.__ckBurgerBound = true;
 
-  function closeBurger() {
-    if (!menuToggle || !mobileMenu) return;
-    menuToggle.classList.remove("open");
-    mobileMenu.classList.remove("open");
-    mobileMenu.setAttribute("aria-hidden", "true");
-  }
+    function closeBurger() {
+      if (!menuToggle || !mobileMenu) return;
+      menuToggle.classList.remove("open");
+      mobileMenu.classList.remove("open");
+      mobileMenu.setAttribute("aria-hidden", "true");
+    }
+    function openBurger() {
+      if (!menuToggle || !mobileMenu) return;
+      menuToggle.classList.add("open");
+      mobileMenu.classList.add("open");
+      mobileMenu.setAttribute("aria-hidden", "false");
+    }
+    window.closeBurger = closeBurger;
 
-  function openBurger() {
-    if (!menuToggle || !mobileMenu) return;
-    menuToggle.classList.add("open");
-    mobileMenu.classList.add("open");
-    mobileMenu.setAttribute("aria-hidden", "false");
-  }
+    if (menuToggle && mobileMenu) {
+      menuToggle.addEventListener("click", (e) => { e.preventDefault(); mobileMenu.classList.contains("open") ? closeBurger() : openBurger(); });
+      mobileMenu.querySelectorAll("a").forEach(a => a.addEventListener("click", () => closeBurger()));
+    }
 
-  function toggleBurger() {
-    if (!menuToggle || !mobileMenu) return;
-    const isOpen = mobileMenu.classList.contains("open");
-    isOpen ? closeBurger() : openBurger();
-  }
-
-  // κάνε το διαθέσιμο global (για άλλα scripts)
-  window.closeBurger = closeBurger;
-
-  // Toggle burger
-  if (menuToggle && mobileMenu) {
-    menuToggle.addEventListener("click", (e) => {
+    // Mobile THEME
+    mobileTheme?.addEventListener("click", (e) => {
       e.preventDefault();
-      toggleBurger();
+      closeBurger?.();
+      applyTheme(!document.body.classList.contains("light-theme"));
     });
 
-    // close όταν πατάς link μέσα στο mobile menu
-    mobileMenu.querySelectorAll("a").forEach(a => {
-      a.addEventListener("click", () => closeBurger());
+    // Mobile LOGIN
+    mobileAuth?.addEventListener("click", (e) => {
+      e.preventDefault();
+      closeBurger?.();
+      document.getElementById("auth-btn")?.click();
     });
   }
-
-  // Mobile THEME → κλείσε burger + κάνε click στο desktop theme
-  if (mobileTheme && window.themeBtn) {
-    mobileTheme.addEventListener("click", (e) => {
-      e.preventDefault();
-      closeBurger();
-      window.themeBtn.click();
-    });
-  } else if (mobileTheme && typeof themeBtn !== "undefined" && themeBtn) {
-    // fallback αν themeBtn είναι στη scope σου
-    mobileTheme.addEventListener("click", (e) => {
-      e.preventDefault();
-      closeBurger();
-      themeBtn.click();
-    });
-  }
-
-  // Mobile LOGIN → κλείσε burger + άνοιξε login μέσω του auth-btn (ενιαίο handler)
-  mobileAuth?.addEventListener("click", (e) => {
-    e.preventDefault();
-    closeBurger();
-    document.getElementById("auth-btn")?.click();
-  });
-
-  // ❌ ΣΗΜΑΝΤΙΚΟ:
-  // ΔΕΝ βάζουμε εδώ listener για mobileLang που να πατάει lang-toggle
-  // γιατί έχεις ήδη το σωστό lang script στο τέλος (toggleLang()).
-  // Άρα εδώ μόνο κλείνουμε burger (προαιρετικά).
-  mobileLang?.addEventListener("click", () => {
-    // άστο να το χειριστεί το language script σου
-    closeBurger();
-  });
-
-  // close burger όταν κλείνει modal (backdrop / close)
-  document.querySelectorAll(".modal-backdrop, .modal-close").forEach(el => {
-    el.addEventListener("click", () => closeBurger());
-  });
-
-  // close με ESC
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") closeBurger();
-  });
-}
-
-
-
-
-
-
-
+});
 
 
 // ===============================
@@ -580,78 +745,3 @@ if (!window.__ckBurgerBound) {
 
 
 
-
-// =========================
-// STATIC TICKER (NO SCROLL)
-// =========================
-(function () {
-  const COINS = [
-    { id: "bitcoin",  sym: "BTC" },
-    { id: "ethereum", sym: "ETH" },
-    { id: "solana",   sym: "SOL" },
-  ];
-
-  async function fetchData() {
-    const ids = COINS.map(c => c.id).join(",");
-    const url =
-      `https://api.coingecko.com/api/v3/simple/price` +
-      `?ids=${encodeURIComponent(ids)}` +
-      `&vs_currencies=usd&include_24hr_change=true`;
-
-    const res = await fetch(url);
-    if (!res.ok) throw new Error("ticker fetch failed");
-    return res.json();
-  }
-
-  function fmt(n){
-    if (n == null || !isFinite(n)) return "—";
-    return "$" + n.toLocaleString(undefined, { maximumFractionDigits: 2 });
-  }
-
-  function cls(chg){
-    if (!isFinite(chg)) return "";
-    return chg > 0 ? "up" : chg < 0 ? "down" : "";
-  }
-
-  function render(data){
-    document.querySelectorAll("[data-ticker-inner]").forEach(inner => {
-      inner.innerHTML = COINS.map(c => {
-        const row = data[c.id] || {};
-        const price = row.usd;
-        const chg = row.usd_24h_change;
-        const arrow = isFinite(chg) ? (chg > 0 ? "▲" : chg < 0 ? "▼" : "•") : "•";
-        const pct = isFinite(chg) ? `${chg.toFixed(2)}%` : "";
-        return `
-          <span class="ck-tick ${cls(chg)}">
-            <span class="sym">${c.sym}</span>
-            <span class="p">${fmt(price)}</span>
-            <span class="chg">${arrow} ${pct}</span>
-          </span>
-        `;
-      }).join("");
-    });
-  }
-
-  document.addEventListener("DOMContentLoaded", async () => {
-    if (!document.querySelector("[data-ticker]")) return;
-    try {
-      const data = await fetchData();
-      render(data);
-    } catch (e) {
-      console.warn(e);
-    }
-  });
-})();
-
-
-
-
-
-
-
-
-// Google Analytics (GA4)
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', 'G-7DWG18EQLG');

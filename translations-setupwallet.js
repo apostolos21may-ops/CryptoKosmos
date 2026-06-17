@@ -1,218 +1,183 @@
-window.TRANSLATIONS = {
-  el: {
-   /* =======================
-     WALLET SETUP
-======================= */
-ws_title: "Πώς στήνω Wallet σωστά",
-ws_intro:
-  "Ένα wallet δεν είναι απλά ένα app — είναι ο τρόπος που ελέγχεις τα κλειδιά σου. Αν το στήσεις σωστά από την αρχή, μειώνεις δραματικά τον κίνδυνο απώλειας.",
+window.TRANSLATIONS = window.TRANSLATIONS || {};
 
-ws_types_title: "Τύποι Wallet (ποιο να διαλέξω;)",
-ws_types_text:
-  "Υπάρχουν hot wallets (στο κινητό/PC) και cold wallets (hardware). Για αρχή, ένα αξιόπιστο hot wallet είναι ΟΚ για μικρά ποσά. Για μεγαλύτερα ποσά, hardware wallet είναι πιο ασφαλές.",
+window.TRANSLATIONS.el = Object.assign(window.TRANSLATIONS.el || {}, {
+  /* =======================
+     HEADER / SHARED
+  ======================= */
+  header_tagline: "Διάβασε την αγορά. Μην την ακούς.",
+  nav_market: "Αγορά",
+  nav_charts: "Τάσεις",
+  nav_guides: "Οδηγοί",
+  nav_glossary: "Γλωσσάρι",
+  nav_articles: "Άρθρα",
+  theme_dark: "Dark",
+  mobile_theme: "Αλλαγή Θέματος",
+  login: "Login",
+  logout: "Logout",
+  footer_disclaimer: "Εκπαιδευτικό περιεχόμενο μόνο. Δεν αποτελεί επενδυτική συμβουλή.",
 
-ws_steps_title: "Στήσιμο Wallet βήμα-βήμα",
-ws_step1: "Κατέβασε το wallet μόνο από το επίσημο site / official app store (όχι από ads/links).",
-ws_step2: "Δημιούργησε νέο wallet και γράψε τη seed phrase OFFLINE (χαρτί ή metal backup).",
-ws_step3: "Βάλε ισχυρό password / PIN και ενεργοποίησε βιομετρικά αν υπάρχουν.",
-ws_step4: "Κάνε test restore: έλεγξε ότι μπορείς να επαναφέρεις το wallet με τη seed (σε ασφαλές περιβάλλον).",
-ws_step5: "Πρόσθεσε σωστό network (π.χ. Ethereum, Solana) και κάνε μια μικρή δοκιμαστική μεταφορά.",
-ws_step6: "Οργάνωσε folders/labels και κράτα το wallet “clean” (μην συνδέεσαι παντού).",
+  /* =======================
+     HERO
+  ======================= */
+  ws_eyebrow: "ΟΔΗΓΟΣ",
+  ws_title: "Πώς στήνω Wallet σωστά",
+  ws_lead:
+    "Ένα wallet δεν είναι «app για crypto» — είναι ο τρόπος που ελέγχεις τα κλειδιά σου. Αν το στήσεις σωστά από την αρχή, γλιτώνεις τα πιο συχνά λάθη.",
 
-ws_seed_title: "Seed phrase: ο πιο σημαντικός κανόνας",
-ws_seed_text:
-  "Η seed phrase (12/24 λέξεις) είναι το master key. Όποιος την έχει, έχει και τα χρήματά σου. Δεν τη βάζεις ΠΟΤΕ σε site, Google Drive, notes, screenshot, email ή chat.",
+  /* =======================
+     TYPES
+  ======================= */
+  ws_types_title: "Τύποι Wallet — ποιο να διαλέξω;",
+  ws_types_text:
+    "Τα wallets χωρίζονται σε hot (συνδεδεμένα στο internet) και cold (offline). Για μικρά ποσά και καθημερινές συναλλαγές κάνει ένα software wallet (MetaMask, Trust Wallet). Για αποταμίευση ή μεγαλύτερα ποσά, hardware wallet (Ledger, Trezor) — τα κλειδιά σου δεν φεύγουν ποτέ online.",
 
-ws_backup_title: "Backup που πραγματικά δουλεύει",
-ws_backup_text:
-  "Κράτα τουλάχιστον 2 αντίγραφα σε 2 διαφορετικά ασφαλή σημεία. Αν μπορείς, χρησιμοποίησε metal backup για φωτιά/νερό. Μην το αφήνεις στο ίδιο μέρος με το κινητό σου.",
-ws_tip_title: "Tip:",
-ws_tip:
-  "Κάνε μία μικρή δοκιμή ανάκτησης πριν βάλεις σοβαρό ποσό — είναι ο πιο γρήγορος τρόπος να βρεις λάθος στο backup.",
+  /* =======================
+     STEPS
+  ======================= */
+  ws_steps_title: "Στήσιμο Wallet βήμα-βήμα",
+  ws_step1: "Κατέβασε το wallet μόνο από επίσημο site ή store — έλεγξε το domain δύο φορές.",
+  ws_step2: "Δημιούργησε νέο wallet (όχι «import») και σημείωσε το seed phrase.",
+  ws_step3: "Γράψε τη seed phrase σε χαρτί ή μεταλλική πλάκα — ποτέ σε screenshot ή cloud.",
+  ws_step4: "Επιβεβαίωσε τη seed phrase: το wallet θα σε ρωτήσει να την ξαναγράψεις με σωστή σειρά.",
+  ws_step5: "Ρύθμισε PIN ή biometric lock για το άνοιγμα του app.",
+  ws_step6: "Δοκίμασε πρώτα με μικρό ποσό πριν μεταφέρεις μεγάλα κεφάλαια.",
 
-ws_security_title: "Ρυθμίσεις ασφάλειας (must)",
-ws_sec1: "Κλείδωμα εφαρμογής με PIN/biometrics.",
-ws_sec2: "Αυτόματα updates (wallet + λειτουργικό).",
-ws_sec3: "Anti-phishing: πάντα έλεγχος domain/URL πριν κάνεις connect.",
-ws_sec4: "Approvals: μην δίνεις unlimited approvals χωρίς λόγο, κάνε revoke όταν τελειώσεις.",
-ws_sec5: "Ξεχωριστό “main wallet” και “risk wallet” για πειραματισμούς/airdrops.",
+  /* =======================
+     SEED PHRASE
+  ======================= */
+  ws_seed_title: "Seed phrase: ο πιο σημαντικός κανόνας",
+  ws_seed_text:
+    "Η seed phrase (12 ή 24 λέξεις) είναι το μοναδικό backup του wallet σου. Αν χαθεί ή κλαπεί, τα funds χάνονται για πάντα ή πηγαίνουν στον κλέφτη. Μην τη φωτογραφίσεις, μην την αποθηκεύσεις σε email ή cloud, μην την πεις σε κανέναν — ούτε σε «support».",
 
-ws_mistakes_title: "Συχνά λάθη",
-ws_mistake1: "Seed σε screenshot / notes / cloud.",
-ws_mistake2: "Κατέβασμα fake wallet από διαφήμιση ή ψεύτικο link.",
-ws_mistake3: "Στέλνεις funds σε λάθος network (π.χ. λάθος chain).",
-ws_mistake4: "Συνδέεσαι σε άγνωστα dApps χωρίς έλεγχο.",
-ws_mistake5: "Unlimited approvals σε sketchy contract.",
-ws_mistake6: "Δεν κάνεις test transfer με μικρό ποσό πρώτα.",
-ws_mistake7: "Βάζεις όλα τα funds σε ένα μόνο wallet χωρίς διαχωρισμό.",
+  /* =======================
+     BACKUP
+  ======================= */
+  ws_backup_title: "Backup που πραγματικά δουλεύει",
+  ws_backup_text:
+    "Γράψε τη seed phrase σε δύο διαφορετικά χαρτιά και φύλαξέ τα σε δύο διαφορετικές τοποθεσίες. Για ακόμα καλύτερη προστασία, χρησιμοποίησε μεταλλική πλάκα (fire & waterproof). Ποτέ μην βασίζεσαι σε ένα μόνο αντίγραφο.",
+  ws_tip_title: "Tip:",
+  ws_tip:
+    "Κάνε «restore test» — διέγραψε το app και ανέκτησε το wallet με τη seed phrase, για να σιγουρευτείς ότι λειτουργεί σωστά.",
 
-ws_check_title: "Mini checklist πριν βάλεις χρήματα",
-ws_check1: "Έχω seed phrase γραμμένη offline και σωστά;",
-ws_check2: "Έχω κάνει test restore (ή ξέρω ότι γίνεται);",
-ws_check3: "Ξέρω σε ποιο network στέλνω/λαμβάνω;",
-ws_check4: "Έκανα πρώτα test transfer με μικρό ποσό;",
-ws_check5: "Έχω ξεχωρίσει main wallet από risky wallet;",
+  /* =======================
+     SECURITY SETTINGS
+  ======================= */
+  ws_security_title: "Ρυθμίσεις ασφάλειας (must)",
+  ws_sec1: "Ενεργοποίησε PIN ή biometric lock.",
+  ws_sec2: "Απενεργοποίησε auto-fill passwords για το wallet app.",
+  ws_sec3: "Χρησιμοποίησε dedicated συσκευή ή browser profile για crypto.",
+  ws_sec4: "Έλεγχε τακτικά τα permissions που έχεις δώσει σε dApps.",
+  ws_sec5: "Ενημέρωνε το firmware αν έχεις hardware wallet.",
 
-ws_conclusion_title: "Συμπέρασμα",
-ws_conclusion:
-  "Wallet setup = ασφάλεια. Αν κρατήσεις seed offline, κάνεις test, και χωρίσεις main/risk χρήση, έχεις ήδη αποφύγει το 80% των προβλημάτων.",
+  /* =======================
+     MISTAKES
+  ======================= */
+  ws_mistakes_title: "Συχνά λάθη",
+  ws_mistake1: "Screenshot ή φωτογραφία της seed phrase.",
+  ws_mistake2: "Αποθήκευση seed phrase σε Google Drive, iCloud ή email.",
+  ws_mistake3: "Download wallet από ανεπίσημο link ή ad.",
+  ws_mistake4: "Χρήση του ίδιου wallet για DeFi και αποταμίευση.",
+  ws_mistake5: "Δεν ελέγχουν το address πριν στείλουν.",
+  ws_mistake6: "Δίνουν unlimited approval σε smart contracts.",
+  ws_mistake7: "Μόνο ένα backup της seed phrase.",
 
-guides_more: "Δες περισσότερα →",
+  /* =======================
+     CHECKLIST
+  ======================= */
+  ws_check_title: "Mini checklist πριν βάλεις χρήματα",
+  ws_check1: "Seed phrase γραμμένη χειρόγραφα και αποθηκευμένη offline;",
+  ws_check2: "Wallet downloaded από επίσημο source;",
+  ws_check3: "PIN / biometric ενεργοποιημένο;",
+  ws_check4: "Restore test έχει γίνει επιτυχώς;",
+  ws_check5: "Δοκιμαστική μεταφορά με μικρό ποσό πριν τα μεγάλα;",
 
-    /* =======================
-           FOOTER
-    ======================= */
-    footer_rights: "Όλα τα δικαιώματα διατηρούνται.",
+  /* =======================
+     CONCLUSION
+  ======================= */
+  ws_conclusion_title: "Συμπέρασμα",
+  ws_conclusion:
+    "Το wallet είναι το θεμέλιο. Στήσε το σωστά μία φορά και θα έχεις ηρεμία για πάντα — το αντίθετο είναι δύσκολο να διορθωθεί.",
 
+  guides_more: "Δες περισσότερα →",
+});
 
-mobile_home: "Αρχική Σελίδα",
-mobile_theme: "Αλλαγή Θέματος",
+window.TRANSLATIONS.en = Object.assign(window.TRANSLATIONS.en || {}, {
+  /* HEADER / SHARED */
+  header_tagline: "Read the market. Don't follow the noise.",
+  nav_market: "Market",
+  nav_charts: "Trends",
+  nav_guides: "Guides",
+  nav_glossary: "Glossary",
+  nav_articles: "Articles",
+  theme_dark: "Dark",
+  mobile_theme: "Change Theme",
+  login: "Login",
+  logout: "Logout",
+  footer_disclaimer: "Educational content only. Not financial advice.",
 
+  /* HERO */
+  ws_eyebrow: "GUIDE",
+  ws_title: "How to Set Up a Wallet Properly",
+  ws_lead:
+    "A wallet isn't just a 'crypto app' — it's how you control your keys. Set it up correctly from the start and you'll avoid the most common mistakes.",
 
-    /* HEADER */
-    header_tagline: "Ο παλμός του κόσμου των crypto",
-    nav_market: "Αγορά",
-    nav_charts: "Τάσεις",
-    nav_guides: "Οδηγοί",
-    nav_glossary: "Γλωσσάρι",
+  /* TYPES */
+  ws_types_title: "Wallet Types — Which One Should I Choose?",
+  ws_types_text:
+    "Wallets come in two flavors: hot (internet-connected) and cold (offline). For small amounts and daily use, a software wallet works fine (MetaMask, Trust Wallet). For savings or larger amounts, go hardware (Ledger, Trezor) — your keys never leave the device.",
 
-    /* =======================
-             LOGIN
-    ======================= */
-    login_title: "Σύνδεση",
-    login_email: "Email",
-    login_password: "Κωδικός",
-    login_btn: "Σύνδεση",
-    login_no_account: "Δεν έχεις λογαριασμό στο CryptoKosmos.",
-    login_create_account: "Δημιουργία λογαριασμού",
+  /* STEPS */
+  ws_steps_title: "Setting Up a Wallet Step by Step",
+  ws_step1: "Download only from the official site or store — double-check the domain.",
+  ws_step2: "Create a new wallet (not 'import') and write down the seed phrase.",
+  ws_step3: "Write the seed phrase on paper or a metal plate — never screenshot or cloud.",
+  ws_step4: "Confirm the seed phrase: the wallet will ask you to re-enter it in the correct order.",
+  ws_step5: "Set a PIN or biometric lock to open the app.",
+  ws_step6: "Test with a small amount first before transferring large funds.",
 
+  /* SEED PHRASE */
+  ws_seed_title: "Seed Phrase: The Most Important Rule",
+  ws_seed_text:
+    "The seed phrase (12 or 24 words) is the only backup for your wallet. If it's lost or stolen, funds are gone forever or go to the thief. Don't photograph it, don't store it in email or cloud, don't share it with anyone — not even 'support'.",
 
-    /* =======================
-             SIGNUP
-    ======================= */
-    signup_title: "Δημιούργησε λογαριασμό",
-    signup_email: "Email",
-    signup_pass1: "Κωδικός",
-    signup_pass2: "Επιβεβαίωση κωδικού",
-    signup_error: "Οι κωδικοί δεν ταιριάζουν.",
-    signup_btn: "Δημιουργία λογαριασμού",
-    signup_back: "Σύνδεση",
-    signup_have_account: "Έχεις ήδη λογαριασμό;",
+  /* BACKUP */
+  ws_backup_title: "Backup That Actually Works",
+  ws_backup_text:
+    "Write the seed phrase on two separate pieces of paper and store them in two different locations. For even better protection, use a metal plate (fire & waterproof). Never rely on a single copy.",
+  ws_tip_title: "Tip:",
+  ws_tip:
+    "Do a 'restore test' — delete the app and recover the wallet with the seed phrase, to make sure it works correctly.",
 
+  /* SECURITY SETTINGS */
+  ws_security_title: "Security Settings (Must-Do)",
+  ws_sec1: "Enable PIN or biometric lock.",
+  ws_sec2: "Disable auto-fill passwords for the wallet app.",
+  ws_sec3: "Use a dedicated device or browser profile for crypto.",
+  ws_sec4: "Regularly check the permissions you've granted to dApps.",
+  ws_sec5: "Update the firmware if you have a hardware wallet.",
 
-    /* =======================
-             VERIFY
-    ======================= */
-    verify_title: "Επαλήθευση Email",
-    verify_subtitle: "Σου στείλαμε έναν 6-ψήφιο κωδικό.",
-    verify_code: "Κωδικός",
-    verify_error: "Λάθος κωδικός. Προσπάθησε ξανά.",
-    verify_btn: "Επιβεβαίωση"
-  },
+  /* MISTAKES */
+  ws_mistakes_title: "Common Mistakes",
+  ws_mistake1: "Screenshot or photo of the seed phrase.",
+  ws_mistake2: "Storing the seed phrase in Google Drive, iCloud, or email.",
+  ws_mistake3: "Downloading a wallet from an unofficial link or ad.",
+  ws_mistake4: "Using the same wallet for DeFi and savings.",
+  ws_mistake5: "Not checking the address before sending.",
+  ws_mistake6: "Giving unlimited approval to smart contracts.",
+  ws_mistake7: "Only one backup of the seed phrase.",
 
-  /* ================================================================
-                          ENGLISH VERSION
-  ================================================================ */
-  en: {
-   /* =======================
-     WALLET SETUP
-======================= */
-ws_title: "How to Set Up a Wallet Properly",
-ws_intro:
-  "A wallet isn’t just an app — it’s how you control your keys. If you set it up correctly from day one, you massively reduce the risk of losing funds.",
+  /* CHECKLIST */
+  ws_check_title: "Mini Checklist Before Depositing Funds",
+  ws_check1: "Seed phrase written by hand and stored offline?",
+  ws_check2: "Wallet downloaded from an official source?",
+  ws_check3: "PIN / biometric enabled?",
+  ws_check4: "Restore test completed successfully?",
+  ws_check5: "Test transfer with a small amount before the big ones?",
 
-ws_types_title: "Wallet types (which one should I choose?)",
-ws_types_text:
-  "There are hot wallets (phone/PC) and cold wallets (hardware). A reputable hot wallet is fine for small amounts. For larger amounts, a hardware wallet is generally safer.",
+  /* CONCLUSION */
+  ws_conclusion_title: "Conclusion",
+  ws_conclusion:
+    "The wallet is the foundation. Set it up right once and you'll have peace of mind forever — the alternative is very hard to fix.",
 
-ws_steps_title: "Wallet setup step-by-step",
-ws_step1: "Download the wallet only from the official website / official app store (avoid ads/unknown links).",
-ws_step2: "Create a new wallet and write the seed phrase OFFLINE (paper or metal backup).",
-ws_step3: "Set a strong password / PIN and enable biometrics if available.",
-ws_step4: "Do a test restore: confirm you can recover the wallet with the seed (safely).",
-ws_step5: "Use the correct network (e.g., Ethereum, Solana) and make a small test transfer.",
-ws_step6: "Organize usage and keep it “clean” (don’t connect everywhere).",
-
-ws_seed_title: "Seed phrase: the #1 rule",
-ws_seed_text:
-  "The seed phrase (12/24 words) is your master key. Anyone who has it controls your funds. Never type it into a website, cloud notes, screenshots, email, or chats.",
-
-ws_backup_title: "Backups that actually work",
-ws_backup_text:
-  "Keep at least 2 copies in 2 different secure locations. If possible, use a metal backup for fire/water resistance. Don’t store it next to your phone.",
-ws_tip_title: "Tip:",
-ws_tip:
-  "Do a small recovery test before depositing serious funds — it’s the fastest way to catch backup mistakes.",
-
-ws_security_title: "Security settings (must)",
-ws_sec1: "App lock with PIN/biometrics.",
-ws_sec2: "Automatic updates (wallet + operating system).",
-ws_sec3: "Anti-phishing: always verify the domain/URL before connecting.",
-ws_sec4: "Approvals: avoid unlimited approvals unless needed; revoke when done.",
-ws_sec5: "Separate a “main wallet” from a “risk wallet” for experiments/airdrops.",
-
-ws_mistakes_title: "Common mistakes",
-ws_mistake1: "Seed phrase in screenshots / notes / cloud.",
-ws_mistake2: "Installing a fake wallet via ads or phishing links.",
-ws_mistake3: "Sending funds on the wrong network (wrong chain).",
-ws_mistake4: "Connecting to random dApps without checking legitimacy.",
-ws_mistake5: "Unlimited approvals on sketchy contracts.",
-ws_mistake6: "Skipping a small test transfer first.",
-ws_mistake7: "Keeping all funds in one wallet without separation.",
-
-ws_check_title: "Mini checklist before depositing funds",
-ws_check1: "Is my seed phrase written offline and correct?",
-ws_check2: "Have I tested recovery (or confirmed it works)?",
-ws_check3: "Do I know which network I’m sending/receiving on?",
-ws_check4: "Did I do a small test transfer first?",
-ws_check5: "Did I separate a main wallet from a risky wallet?",
-
-ws_conclusion_title: "Conclusion",
-ws_conclusion:
-  "Wallet setup equals safety. Keep the seed offline, test recovery, and separate main vs risk usage — you’ll avoid most beginner disasters.",
-
-guides_more: "See more →",
-
-
-    /* FOOTER */
-    footer_rights: "All rights reserved.",
-
-
-mobile_home: "Home Page",
-mobile_theme: "Change Theme",
-
-    /* HEADER */
-    header_tagline: "The pulse of the crypto world",
-    nav_market: "Market",
-    nav_charts: "Trends",
-    nav_guides: "Guides",
-    nav_glossary: "Glossary",
-
-    /* LOGIN */
-    login_title: "Login",
-    login_email: "Email",
-    login_password: "Password",
-    login_btn: "Login",
-    login_no_account: "You don't have a CryptoKosmos account.",
-    login_create_account: "Create Account",
-
-
-    /* SIGNUP */
-    signup_title: "Create an Account",
-    signup_email: "Email",
-    signup_pass1: "Password",
-    signup_pass2: "Confirm Password",
-    signup_error: "Passwords do not match.",
-    signup_btn: "Create Account",
-    signup_back: "Login",
-    signup_have_account: "Already have an account?",
-
-
-    /* VERIFY */
-    verify_title: "Email Verification",
-    verify_subtitle: "We sent you a 6-digit code.",
-    verify_code: "Code",
-    verify_error: "Incorrect code. Try again.",
-    verify_btn: "Verify"
-  }
-};
+  guides_more: "See more →",
+});

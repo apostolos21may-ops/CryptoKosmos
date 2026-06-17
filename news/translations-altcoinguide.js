@@ -1,222 +1,193 @@
-window.TRANSLATIONS = {
-  el: {
-  
-  
+/**
+ * translations-altcoinguide.js
+ * Page-specific i18n strings for altcoinguide.html (CryptoKosmos)
+ *
+ * Matches the i18n.js engine: reads from window.TRANSLATIONS[lang][key]
+ * (lang = "el" | "en") and applies it to any element with a matching
+ * data-i18n / data-i18n-placeholder attribute.
+ *
+ * Includes:
+ *  - shared header / nav / auth-modal strings (used by the header.js-
+ *    injected header, mobile menu and login/signup/verify modals)
+ *  - page-specific "ae_*" strings for the article body
+ *  - "pf_*" strings for the "Διάβασε επίσης" related-articles section
+ *    (NOT the same as the prefooter.js brand/explore/social block,
+ *    which has its own self-contained translations)
+ *
+ * Using Object.assign so this file can be loaded alongside other
+ * global/shared translation files without wiping their keys.
+ */
 
+(function () {
+  const el = {
+    "header_tagline": "Διάβασε την αγορά. Μην την ακούς.",
+    "nav_market": "Αγορά",
+    "nav_charts": "Τάσεις",
+    "nav_guides": "Οδηγοί",
+    "nav_glossary": "Γλωσσάρι",
+    "nav_articles": "Άρθρα",
+    "theme_dark": "Dark",
+    "login": "Login",
+    "mobile_theme": "Αλλαγή Θέματος",
+    "login_title": "Σύνδεση",
+    "login_email": "Email",
+    "login_password": "Κωδικός",
+    "login_btn": "Σύνδεση",
+    "login_demo": "Ο λογαριασμός σου αποθηκεύεται με ασφάλεια στο cloud.",
+    "login_no_account": "Λάθος email ή κωδικός.",
+    "login_create_account": "Δημιουργία λογαριασμού",
+    "signup_title": "Δημιούργησε λογαριασμό",
+    "signup_email": "Email",
+    "signup_pass1": "Κωδικός",
+    "signup_pass2": "Επιβεβαίωση κωδικού",
+    "signup_error": "Οι κωδικοί δεν ταιριάζουν.",
+    "signup_btn": "Δημιουργία λογαριασμού",
+    "signup_have_account": "Έχεις ήδη λογαριασμό;",
+    "signup_back": "Σύνδεση",
+    "verify_title": "Επαλήθευση Email",
+    "verify_subtitle": "Σου στείλαμε έναν 6-ψήφιο κωδικό.",
+    "verify_code": "Κωδικός",
+    "verify_error": "Λάθος κωδικός. Προσπάθησε ξανά.",
+    "verify_btn": "Επιβεβαίωση",
+    "ae_kicker": "Altcoin Strategy Guide",
+    "ae_title": "Altcoin Exit Checklist: πώς (και πότε) βγαίνεις πριν γίνει αργά",
+    "ae_lead": "Οι περισσότεροι traders ξέρουν πότε να μπουν σε ένα altcoin — ελάχιστοι ξέρουν πότε να βγουν. Τα μεγαλύτερα losses δεν έρχονται από κακές εισόδους, αλλά από exits που δεν έγιναν ποτέ. Παρακάτω θα βρεις ένα πρακτικό exit checklist για altcoins, ώστε να προστατεύεις κέρδη, να μειώνεις ρίσκο και να μη γίνεσαι exit liquidity.",
+    "ae_tldr_title": "Checklist σε 30 δευτερόλεπτα",
+    "ae_tldr_1": "Όρισε targets & invalidation πριν μπεις στη θέση, όχι ενώ ήδη κινείται.",
+    "ae_tldr_2": "Χρησιμοποίησε partial exits — μην περιμένεις το «τέλειο top».",
+    "ae_tldr_3": "Παρακολούθα το volume: fading volume πάνω σε rally = προειδοποίηση.",
+    "ae_tldr_4": "Όταν το sentiment γίνεται ομόφωνα bullish, σκέψου exit, όχι re-entry.",
+    "ae_tldr_5": "«Πολύ καλό για να πουληθεί» συνήθως σημαίνει «ώρα να πουληθεί».",
+    "ae_tldr_6": "Διαχείριση ρίσκου > πίστη σε ένα project — πάντα.",
+    "ae_caption": "Exit snapshot: partials, invalidation, liquidity και sentiment shifts.",
+    "ae_h2_1": "1) Πρώτα το πλάνο, μετά το pump",
+    "ae_p_1": "Το exit δεν σχεδιάζεται όταν το alt ανεβαίνει — σχεδιάζεται πριν μπεις στη θέση. Αν δεν ξέρεις από πριν πού θα πάρεις κέρδη και πού ακυρώνεται το setup, το trade θα σε οδηγήσει συναισθηματικά. Κανόνας: κάθε alt position πρέπει να έχει predefined targets και invalidation, ακόμα κι αν νομίζεις ότι “θα το δεις στην πορεία”.",
+    "ae_h2_2": "2) Partials: γιατί το full exit σπάνια δουλεύει",
+    "ae_p_2": "Τα altcoins κινούνται με bursts. Περιμένοντας το τέλειο top, οι περισσότεροι καταλήγουν να μη βγουν ποτέ. Τα partial exits σου επιτρέπουν να κλειδώνεις κέρδη χωρίς να σκοτώνεις το trade. Συνήθως: ένα μέρος σε resistance, ένα μέρος σε momentum exhaustion, και το υπόλοιπο αφήνεται με προστασία.",
+    "ae_h2_3": "3) Liquidity & volume: το πρώτο καμπανάκι",
+    "ae_p_3": "Όταν το volume αρχίζει να πέφτει ενώ η τιμή ανεβαίνει, η έξοδος γίνεται πιο δύσκολη απ’ όσο φαίνεται. Σε thin liquidity περιβάλλον, ένα μικρό sell μπορεί να ρίξει την τιμή απότομα. Αν βλέπεις ότι το orderbook αδειάζει ή ότι τα spikes δεν έχουν συνέχεια, το risk/reward γυρίζει εναντίον σου.",
+    "ae_h2_4": "4) Sentiment shift: όταν όλοι συμφωνούν",
+    "ae_p_4": "Όταν ένα alt γίνεται “σίγουρο” στο Twitter, στο Discord και στα group chats, το μεγαλύτερο μέρος της κίνησης έχει ήδη συμβεί. Το extreme bullish sentiment δεν σημαίνει πάντα άμεσο dump, αλλά σημαίνει ότι το upside είναι πλέον περιορισμένο. Εκεί, το exit plan αποκτά μεγαλύτερη σημασία από το entry.",
+    "ae_h2_5": "Ο απλός κανόνας εξόδου",
+    "ae_p_5": "Αν ένα alt σου φαίνεται “πολύ καλό για να πουληθεί”, συνήθως είναι ακριβώς η στιγμή που πρέπει να σκεφτείς το exit. Τα altcoins δεν ανταμείβουν την πίστη — ανταμείβουν τη διαχείριση ρίσκου. Κλείδωσε κέρδη, προστάτεψε κεφάλαιο και θυμήσου: μπορείς πάντα να ξαναμπείς, αλλά δεν μπορείς να γυρίσεις τον χρόνο πίσω.",
+    "ae_h2_6": "6) Live παράδειγμα: το AI-altcoin rally πριν το SpaceX IPO",
+    "ae_p_6a": "Αυτή την εβδομάδα είδαμε ένα σχολικό παράδειγμα του γιατί χρειάζεσαι exit plan. AI-altcoins όπως το Worldcoin, το NEAR Protocol, το Bittensor και το DeXe σημείωσαν διψήφια εβδομαδιαία κέρδη, ενώ το Bitcoin παρέμενε σε αδύναμη τάση. Αφορμή ήταν το IPO της SpaceX στο Nasdaq, με traders να “παίζουν” αυτά τα altcoins ως proxy για το ευρύτερο AI narrative μέσω της σύνδεσης με την xAI.",
+    "ae_p_6b": "Ταυτόχρονα όμως, σε tokens όπως το DEXE, ο όγκος συναλλαγών συρρικνωνόταν καθώς η τιμή πλησίαζε βασικά resistance επίπεδα, και δείκτες momentum όπως το RSI βρίσκονταν κοντά σε προηγούμενα υψηλά — ακριβώς το σημείο 3 του checklist (liquidity & volume) σε πλήρη εξέλιξη. Αναλυτές προειδοποίησαν ότι το ράλι θα μπορούσε να αποδειχθεί ένα προσωρινό “dead cat bounce” μέσα σε bearish περιβάλλον.",
+    "ae_p_6c": "Είτε το ράλι συνεχιστεί είτε όχι, αυτό είναι το ακριβές σημείο όπου ένα προκαθορισμένο exit plan κάνει τη διαφορά: κλείδωμα μέρους των κερδών στα targets, παρακολούθηση όγκου, και αποφυγή του “θα το δω στην πορεία”.",
+    "ae_faq_title": "Συχνές ερωτήσεις (FAQ)",
+    "ae_faq_q1": "Πότε πρέπει να σκεφτώ το exit σε ένα altcoin;",
+    "ae_faq_a1": "Από την πρώτη μέρα, πριν καν ανοίξεις τη θέση. Όρισε targets για partial exits και ένα σημείο invalidation, ώστε να μην παίρνεις αποφάσεις υπό πίεση όταν η τιμή κινείται απότομα προς τα πάνω ή τα κάτω.",
+    "ae_faq_q2": "Τι είναι τα partial exits και γιατί τα χρησιμοποιούν οι traders;",
+    "ae_faq_a2": "Partial exit σημαίνει να πουλάς ένα κομμάτι της θέσης σου σε προκαθορισμένα επίπεδα, αντί να περιμένεις το “τέλειο top”. Έτσι κλειδώνεις κέρδη σταδιακά, χωρίς να βγεις εντελώς από ένα trade που μπορεί να συνεχίσει ανοδικά.",
+    "ae_faq_q3": "Πώς ξέρω αν ένα ράλι είναι “dead cat bounce”;",
+    "ae_faq_a3": "Σημάδια όπως μειωμένος όγκος συναλλαγών κατά τη διάρκεια της ανόδου, δείκτες momentum (π.χ. RSI) κοντά σε προηγούμενα υψηλά χωρίς επιβεβαίωση, και ένα ευρύτερα bearish κλίμα στην αγορά αυξάνουν τις πιθανότητες ότι το ράλι είναι προσωρινό.",
+    "ae_faq_q4": "Τι σημαίνει “exit liquidity” και πώς το αποφεύγω;",
+    "ae_faq_a4": "“Exit liquidity” σημαίνει ότι είσαι εσύ ο αγοραστής που δίνει σε άλλους τη ρευστότητα να πουλήσουν στα υψηλά. Το αποφεύγεις με disciplined entries, ρεαλιστικά targets και αυξημένη προσοχή όταν το sentiment γίνεται ομόφωνα bullish.",
+    "ae_faq_q5": "Πρέπει να κλείσω ολόκληρη τη θέση μόλις πιάσω τον στόχο μου;",
+    "ae_faq_a5": "Όχι απαραίτητα. Πολλοί traders πουλάνε ένα μέρος στον πρώτο στόχο, κρατούν ένα μικρότερο “runner” με trailing stop, και έτσι συμμετέχουν σε επιπλέον upside χωρίς να ρισκάρουν ολόκληρο το κέρδος που έχουν ήδη κλειδώσει.",
+    "pf_title": "Διάβασε επίσης",
+    "pf_sub_altcoins": "Περισσότερα Altcoins άρθρα & checklists",
+    "pf_tag_altcoins": "Altcoins",
+    "pf_alt_hype_title": "Narrative Hype Checklist: πότε είναι ήδη αργά",
+    "pf_alt_hype_b1": "Crowded trades",
+    "pf_alt_hype_b2": "Late volume spikes",
+    "pf_alt_hype_b3": "Social-driven pumps",
+    "pf_read": "Διάβασε",
+    "pf_alt_entry_title": "Altcoin Entry Checklist: πριν πατήσεις buy",
+    "pf_alt_entry_b1": "Structure & timing",
+    "pf_alt_entry_b2": "Volume confirmation",
+    "pf_alt_entry_b3": "Invalidation & size",
+    "pf_alt_vs_title": "Altcoins vs Narratives: γιατί ΔΕΝ ανεβαίνουν όλα μαζί",
+    "pf_alt_vs_b1": "Rotations: το χρήμα πάει επιλεκτικά",
+    "pf_alt_vs_b2": "Leaders vs laggards (relative strength)",
+    "pf_alt_vs_b3": "Attention ≠ capital flow"
+  };
 
- ae_kicker: "Altcoin Strategy Guide",
+  const en = {
+    "header_tagline": "Read the market. Don't follow the noise",
+    "nav_market": "Market",
+    "nav_charts": "Trends",
+    "nav_guides": "Guides",
+    "nav_glossary": "Glossary",
+    "nav_articles": "Articles",
+    "theme_dark": "Dark",
+    "login": "Login",
+    "mobile_theme": "Switch Theme",
+    "login_title": "Log In",
+    "login_email": "Email",
+    "login_password": "Password",
+    "login_btn": "Log In",
+    "login_demo": "Your account is securely stored in the cloud.",
+    "login_no_account": "Incorrect email or password.",
+    "login_create_account": "Create Account",
+    "signup_title": "Create an Account",
+    "signup_email": "Email",
+    "signup_pass1": "Password",
+    "signup_pass2": "Confirm Password",
+    "signup_error": "Passwords don't match.",
+    "signup_btn": "Create Account",
+    "signup_have_account": "Already have an account?",
+    "signup_back": "Log In",
+    "verify_title": "Verify Email",
+    "verify_subtitle": "We sent you a 6-digit code.",
+    "verify_code": "Code",
+    "verify_error": "Incorrect code. Try again.",
+    "verify_btn": "Verify",
+    "ae_kicker": "Altcoin Strategy Guide",
+    "ae_title": "Altcoin Exit Checklist: How (and When) to Get Out Before It's Too Late",
+    "ae_lead": "Most traders know when to enter an altcoin — very few know when to exit. The biggest losses don't come from bad entries, but from exits that never happened. Below you'll find a practical exit checklist for altcoins, so you can protect profits, reduce risk, and avoid becoming exit liquidity.",
+    "ae_tldr_title": "30-Second Checklist",
+    "ae_tldr_1": "Set targets & invalidation before you enter — not while it's already moving.",
+    "ae_tldr_2": "Use partial exits — don't wait for the “perfect top”.",
+    "ae_tldr_3": "Watch the volume: fading volume on a rally = warning sign.",
+    "ae_tldr_4": "When sentiment turns unanimously bullish, think exit, not re-entry.",
+    "ae_tldr_5": "“Too good to sell” usually means “time to sell”.",
+    "ae_tldr_6": "Risk management > faith in a project — always.",
+    "ae_caption": "Exit snapshot: partials, invalidation, liquidity and sentiment shifts.",
+    "ae_h2_1": "1) Plan First, Pump Second",
+    "ae_p_1": "An exit isn't planned while the alt is pumping — it's planned before you enter the position. If you don't already know where you'll take profit and where the setup gets invalidated, the trade will end up driving you emotionally. Rule: every alt position needs predefined targets and an invalidation level, even if you think you'll ‘figure it out along the way’.",
+    "ae_h2_2": "2) Partial Exits: Why a Full Exit Rarely Works",
+    "ae_p_2": "Altcoins move in bursts. By waiting for the perfect top, most people end up never exiting at all. Partial exits let you lock in profit without killing the trade. A common approach: take some off at resistance, some at momentum exhaustion, and let the rest run with downside protection.",
+    "ae_h2_3": "3) Liquidity & Volume: The First Warning Bell",
+    "ae_p_3": "When volume starts dropping while price keeps climbing, exiting becomes harder than it looks. In a thin-liquidity environment, even a small sell order can crash the price. If you notice the order book thinning out or spikes failing to follow through, the risk/reward has turned against you.",
+    "ae_h2_4": "4) Sentiment Shift: When Everyone Agrees",
+    "ae_p_4": "When an alt becomes a ‘sure thing’ on Twitter, Discord, and group chats, most of the move has likely already happened. Extreme bullish sentiment doesn't always mean an immediate dump, but it does mean the remaining upside is now limited. At that point, your exit plan matters more than your entry ever did.",
+    "ae_h2_5": "The Simple Exit Rule",
+    "ae_p_5": "If an alt feels ‘too good to sell’, that's usually exactly the moment to start thinking about your exit. Altcoins don't reward loyalty — they reward risk management. Lock in profits, protect your capital, and remember: you can always re-enter, but you can never get that time back.",
+    "ae_h2_6": "6) Live Example: The AI-Altcoin Rally Ahead of the SpaceX IPO",
+    "ae_p_6a": "This week gave us a textbook example of why you need an exit plan. AI-linked altcoins such as Worldcoin, NEAR Protocol, Bittensor, and DeXe posted double-digit weekly gains while Bitcoin's trend stayed weak. The trigger was SpaceX's IPO on Nasdaq, with traders treating these altcoins as a proxy for the broader AI narrative through their ties to xAI.",
+    "ae_p_6b": "At the same time, on tokens like DEXE, trading volume was contracting as price approached key resistance levels, and momentum indicators like RSI were sitting near previous highs — point 3 of the checklist (liquidity & volume) playing out in real time. Analysts warned the rally could turn out to be a temporary ‘dead cat bounce’ inside an otherwise bearish environment.",
+    "ae_p_6c": "Whether the rally continues or not, this is exactly where a predefined exit plan makes the difference: locking in part of the profit at your targets, watching volume, and avoiding the ‘I'll figure it out along the way’ trap.",
+    "ae_faq_title": "Frequently Asked Questions (FAQ)",
+    "ae_faq_q1": "When should I start thinking about my exit on an altcoin?",
+    "ae_faq_a1": "From day one, before you even open the position. Set targets for partial exits and an invalidation point, so you're not making decisions under pressure when price moves sharply in either direction.",
+    "ae_faq_q2": "What are partial exits and why do traders use them?",
+    "ae_faq_a2": "A partial exit means selling a portion of your position at predefined levels instead of waiting for the “perfect top”. This locks in profit gradually without fully exiting a trade that might keep climbing.",
+    "ae_faq_q3": "How do I know if a rally is a “dead cat bounce”?",
+    "ae_faq_a3": "Signs like declining trading volume during the rally, momentum indicators (e.g. RSI) sitting near previous highs without confirmation, and a broader bearish market backdrop all increase the odds that the rally is temporary.",
+    "ae_faq_q4": "What does “exit liquidity” mean and how do I avoid it?",
+    "ae_faq_a4": "Being ‘exit liquidity’ means you're the buyer giving others the liquidity to sell at the highs. You avoid it with disciplined entries, realistic targets, and extra caution whenever sentiment turns unanimously bullish.",
+    "ae_faq_q5": "Should I close my entire position as soon as I hit my target?",
+    "ae_faq_a5": "Not necessarily. Many traders sell part of the position at their first target and keep a smaller ‘runner’ with a trailing stop, so they can still participate in further upside without risking the profit they've already locked in.",
+    "pf_title": "Read Also",
+    "pf_sub_altcoins": "More altcoin articles & checklists",
+    "pf_tag_altcoins": "Altcoins",
+    "pf_read": "Read",
+    "pf_alt_hype_title": "Narrative Hype Checklist: When It's Already Too Late",
+    "pf_alt_hype_b1": "Crowded trades",
+    "pf_alt_hype_b2": "Late volume spikes",
+    "pf_alt_hype_b3": "Social-driven pumps",
+    "pf_alt_entry_title": "Altcoin Entry Checklist: Before You Hit Buy",
+    "pf_alt_entry_b1": "Structure & timing",
+    "pf_alt_entry_b2": "Volume confirmation",
+    "pf_alt_entry_b3": "Invalidation & size",
+    "pf_alt_vs_title": "Altcoins vs Narratives: Why They DON'T All Rise Together",
+    "pf_alt_vs_b1": "Rotations: capital moves selectively",
+    "pf_alt_vs_b2": "Leaders vs laggards (relative strength)",
+    "pf_alt_vs_b3": "Attention ≠ capital flow"
+  };
 
-    ae_title: "Altcoin Exit Checklist: πώς (και πότε) βγαίνεις πριν γίνει αργά",
-
-    ae_lead:
-      "Οι περισσότεροι traders ξέρουν πότε να μπουν σε ένα altcoin — ελάχιστοι ξέρουν πότε να βγουν. Τα μεγαλύτερα losses δεν έρχονται από κακές εισόδους, αλλά από exits που δεν έγιναν ποτέ. Παρακάτω θα βρεις ένα πρακτικό exit checklist για altcoins, ώστε να προστατεύεις κέρδη, να μειώνεις ρίσκο και να μη γίνεσαι exit liquidity.",
-
-    ae_caption:
-      "Exit snapshot: partials, invalidation, liquidity και sentiment shifts.",
-
-    ae_h2_1: "1) Πρώτα το πλάνο, μετά το pump",
-    ae_p_1:
-      "Το exit δεν σχεδιάζεται όταν το alt ανεβαίνει — σχεδιάζεται πριν μπεις στη θέση. Αν δεν ξέρεις από πριν πού θα πάρεις κέρδη και πού ακυρώνεται το setup, το trade θα σε οδηγήσει συναισθηματικά. Κανόνας: κάθε alt position πρέπει να έχει predefined targets και invalidation, ακόμα κι αν νομίζεις ότι “θα το δεις στην πορεία”.",
-
-    ae_h2_2: "2) Partials: γιατί το full exit σπάνια δουλεύει",
-    ae_p_2:
-      "Τα altcoins κινούνται με bursts. Περιμένοντας το τέλειο top, οι περισσότεροι καταλήγουν να μη βγουν ποτέ. Τα partial exits σου επιτρέπουν να κλειδώνεις κέρδη χωρίς να σκοτώνεις το trade. Συνήθως: ένα μέρος σε resistance, ένα μέρος σε momentum exhaustion, και το υπόλοιπο αφήνεται με προστασία.",
-
-    ae_h2_3: "3) Liquidity & volume: το πρώτο καμπανάκι",
-    ae_p_3:
-      "Όταν το volume αρχίζει να πέφτει ενώ η τιμή ανεβαίνει, η έξοδος γίνεται πιο δύσκολη απ’ όσο φαίνεται. Σε thin liquidity περιβάλλον, ένα μικρό sell μπορεί να ρίξει την τιμή απότομα. Αν βλέπεις ότι το orderbook αδειάζει ή ότι τα spikes δεν έχουν συνέχεια, το risk/reward γυρίζει εναντίον σου.",
-
-    ae_h2_4: "4) Sentiment shift: όταν όλοι συμφωνούν",
-    ae_p_4:
-      "Όταν ένα alt γίνεται “σίγουρο” στο Twitter, στο Discord και στα group chats, το μεγαλύτερο μέρος της κίνησης έχει ήδη συμβεί. Το extreme bullish sentiment δεν σημαίνει πάντα άμεσο dump, αλλά σημαίνει ότι το upside είναι πλέον περιορισμένο. Εκεί, το exit plan αποκτά μεγαλύτερη σημασία από το entry.",
-
-    ae_h2_5: "Ο απλός κανόνας εξόδου",
-    ae_p_5:
-      "Αν ένα alt σου φαίνεται “πολύ καλό για να πουληθεί”, συνήθως είναι ακριβώς η στιγμή που πρέπει να σκεφτείς το exit. Τα altcoins δεν ανταμείβουν την πίστη — ανταμείβουν τη διαχείριση ρίσκου. Κλείδωσε κέρδη, προστάτεψε κεφάλαιο και θυμήσου: μπορείς πάντα να ξαναμπείς, αλλά δεν μπορείς να γυρίσεις τον χρόνο πίσω.",
-
-   pf_title: "Διάβασε επίσης",
-   
-    pf_sub_altcoins: "Περισσότερα Altcoins άρθρα & checklists",
-  pf_news_card3_aria: "Featured άρθρο Altcoins: Solana fees & tips",
-
-  pf_tag_altcoins: "Altcoins",
-  pf_read: "Διάβασε",
-
-  pf_alt_entry_title: "Altcoin Entry Checklist: πριν πατήσεις buy",
-  pf_alt_entry_b1: "Structure & timing",
-  pf_alt_entry_b2: "Volume confirmation",
-  pf_alt_entry_b3: "Invalidation & size",
-
- pf_alt_vs_title: "Altcoins vs Narratives: γιατί ΔΕΝ ανεβαίνουν όλα μαζί",
-  pf_alt_vs_b1: "Rotations: το χρήμα πάει επιλεκτικά",
-  pf_alt_vs_b2: "Leaders vs laggards (relative strength)",
-  pf_alt_vs_b3: "Attention ≠ capital flow",
-
-  pf_alt_hype_title: "Narrative Hype Checklist: πότε είναι ήδη αργά",
-  pf_alt_hype_b1: "Crowded trades",
-  pf_alt_hype_b2: "Late volume spikes",
-  pf_alt_hype_b3: "Social-driven pumps",
-
-
-pf_brand_sub: "Quick links & updates από το crypto σύμπαν.",
-
-    /* =======================
-           FOOTER
-    ======================= */
-    footer_rights: "Όλα τα δικαιώματα διατηρούνται.",
-
-
-mobile_home: "Αρχική Σελίδα",
-mobile_theme: "Αλλαγή Θέματος",
-
-
-    /* HEADER */
-    header_tagline: "Ο παλμός του κόσμου των crypto",
-    nav_market: "Αγορά",
-    nav_charts: "Τάσεις",
-    nav_guides: "Οδηγοί",
-    nav_glossary: "Γλωσσάρι",
-
-    /* =======================
-             LOGIN
-    ======================= */
-    login_title: "Σύνδεση",
-    login_email: "Email",
-    login_password: "Κωδικός",
-    login_btn: "Σύνδεση",
-    login_no_account: "Δεν έχεις λογαριασμό στο CryptoKosmos.",
-    login_create_account: "Δημιουργία λογαριασμού",
-
-
-    /* =======================
-             SIGNUP
-    ======================= */
-    signup_title: "Δημιούργησε λογαριασμό",
-    signup_email: "Email",
-    signup_pass1: "Κωδικός",
-    signup_pass2: "Επιβεβαίωση κωδικού",
-    signup_error: "Οι κωδικοί δεν ταιριάζουν.",
-    signup_btn: "Δημιουργία λογαριασμού",
-    signup_back: "Σύνδεση",
-    signup_have_account: "Έχεις ήδη λογαριασμό;",
-
-
-    /* =======================
-             VERIFY
-    ======================= */
-    verify_title: "Επαλήθευση Email",
-    verify_subtitle: "Σου στείλαμε έναν 6-ψήφιο κωδικό.",
-    verify_code: "Κωδικός",
-    verify_error: "Λάθος κωδικός. Προσπάθησε ξανά.",
-    verify_btn: "Επιβεβαίωση"
-  },
-
-  /* ================================================================
-                          ENGLISH VERSION
-  ================================================================ */
-  en: {
-   
-    pf_title: "Read also",
-pf_sub_guides: "More guides & security tips",
-
- ae_kicker: "Altcoin Strategy Guide",
-
-    ae_title: "Altcoin Exit Checklist: how (and when) to exit before it’s too late",
-
-    ae_lead:
-      "Most traders know when to enter an altcoin — very few know when to exit. The biggest losses don’t come from bad entries, but from exits that never happened. Below is a practical altcoin exit checklist to help you protect profits, reduce risk, and avoid becoming exit liquidity.",
-
-    ae_caption:
-      "Exit snapshot: partials, invalidation, liquidity, and sentiment shifts.",
-
-    ae_h2_1: "1) Plan the exit before the pump",
-    ae_p_1:
-      "Exits are not planned when price is pumping — they’re planned before entry. If you don’t know where profits are taken and where the setup is invalidated, emotions will run the trade. Rule: every alt position needs predefined targets and invalidation, even if you think you’ll “decide later.”",
-
-    ae_h2_2: "2) Partials: why full exits rarely work",
-    ae_p_2:
-      "Altcoins move in bursts. Waiting for the perfect top usually means never exiting at all. Partial exits allow you to lock profits without killing the trade. Typically: some at resistance, some on momentum exhaustion, and the rest protected.",
-
-    ae_h2_3: "3) Liquidity & volume: the first warning sign",
-    ae_p_3:
-      "When volume starts fading while price moves higher, exits become harder than they look. In thin liquidity environments, even small sells can cause sharp drops. If the orderbook thins out or spikes fail to follow through, the risk/reward flips against you.",
-
-    ae_h2_4: "4) Sentiment shift: when everyone agrees",
-    ae_p_4:
-      "When an alt becomes a ‘sure thing’ on Twitter, Discord, and group chats, most of the move is already done. Extreme bullish sentiment doesn’t always mean an immediate dump, but it does mean upside is limited. That’s when the exit plan matters more than the entry.",
-
-    ae_h2_5: "The simple exit rule",
-    ae_p_5:
-      "If an alt feels ‘too good to sell’, that’s often the exact moment to think about exiting. Altcoins don’t reward belief — they reward risk management. Lock profits, protect capital, and remember: you can always re-enter, but you can’t rewind time.",
-
-
-  pf_sub_altcoins: "More Altcoins articles & checklists",
-  pf_news_card3_aria: "Featured Altcoins article: Solana fees & tips",
-
-  pf_tag_altcoins: "Altcoins",
-  pf_read: "Read",
-
- 
- pf_alt_entry_title: "Altcoin Entry Checklist: before you hit buy",
-  pf_alt_entry_b1: "Structure & timing",
-  pf_alt_entry_b2: "Volume confirmation",
-  pf_alt_entry_b3: "Invalidation & sizing",
-
-  pf_alt_vs_title: "Altcoins vs Narratives: why they DON’T all pump together",
-  pf_alt_vs_b1: "Rotations: capital moves selectively",
-  pf_alt_vs_b2: "Leaders vs laggards (relative strength)",
-  pf_alt_vs_b3: "Attention ≠ capital flow",
-
-   pf_alt_hype_title: "Narrative Hype Checklist: when it’s already late",
-  pf_alt_hype_b1: "Crowded trades",
-  pf_alt_hype_b2: "Late volume spikes",
-  pf_alt_hype_b3: "Social-driven pumps",
-
-
-  
-
-pf_brand_sub: "Quick links & updates from the crypto universe.",
-
-
-    /* FOOTER */
-    footer_rights: "All rights reserved.",
-
-
-mobile_home: "Home Page",
-mobile_theme: "Change Theme",
-
-    /* HEADER */
-    header_tagline: "The pulse of the crypto world",
-    nav_market: "Market",
-    nav_charts: "Trends",
-    nav_guides: "Guides",
-    nav_glossary: "Glossary",
-
-    /* LOGIN */
-    login_title: "Login",
-    login_email: "Email",
-    login_password: "Password",
-    login_btn: "Login",
-    login_no_account: "You don't have a CryptoKosmos account.",
-    login_create_account: "Create Account",
-
-
-    /* SIGNUP */
-    signup_title: "Create an Account",
-    signup_email: "Email",
-    signup_pass1: "Password",
-    signup_pass2: "Confirm Password",
-    signup_error: "Passwords do not match.",
-    signup_btn: "Create Account",
-    signup_back: "Login",
-    signup_have_account: "Already have an account?",
-
-
-    /* VERIFY */
-    verify_title: "Email Verification",
-    verify_subtitle: "We sent you a 6-digit code.",
-    verify_code: "Code",
-    verify_error: "Incorrect code. Try again.",
-    verify_btn: "Verify"
-  }
-};
+  window.TRANSLATIONS = window.TRANSLATIONS || {};
+  window.TRANSLATIONS.el = Object.assign({}, window.TRANSLATIONS.el || {}, el);
+  window.TRANSLATIONS.en = Object.assign({}, window.TRANSLATIONS.en || {}, en);
+})();

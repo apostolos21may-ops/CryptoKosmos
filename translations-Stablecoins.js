@@ -1,218 +1,184 @@
 window.TRANSLATIONS = {
   el: {
-    
-/* =======================
-   STABLECOINS (EL)
-======================= */
-st_title: "Τι είναι τα Stablecoins;",
-st_intro:
-  "Τα stablecoins είναι κρυπτονομίσματα που έχουν στόχο να κρατάνε σταθερή αξία (συνήθως 1$). Χρησιμοποιούνται πολύ σε trading, μεταφορές χρημάτων και DeFi.",
-
-st_what_title: "Τι σημαίνει “stable”;",
-st_what_text:
-  "“Stable” σημαίνει ότι η τιμή προσπαθεί να μένει κοντά σε μια αναφορά (π.χ. 1 USD ή 1 EUR). Δεν είναι 100% εγγυημένο, αλλά ο στόχος είναι η μικρή μεταβλητότητα σε σχέση με BTC/ETH.",
-
-st_types_title: "Τύποι stablecoins",
-st_type1: "Fiat-collateralized: υποστηρίζονται από καταθέσεις/ομόλογα (π.χ. USDT, USDC).",
-st_type2: "Crypto-collateralized: υποστηρίζονται από crypto με υπερ-εγγύηση (π.χ. DAI).",
-st_type3: "Algorithmic: βασίζονται σε μηχανισμό/αλγόριθμο (έχουν ιστορικά μεγαλύτερο ρίσκο).",
-st_type4: "USD stablecoins: τα πιο κοινά, για trading και DeFi.",
-st_type5: "EUR stablecoins: χρήσιμα για Ευρώπη/εναλλακτικό “peg”.",
-st_type6: "Yield-bearing/interest tokens: μοιάζουν με stable αλλά έχουν μηχανισμό απόδοσης (θέλει προσοχή).",
-
-st_peg_title: "Τι είναι το “peg” (1$);",
-st_peg_text:
-  "Το “peg” είναι ο στόχος τιμής (π.χ. 1 USDT ≈ 1$). Το stablecoin κρατάει το peg μέσω αποθεματικών, υπερ-εγγύησης ή μηχανισμών αγοράς/προσφοράς. Σε περιόδους stress μπορεί να “ξεκολλήσει” λίγο.",
-
-st_use_title: "Πού χρησιμοποιούνται;",
-st_use1: "Trading: μπαίνεις/βγαίνεις από θέσεις χωρίς να πας σε ευρώ/δολάρια.",
-st_use2: "Μεταφορές: στέλνεις αξία γρήγορα (ανάλογα το network).",
-st_use3: "DeFi: lending/borrowing, liquidity pools και yields.",
-st_use4: "Πληρωμές: σε shops/υπηρεσίες που δέχονται stable.",
-st_use5: "Hedge από volatility: “παρκάρεις” προσωρινά σε stable.",
-st_use6: "On-chain accounting: εύκολη λογιστική σε USD ισοδύναμο.",
-
-st_risks_title: "Κίνδυνοι (τι να προσέχεις)",
-st_risk1: "De-peg: μπορεί να πέσει/ανέβει από 1$ σε κρίση.",
-st_risk2: "Issuer risk: εξαρτάται από την εταιρία/εκδότη (ιδίως fiat-backed).",
-st_risk3: "Reserve transparency: τι αποθεματικά υπάρχουν και πόσο συχνά ελέγχονται.",
-st_risk4: "Smart contract risk (σε DeFi χρήσεις): bugs/hacks σε πρωτόκολλα.",
-st_risk5: "Network risk: λάθος chain/λάθος διεύθυνση = χάθηκαν.",
-st_risk6: "Regulatory risk: κανονισμοί μπορεί να επηρεάσουν εκδότες/χρήση.",
-st_risk7: "Scam stablecoins: “ψεύτικα” tokens που μοιάζουν με USDT/USDC.",
-
-st_tip_title: "Tip",
-st_tip_strong: "Κανόνας:",
-st_tip_text:
-  "Για αρχή, προτίμησε γνωστά stablecoins και πάντα έλεγχε ότι είσαι στο σωστό network και στο σωστό token contract.",
-
-st_check_title: "Mini checklist πριν τα χρησιμοποιήσεις",
-st_check1: "Ποιο stablecoin είναι; (USDT/USDC/DAI κ.λπ.)",
-st_check2: "Σε ποιο network είμαι; (ERC-20, TRC-20, Solana, Arbitrum κ.λπ.)",
-st_check3: "Είναι σωστό το contract address; (αν είσαι σε DEX)",
-st_check4: "Χρησιμοποιώ αξιόπιστο wallet/DEX/CEX;",
-st_check5: "Έχω υπολογίσει fees/withdrawal/slippage;",
-
-st_conclusion_title: "Συμπέρασμα",
-st_conclusion:
-  "Τα stablecoins είναι βασικό εργαλείο στα crypto για σταθερή αξία και ευκολία συναλλαγών. Είναι πολύ χρήσιμα, αλλά θέλουν προσοχή σε network, αξιοπιστία εκδότη και πιθανά de-peg ρίσκα.",
-
-guides_more: "Δες περισσότερα →",
-
     /* =======================
-           FOOTER
+       HEADER / SHARED
     ======================= */
-    footer_rights: "Όλα τα δικαιώματα διατηρούνται.",
-
-
-mobile_home: "Αρχική Σελίδα",
-mobile_theme: "Αλλαγή Θέματος",
-
-
-    /* HEADER */
-    header_tagline: "Ο παλμός του κόσμου των crypto",
+    header_tagline: "Διάβασε την αγορά. Μην την ακούς.",
     nav_market: "Αγορά",
     nav_charts: "Τάσεις",
     nav_guides: "Οδηγοί",
     nav_glossary: "Γλωσσάρι",
+    nav_articles: "Άρθρα",
+    theme_dark: "Dark",
+    mobile_theme: "Αλλαγή Θέματος",
+    login: "Login",
+    logout: "Logout",
+    footer_disclaimer: "Εκπαιδευτικό περιεχόμενο μόνο. Δεν αποτελεί επενδυτική συμβουλή.",
 
     /* =======================
-             LOGIN
+       HERO
     ======================= */
-    login_title: "Σύνδεση",
-    login_email: "Email",
-    login_password: "Κωδικός",
-    login_btn: "Σύνδεση",
-    login_no_account: "Δεν έχεις λογαριασμό στο CryptoKosmos.",
-    login_create_account: "Δημιουργία λογαριασμού",
-
+    st_eyebrow: "ΟΔΗΓΟΣ",
+    st_title: "Τι είναι τα Stablecoins;",
+    st_intro:
+      "Τα stablecoins είναι κρυπτονομίσματα που έχουν στόχο να κρατάνε σταθερή αξία (συνήθως 1$). Χρησιμοποιούνται πολύ σε trading, μεταφορές χρημάτων και DeFi.",
 
     /* =======================
-             SIGNUP
+       WHAT IS STABLE
     ======================= */
-    signup_title: "Δημιούργησε λογαριασμό",
-    signup_email: "Email",
-    signup_pass1: "Κωδικός",
-    signup_pass2: "Επιβεβαίωση κωδικού",
-    signup_error: "Οι κωδικοί δεν ταιριάζουν.",
-    signup_btn: "Δημιουργία λογαριασμού",
-    signup_back: "Σύνδεση",
-    signup_have_account: "Έχεις ήδη λογαριασμό;",
-
+    st_what_title: "Τι σημαίνει «stable»;",
+    st_what_text:
+      "«Stable» σημαίνει ότι η τιμή του token είναι σχεδιασμένη να παραμένει σταθερή — συνήθως «καρφωμένη» (pegged) σε ένα νόμισμα αναφοράς όπως το δολάριο ΗΠΑ. Σε αντίθεση με το Bitcoin ή το Ethereum, η τιμή ενός stablecoin δεν αναμένεται να ανέβει ή να κατέβει σημαντικά.",
 
     /* =======================
-             VERIFY
+       TYPES
     ======================= */
-    verify_title: "Επαλήθευση Email",
-    verify_subtitle: "Σου στείλαμε έναν 6-ψήφιο κωδικό.",
-    verify_code: "Κωδικός",
-    verify_error: "Λάθος κωδικός. Προσπάθησε ξανά.",
-    verify_btn: "Επιβεβαίωση"
+    st_types_title: "Τύποι stablecoins",
+    st_type1: "Fiat-backed: υποστηρίζονται από αποθέματα fiat νομίσματος (π.χ. USDT, USDC)",
+    st_type2: "Crypto-backed: υποστηρίζονται από άλλα κρυπτονομίσματα με υπερ-εξασφάλιση (π.χ. DAI)",
+    st_type3: "Algorithmic: η σταθερότητα διατηρείται μέσω αλγορίθμων προσφοράς/ζήτησης",
+    st_type4: "Commodity-backed: υποστηρίζονται από φυσικά αγαθά όπως ο χρυσός",
+    st_type5: "Hybrid: συνδυασμός παραπάνω μεθόδων εξασφάλισης",
+    st_type6: "Yield-bearing: stablecoins που αποδίδουν τόκο/απόδοση στον κάτοχο",
+
+    /* =======================
+       PEG
+    ======================= */
+    st_peg_title: "Τι είναι το «peg» (1$);",
+    st_peg_text:
+      "Το «peg» είναι η δέσμευση ότι 1 token = 1 μονάδα του νομίσματος αναφοράς (π.χ. 1 USDT ≈ 1$). Ο εκδότης ή το πρωτόκολλο προσπαθεί να διατηρήσει αυτή την ισοτιμία μέσω αποθεμάτων, εξασφαλίσεων ή αλγορίθμων. Όταν η τιμή αποκλίνει σημαντικά από το 1$, μιλάμε για «depeg».",
+
+    /* =======================
+       USE CASES
+    ======================= */
+    st_use_title: "Πού χρησιμοποιούνται;",
+    st_use1: "Trading: ως ενδιάμεσο νόμισμα για αγοραπωλησίες χωρίς να βγαίνεις σε fiat",
+    st_use2: "Μεταφορές χρημάτων διεθνώς, με χαμηλό κόστος και ταχύτητα",
+    st_use3: "DeFi: δανεισμός, δανειοδότηση και liquidity pools",
+    st_use4: "Αποθήκη αξίας σε περιόδους μεταβλητότητας (παρκάρισμα κεφαλαίων)",
+    st_use5: "Πληρωμές και μισθοδοσία σε crypto",
+    st_use6: "Είσοδος/έξοδος μεταξύ ανταλλακτηρίων χωρίς τραπεζικές καθυστερήσεις",
+
+    /* =======================
+       RISKS
+    ======================= */
+    st_risks_title: "Κίνδυνοι (τι να προσέχεις)",
+    st_risk1: "Ρίσκο «depeg» — το token να χάσει την ισοτιμία 1$",
+    st_risk2: "Ρίσκο αποθεματικών — αμφιβολίες για το αν υπάρχουν πραγματικά τα αποθέματα",
+    st_risk3: "Κανονιστικό ρίσκο — αλλαγές νομοθεσίας που επηρεάζουν τον εκδότη",
+    st_risk4: "Ρίσκο smart contract για crypto-backed και algorithmic stablecoins",
+    st_risk5: "Ρίσκο πλατφόρμας — αν χρησιμοποιείς custodial υπηρεσία",
+    st_risk6: "Ρίσκο ρευστότητας σε λιγότερο γνωστά stablecoins",
+    st_risk7: "Ρίσκο συγκέντρωσης — εξάρτηση από έναν εκδότη ή blockchain",
+
+    /* =======================
+       TIP
+    ======================= */
+    st_tip_title: "Tip",
+    st_tip_strong: "Πριν χρησιμοποιήσεις ένα stablecoin:",
+    st_tip_text:
+      "έλεγξε ποιος το εκδίδει, πώς υποστηρίζεται και αν υπάρχουν πρόσφατα audits αποθεμάτων.",
+
+    /* =======================
+       CHECKLIST
+    ======================= */
+    st_check_title: "Mini checklist πριν τα χρησιμοποιήσεις",
+    st_check1: "Ποιος είναι ο εκδότης και πού εδρεύει;",
+    st_check2: "Τι το υποστηρίζει (fiat, crypto, αλγόριθμος);",
+    st_check3: "Υπάρχουν πρόσφατα audits/αναφορές αποθεμάτων;",
+    st_check4: "Σε ποια blockchains κυκλοφορεί και πόση ρευστότητα έχει;",
+    st_check5: "Ποιο είναι το ιστορικό του — έχει ξανακάνει depeg;",
+
+    /* =======================
+       CONCLUSION
+    ======================= */
+    st_conclusion_title: "Συμπέρασμα",
+    st_conclusion:
+      "Τα stablecoins είναι ένα από τα πιο χρήσιμα εργαλεία στο crypto — γεφυρώνουν τον κόσμο του fiat με το on-chain οικοσύστημα. Όμως «stable» δεν σημαίνει «χωρίς ρίσκο»: κάνε έρευνα για τον εκδότη και τις εξασφαλίσεις πριν εμπιστευτείς μεγάλα ποσά.",
+
+    guides_more: "Δες περισσότερα →",
   },
 
-  /* ================================================================
-                          ENGLISH VERSION
-  ================================================================ */
+  /* ========================================================
+       ENGLISH TRANSLATIONS
+  ======================================================== */
   en: {
-    
-/* =======================
-   STABLECOINS (EN)
-======================= */
-st_title: "What Are Stablecoins?",
-st_intro:
-  "Stablecoins are cryptocurrencies designed to keep a stable value (usually $1). They are widely used for trading, transfers, and DeFi.",
-
-st_what_title: "What does “stable” mean?",
-st_what_text:
-  "“Stable” means the price aims to stay close to a reference (e.g., 1 USD or 1 EUR). It’s not a guaranteed fixed price, but the goal is much lower volatility compared to BTC/ETH.",
-
-st_types_title: "Types of stablecoins",
-st_type1: "Fiat-collateralized: backed by reserves (e.g., USDT, USDC).",
-st_type2: "Crypto-collateralized: backed by crypto with over-collateralization (e.g., DAI).",
-st_type3: "Algorithmic: relies on supply/demand mechanisms (historically higher risk).",
-st_type4: "USD stablecoins: the most common for trading and DeFi.",
-st_type5: "EUR stablecoins: useful for Europe and alternative pegs.",
-st_type6: "Yield-bearing/interest tokens: stable-like assets with yield mechanics (use caution).",
-
-st_peg_title: "What is the “peg” ($1)?",
-st_peg_text:
-  "The “peg” is the target price (e.g., 1 USDT ≈ $1). Stablecoins maintain the peg via reserves, over-collateralization, or market mechanisms. During stress, the peg can deviate.",
-
-st_use_title: "Where are they used?",
-st_use1: "Trading: move in/out of positions without converting to fiat.",
-st_use2: "Transfers: send value quickly (depending on the network).",
-st_use3: "DeFi: lending/borrowing, liquidity pools, and yields.",
-st_use4: "Payments: for merchants/services that accept stablecoins.",
-st_use5: "Volatility hedge: park funds in stablecoins temporarily.",
-st_use6: "On-chain accounting: easier USD-equivalent tracking.",
-
-st_risks_title: "Risks (what to watch out for)",
-st_risk1: "De-peg: can move below/above $1 during stress.",
-st_risk2: "Issuer risk: depends on the company/issuer (especially fiat-backed).",
-st_risk3: "Reserve transparency: what reserves exist and how often they’re audited.",
-st_risk4: "Smart contract risk (in DeFi): protocol bugs/hacks.",
-st_risk5: "Network risk: wrong chain/wrong address can mean permanent loss.",
-st_risk6: "Regulatory risk: rules can affect issuers and usage.",
-st_risk7: "Scam stablecoins: fake tokens mimicking USDT/USDC.",
-
-st_tip_title: "Tip",
-st_tip_strong: "Rule:",
-st_tip_text:
-  "For beginners, stick to well-known stablecoins and always verify the correct network and token contract.",
-
-st_check_title: "Mini checklist before using stablecoins",
-st_check1: "Which stablecoin is it? (USDT/USDC/DAI, etc.)",
-st_check2: "Which network am I on? (ERC-20, TRC-20, Solana, Arbitrum, etc.)",
-st_check3: "Is the contract address correct? (if using a DEX)",
-st_check4: "Am I using a trusted wallet/DEX/CEX?",
-st_check5: "Did I account for fees/withdrawals/slippage?",
-
-st_conclusion_title: "Conclusion",
-st_conclusion:
-  "Stablecoins are a core crypto tool for stable value and smooth transactions. They’re very useful, but you must pay attention to networks, issuer reliability, and potential de-peg risks.",
-
-guides_more: "See more →",
-
-
-    /* FOOTER */
-    footer_rights: "All rights reserved.",
-
-
-mobile_home: "Home Page",
-mobile_theme: "Change Theme",
-
-    /* HEADER */
-    header_tagline: "The pulse of the crypto world",
+    /* HEADER / SHARED */
+    header_tagline: "Read the market. Don't follow the noise.",
     nav_market: "Market",
     nav_charts: "Trends",
     nav_guides: "Guides",
     nav_glossary: "Glossary",
+    nav_articles: "Articles",
+    theme_dark: "Dark",
+    mobile_theme: "Change Theme",
+    login: "Login",
+    logout: "Logout",
+    footer_disclaimer: "Educational content only. Not financial advice.",
 
-    /* LOGIN */
-    login_title: "Login",
-    login_email: "Email",
-    login_password: "Password",
-    login_btn: "Login",
-    login_no_account: "You don't have a CryptoKosmos account.",
-    login_create_account: "Create Account",
+    /* HERO */
+    st_eyebrow: "GUIDE",
+    st_title: "What Are Stablecoins?",
+    st_intro:
+      "Stablecoins are cryptocurrencies designed to hold a stable value (usually $1). They're widely used in trading, money transfers, and DeFi.",
 
+    /* WHAT IS STABLE */
+    st_what_title: "What does \"stable\" mean?",
+    st_what_text:
+      "\"Stable\" means the token's price is designed to stay constant — usually pegged to a reference currency like the US dollar. Unlike Bitcoin or Ethereum, a stablecoin's price isn't expected to rise or fall significantly.",
 
-    /* SIGNUP */
-    signup_title: "Create an Account",
-    signup_email: "Email",
-    signup_pass1: "Password",
-    signup_pass2: "Confirm Password",
-    signup_error: "Passwords do not match.",
-    signup_btn: "Create Account",
-    signup_back: "Login",
-    signup_have_account: "Already have an account?",
+    /* TYPES */
+    st_types_title: "Types of stablecoins",
+    st_type1: "Fiat-backed: backed by reserves of fiat currency (e.g. USDT, USDC)",
+    st_type2: "Crypto-backed: backed by other cryptocurrencies with over-collateralization (e.g. DAI)",
+    st_type3: "Algorithmic: stability maintained through supply/demand algorithms",
+    st_type4: "Commodity-backed: backed by physical assets such as gold",
+    st_type5: "Hybrid: a combination of the above collateral methods",
+    st_type6: "Yield-bearing: stablecoins that pay interest/yield to holders",
 
+    /* PEG */
+    st_peg_title: "What is the \"peg\" ($1)?",
+    st_peg_text:
+      "The \"peg\" is the commitment that 1 token = 1 unit of the reference currency (e.g. 1 USDT ≈ $1). The issuer or protocol tries to maintain this parity through reserves, collateral, or algorithms. When the price deviates significantly from $1, it's called a \"depeg\".",
 
-    /* VERIFY */
-    verify_title: "Email Verification",
-    verify_subtitle: "We sent you a 6-digit code.",
-    verify_code: "Code",
-    verify_error: "Incorrect code. Try again.",
-    verify_btn: "Verify"
-  }
+    /* USE CASES */
+    st_use_title: "Where are they used?",
+    st_use1: "Trading: as an intermediary currency for buying/selling without exiting to fiat",
+    st_use2: "International money transfers, with low cost and speed",
+    st_use3: "DeFi: lending, borrowing, and liquidity pools",
+    st_use4: "Store of value during volatile periods (parking funds)",
+    st_use5: "Payments and payroll in crypto",
+    st_use6: "Moving funds between exchanges without bank delays",
+
+    /* RISKS */
+    st_risks_title: "Risks (what to watch out for)",
+    st_risk1: "\"Depeg\" risk — the token losing its $1 parity",
+    st_risk2: "Reserve risk — doubts about whether the reserves actually exist",
+    st_risk3: "Regulatory risk — legal changes affecting the issuer",
+    st_risk4: "Smart contract risk for crypto-backed and algorithmic stablecoins",
+    st_risk5: "Platform risk — if you use a custodial service",
+    st_risk6: "Liquidity risk on lesser-known stablecoins",
+    st_risk7: "Concentration risk — dependence on a single issuer or blockchain",
+
+    /* TIP */
+    st_tip_title: "Tip",
+    st_tip_strong: "Before using a stablecoin:",
+    st_tip_text:
+      "check who issues it, how it's backed, and whether there are recent reserve audits.",
+
+    /* CHECKLIST */
+    st_check_title: "Mini checklist before using them",
+    st_check1: "Who is the issuer and where are they based?",
+    st_check2: "What backs it (fiat, crypto, algorithm)?",
+    st_check3: "Are there recent audits/reserve reports?",
+    st_check4: "Which blockchains is it on and how much liquidity does it have?",
+    st_check5: "What's its track record — has it depegged before?",
+
+    /* CONCLUSION */
+    st_conclusion_title: "Conclusion",
+    st_conclusion:
+      "Stablecoins are one of the most useful tools in crypto — they bridge the fiat world with the on-chain ecosystem. But \"stable\" doesn't mean \"risk-free\": research the issuer and the collateral before trusting them with large amounts.",
+
+    guides_more: "See more →",
+  },
 };

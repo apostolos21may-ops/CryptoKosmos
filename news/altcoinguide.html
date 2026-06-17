@@ -3,22 +3,567 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Altcoin Strategy Guide – CryptoKosmos</title>
+  <!-- If this visitor's saved language preference is English, send them
+       straight to the English version of this article. Internal links can
+       just point to this (Greek) URL and let it route automatically.
+
+       Exception: if the URL has ?lang=el (used by the "switch to Greek"
+       button on the English page), we honor that explicit choice instead
+       of redirecting back to English — otherwise the two pages would
+       bounce back and forth forever once ck-lang becomes "en". -->
+  <script>
+    try {
+      var params = new URLSearchParams(location.search);
+      if (params.get("lang") === "el") {
+        // Explicit choice to view the Greek version: stay here, clean the URL.
+        params.delete("lang");
+        var qs = params.toString();
+        history.replaceState(null, "", location.pathname + (qs ? "?" + qs : "") + location.hash);
+      } else if (localStorage.getItem("ck-lang") === "en") {
+        location.replace("./altcoinguide-en.html");
+      }
+    } catch (e) {}
+  </script>
+
+  <title>Altcoin Exit Checklist: πώς (και πότε) βγαίνεις πριν γίνει αργά – CryptoKosmos</title>
+
+  <!-- ============ SEO META TAGS ============ -->
+  <!-- ⚠️ Άλλαξε το 'https://cryptokosmos.app/news/' στο πραγματικό domain/path του site -->
+  <meta name="description" content="Πρακτικό Altcoin Exit Checklist: πότε και πώς να βγεις από ένα altcoin πριν γίνει αργά. Partial exits, liquidity &amp; volume, sentiment shifts, live παράδειγμα της εβδομάδας και FAQ." />
+  <meta name="robots" content="index, follow, max-image-preview:large" />
+  <link rel="canonical" href="https://cryptokosmos.app/news/altcoinguide.html" />
+
+  <!-- hreflang alternates -->
+  <link rel="alternate" hreflang="el" href="https://cryptokosmos.app/news/altcoinguide.html" />
+  <link rel="alternate" hreflang="en" href="https://cryptokosmos.app/news/altcoinguide-en.html" />
+  <link rel="alternate" hreflang="x-default" href="https://cryptokosmos.app/news/altcoinguide.html" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="CryptoKosmos" />
+  <meta property="og:title" content="Altcoin Exit Checklist: πώς (και πότε) βγαίνεις πριν γίνει αργά" />
+  <meta property="og:description" content="Πρακτικό Altcoin Exit Checklist: πότε και πώς να βγεις από ένα altcoin πριν γίνει αργά. Partial exits, liquidity &amp; volume, sentiment shifts, live παράδειγμα της εβδομάδας και FAQ." />
+  <meta property="og:image" content="https://cryptokosmos.app/news/altcoinexit.png" />
+  <meta property="og:url" content="https://cryptokosmos.app/news/altcoinguide.html" />
+  <meta property="og:locale" content="el_GR" />
+  <meta property="og:locale:alternate" content="en_US" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Altcoin Exit Checklist: πώς (και πότε) βγαίνεις πριν γίνει αργά" />
+  <meta name="twitter:description" content="Πρακτικό Altcoin Exit Checklist: πότε και πώς να βγεις από ένα altcoin πριν γίνει αργά. Partial exits, liquidity &amp; volume, sentiment shifts, live παράδειγμα της εβδομάδας και FAQ." />
+  <meta name="twitter:image" content="https://cryptokosmos.app/news/altcoinexit.png" />
+
+  <!-- Article structured data -->
+  <!-- ⚠️ Πρόσθεσε πραγματικό author (Person) με όνομα/bio αν θες καλύτερο E-E-A-T,
+       και διόρθωσε datePublished στην πραγματική ημ/νία πρώτης δημοσίευσης -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Altcoin Exit Checklist: πώς (και πότε) βγαίνεις πριν γίνει αργά",
+  "description": "Οι περισσότεροι traders ξέρουν πότε να μπουν σε ένα altcoin — ελάχιστοι ξέρουν πότε να βγουν. Τα μεγαλύτερα losses δεν έρχονται από κακές εισόδους, αλλά από exits που δεν έγιναν ποτέ. Παρακάτω θα βρει",
+  "image": [
+    "https://cryptokosmos.app/news/altcoinexit.png"
+  ],
+  "inLanguage": "el",
+  "author": {
+    "@type": "Organization",
+    "name": "CryptoKosmos",
+    "url": "https://cryptokosmos.app"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "CryptoKosmos",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://cryptokosmos.app/logo.png"
+    }
+  },
+  "datePublished": "2026-06-13",
+  "dateModified": "2026-06-13",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://cryptokosmos.app/news/altcoinguide.html"
+  }
+}
+  </script>
+
+  <!-- FAQ structured data -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Πότε πρέπει να σκεφτώ το exit σε ένα altcoin;",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Από την πρώτη μέρα, πριν καν ανοίξεις τη θέση. Όρισε targets για partial exits και ένα σημείο invalidation, ώστε να μην παίρνεις αποφάσεις υπό πίεση όταν η τιμή κινείται απότομα προς τα πάνω ή τα κάτω."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Τι είναι τα partial exits και γιατί τα χρησιμοποιούν οι traders;",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Partial exit σημαίνει να πουλάς ένα κομμάτι της θέσης σου σε προκαθορισμένα επίπεδα, αντί να περιμένεις το “τέλειο top”. Έτσι κλειδώνεις κέρδη σταδιακά, χωρίς να βγεις εντελώς από ένα trade που μπορεί να συνεχίσει ανοδικά."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Πώς ξέρω αν ένα ράλι είναι “dead cat bounce”;",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Σημάδια όπως μειωμένος όγκος συναλλαγών κατά τη διάρκεια της ανόδου, δείκτες momentum (π.χ. RSI) κοντά σε προηγούμενα υψηλά χωρίς επιβεβαίωση, και ένα ευρύτερα bearish κλίμα στην αγορά αυξάνουν τις πιθανότητες ότι το ράλι είναι προσωρινό."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Τι σημαίνει “exit liquidity” και πώς το αποφεύγω;",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "“Exit liquidity” σημαίνει ότι είσαι εσύ ο αγοραστής που δίνει σε άλλους τη ρευστότητα να πουλήσουν στα υψηλά. Το αποφεύγεις με disciplined entries, ρεαλιστικά targets και αυξημένη προσοχή όταν το sentiment γίνεται ομόφωνα bullish."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Πρέπει να κλείσω ολόκληρη τη θέση μόλις πιάσω τον στόχο μου;",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Όχι απαραίτητα. Πολλοί traders πουλάνε ένα μέρος στον πρώτο στόχο, κρατούν ένα μικρότερο “runner” με trailing stop, και έτσι συμμετέχουν σε επιπλέον upside χωρίς να ρισκάρουν ολόκληρο το κέρδος που έχουν ήδη κλειδώσει."
+      }
+    }
+  ]
+}
+  </script>
 
   <!-- GLOBAL STYLES -->
   <link rel="stylesheet" href="../styles.css" />
 
-  <!-- PAGE TRANSLATIONS -->
-  <script src="./translations-altcoinguide.js"></script>
-
-
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-7DWG18EQLG"></script>
 
-
-<link rel="preload" as="image" href="./altcoinexit.png">
- 
+  <link rel="preload" as="image" href="./altcoinexit.png">
 
   <style>
+/* =========================================
+   HEADER / NAV / MOBILE MENU
+   (copied from index.html so the article pages
+   use the exact same top bar)
+========================================= */
+html,body{
+  font-family:'Space Grotesk', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(10, 13, 20, 0.75);
+
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  box-shadow: 0 1px 0 rgba(255,255,255,0.04), 0 4px 24px rgba(0,0,0,0.25);
+}
+
+html.light-theme .site-header,
+body.light-theme .site-header {
+  background: rgba(255,255,255,0.82);
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+  box-shadow: 0 1px 0 rgba(255,255,255,0.9), 0 4px 20px rgba(0,0,0,0.07);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 68px;
+  gap: 16px;
+}
+
+/* BRAND */
+.brand {
+  display: flex;
+  gap: 11px;
+  align-items: center;
+  text-decoration: none;
+}
+
+.logo {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  display: block;
+  object-fit: cover;
+  border: 1px solid rgba(255,255,255,0.10);
+  box-shadow: 0 2px 12px rgba(91,180,255,0.20);
+  transition: box-shadow .25s, transform .25s;
+}
+
+.brand:hover .logo {
+  box-shadow: 0 4px 20px rgba(91,180,255,0.40);
+  transform: scale(1.05);
+}
+
+.brand-text h1 {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1;
+  margin: 0;
+  background: linear-gradient(135deg, #ffffff 40%, rgba(91,180,255,0.85) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+body.light-theme .brand-text h1 {
+  background: linear-gradient(135deg, #0f172a 40%, #2563eb 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+.tagline {
+  margin: 3px 0 0;
+  color: var(--muted);
+  font-size: 11px;
+  letter-spacing: .2px;
+  opacity: .7;
+}
+
+/* NAV LINKS */
+.nav {
+  display: flex;
+  gap: 4px;
+}
+
+.nav a {
+  padding: 7px 13px;
+  border-radius: 10px;
+  color: rgba(200,220,255,0.75);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: .1px;
+  transition: background .18s, color .18s;
+  text-decoration: none;
+  position: relative;
+}
+
+.nav a:hover {
+  background: rgba(91,180,255,0.09);
+  color: #ffffff;
+}
+
+.nav a.active {
+  color: var(--brand);
+  background: rgba(91,180,255,0.08);
+}
+
+body.light-theme .nav a {
+  color: #374151;
+}
+
+body.light-theme .nav a:hover {
+  background: rgba(37,99,235,0.08);
+  color: #1d4ed8;
+}
+
+/* HEADER ACTIONS */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pill-btn {
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.10);
+  padding: 7px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  background: rgba(255,255,255,0.05);
+  color: var(--text);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: background .18s, border-color .18s, box-shadow .18s;
+  backdrop-filter: blur(8px);
+}
+
+.pill-btn:hover {
+  background: rgba(91,180,255,0.10);
+  border-color: rgba(91,180,255,0.35);
+  box-shadow: 0 0 12px rgba(91,180,255,0.15);
+}
+
+body.light-theme .pill-btn {
+  background: rgba(255,255,255,0.9);
+  border-color: rgba(0,0,0,0.10);
+  color: #1f2937;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+
+body.light-theme .pill-btn:hover {
+  background: #ffffff;
+  border-color: #2563eb;
+  box-shadow: 0 2px 12px rgba(37,99,235,0.15);
+}
+
+/* IMG icons μέσα στα κουμπιά */
+.pill-btn .icon-img{
+  width:22px;
+  height:22px;
+  object-fit:contain;
+  display:inline-block;
+  margin-right:4px;
+}
+
+#auth-icon {
+  width: 20px;
+  height: 20px;
+}
+
+/* =========================================
+   BURGER BUTTON
+========================================= */
+.menu-btn {
+  display: none;
+  position: relative;
+  width: 42px;
+  height: 42px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  cursor: pointer;
+  padding: 0;
+  z-index: 300;
+  transition: background .18s, border-color .18s, box-shadow .18s;
+}
+
+.menu-btn:hover {
+  background: rgba(91,180,255,0.10);
+  border-color: rgba(91,180,255,0.35);
+  box-shadow: 0 0 12px rgba(91,180,255,0.15);
+}
+
+body.light-theme .menu-btn {
+  background: rgba(255,255,255,0.9);
+  border-color: rgba(0,0,0,0.10);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+
+body.light-theme .menu-btn:hover {
+  border-color: #2563eb;
+  box-shadow: 0 2px 12px rgba(37,99,235,0.15);
+}
+
+.burger-line {
+  position: absolute;
+  left: 50%;
+  width: 18px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--text);
+  transform: translateX(-50%);
+  transition: 0.3s ease, background .25s ease;
+}
+
+body.light-theme .burger-line {
+  background: linear-gradient(90deg, var(--brand), var(--brand2));
+}
+
+.burger-line:nth-child(1) { top: 14px; }
+.burger-line:nth-child(2) { top: 20px; }
+.burger-line:nth-child(3) { top: 26px; }
+
+.menu-btn.open .burger-line:nth-child(1) {
+  transform: translateX(-50%) translateY(6px) rotate(45deg);
+}
+.menu-btn.open .burger-line:nth-child(2) {
+  opacity: 0;
+}
+.menu-btn.open .burger-line:nth-child(3) {
+  transform: translateX(-50%) translateY(-6px) rotate(-45deg);
+}
+
+@media (max-width: 850px) {
+  .menu-btn {
+    display: block;
+  }
+
+  .nav {
+    display: none !important;
+  }
+
+  .header-actions .pill-btn {
+    display: none !important;
+  }
+}
+
+/* =========================================
+   MOBILE MENU
+========================================= */
+.mobile-menu {
+  position: fixed;
+  top: 78px;
+  left: 14px;
+  right: 14px;
+
+  display: none;
+  flex-direction: column;
+  gap: 4px;
+
+  padding: 14px;
+
+  background:
+    radial-gradient(ellipse at 0% 0%, rgba(91,180,255,0.10) 0%, transparent 55%),
+    radial-gradient(ellipse at 100% 100%, rgba(123,97,255,0.10) 0%, transparent 55%),
+    rgba(10,13,20,0.85);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+
+  border-radius: 22px;
+  border: 1px solid rgba(255,255,255,0.08);
+
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.04) inset,
+    0 20px 60px rgba(0,0,0,0.50),
+    0 0 40px rgba(91,180,255,0.08);
+
+  z-index: 999;
+
+  transform: translateY(-12px) scale(0.98);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform .35s cubic-bezier(.23,1,.32,1), opacity .3s ease;
+}
+
+body.light-theme .mobile-menu {
+  background:
+    radial-gradient(ellipse at 0% 0%, rgba(91,180,255,0.06) 0%, transparent 55%),
+    radial-gradient(ellipse at 100% 100%, rgba(123,97,255,0.06) 0%, transparent 55%),
+    rgba(255,255,255,0.92);
+  border: 1px solid rgba(0,0,0,0.08);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+}
+
+.mobile-menu.open {
+  display: flex;
+  transform: translateY(0) scale(1);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.mobile-menu a {
+  font-size: 16px;
+  font-weight: 600;
+  padding: 13px 14px;
+  border-radius: 14px;
+  color: var(--text);
+  transition: background .18s ease, color .18s ease;
+}
+
+.mobile-menu a:hover,
+.mobile-menu a:active {
+  background: rgba(91,180,255,0.10);
+  color: var(--brand);
+}
+
+body.light-theme .mobile-menu a:hover,
+body.light-theme .mobile-menu a:active {
+  background: rgba(37,99,235,0.08);
+  color: #2563eb;
+}
+
+.mobile-menu hr {
+  border: none;
+  height: 1px;
+  margin: 8px 6px;
+  background: linear-gradient(90deg, transparent, rgba(91,180,255,0.30), rgba(123,97,255,0.30), transparent);
+  opacity: .7;
+}
+
+.mobile-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  padding: 13px 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.08);
+
+  background: rgba(255,255,255,0.04);
+  color: var(--text);
+
+  text-align: center;
+  font-size: 15px;
+  font-weight: 600;
+
+  transition: background .18s ease, border-color .18s ease;
+}
+
+.mobile-btn:hover {
+  background: rgba(91,180,255,0.08);
+  border-color: rgba(91,180,255,0.30);
+}
+
+body.light-theme .mobile-btn {
+  background: rgba(0,0,0,0.03);
+  border-color: rgba(0,0,0,0.08);
+  color: var(--text) !important;
+}
+
+body.light-theme .mobile-btn:hover {
+  background: rgba(37,99,235,0.06);
+  border-color: rgba(37,99,235,0.25);
+}
+
+#mobile-lang-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 8px 12px !important;
+  height: 42px;
+  gap: 6px;
+
+  border-radius: 14px;
+}
+
+#mobile-lang-toggle .icon-img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+/* Desktop: lock widths of header buttons */
+@media (min-width: 900px) {
+  #theme-toggle {
+    width: 85px;
+    justify-content: center;
+  }
+
+  #auth-btn {
+    width: 85px;
+    justify-content: center;
+  }
+
+  #lang-toggle {
+    width: 70px;
+    justify-content: center;
+  }
+
+  .pill-btn {
+    height: 34px;
+  }
+}
+
+
 
 
 #auth-icon {
@@ -759,6 +1304,95 @@ body.light-theme .news-caption{
   }
 }
 
+/* =========================
+   QUICK CHECKLIST (TL;DR)
+========================= */
+.quick-checklist{
+  max-width: 700px;
+  margin: 22px auto 0;
+  padding: 18px 22px;
+  border-radius: 16px;
+
+  background: rgba(15,18,22,.55);
+  border: 1px solid rgba(91,180,255,.25);
+  box-shadow:
+    0 0 0 1px rgba(123,97,255,.10),
+    0 10px 26px rgba(0,0,0,.25);
+
+  text-align: left;
+}
+
+.quick-checklist h3{
+  margin: 0 0 10px;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.72);
+}
+
+.quick-checklist ul{
+  margin: 0;
+  padding-left: 1.2em;
+  display: grid;
+  gap: 8px;
+}
+
+.quick-checklist li{
+  font-size: 15px;
+  line-height: 1.55;
+  color: rgba(255,255,255,.82);
+}
+
+html.light-theme .quick-checklist,
+body.light-theme .quick-checklist{
+  background: rgba(255,255,255,.85);
+  border: 1px solid rgba(0,0,0,.10);
+  box-shadow:
+    0 0 0 1px rgba(0,0,0,.04),
+    0 10px 22px rgba(0,0,0,.08);
+}
+
+html.light-theme .quick-checklist h3,
+body.light-theme .quick-checklist h3{ color: rgba(15,23,42,.65); }
+
+html.light-theme .quick-checklist li,
+body.light-theme .quick-checklist li{ color: rgba(15,23,42,.78); }
+
+/* =========================
+   FAQ SECTION
+========================= */
+.faq-section{
+  margin-top: 8px;
+}
+
+.faq-item{
+  margin-top: 16px;
+  text-align: left;
+}
+
+.faq-q{
+  margin: 0 0 6px;
+  font-size: clamp(16px, 1.9vw, 19px);
+  line-height: 1.3;
+  font-weight: 800;
+  color: rgba(255,255,255,.92);
+}
+
+.faq-a{
+  margin: 0;
+  font-size: clamp(14px, 1.5vw, 16px);
+  line-height: 1.7;
+  color: rgba(255,255,255,.75);
+}
+
+html.light-theme .faq-q,
+body.light-theme .faq-q{ color: rgba(15,23,42,.9); }
+
+html.light-theme .faq-a,
+body.light-theme .faq-a{ color: rgba(15,23,42,.72); }
+
+  
   </style>
 </head>
 
@@ -767,7 +1401,7 @@ body.light-theme .news-caption{
 <header class="site-header">
   <div class="container header-inner">
 
-    <a class="brand" href="./index.html">
+    <a class="brand" href="../index.html">
       <img id="site-logo" src="../logo.png" alt="CryptoKosmos logo" class="logo" />
       <div class="brand-text">
         <h1>CryptoKosmos</h1>
@@ -780,50 +1414,58 @@ body.light-theme .news-caption{
       <a href="../index.html#charts"   data-i18n="nav_charts">Τάσεις</a>
       <a href="../index.html#guides"   data-i18n="nav_guides">Οδηγοί</a>
       <a href="../index.html#glossary" data-i18n="nav_glossary">Γλωσσάρι</a>
+      <a href="./articles.html" data-i18n="nav_articles">Άρθρα</a>
     </nav>
 
     <div class="header-actions">
-      <button id="theme-toggle" class="pill-btn">
+      <button id="theme-toggle" class="pill-btn" type="button">
         <img id="theme-icon" src="../IMG_5300.png" class="icon-img">
         <span id="theme-label" data-i18n="theme_dark">Dark</span>
       </button>
 
-      <button id="auth-btn" class="pill-btn">
+      <button id="auth-btn" class="pill-btn" type="button">
         <img id="auth-icon" src="../IMG_5301.png" class="icon-img">
         <span id="auth-label" data-i18n="login">Login</span>
       </button>
 
-      <button id="menu-toggle" class="menu-btn">
+      <button id="menu-toggle" class="menu-btn" type="button">
         <span class="burger-line"></span>
         <span class="burger-line"></span>
         <span class="burger-line"></span>
       </button>
 
-      <!-- LANGUAGE BUTTON -->
-      <button id="lang-toggle" class="pill-btn">
-        <img id="lang-icon" class="icon-img" src="../IMG_5542.png">
-        <span id="lang-label">GR</span>
-      </button>
+      <!-- LANGUAGE SWITCH: links to the other language file -->
+      <a id="lang-toggle" class="pill-btn" href="./altcoinguide-en.html" aria-label="Switch to English">
+        <img id="lang-icon" class="icon-img lang-anim" src="../IMG_5542.png">
+        <span id="lang-label" class="lang-anim">GR</span>
+      </a>
     </div>
   </div>
 </header>
 
-<!-- MOBILE MENU -->
-<div id="mobile-menu" class="mobile-menu">
+<div id="mobile-menu" class="mobile-menu" aria-hidden="true">
 
   <a href="../index.html#market"   data-i18n="nav_market">Αγορά</a>
   <a href="../index.html#charts"   data-i18n="nav_charts">Τάσεις</a>
   <a href="../index.html#guides"   data-i18n="nav_guides">Οδηγοί</a>
   <a href="../index.html#glossary" data-i18n="nav_glossary">Γλωσσάρι</a>
+  <a href="../index.html#articles" data-i18n="nav_articles">Άρθρα</a>
 
-  <button id="mobile-home-btn" class="mobile-btn" data-i18n="mobile_home">⬅ Αρχική Σελίδα</button>
-  <button id="mobile-theme-toggle" class="mobile-btn" data-i18n="mobile_theme">Αλλαγή Θέματος</button>
-  <button id="mobile-auth-btn" class="mobile-btn" data-i18n="login">Login</button>
+  <hr>
 
-  <button id="mobile-lang-toggle" class="mobile-btn">
-    <img id="mobile-lang-icon" class="icon-img" src="../IMG_5542.png">
-    <span id="mobile-lang-label">GR</span>
+  <button id="mobile-theme-toggle" class="mobile-btn" type="button" data-i18n="mobile_theme">
+    Αλλαγή Θέματος
   </button>
+
+  <button id="mobile-auth-btn" class="mobile-btn" type="button">
+    Login
+  </button>
+
+  <!-- LANGUAGE SWITCH (mobile): links to the other language file -->
+  <a id="mobile-lang-toggle" class="mobile-btn" href="./altcoinguide-en.html" aria-label="Switch to English">
+    <img id="mobile-lang-icon" class="icon-img" src="../IMG_5542.png" alt="">
+    <span id="mobile-lang-label">GR</span>
+  </a>
 
 </div>
 
@@ -848,6 +1490,18 @@ body.light-theme .news-caption{
       ώστε να προστατεύεις κέρδη, να μειώνεις ρίσκο
       και να μη γίνεσαι exit liquidity.
     </p>
+
+    <div class="quick-checklist" aria-label="Quick checklist">
+      <h3 data-i18n="ae_tldr_title">Checklist σε 30 δευτερόλεπτα</h3>
+      <ul>
+        <li data-i18n="ae_tldr_1">Όρισε targets &amp; invalidation πριν μπεις στη θέση, όχι ενώ ήδη κινείται.</li>
+        <li data-i18n="ae_tldr_2">Χρησιμοποίησε partial exits — μην περιμένεις το «τέλειο top».</li>
+        <li data-i18n="ae_tldr_3">Παρακολούθα το volume: fading volume πάνω σε rally = προειδοποίηση.</li>
+        <li data-i18n="ae_tldr_4">Όταν το sentiment γίνεται ομόφωνα bullish, σκέψου exit, όχι re-entry.</li>
+        <li data-i18n="ae_tldr_5">«Πολύ καλό για να πουληθεί» συνήθως σημαίνει «ώρα να πουληθεί».</li>
+        <li data-i18n="ae_tldr_6">Διαχείριση ρίσκου &gt; πίστη σε ένα project — πάντα.</li>
+      </ul>
+    </div>
   </header>
 
   <!-- Hero image -->
@@ -933,6 +1587,100 @@ body.light-theme .news-caption{
       αλλά δεν μπορείς να γυρίσεις τον χρόνο πίσω.
     </p>
 
+    <h2 class="news-h2" data-i18n="ae_h2_6">
+      6) Live παράδειγμα: το AI-altcoin rally πριν το SpaceX IPO
+    </h2>
+    <p class="news-p" data-i18n="ae_p_6a">
+      Αυτή την εβδομάδα είδαμε ένα σχολικό παράδειγμα
+      του γιατί χρειάζεσαι exit plan.
+      AI-altcoins όπως το Worldcoin, το NEAR Protocol,
+      το Bittensor και το DeXe σημείωσαν διψήφια εβδομαδιαία κέρδη,
+      ενώ το Bitcoin παρέμενε σε αδύναμη τάση.
+      Αφορμή ήταν το IPO της SpaceX στο Nasdaq,
+      με traders να “παίζουν” αυτά τα altcoins
+      ως proxy για το ευρύτερο AI narrative
+      μέσω της σύνδεσης με την xAI.
+    </p>
+    <p class="news-p" data-i18n="ae_p_6b">
+      Ταυτόχρονα όμως, σε tokens όπως το DEXE,
+      ο όγκος συναλλαγών συρρικνωνόταν
+      καθώς η τιμή πλησίαζε βασικά resistance επίπεδα,
+      και δείκτες momentum όπως το RSI
+      βρίσκονταν κοντά σε προηγούμενα υψηλά —
+      ακριβώς το σημείο 3 του checklist
+      (liquidity &amp; volume) σε πλήρη εξέλιξη.
+      Αναλυτές προειδοποίησαν ότι το ράλι
+      θα μπορούσε να αποδειχθεί ένα προσωρινό
+      “dead cat bounce” μέσα σε bearish περιβάλλον.
+    </p>
+    <p class="news-p" data-i18n="ae_p_6c">
+      Είτε το ράλι συνεχιστεί είτε όχι,
+      αυτό είναι το ακριβές σημείο
+      όπου ένα προκαθορισμένο exit plan κάνει τη διαφορά:
+      κλείδωμα μέρους των κερδών στα targets,
+      παρακολούθηση όγκου,
+      και αποφυγή του “θα το δω στην πορεία”.
+    </p>
+
+  </section>
+
+  <!-- FAQ -->
+  <section class="news-body faq-section" aria-labelledby="ae-faq-title">
+
+    <h2 class="news-h2" id="ae-faq-title" data-i18n="ae_faq_title">
+      Συχνές ερωτήσεις (FAQ)
+    </h2>
+
+    <div class="faq-item">
+      <h3 class="faq-q" data-i18n="ae_faq_q1">Πότε πρέπει να σκεφτώ το exit σε ένα altcoin;</h3>
+      <p class="faq-a" data-i18n="ae_faq_a1">
+        Από την πρώτη μέρα, πριν καν ανοίξεις τη θέση.
+        Όρισε targets για partial exits και ένα σημείο invalidation,
+        ώστε να μην παίρνεις αποφάσεις υπό πίεση
+        όταν η τιμή κινείται απότομα προς τα πάνω ή τα κάτω.
+      </p>
+    </div>
+
+    <div class="faq-item">
+      <h3 class="faq-q" data-i18n="ae_faq_q2">Τι είναι τα partial exits και γιατί τα χρησιμοποιούν οι traders;</h3>
+      <p class="faq-a" data-i18n="ae_faq_a2">
+        Partial exit σημαίνει να πουλάς ένα κομμάτι της θέσης σου
+        σε προκαθορισμένα επίπεδα, αντί να περιμένεις το “τέλειο top”.
+        Έτσι κλειδώνεις κέρδη σταδιακά, χωρίς να βγεις εντελώς
+        από ένα trade που μπορεί να συνεχίσει ανοδικά.
+      </p>
+    </div>
+
+    <div class="faq-item">
+      <h3 class="faq-q" data-i18n="ae_faq_q3">Πώς ξέρω αν ένα ράλι είναι “dead cat bounce”;</h3>
+      <p class="faq-a" data-i18n="ae_faq_a3">
+        Σημάδια όπως μειωμένος όγκος συναλλαγών κατά τη διάρκεια της ανόδου,
+        δείκτες momentum (π.χ. RSI) κοντά σε προηγούμενα υψηλά χωρίς επιβεβαίωση,
+        και ένα ευρύτερα bearish κλίμα στην αγορά
+        αυξάνουν τις πιθανότητες ότι το ράλι είναι προσωρινό.
+      </p>
+    </div>
+
+    <div class="faq-item">
+      <h3 class="faq-q" data-i18n="ae_faq_q4">Τι σημαίνει “exit liquidity” και πώς το αποφεύγω;</h3>
+      <p class="faq-a" data-i18n="ae_faq_a4">
+        “Exit liquidity” σημαίνει ότι είσαι εσύ ο αγοραστής
+        που δίνει σε άλλους τη ρευστότητα να πουλήσουν στα υψηλά.
+        Το αποφεύγεις με disciplined entries, ρεαλιστικά targets
+        και αυξημένη προσοχή όταν το sentiment γίνεται ομόφωνα bullish.
+      </p>
+    </div>
+
+    <div class="faq-item">
+      <h3 class="faq-q" data-i18n="ae_faq_q5">Πρέπει να κλείσω ολόκληρη τη θέση μόλις πιάσω τον στόχο μου;</h3>
+      <p class="faq-a" data-i18n="ae_faq_a5">
+        Όχι απαραίτητα. Πολλοί traders πουλάνε ένα μέρος στον πρώτο στόχο,
+        κρατούν ένα μικρότερο “runner” με trailing stop,
+        και έτσι συμμετέχουν σε επιπλέον upside
+        χωρίς να ρισκάρουν ολόκληρο το κέρδος που έχουν ήδη κλειδώσει.
+      </p>
+    </div>
+
   </section>
 
 </article>
@@ -949,22 +1697,22 @@ body.light-theme .news-caption{
 
   <div class="pn-grid pn-cards">
 
-     <!-- NARRATIVE HYPE -->
-    <a class="pn-card" href="./narrativehype.html" target="_blank" rel="noopener">
+      <!-- STRATEGY BTC SALE -->
+    <a class="pn-card" href="./strategybtcsale.html" target="_blank" rel="noopener">
       <article class="pn-slide">
-        <img class="pn-thumb" src="./narrativehype.png" alt="Narrative hype checklist">
+        <img class="pn-thumb" src="./strategysale.png" alt="Strategy Bitcoin sale news">
 
-        <span class="pn-kicker pn-kicker--top" data-i18n="pf_tag_altcoins">Altcoins</span>
-        <span class="pn-hero-title">HYPE</span>
+        <span class="pn-kicker pn-kicker--top" data-i18n="pf_tag_market">Market</span>
+        <span class="pn-hero-title">SELL</span>
 
         <div class="pn-overlay">
-          <h5 class="pn-title-onimg" data-i18n="pf_alt_hype_title">
-            Narrative Hype Checklist: πότε είναι ήδη αργά
+          <h5 class="pn-title-onimg" data-i18n="pf_ss_title">
+            Όταν ο «never sell» πούλησε: τι μαθαίνουμε από τη Strategy
           </h5>
           <ul class="pn-bullets">
-            <li data-i18n="pf_alt_hype_b1">Crowded trades</li>
-            <li data-i18n="pf_alt_hype_b2">Late volume spikes</li>
-            <li data-i18n="pf_alt_hype_b3">Social-driven pumps</li>
+            <li data-i18n="pf_ss_b1">ETF outflow streak ρεκόρ</li>
+            <li data-i18n="pf_ss_b2">Symbolism vs μέγεθος</li>
+            <li data-i18n="pf_ss_b3">Πώς διαβάζεις τίτλους χωρίς πανικό</li>
           </ul>
         </div>
 
@@ -973,22 +1721,22 @@ body.light-theme .news-caption{
     </a>
 
 
-   
-    <a class="pn-card" href="./altcoinentry.html" target="_blank" rel="noopener">
+    <!-- XRP ETF FLOWS -->
+    <a class="pn-card" href="./xrpetfflows.html" target="_blank" rel="noopener">
       <article class="pn-slide">
-        <img class="pn-thumb" src="./altcoinentry.png" alt="Altcoin entry checklist">
+        <img class="pn-thumb" src="./xrpetfflows.png" alt="XRP ETF inflows vs price">
 
-        <span class="pn-kicker pn-kicker--top" data-i18n="pf_tag_altcoins">Altcoins</span>
-        <span class="pn-hero-title">ENTRY</span>
+        <span class="pn-kicker pn-kicker--top" data-i18n="pf_tag_market">Market</span>
+        <span class="pn-hero-title">FLOW</span>
 
         <div class="pn-overlay">
-          <h5 class="pn-title-onimg" data-i18n="pf_alt_entry_title">
-            Altcoin Entry Checklist: πριν πατήσεις buy
+          <h5 class="pn-title-onimg" data-i18n="pf_xr_title">
+            6 εβδομάδες εισροών στα XRP ETFs ενώ η τιμή πέφτει
           </h5>
           <ul class="pn-bullets">
-            <li data-i18n="pf_alt_entry_b1">Structure &amp; timing</li>
-            <li data-i18n="pf_alt_entry_b2">Volume confirmation</li>
-            <li data-i18n="pf_alt_entry_b3">Invalidation &amp; size</li>
+            <li data-i18n="pf_xr_b1">Flows vs price</li>
+            <li data-i18n="pf_xr_b2">Capital rotation</li>
+            <li data-i18n="pf_xr_b3">Sentiment ως contrarian σήμα</li>
           </ul>
         </div>
 
@@ -996,211 +1744,40 @@ body.light-theme .news-caption{
       </article>
     </a>
 
-   
-   <a class="pn-card" href="./altcoins-narratives.html" target="_blank" rel="noopener">
-  <article class="pn-slide">
-    <img class="pn-thumb" src="./altcoins-narratives.png" alt="Altcoins vs Narratives">
 
-    <span class="pn-kicker pn-kicker--top" data-i18n="pf_tag_altcoins">Altcoins</span>
-    <span class="pn-hero-title">NARR</span>
+     <!-- BITMINE TREASURY -->
+    <a class="pn-card" href="./bitminetreasury.html" target="_blank" rel="noopener">
+      <article class="pn-slide">
+        <img class="pn-thumb" src="./bitminetreasury.png" alt="BitMine Ethereum treasury">
 
-    <div class="pn-overlay">
-      <h5 class="pn-title-onimg" data-i18n="pf_alt_vs_title">
-        Altcoins vs Narratives: γιατί ΔΕΝ ανεβαίνουν όλα μαζί
-      </h5>
-      <ul class="pn-bullets">
-        <li data-i18n="pf_alt_vs_b1">Rotations: το χρήμα πάει επιλεκτικά</li>
-        <li data-i18n="pf_alt_vs_b2">Leaders vs laggards (relative strength)</li>
-        <li data-i18n="pf_alt_vs_b3">Attention ≠ capital flow</li>
-      </ul>
-    </div>
+        <span class="pn-kicker pn-kicker--top" data-i18n="pf_tag_market">Market</span>
+        <span class="pn-hero-title">ETH</span>
 
-    <span class="pn-read pn-read--btn" data-i18n="pf_read">Διάβασε</span>
-  </article>
-</a>
-
-
-
-  </div>
-</section>
-
-
-
-<!-- ================= PRE-FOOTER (IMPACT) ================= -->
-<section class="prefooter">
-  <div class="prefooter-glow"></div>
-
-  <div class="prefooter-inner">
-    <div class="pf-col">
-      <h4>CryptoKosmos</h4>
-       <p class="pf-muted" data-i18n="pf_brand_sub">Quick links & updates από το crypto σύμπαν.</p>
-    </div>
-
-    <div class="pf-col">
-      <h4>Explore</h4>
-      <a href="../index.html#market" class="pf-link">Market</a>
-      <a href="../index.html#charts" class="pf-link">Trends</a>
-      <a href="../index.html#guides" class="pf-link">Guides</a>
-      <a href="../index.html#glossary" class="pf-link">Glossary</a>
-    </div>
-
- <div class="pf-col">
-      <h4 data-i18n="pf_social_title">Social</h4>
-      <a href="https://x.com/CryptoKosmosApp" class="pf-link" target="_blank" rel="noopener" data-i18n="pf_social_x">X / Twitter</a>
-      <a href="https://www.instagram.com/cryptokosmos.app/" class="pf-link" target="_blank" rel="noopener" data-i18n="pf_social_ig">Instagram</a>
-      <a href="https://youtube.com/@cryptokosmosapp?si=tnWTyUZe6cJgFM4r" class="pf-link" target="_blank" rel="noopener" data-i18n="pf_social_yt">YouTube</a>
-      <a href="https://www.tiktok.com/@cryptokosmosapp?_r=1&_t=ZN-943YUhcff0w"  class="pf-link" target="_blank" rel="noopener" data-i18n="pf_social_tt">TikTok</a>
-      <a href="mailto:cryptokosmos.news@gmail.com" class="pf-link" data-i18n="pf_social_email">Email</a>
-    </div>
-  </div>
-
-  <div class="prefooter-divider"></div>
-</section>
-
-<footer class="site-footer">
-  <div class="container">
-    <p>© <span id="year"></span> CryptoKosmos —
-      <span data-i18n="footer_rights">Όλα τα δικαιώματα διατηρούνται.</span>
-    </p>
-  </div>
-</footer>
-
-
-<!-- ========= LOGIN MODAL ========= -->
-<div id="login-modal" class="modal hidden">
-  <div class="modal-backdrop"></div>
-  <div class="modal-card">
-
-    <div class="modal-header">
-      <span class="modal-title" data-i18n="login_title">Σύνδεση</span>
-      <button class="modal-close" id="login-close">×</button>
-    </div>
-
-    <form id="login-form">
-      <div class="modal-body">
-
-        <label data-i18n="login_email">Email</label>
-        <input id="login-email" type="email" required placeholder="you@example.com">
-
-        <label data-i18n="login_password">Κωδικός</label>
-        <div class="pass-wrap">
-          <input id="login-pass" type="password" placeholder="••••••••">
-          <img id="login-pass-toggle" class="pass-eye" src="../IMG_5380.png">
+        <div class="pn-overlay">
+          <h5 class="pn-title-onimg" data-i18n="pf_bm_title">
+            $8,66 δισ. «χαρτί»: η μεγαλύτερη ETH treasury στον κόσμο
+          </h5>
+          <ul class="pn-bullets">
+            <li data-i18n="pf_bm_b1">Unrealized vs realized loss</li>
+            <li data-i18n="pf_bm_b2">Equity vs χρέος</li>
+            <li data-i18n="pf_bm_b3">NAV &amp; treasury εταιρείες</li>
+          </ul>
         </div>
 
-      </div>
+        <span class="pn-read pn-read--btn" data-i18n="pf_read">Διάβασε</span>
+      </article>
+    </a>
 
-      <button class="modal-submit" type="submit" data-i18n="login_btn">
-        Σύνδεση
-      </button>
 
-      <p id="no-account" class="modal-hint" style="color:#ffb3b3; display:none;" data-i18n="login_no_account">
-        Δεν έχεις λογαριασμό στο CryptoKosmos.
-      </p>
-
-      <button id="signup-btn" type="button"
-        style="display:none; margin-top:10px; width:100%; padding:10px 14px; border:none; border-radius:14px;
-        background:#1e293b; color:white; font-weight:600; cursor:pointer; border:1px solid rgba(255,255,255,0.25);"
-        data-i18n="login_create_account">
-        Δημιουργία λογαριασμού
-      </button>
-
-    </form>
+    
+   
 
   </div>
-</div>
+</section>
 
 
 
-<!-- ========= SIGNUP MODAL ========= -->
-<div id="signup-modal" class="modal hidden">
-  <div class="modal-backdrop"></div>
-
-  <div class="modal-card">
-    <div class="modal-header">
-      <h3 class="modal-title" data-i18n="signup_title">Δημιούργησε λογαριασμό</h3>
-      <button class="modal-close signup-close">×</button>
-    </div>
-
-    <div class="modal-body">
-
-      <label data-i18n="signup_email">Email</label>
-      <input id="signup-email" type="email">
-
-      <label data-i18n="signup_pass1">Κωδικός</label>
-      <div class="pass-wrap">
-        <input id="signup-pass1" type="password" placeholder="••••••••">
-        <img id="signup-pass1-toggle" class="pass-eye" src="../IMG_5380.png">
-      </div>
-
-      <label data-i18n="signup_pass2">Επιβεβαίωση κωδικού</label>
-      <div class="pass-wrap">
-        <input id="signup-pass2" type="password" placeholder="••••••••">
-        <img id="signup-pass2-toggle" class="pass-eye" src="../IMG_5380.png">
-      </div>
-
-      <p id="signup-error" style="color:#ff6b6b; display:none;"
-         data-i18n="signup_error">Οι κωδικοί δεν ταιριάζουν.</p>
-
-      <button id="signup-create" class="modal-submit" data-i18n="signup_btn">
-        Δημιουργία λογαριασμού
-      </button>
-
-      <p class="modal-hint">
-        <span data-i18n="signup_have_account">Έχεις ήδη λογαριασμό;</span>
-        <span id="back-to-login" style="color:#5bb4ff; cursor:pointer;" data-i18n="signup_back">
-          Σύνδεση
-        </span>
-      </p>
-    </div>
-
-  </div>
-</div>
-
-
-
-<!-- ========= VERIFY MODAL ========= -->
-<div id="verify-modal" class="modal hidden">
-  <div class="modal-backdrop"></div>
-
-  <div class="modal-card">
-    <div class="modal-header">
-      <h3 class="modal-title" data-i18n="verify_title">Επαλήθευση Email</h3>
-      <button class="modal-close verify-close">×</button>
-    </div>
-
-    <div class="modal-body">
-
-      <p class="muted" data-i18n="verify_subtitle">
-        Σου στείλαμε έναν 6-ψήφιο κωδικό.
-      </p>
-
-      <label data-i18n="verify_code">Κωδικός</label>
-      <input id="verify-code" type="text" placeholder="123456">
-
-      <p id="verify-error" style="color:#ff6b6b; display:none;"
-         data-i18n="verify_error">Λάθος κωδικός. Προσπάθησε ξανά.</p>
-
-      <button id="verify-submit" class="modal-submit" data-i18n="verify_btn">
-        Επιβεβαίωση
-      </button>
-
-    </div>
-  </div>
-</div>
-
-<script>
-  document.getElementById("year").textContent = new Date().getFullYear();
-  document.getElementById("mobile-home-btn")?.addEventListener("click", () => {
-    window.location.href = "../index.html";
-  });
-</script>
-
-<!-- GLOBAL APP -->
-<script src="../app.js" defer></script>
-
-<!-- GLOBAL i18n ENGINE -->
-<script src="../i18n.js"></script>
+<!-- prefooter.js injects .prefooter + <footer> here -->
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
@@ -1214,5 +1791,30 @@ document.addEventListener("DOMContentLoaded", () => {
   io.observe(section);
 });
 </script>
+
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+
+<!-- GLOBAL SCRIPTS -->
+<script src="../header.js" defer></script>
+<script src="../prefooter.js" defer></script>
+
+<!-- This page is statically EL — lock the language so the
+     header/modals injected by header.js + i18n.js render in EL
+     (the lang button itself just links to the other file, see header above) -->
+<script>
+  try { localStorage.setItem("ck-lang", "el"); } catch (e) {}
+</script>
+
+<!-- PAGE TRANSLATIONS (πρέπει να φορτωθεί ΠΡΙΝ το i18n.js) -->
+<script src="./translations-altcoinguide.js" defer></script>
+
+<script src="../i18n.js" defer></script>
+<script src="../app.js" defer></script>
+
+<!-- GLOBAL STYLES -->
+<link rel="stylesheet" href="../header-theme.css" />
+
 </body>
 </html>

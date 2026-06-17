@@ -1,0 +1,516 @@
+/* =============================================================
+   ARTICLE THEME — shared styles for guide/article pages
+   (blockchain.html, wallets.html, κλπ)
+   Requires header-theme.css to be loaded first (CSS vars, fonts).
+============================================================= */
+
+body.article-page {
+  padding: 0;
+}
+
+@media (min-width: 900px) {
+  #theme-toggle { width: 85px; justify-content: center; }
+  #auth-btn { width: 85px; justify-content: center; }
+  #lang-toggle { width: 70px; justify-content: center; }
+  .pill-btn { height: 34px; }
+}
+
+/* =========================================
+   ARTICLE SHELL
+========================================= */
+.article-wrap {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 40px 18px 0;
+}
+
+.article-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  background: rgba(91,180,255,0.10);
+  border: 1px solid rgba(91,180,255,0.25);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  color: var(--brand);
+  margin-bottom: 18px;
+}
+
+.article-title {
+  margin: 0 0 14px;
+  font-size: 38px;
+  font-weight: 700;
+  letter-spacing: -.8px;
+  line-height: 1.15;
+  background: linear-gradient(135deg, #ffffff 35%, rgba(91,180,255,0.85) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+body.light-theme .article-title {
+  background: linear-gradient(135deg, #0f172a 35%, #2563eb 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+.article-lead {
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--muted);
+  margin: 0 0 28px;
+  max-width: 620px;
+}
+
+.article-hero-img {
+  width: 100%;
+  border-radius: 18px;
+  display: block;
+  margin: 0 0 44px;
+  border: 1px solid rgba(255,255,255,0.07);
+  box-shadow: 0 16px 48px rgba(0,0,0,0.35);
+}
+
+/* =========================================
+   SECTION HEADINGS
+========================================= */
+.article-wrap section {
+  margin: 0 0 52px;
+}
+
+.article-wrap h3 {
+  margin: 0 0 10px;
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -.3px;
+  position: relative;
+  display: inline-block;
+}
+
+.article-wrap h3::after {
+  content: "";
+  position: absolute;
+  bottom: -8px; left: 0;
+  width: 40px; height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--brand), var(--brand2));
+}
+
+.article-wrap .section-text {
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--muted);
+  margin: 18px 0 0;
+  max-width: 640px;
+}
+
+/* =========================================
+   GENERIC CARD
+========================================= */
+.a-card {
+  background:
+    radial-gradient(ellipse at 0% 0%, rgba(91,180,255,0.05) 0%, transparent 60%),
+    var(--card);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 16px;
+  padding: 18px;
+  position: relative;
+  overflow: hidden;
+}
+
+.a-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.09), transparent);
+}
+
+/* =========================================
+   2 / 4 ITEM GRID (anatomy, key types, wallet types...)
+========================================= */
+.anatomy-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  margin-top: 24px;
+}
+
+.anatomy-card .a-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px; height: 28px;
+  border-radius: 9px;
+  font-size: 12px;
+  font-weight: 800;
+  margin-bottom: 10px;
+  background: linear-gradient(135deg, rgba(91,180,255,0.18), rgba(123,97,255,0.18));
+  color: var(--brand);
+  border: 1px solid rgba(91,180,255,0.25);
+}
+
+.anatomy-card h4 {
+  margin: 0 0 6px;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.anatomy-card p {
+  margin: 0;
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+/* =========================================
+   CALLOUT (info / warning)
+========================================= */
+.how-outro {
+  margin-top: 18px;
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--muted);
+  padding: 14px 16px;
+  border-left: 3px solid var(--brand);
+  border-radius: 0 12px 12px 0;
+  background: rgba(91,180,255,0.06);
+}
+
+.how-outro.danger {
+  border-left-color: #f97373;
+  background: rgba(249,115,115,0.08);
+}
+
+.how-outro.danger strong {
+  color: #f97373;
+}
+
+/* =========================================
+   CONSENSUS / COMPARISON — 2 col with adv/dis rows
+========================================= */
+.consensus-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.consensus-card h4 {
+  margin: 0 0 10px;
+  font-size: 17px;
+  font-weight: 700;
+  background: linear-gradient(90deg, var(--brand), var(--brand2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.consensus-card > p {
+  margin: 0 0 14px;
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--muted);
+}
+
+.consensus-row {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  font-size: 13px;
+  line-height: 1.55;
+  padding: 10px 12px;
+  border-radius: 10px;
+  margin-bottom: 8px;
+}
+
+.consensus-row.adv { background: rgba(74,222,128,0.08); border: 1px solid rgba(74,222,128,0.18); }
+.consensus-row.dis { background: rgba(249,115,115,0.08); border: 1px solid rgba(249,115,115,0.16); }
+
+.consensus-row .tag {
+  flex: none;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .6px;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 999px;
+}
+.consensus-row.adv .tag { color: #4ade80; background: rgba(74,222,128,0.15); }
+.consensus-row.dis .tag { color: #f97373; background: rgba(249,115,115,0.15); }
+
+.consensus-row span:last-child { color: var(--text); }
+
+/* =========================================
+   PILL LIST (use cases, tags...)
+========================================= */
+.uses-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.use-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: 999px;
+  font-size: 13.5px;
+  font-weight: 600;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  color: var(--text);
+}
+
+.use-pill::before {
+  content: "";
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--brand), var(--brand2));
+  flex: none;
+}
+
+/* =========================================
+   PROS / CONS — 2 col
+========================================= */
+.proscons-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.proscons-card h4 {
+  margin: 0 0 12px;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: .3px;
+  text-transform: uppercase;
+}
+
+.proscons-card.pros h4 { color: #4ade80; }
+.proscons-card.cons h4 { color: #f97373; }
+
+.proscons-card ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.proscons-card li {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: var(--muted);
+}
+
+.proscons-card li::before {
+  flex: none;
+  font-size: 13px;
+  line-height: 1.5;
+  font-weight: 800;
+}
+
+.proscons-card.pros li::before { content: "✓"; color: #4ade80; }
+.proscons-card.cons li::before { content: "×"; color: #f97373; }
+
+/* =========================================
+   CHECKLIST — single card, ✓ list (security tips, steps...)
+========================================= */
+.checklist {
+  margin-top: 24px;
+}
+
+.checklist ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.checklist li {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text);
+}
+
+.checklist li::before {
+  content: "✓";
+  flex: none;
+  width: 22px; height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 7px;
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--brand);
+  background: rgba(91,180,255,0.12);
+  border: 1px solid rgba(91,180,255,0.22);
+}
+
+/* =========================================
+   EXAMPLES — badge cards (coins, products...)
+========================================= */
+.examples-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  margin-top: 24px;
+}
+
+.example-card {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+
+.example-badge {
+  flex: none;
+  width: 44px; height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .3px;
+  color: #0f1216;
+  background: linear-gradient(135deg, var(--brand), var(--brand2));
+  text-align: center;
+  line-height: 1.1;
+}
+
+.example-card h4 {
+  margin: 0 0 4px;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.example-card p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--muted);
+}
+
+/* =========================================
+   CONCLUSION
+========================================= */
+.conclusion-card {
+  margin-top: 24px;
+  padding: 24px;
+  border-radius: 18px;
+  background:
+    radial-gradient(ellipse at 0% 0%, rgba(91,180,255,0.08) 0%, transparent 60%),
+    radial-gradient(ellipse at 100% 100%, rgba(123,97,255,0.08) 0%, transparent 60%),
+    var(--card);
+  border: 1px solid rgba(91,180,255,0.15);
+}
+
+.conclusion-card h3 { margin-bottom: 12px; }
+.conclusion-card h3::after { display: none; }
+.conclusion-card p {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--muted);
+}
+
+/* =========================================
+   MORE GUIDES CTA
+========================================= */
+.cta-row {
+  margin: 8px 0 60px;
+}
+
+.more-guides{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+
+  padding:10px 16px;
+  border-radius:14px;
+
+  background: rgba(15,18,22,.55);
+  border: 1px solid rgba(91,180,255,.35);
+
+  color: var(--text);
+  font-weight:700;
+  font-size:13px;
+  letter-spacing:.2px;
+  text-decoration:none;
+
+  box-shadow:
+    0 0 0 1px rgba(123,97,255,.12),
+    0 10px 26px rgba(0,0,0,.35);
+
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+}
+
+.more-guides:hover{
+  transform: translateY(-2px);
+  border-color: rgba(91,180,255,.75);
+  box-shadow:
+    0 0 0 1px rgba(91,180,255,.18),
+    0 16px 34px rgba(0,0,0,.42);
+}
+
+.mg-arrow{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+
+  width:28px;
+  height:28px;
+
+  border-radius:10px;
+  background: linear-gradient(135deg, rgba(91,180,255,.95), rgba(123,97,255,.95));
+  color:#0f1216;
+
+  font-weight:900;
+  line-height:1;
+
+  box-shadow: 0 10px 22px rgba(91,180,255,.22);
+}
+
+body.light-theme .more-guides{
+  background: rgba(255,255,255,.85);
+  border: 1px solid rgba(0,0,0,.12);
+  box-shadow:
+    0 0 0 1px rgba(0,0,0,.04),
+    0 10px 22px rgba(0,0,0,.10);
+}
+
+body.light-theme .more-guides:hover{
+  border-color: rgba(53,92,255,.55);
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+@media (max-width: 640px) {
+  .article-title { font-size: 28px; }
+  .anatomy-grid,
+  .consensus-grid,
+  .proscons-grid,
+  .examples-grid {
+    grid-template-columns: 1fr;
+  }
+}

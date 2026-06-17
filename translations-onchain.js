@@ -1,220 +1,198 @@
 window.TRANSLATIONS = {
   el: {
-  
-/* =======================
-   ON-CHAIN DATA (EL)
-======================= */
-oc_title: "On-chain δεδομένα (βασικά)",
-oc_intro:
-  "Τα on-chain δεδομένα είναι πληροφορίες που “γράφονται” στο blockchain και δείχνουν τι γίνεται πραγματικά στο δίκτυο: κινήσεις wallets, flows, activity και χρήσιμα σημάδια τάσης.",
-
-oc_what_title: "Τι σημαίνει “on-chain”;",
-oc_what_text:
-  "“On-chain” σημαίνει ότι τα δεδομένα προέρχονται από το ίδιο το blockchain (συναλλαγές, διευθύνσεις, ποσά, blocks). Δεν είναι γνώμη/φήμη — είναι μετρήσεις από τη δραστηριότητα του δικτύου.",
-
-oc_metrics_title: "Βασικά metrics που αξίζει να ξέρεις",
-oc_metric1: "Active addresses: πόσες διευθύνσεις κάνουν συναλλαγές σε μια περίοδο.",
-oc_metric2: "Transaction count/volume: πόσες συναλλαγές γίνονται και τι “όγκο” έχουν.",
-oc_metric3: "Fees & congestion: πόσο “φορτωμένο” είναι το δίκτυο (και πόσο κοστίζει).",
-oc_metric4: "Exchange inflows/outflows: πόσα coins μπαίνουν/βγαίνουν από ανταλλακτήρια.",
-oc_metric5: "Whale activity: κινήσεις μεγάλων κατόχων (με προσοχή στην ερμηνεία).",
-oc_metric6: "Supply metrics: π.χ. πόσο supply μένει σε exchanges ή κινείται σε long-term holders.",
-
-oc_flows_title: "Flows: εισροές/εκροές σε exchanges",
-oc_flows_text:
-  "Γενικά, όταν πολλά coins μπαίνουν σε exchanges (inflows), μπορεί να σημαίνει πρόθεση πώλησης. Όταν βγαίνουν (outflows), μπορεί να δείχνει αποθήκευση/μακροπρόθεσμη κατοχή. Όμως δεν είναι “σήμα” μόνο του — χρειάζεται πλαίσιο.",
-
-oc_whales_title: "Whales & μεγάλοι κάτοχοι",
-oc_whales_text:
-  "Οι whales μπορούν να μετακινούν μεγάλα ποσά και να επηρεάζουν την αγορά. Μια μεταφορά whale δεν σημαίνει πάντα πώληση: μπορεί να είναι αναδιάρθρωση, OTC, αλλαγή wallet, custody κ.ά.",
-oc_tip_title: "Tip:",
-oc_tip:
-  "Μην πανικοβάλλεσαι από ένα tweet/alert. Κοίτα αν η κίνηση πήγε σε exchange, αν ακολούθησε selling volume και τι δείχνει το trend συνολικά.",
-
-oc_limits_title: "Περιορισμοί (τι ΔΕΝ σου λένε τα on-chain)",
-oc_limit1: "Δεν βλέπεις πάντα τον “κάτοχο” πίσω από μια διεύθυνση.",
-oc_limit2: "Μπορεί να υπάρχουν internal transfers (π.χ. exchange wallets) που μπερδεύουν.",
-oc_limit3: "Bridges/L2s κάνουν τη ροή πιο σύνθετη (δεν είναι όλα στο ίδιο chain).",
-oc_limit4: "Τα δεδομένα μπορεί να έχουν lag ή διαφορετικές μεθόδους υπολογισμού ανά πλατφόρμα.",
-oc_limit5: "On-chain ≠ τιμή. Η αγορά κινείται και από sentiment, macro, news, liquidity.",
-
-oc_mistakes_title: "Συχνά λάθη στην ερμηνεία",
-oc_mistake1: "Βλέπω inflow και “σίγουρη πτώση” — χωρίς επιβεβαίωση σε volume/price.",
-oc_mistake2: "Μπερδεύω internal exchange transfers με πραγματικές καταθέσεις χρηστών.",
-oc_mistake3: "Αγνοώ το timeframe (άλλο 1 ώρα, άλλο 1 μήνας).",
-oc_mistake4: "Κοιτάω 1 metric μόνο αντί για συνδυασμό.",
-oc_mistake5: "Δεν συγκρίνω με ιστορικά επίπεδα (τι είναι “υψηλό”;).",
-oc_mistake6: "Παίρνω whale alerts ως “σήματα trading”.",
-oc_mistake7: "Δεν ελέγχω αν η κίνηση έγινε σε exchange ή σε άλλο wallet/custody.",
-
-oc_check_title: "Mini checklist (πριν βγάλεις συμπέρασμα)",
-oc_check1: "Ποιο timeframe κοιτάω (ώρα/μέρα/εβδομάδα);",
-oc_check2: "Υπάρχει επιβεβαίωση σε volume/price action;",
-oc_check3: "Η μεταφορά πήγε σε exchange ή απλά άλλαξε wallet;",
-oc_check4: "Τι δείχνουν 2–3 metrics μαζί (όχι ένα μόνο);",
-oc_check5: "Υπάρχει news/sentiment που εξηγεί την κίνηση;",
-
-oc_conclusion_title: "Συμπέρασμα",
-oc_conclusion:
-  "Τα on-chain δεδομένα είναι πολύ χρήσιμα για να καταλάβεις τη δραστηριότητα ενός δικτύου, αλλά θέλουν σωστή ερμηνεία. Χρησιμοποίησέ τα σαν ‘εργαλείο επιβεβαίωσης’ μαζί με price/volume και γενικό πλαίσιο.",
-
-guides_more: "Δες περισσότερα →",
-
     /* =======================
-           FOOTER
+       HEADER / SHARED
     ======================= */
-    footer_rights: "Όλα τα δικαιώματα διατηρούνται.",
-
-
-mobile_home: "Αρχική Σελίδα",
-mobile_theme: "Αλλαγή Θέματος",
-
-
-    /* HEADER */
-    header_tagline: "Ο παλμός του κόσμου των crypto",
+    header_tagline: "Διάβασε την αγορά. Μην την ακούς.",
     nav_market: "Αγορά",
     nav_charts: "Τάσεις",
     nav_guides: "Οδηγοί",
     nav_glossary: "Γλωσσάρι",
+    nav_articles: "Άρθρα",
+    theme_dark: "Dark",
+    mobile_theme: "Αλλαγή Θέματος",
+    login: "Login",
+    logout: "Logout",
+    footer_disclaimer: "Εκπαιδευτικό περιεχόμενο μόνο. Δεν αποτελεί επενδυτική συμβουλή.",
 
     /* =======================
-             LOGIN
+       HERO
     ======================= */
-    login_title: "Σύνδεση",
-    login_email: "Email",
-    login_password: "Κωδικός",
-    login_btn: "Σύνδεση",
-    login_no_account: "Δεν έχεις λογαριασμό στο CryptoKosmos.",
-    login_create_account: "Δημιουργία λογαριασμού",
-
+    oc_eyebrow: "ΟΔΗΓΟΣ",
+    oc_title: "On-chain δεδομένα (βασικά)",
+    oc_intro:
+      "Τα on-chain δεδομένα είναι πληροφορίες που «γράφονται» στο blockchain και δείχνουν τι γίνεται πραγματικά στο δίκτυο: κινήσεις wallets, flows, activity και χρήσιμα σημάδια τάσης.",
 
     /* =======================
-             SIGNUP
+       WHAT IS ON-CHAIN
     ======================= */
-    signup_title: "Δημιούργησε λογαριασμό",
-    signup_email: "Email",
-    signup_pass1: "Κωδικός",
-    signup_pass2: "Επιβεβαίωση κωδικού",
-    signup_error: "Οι κωδικοί δεν ταιριάζουν.",
-    signup_btn: "Δημιουργία λογαριασμού",
-    signup_back: "Σύνδεση",
-    signup_have_account: "Έχεις ήδη λογαριασμό;",
-
+    oc_what_title: "Τι σημαίνει \"on-chain\";",
+    oc_what_text:
+      "«On-chain» σημαίνει ότι κάθε πληροφορία είναι μόνιμα αποθηκευμένη στο δημόσιο blockchain — διαφανής, αμετάβλητη και επαληθεύσιμη από οποιονδήποτε. Αντίθετα, «off-chain» είναι δεδομένα που δεν καταγράφονται στο blockchain, όπως εσωτερικές συναλλαγές ενός CEX.",
 
     /* =======================
-             VERIFY
+       METRICS
     ======================= */
-    verify_title: "Επαλήθευση Email",
-    verify_subtitle: "Σου στείλαμε έναν 6-ψήφιο κωδικό.",
-    verify_code: "Κωδικός",
-    verify_error: "Λάθος κωδικός. Προσπάθησε ξανά.",
-    verify_btn: "Επιβεβαίωση"
+    oc_metrics_title: "Βασικά metrics που αξίζει να ξέρεις",
+    oc_metric1:
+      "Active Addresses: ο αριθμός μοναδικών διευθύνσεων που χρησιμοποιήθηκαν σε μια περίοδο. Υψηλή αύξηση = αυξημένη χρήση του δικτύου.",
+    oc_metric2:
+      "Transaction Volume: το συνολικό αξία που μεταφέρθηκε on-chain. Ξεχωρίζει πραγματική δραστηριότητα από «φασαρία».",
+    oc_metric3:
+      "NVT Ratio (Network Value to Transactions): μετρά αν η αγοραία αξία είναι δικαιολογημένη σε σχέση με την πραγματική χρήση. Υψηλό NVT = πιθανή υπερτίμηση.",
+    oc_metric4:
+      "SOPR (Spent Output Profit Ratio): δείχνει αν οι κάτοχοι πουλούν σε κέρδος ή ζημιά. Τιμή > 1 σημαίνει κέρδη, < 1 σημαίνει πανικός/ζημιές.",
+    oc_metric5:
+      "MVRV (Market Value to Realized Value): συγκρίνει την τρέχουσα τιμή με τη μέση τιμή κτήσης των coins. Χρήσιμο για εντοπισμό κορυφών και πατωμάτων.",
+    oc_metric6:
+      "Hodler Net Position Change: δείχνει αν οι μακροπρόθεσμοι κάτοχοι συσσωρεύουν ή πουλούν.",
+
+    /* =======================
+       FLOWS
+    ======================= */
+    oc_flows_title: "Flows: εισροές/εκροές σε exchanges",
+    oc_flows_text:
+      "Οι εισροές (inflows) σε exchanges σημαίνουν ότι κάποιοι μεταφέρουν crypto για να πουλήσουν — αυξημένη πίεση πώλησης. Οι εκροές (outflows) σημαίνουν ότι τα coins βγαίνουν από τα exchanges σε private wallets — σήμα συσσώρευσης και «hodling». Σταθερά υψηλές εκροές σε περίοδο πτώσης μπορεί να σημαίνουν ότι οι smart money αγοράζουν.",
+
+    /* =======================
+       WHALES
+    ======================= */
+    oc_whales_title: "Whales & μεγάλοι κάτοχοι",
+    oc_whales_text:
+      "Οι «whales» είναι διευθύνσεις που κρατούν πολύ μεγάλες ποσότητες crypto. Οι κινήσεις τους μπορούν να επηρεάσουν τις τιμές. Εργαλεία όπως το Glassnode, Nansen και Arkham επιτρέπουν να παρακολουθείς αυτές τις κινήσεις σε πραγματικό χρόνο.",
+    oc_tip_title: "Σημαντικό:",
+    oc_tip:
+      "Μια μεγάλη κίνηση whale δεν σημαίνει απαραίτητα αγορά ή πώληση — μπορεί να είναι απλά μεταφορά μεταξύ ιδίων wallets.",
+
+    /* =======================
+       LIMITS
+    ======================= */
+    oc_limits_title: "Περιορισμοί (τι ΔΕΝ σου λένε τα on-chain)",
+    oc_limit1: "Δεν ξέρεις αν μια διεύθυνση ανήκει σε exchange, fund ή ιδιώτη.",
+    oc_limit2: "Δεν αντικατοπτρίζουν off-chain συναλλαγές (π.χ. CEX internal trades).",
+    oc_limit3: "Ένα «whale» wallet μπορεί να ανήκει σε custodian — όχι σε έναν άνθρωπο.",
+    oc_limit4: "Τα δεδομένα είναι δημόσια αλλά η ερμηνεία τους απαιτεί πλαίσιο.",
+    oc_limit5: "Δεν προβλέπουν βραχυπρόθεσμες κινήσεις τιμών με αξιοπιστία.",
+
+    /* =======================
+       MISTAKES
+    ======================= */
+    oc_mistakes_title: "Συχνά λάθη στην ερμηνεία",
+    oc_mistake1: "Να βγάζεις συμπέρασμα από ένα μόνο metric χωρίς πλαίσιο.",
+    oc_mistake2: "Να θεωρείς ότι whale inflow = σίγουρη πώληση.",
+    oc_mistake3: "Να αγνοείς ότι πολλές μεταφορές είναι εσωτερικές (π.χ. rebalancing).",
+    oc_mistake4: "Να συγχέεις ενεργές διευθύνσεις με ενεργούς χρήστες.",
+    oc_mistake5: "Να βασίζεσαι αποκλειστικά σε on-chain χωρίς να κοιτάς τεχνική ανάλυση.",
+    oc_mistake6: "Να νομίζεις ότι υψηλό transaction volume σημαίνει bullish αγορά.",
+    oc_mistake7: "Να αντιγράφεις κινήσεις whales χωρίς να ξέρεις τον σκοπό τους.",
+
+    /* =======================
+       CHECKLIST
+    ======================= */
+    oc_check_title: "Mini checklist (πριν βγάλεις συμπέρασμα)",
+    oc_check1: "Κοίταξα πάνω από ένα metric ή μόνο ένα;",
+    oc_check2: "Ξέρω αν η διεύθυνση ανήκει σε exchange, fund ή ιδιώτη;",
+    oc_check3: "Η κίνηση είναι συνεπής με τη γενικότερη τάση της αγοράς;",
+    oc_check4: "Έχω ελέγξει τι λέει η τεχνική ανάλυση παράλληλα;",
+    oc_check5: "Το συμπέρασμά μου βασίζεται σε δεδομένα ή σε narrative;",
+
+    /* =======================
+       CONCLUSION
+    ======================= */
+    oc_conclusion_title: "Συμπέρασμα",
+    oc_conclusion:
+      "Τα on-chain δεδομένα δεν είναι μαγική σφαίρα — είναι ένα επιπλέον εργαλείο. Χρησιμοποιούνται σωστά όταν συνδυάζονται με τεχνική ανάλυση, macro πλαίσιο και κριτική σκέψη. Μάθε να τα διαβάζεις, όχι να τα ακολουθείς τυφλά.",
+
+    guides_more: "Δες περισσότερα →",
   },
 
-  /* ================================================================
-                          ENGLISH VERSION
-  ================================================================ */
+  /* ========================================================
+       ENGLISH TRANSLATIONS
+  ======================================================== */
   en: {
-   
-/* =======================
-   ON-CHAIN DATA (EN)
-======================= */
-oc_title: "On-chain Data (Basics)",
-oc_intro:
-  "On-chain data comes directly from the blockchain and shows what’s actually happening on the network: wallet movements, flows, activity, and useful trend signals.",
-
-oc_what_title: "What does “on-chain” mean?",
-oc_what_text:
-  "“On-chain” means the data is sourced from the blockchain itself (transactions, addresses, amounts, blocks). It’s not opinion or rumor — it’s measurable network activity.",
-
-oc_metrics_title: "Key metrics worth knowing",
-oc_metric1: "Active addresses: how many addresses transact over a period.",
-oc_metric2: "Transaction count/volume: how many transactions happen and their volume.",
-oc_metric3: "Fees & congestion: how busy the network is (and how costly it is).",
-oc_metric4: "Exchange inflows/outflows: coins moving into/out of exchanges.",
-oc_metric5: "Whale activity: large-holder movements (interpret carefully).",
-oc_metric6: "Supply metrics: e.g., supply on exchanges vs long-term holders.",
-
-oc_flows_title: "Flows: exchange inflows/outflows",
-oc_flows_text:
-  "In general, large inflows to exchanges can suggest selling intent, while outflows can suggest storage/long-term holding. But it’s not a standalone signal — context matters.",
-
-oc_whales_title: "Whales & large holders",
-oc_whales_text:
-  "Whales can move big amounts and influence markets. A whale transfer doesn’t always mean selling: it can be rebalancing, OTC, wallet migration, custody moves, etc.",
-oc_tip_title: "Tip:",
-oc_tip:
-  "Don’t panic from a single alert. Check whether it went to an exchange, whether selling volume followed, and what the broader trend looks like.",
-
-oc_limits_title: "Limitations (what on-chain DOESN’T tell you)",
-oc_limit1: "You often can’t identify the real owner behind an address.",
-oc_limit2: "Internal transfers (e.g., exchange wallets) can distort signals.",
-oc_limit3: "Bridges/L2s make flows more complex across chains.",
-oc_limit4: "Different platforms may calculate metrics differently or with delays.",
-oc_limit5: "On-chain ≠ price. Markets also move on sentiment, macro, news, liquidity.",
-
-oc_mistakes_title: "Common interpretation mistakes",
-oc_mistake1: "Seeing inflows and calling a guaranteed dump without confirmation.",
-oc_mistake2: "Confusing internal exchange shuffles with real user deposits.",
-oc_mistake3: "Ignoring timeframe (1 hour vs 1 month tells a different story).",
-oc_mistake4: "Relying on one metric instead of a set of signals.",
-oc_mistake5: "Not comparing to historical baselines (what counts as “high”?).",
-oc_mistake6: "Treating whale alerts as trading signals.",
-oc_mistake7: "Not checking whether a move went to an exchange or just another wallet.",
-
-oc_check_title: "Mini checklist (before drawing conclusions)",
-oc_check1: "What timeframe am I looking at (hour/day/week)?",
-oc_check2: "Is there confirmation in volume/price action?",
-oc_check3: "Did the transfer go to an exchange or just change wallets?",
-oc_check4: "Do 2–3 metrics agree (not just one)?",
-oc_check5: "Is there news/sentiment that explains the move?",
-
-oc_conclusion_title: "Conclusion",
-oc_conclusion:
-  "On-chain data is powerful for understanding network activity, but it must be interpreted carefully. Use it as a confirmation tool alongside price/volume and broader context.",
-
-guides_more: "See more →",
-
-
-    /* FOOTER */
-    footer_rights: "All rights reserved.",
-
-
-mobile_home: "Home Page",
-mobile_theme: "Change Theme",
-
-    /* HEADER */
-    header_tagline: "The pulse of the crypto world",
+    /* HEADER / SHARED */
+    header_tagline: "Read the market. Don't follow the noise.",
     nav_market: "Market",
     nav_charts: "Trends",
     nav_guides: "Guides",
     nav_glossary: "Glossary",
+    nav_articles: "Articles",
+    theme_dark: "Dark",
+    mobile_theme: "Change Theme",
+    login: "Login",
+    logout: "Logout",
+    footer_disclaimer: "Educational content only. Not financial advice.",
 
-    /* LOGIN */
-    login_title: "Login",
-    login_email: "Email",
-    login_password: "Password",
-    login_btn: "Login",
-    login_no_account: "You don't have a CryptoKosmos account.",
-    login_create_account: "Create Account",
+    /* HERO */
+    oc_eyebrow: "GUIDE",
+    oc_title: "On-chain Data (The Basics)",
+    oc_intro:
+      "On-chain data is information that is \"written\" to the blockchain and shows what is actually happening on the network: wallet movements, flows, activity, and useful trend signals.",
 
+    /* WHAT IS ON-CHAIN */
+    oc_what_title: "What does \"on-chain\" mean?",
+    oc_what_text:
+      "\"On-chain\" means every piece of information is permanently stored on the public blockchain — transparent, immutable, and verifiable by anyone. \"Off-chain,\" by contrast, refers to data not recorded on the blockchain, such as internal transactions within a CEX.",
 
-    /* SIGNUP */
-    signup_title: "Create an Account",
-    signup_email: "Email",
-    signup_pass1: "Password",
-    signup_pass2: "Confirm Password",
-    signup_error: "Passwords do not match.",
-    signup_btn: "Create Account",
-    signup_back: "Login",
-    signup_have_account: "Already have an account?",
+    /* METRICS */
+    oc_metrics_title: "Key metrics worth knowing",
+    oc_metric1:
+      "Active Addresses: the number of unique addresses used in a given period. A sharp increase signals higher network usage.",
+    oc_metric2:
+      "Transaction Volume: the total value transferred on-chain. Separates real activity from noise.",
+    oc_metric3:
+      "NVT Ratio (Network Value to Transactions): measures whether market cap is justified relative to actual usage. High NVT = possible overvaluation.",
+    oc_metric4:
+      "SOPR (Spent Output Profit Ratio): shows whether holders are selling at a profit or a loss. Value > 1 means profit, < 1 means panic/losses.",
+    oc_metric5:
+      "MVRV (Market Value to Realized Value): compares the current price with the average acquisition cost of coins in circulation. Useful for spotting tops and bottoms.",
+    oc_metric6:
+      "Hodler Net Position Change: shows whether long-term holders are accumulating or selling.",
 
+    /* FLOWS */
+    oc_flows_title: "Flows: exchange inflows & outflows",
+    oc_flows_text:
+      "Inflows to exchanges mean people are moving crypto in to sell — increased selling pressure. Outflows mean coins are leaving exchanges into private wallets — a signal of accumulation and hodling. Consistently high outflows during a price decline may indicate that smart money is buying.",
 
-    /* VERIFY */
-    verify_title: "Email Verification",
-    verify_subtitle: "We sent you a 6-digit code.",
-    verify_code: "Code",
-    verify_error: "Incorrect code. Try again.",
-    verify_btn: "Verify"
-  }
+    /* WHALES */
+    oc_whales_title: "Whales & large holders",
+    oc_whales_text:
+      "\"Whales\" are addresses holding very large amounts of crypto. Their moves can influence prices. Tools like Glassnode, Nansen, and Arkham allow you to track these movements in real time.",
+    oc_tip_title: "Important:",
+    oc_tip:
+      "A large whale transaction doesn't necessarily mean a buy or sell — it could simply be a transfer between the same entity's wallets.",
+
+    /* LIMITS */
+    oc_limits_title: "Limitations (what on-chain data does NOT tell you)",
+    oc_limit1: "You don't know whether an address belongs to an exchange, a fund, or an individual.",
+    oc_limit2: "They don't reflect off-chain transactions (e.g. CEX internal trades).",
+    oc_limit3: "A \"whale\" wallet may belong to a custodian — not a single person.",
+    oc_limit4: "The data is public, but interpreting it requires context.",
+    oc_limit5: "They don't reliably predict short-term price movements.",
+
+    /* MISTAKES */
+    oc_mistakes_title: "Common interpretation mistakes",
+    oc_mistake1: "Drawing conclusions from a single metric without context.",
+    oc_mistake2: "Assuming whale inflow always means an imminent sell.",
+    oc_mistake3: "Ignoring that many transfers are internal (e.g. rebalancing).",
+    oc_mistake4: "Confusing active addresses with active users.",
+    oc_mistake5: "Relying solely on on-chain data without looking at technical analysis.",
+    oc_mistake6: "Thinking high transaction volume automatically means a bullish market.",
+    oc_mistake7: "Copying whale moves without knowing their intent.",
+
+    /* CHECKLIST */
+    oc_check_title: "Mini checklist (before drawing a conclusion)",
+    oc_check1: "Did I look at more than one metric, or just one?",
+    oc_check2: "Do I know whether the address belongs to an exchange, fund, or individual?",
+    oc_check3: "Is the movement consistent with the broader market trend?",
+    oc_check4: "Have I also checked what technical analysis says?",
+    oc_check5: "Is my conclusion based on data or on a narrative?",
+
+    /* CONCLUSION */
+    oc_conclusion_title: "The bottom line",
+    oc_conclusion:
+      "On-chain data isn't a crystal ball — it's an additional tool. It works best when combined with technical analysis, macro context, and critical thinking. Learn to read it, not blindly follow it.",
+
+    guides_more: "See more →",
+  },
 };

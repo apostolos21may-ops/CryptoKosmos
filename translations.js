@@ -2,10 +2,11 @@ window.TRANSLATIONS = {
   el: {
 
 pf_brand_title: "CryptoKosmos",
-  pf_brand_sub: "Quick links & updates από το crypto σύμπαν.",
+  pf_brand_sub: "Ζωντανές τιμές, ανάλυση & οδηγοί στα ελληνικά.",
 
 
-news_subtitlee: "9 γρήγορα άρθρα που αξίζουν",
+news_title: "Νέα",
+news_subtitlee: "Τελευταία άρθρα",
 
 
   pf_explore_title: "Explore",
@@ -13,6 +14,7 @@ news_subtitlee: "9 γρήγορα άρθρα που αξίζουν",
   pf_explore_trends: "Trends",
   pf_explore_guides: "Guides",
   pf_explore_glossary: "Glossary",
+ 
 
   pf_social_title: "Social",
   pf_social_x: "X / Twitter",
@@ -24,61 +26,53 @@ news_subtitlee: "9 γρήγορα άρθρα που αξίζουν",
   pf_tag_guides: "Guides",
   pf_tag_altcoins: "Altcoins",
 
-pf_c1_wk_title: "Weekly Outlook: τι κινεί την αγορά",
-pf_c1_wk_b1: "Liquidity & βασικά επίπεδα",
-pf_c1_wk_b2: "Macro τόνος",
-pf_c1_wk_b3: "Sentiment & positioning",
+  // Card 1 — Market this week (Strategy / Tether / XRP)
+  pf_c1_ss_title: "Όταν ο «never sell» πούλησε: τι μαθαίνουμε από τη Strategy",
+  pf_c1_ss_b1: "ETF outflow streak ρεκόρ",
+  pf_c1_ss_b2: "Symbolism vs μέγεθος",
+  pf_c1_ss_b3: "Πώς διαβάζεις τίτλους χωρίς πανικό",
 
-pf_c1_liq_title: "Bitcoin: πού κάθεται η ρευστότητα και γιατί η τιμή πηγαίνει εκεί",
-pf_c1_liq_b1: "Highs & lows: liquidity magnets",
-pf_c1_liq_b2: "Sweeps vs breakouts",
-pf_c1_liq_b3: "Timing μετά το “καθάρισμα”",
+  pf_c1_tf_title: "Το Tether «πέρασε» το Ethereum: τι σημαίνει αυτό το ρεκόρ",
+  pf_c1_tf_b1: "Market cap stablecoin vs network",
+  pf_c1_tf_b2: "Πού πάει το κεφάλαιο",
+  pf_c1_tf_b3: "Πώς διαβάζεις extreme προβλέψεις",
 
-pf_c1_rw_title: "Rotation watch: πού μετακινείται το χρήμα",
-pf_c1_rw_b1: "BTC dominance",
-pf_c1_rw_b2: "ETH & majors",
-pf_c1_rw_b3: "Alt leaders",
+  pf_c1_xr_title: "6 εβδομάδες εισροών στα XRP ETFs ενώ η τιμή πέφτει",
+  pf_c1_xr_b1: "Flows vs price",
+  pf_c1_xr_b2: "Capital rotation",
+  pf_c1_xr_b3: "Sentiment ως contrarian σήμα",
 
-   pf_c2_s3_title:
-      "Wallet Drain Scams: πώς αδειάζει ένα wallet χωρίς seed",
+  // Card 2 — Macro & companies this week (SpaceX / BitMine / Mastercard)
+  pf_c2_ts_title: "Το IPO της SpaceX «μπήκε» στο crypto: tokenized μετοχές & perpetuals",
+  pf_c2_ts_b1: "Tokenized stocks vs perpetuals",
+  pf_c2_ts_b2: "Liquidity & supply risk",
+  pf_c2_ts_b3: "AI narrative & xAI",
 
-    pf_c2_s3_b1:
-      "Κακόβουλα signs & approvals",
+  pf_c2_bm_title: "$8,66 δισ. «χαρτί»: η μεγαλύτερη ETH treasury στον κόσμο",
+  pf_c2_bm_b1: "Unrealized vs realized loss",
+  pf_c2_bm_b2: "Equity vs χρέος",
+  pf_c2_bm_b3: "NAV & treasury εταιρείες",
 
-    pf_c2_s3_b2:
-      "Fake sites & spoofed dApps",
+  pf_c2_mc_title: "Mastercard & Stablecoins: τι αλλάζει για το crypto τώρα",
+  pf_c2_mc_b1: "Stablecoins σε mainstream rails",
+  pf_c2_mc_b2: "Agent Pay & payments infra",
+  pf_c2_mc_b3: "Τι σημαίνει για adoption",
 
-    pf_c2_s3_b3:
-      "Κανόνας main vs hot wallet",
+  // Card 3 — Risk, security & altcoins (Altcoin Exit / Geopolitical / Quantum)
+  pf_c3_alt_title: "Altcoin Exit Checklist: πότε βγαίνεις πριν γίνει αργά",
+  pf_c3_alt_b1: "Partial exits & targets",
+  pf_c3_alt_b2: "Liquidity & volume",
+  pf_c3_alt_b3: "Sentiment shifts",
 
+  pf_c3_gp_title: "Canary in the coal mine: το crypto & τα γεωπολιτικά σοκ",
+  pf_c3_gp_b1: "24/7 markets",
+  pf_c3_gp_b2: "Sell-off & recovery pattern",
+  pf_c3_gp_b3: "Safe haven vs risk asset",
 
-  pf_c2_s3_title: "Fake sites: πώς να τα αναγνωρίζεις σε 10s",
-  pf_c2_s3_b1: "Domain & TLD παγίδες",
-  pf_c2_s3_b2: "UI & frontend ασυνέπειες",
-  pf_c2_s3_b3: "Wallet prompts πριν το drain",
-
-
-pf_c2_s4_title: "Permit approvals: το αόρατο approval",
-pf_c2_s4_b1: "Off-chain signatures (χωρίς approve tx)",
-pf_c2_s4_b2: "Κρυφό allowance & delayed drain",
-pf_c2_s4_b3: "Scam frontends & fake “sign”",
-
-  pf_an_s1_title: "Altcoins vs Narratives: γιατί ΔΕΝ ανεβαίνουν όλα μαζί",
-pf_an_s1_b1: "Selective liquidity, όχι ίση κατανομή",
-pf_an_s1_b2: "Rotation μέσα στο ίδιο narrative",
-pf_an_s1_b3: "Γιατί λίγα coins “κερδίζουν”",
-
- // Slide 2 — Narrative Hype
-  pf_psy_s2_title: "Narrative Hype Checklist: πότε είναι ευκαιρία και πότε παγίδα",
-  pf_psy_s2_b1: "Attention vs πραγματική ζήτηση",
-  pf_psy_s2_b2: "Late-stage narratives",
-  pf_psy_s2_b3: "Πού μπαίνει το smart money",
-
-  // Slide 3 — Altcoin Exit
-  pf_psy_s3_title: "Altcoin Exit Checklist: πότε βγαίνεις πριν γίνει αργά",
-  pf_psy_s3_b1: "Distribution & αδύναμο follow-through",
-  pf_psy_s3_b2: "Narrative exhaustion",
-  pf_psy_s3_b3: "Η ρευστότητα πέφτει & traps",
+  pf_c3_qb_title: "Bitcoin & quantum computers: τι λέει η Coinbase για τα νομίσματα του Satoshi",
+  pf_c3_qb_b1: "Mining vs υπογραφές",
+  pf_c3_qb_b2: "~7 εκατ. BTC ευάλωτα",
+  pf_c3_qb_b3: "Το δίλημμα του «freeze»",
 
   // (προαιρετικά για aria)
   pf_next: "Επόμενο άρθρο",
@@ -99,36 +93,36 @@ mobile_theme: "Αλλαγή Θέματος",
 
 
     /* HEADER */
-    header_tagline: "Ο παλμός του κόσμου των crypto",
+    header_tagline: "Διάβασε την αγορά. Μην την ακούς.",
     nav_market: "Αγορά",
     nav_charts: "Τάσεις",
     nav_guides: "Οδηγοί",
     nav_glossary: "Γλωσσάρι",
+    nav_articles: "Άρθρα",
+
 
     /* THEME */
     theme_dark: "Dark",
     theme_light: "Light",
 
     /* AUTH */
-    login: "Login",
+   login: "Login",
     logout: "Logout",
 
     /* HERO */
-    hero_title: "Καλώς ήρθες στο CryptoKosmos",
-    hero_line1:
-      "Το CryptoKosmos είναι η πιο απλή και ασφαλής ελληνική πλατφόρμα για να βλέπεις ζωντανές τιμές, να καταλαβαίνεις τάσεις και να μπαίνεις στον κόσμο των crypto χωρίς πονοκέφαλο.",
-    hero_line2:
-      "Ζωντανά δεδομένα από Binance & CoinGecko, premium ανάλυση και γλώσσα απλή — για όλους.",
+    hero_title: "Crypto χωρίς φλυαρία.",
+    hero_line1: "Ζωντανές τιμές για Bitcoin, Ethereum και Solana. Ανάλυση αγοράς και οδηγοί — στα ελληνικά, χωρίς περιττά.",
+    hero_line2: "Δεδομένα από Binance & CoinGecko. Ανανέωση σε πραγματικό χρόνο.",
 
     /* MARKET */
     market_title: "Ζωντανές τιμές",
-    market_source: "Πηγή τιμών: CoinGecko (ανανεώνεται αυτόματα).",
+    market_source: "Πηγή: CoinGecko — ανανεώνεται αυτόματα.",
 
     /* CHARTS */
     charts_title: "Τάσεις αγοράς",
 
     /* GUIDES */
-    guides_title: "Οδηγοί για αρχάριους",
+    guides_title: "Οδηγοί",
     guide_blockchain_title: "Τι είναι το Blockchain",
     guide_blockchain_desc:
       "Το “κοινόχρηστο ψηφιακό βιβλίο” που καταγράφει συναλλαγές με ασφάλεια & διαφάνεια.",
@@ -351,11 +345,10 @@ guides_more: "Δες περισσότερα →",
 "Network Partition": "Διαχωρισμός δικτύου."
     },
 glossary_more: "Δες περισσότερα",
-glossary_less: "Λιγότερα",
+glossary_less: "Δες λιγότερα",
     /* FOOTER */
     footer_rights: "Όλα τα δικαιώματα διατηρούνται.",
-    footer_disclaimer:
-      "Disclaimer: Εκπαιδευτικό περιεχόμενο. Δεν αποτελεί επενδυτική συμβουλή.",
+    footer_disclaimer: "Εκπαιδευτικό περιεχόμενο μόνο. Δεν αποτελεί επενδυτική συμβουλή.",
 
     /* LOGIN MODAL */
     login_title: "Σύνδεση",
@@ -363,8 +356,8 @@ glossary_less: "Λιγότερα",
     login_email_placeholder: "you@example.com",
     login_password_label: "Password",
     login_password_placeholder: "••••••••",
-    login_submit: "Σύνδεση",
-    login_demo: "Demo login: δεν στέλνεται τίποτα σε server.",
+    login_submit: "Login →",
+    login_demo: "Ο λογαριασμός σου αποθηκεύεται με ασφάλεια στο cloud.",
     login_no_account: "Δεν έχεις λογαριασμό στο CryptoKosmos.",
     login_create_account: "Δημιουργία λογαριασμού",
 
@@ -385,7 +378,7 @@ glossary_less: "Λιγότερα",
     verify_title: "Επαλήθευση Email",
     verify_info: "Σου στείλαμε έναν 6-ψήφιο κωδικό.",
     verify_code_label: "Κωδικός",
-    verify_code_placeholder: "123456",
+    verify_code_placeholder: "_ _ _ _ _ _",
     verify_error: "Λάθος κωδικός. Προσπάθησε ξανά.",
     verify_submit: "Επιβεβαίωση",
   },
@@ -394,10 +387,11 @@ glossary_less: "Λιγότερα",
 
 
 pf_brand_title: "CryptoKosmos",
-  pf_brand_sub: "Quick links & updates from the crypto universe.",
+  pf_brand_sub: "Live prices, analysis & guides in plain English.",
 
 
-news_subtitlee: "9 quick articles worth reading",
+news_title: "News",
+news_subtitlee: "Latest articles",
 
 
   pf_explore_title: "Explore",
@@ -405,6 +399,7 @@ news_subtitlee: "9 quick articles worth reading",
   pf_explore_trends: "Trends",
   pf_explore_guides: "Guides",
   pf_explore_glossary: "Glossary",
+ 
 
   pf_social_title: "Social",
   pf_social_x: "X / Twitter",
@@ -416,80 +411,59 @@ news_subtitlee: "9 quick articles worth reading",
   pf_tag_guides: "Guides",
   pf_tag_altcoins: "Altcoins",
 
- pf_c1_wk_title: "Weekly Outlook: what moves the market",
-pf_c1_wk_b1: "Liquidity & key levels",
-pf_c1_wk_b2: "Macro tone",
-pf_c1_wk_b3: "Sentiment & positioning",
-
-pf_c1_liq_title: "Bitcoin: where liquidity sits and why price moves there",
-pf_c1_liq_b1: "Highs & lows: liquidity magnets",
-pf_c1_liq_b2: "Sweeps vs breakouts",
-pf_c1_liq_b3: "Timing after liquidity is cleared",
-
-pf_c1_rw_title: "Rotation watch: where capital flows",
-pf_c1_rw_b1: "BTC dominance",
-pf_c1_rw_b2: "ETH & majors",
-pf_c1_rw_b3: "Alt leaders",
-
-   
-
-pf_c2_s4_title: "Permit approvals: the invisible approval",
-pf_c2_s4_b1: "Off-chain signatures (no approve tx)",
-pf_c2_s4_b2: "Hidden allowance & delayed drain",
-pf_c2_s4_b3: "Scam frontends & fake “sign”",
-
-
-  pf_c2_s3_title: "Fake sites: how to spot them in 10s",
-  pf_c2_s3_b1: "Domain & TLD traps",
-  pf_c2_s3_b2: "UI & frontend inconsistencies",
-  pf_c2_s3_b3: "Wallet prompts before the drain",
 
 
 
 
-  pf_c3_s1_title: "Solana fees & tips for beginners",
-  pf_c3_s1_b1: "What you pay on swaps & transfers",
-  pf_c3_s1_b2: "Priority fees: when you need them",
-  pf_c3_s1_b3: "Slippage: how to set it",
 
-      pf_c2_s3_title:
-      "Wallet Drain Scams: how wallets get drained without seed",
 
-    pf_c2_s3_b1:
-      "Malicious signs & approvals",
-
-    pf_c2_s3_b2:
-      "Fake sites & spoofed dApps",
-
-    pf_c2_s3_b3:
-      "Main vs hot wallet rule",
-
-  pf_c3_s2_title: "Alt rotation: 3 signs the market is rotating",
-  pf_c3_s2_b1: "BTC dominance: down = room for alts",
-  pf_c3_s2_b2: "Volume majors→alts (on-chain/cex)",
-  pf_c3_s2_b3: "Narratives: what trend is running",
-
-  pf_c3_s3_title: "On-chain checklist: what to check before buying an alt",
-  pf_c3_s3_b1: "Holders / concentration (whales)",
-  pf_c3_s3_b2: "Liquidity & locked LP",
-  pf_c3_s3_b3: "Token unlocks & emissions",
-
-  // Slide 2 — Narrative Hype
-  pf_psy_s2_title: "Narrative Hype Checklist: opportunity or trap?",
-  pf_psy_s2_b1: "Attention vs real demand",
-  pf_psy_s2_b2: "Late-stage narratives",
-  pf_psy_s2_b3: "Where smart money steps in",
-
-  // Slide 3 — Altcoin Exit
-  pf_psy_s3_title: "Altcoin Exit Checklist: when to get out early",
-  pf_psy_s3_b1: "Distribution & weak follow-through",
-  pf_psy_s3_b2: "Narrative exhaustion",
-  pf_psy_s3_b3: "Liquidity fades & traps",
-
-pf_an_s1_title: "Altcoins vs Narratives: why NOT everything pumps together",
-pf_an_s1_b1: "Selective liquidity, not equal distribution",
-pf_an_s1_b2: "Rotation within the same narrative",
-pf_an_s1_b3: "Why only a few coins win",
+  // Card 1 — Market this week (Strategy / Tether / XRP)
+  "pf_c1_ss_title": "When the 'Never Sell' Sold: What Strategy's Move Teaches Us",
+  "pf_c1_ss_b1": "Record ETF outflow streak",
+  "pf_c1_ss_b2": "Symbolism vs size",
+  "pf_c1_ss_b3": "Reading headlines without panic",
+ 
+  "pf_c1_tf_title": "Tether Just 'Flipped' Ethereum: What This Record Means",
+  "pf_c1_tf_b1": "Stablecoin vs network market cap",
+  "pf_c1_tf_b2": "Where capital is going",
+  "pf_c1_tf_b3": "Reading extreme predictions",
+ 
+  "pf_c1_xr_title": "6 Weeks of XRP ETF Inflows While the Price Keeps Falling",
+  "pf_c1_xr_b1": "Flows vs price",
+  "pf_c1_xr_b2": "Capital rotation",
+  "pf_c1_xr_b3": "Sentiment as a contrarian signal",
+ 
+  // Card 2 — Macro & companies this week (SpaceX / BitMine / Mastercard)
+  "pf_c2_ts_title": "SpaceX's IPO Just 'Entered' Crypto: Tokenized Stocks & Perpetuals",
+  "pf_c2_ts_b1": "Tokenized stocks vs perpetuals",
+  "pf_c2_ts_b2": "Liquidity & supply risk",
+  "pf_c2_ts_b3": "AI narrative & xAI",
+ 
+  "pf_c2_bm_title": "$8.66B 'On Paper': The World's Largest ETH Treasury",
+  "pf_c2_bm_b1": "Unrealized vs realized loss",
+  "pf_c2_bm_b2": "Equity vs debt",
+  "pf_c2_bm_b3": "NAV & treasury companies",
+ 
+  "pf_c2_mc_title": "Mastercard & Stablecoins: What's Changing for Crypto Now",
+  "pf_c2_mc_b1": "Stablecoins on mainstream rails",
+  "pf_c2_mc_b2": "Agent Pay & payments infra",
+  "pf_c2_mc_b3": "What it means for adoption",
+ 
+  // Card 3 — Risk, security & altcoins (Altcoin Exit / Geopolitical / Quantum)
+  "pf_c3_alt_title": "Altcoin Exit Checklist: How to Get Out Before It's Too Late",
+  "pf_c3_alt_b1": "Partial exits & targets",
+  "pf_c3_alt_b2": "Liquidity & volume",
+  "pf_c3_alt_b3": "Sentiment shifts",
+ 
+  "pf_c3_gp_title": "Canary in the Coal Mine: Crypto & Geopolitical Shocks",
+  "pf_c3_gp_b1": "24/7 markets",
+  "pf_c3_gp_b2": "Sell-off & recovery pattern",
+  "pf_c3_gp_b3": "Safe haven vs risk asset",
+ 
+  "pf_c3_qb_title": "Bitcoin & Quantum Computers: What Coinbase Says About Satoshi's Coins",
+  "pf_c3_qb_b1": "Mining vs signatures",
+  "pf_c3_qb_b2": "~7M BTC vulnerable",
+  "pf_c3_qb_b3": "The 'freeze' dilemma",
 
   // optional aria
   pf_next: "Next article",
@@ -511,11 +485,13 @@ live_prices: "View Live Prices",
 mobile_theme: "Change Theme",
 
     /* HEADER */
-    header_tagline: "The pulse of the crypto world",
+    header_tagline: "Read the market. Don't follow the noise.",
     nav_market: "Market",
     nav_charts: "Trends",
     nav_guides: "Guides",
     nav_glossary: "Glossary",
+    nav_articles: "Articles",
+
 
     /* THEME */
     theme_dark: "Dark",
@@ -526,21 +502,19 @@ mobile_theme: "Change Theme",
     logout: "Logout",
 
     /* HERO */
-    hero_title: "Welcome to CryptoKosmos",
-    hero_line1:
-      "CryptoKosmos is the simplest and safest platform to track live prices, understand trends and enter the crypto world without headaches.",
-    hero_line2:
-      "Live data from Binance & CoinGecko, premium analysis and simple language — for everyone.",
+    hero_title: "Crypto without the noise.",
+    hero_line1: "Live prices for Bitcoin, Ethereum and Solana. Market analysis and guides — in plain language, no fluff.",
+    hero_line2: "Data from Binance & CoinGecko. Updated in real time.",
 
     /* MARKET */
     market_title: "Live Prices",
-    market_source: "Price source: CoinGecko (updates automatically).",
+    market_source: "Source: CoinGecko — auto-updated.",
 
     /* CHARTS */
     charts_title: "Market Trends",
 
     /* GUIDES */
-    guides_title: "Beginner Guides",
+    guides_title: "Guides",
     guide_blockchain_title: "What is Blockchain",
     guide_blockchain_desc:
       "The shared digital ledger that records transactions securely and transparently.",
@@ -765,8 +739,7 @@ glossary_less: "See less",
 
     /* FOOTER */
     footer_rights: "All rights reserved.",
-    footer_disclaimer:
-      "Disclaimer: Educational content only. Not financial advice.",
+    footer_disclaimer: "Educational content only. Not financial advice.",
 
     /* LOGIN MODAL */
     login_title: "Login",
@@ -775,7 +748,7 @@ glossary_less: "See less",
     login_password_label: "Password",
     login_password_placeholder: "••••••••",
     login_submit: "Login",
-    login_demo: "Demo login: nothing is sent to a server.",
+    login_demo: "Your account is securely stored in the cloud.",
     login_no_account: "You don’t have an account on CryptoKosmos.",
     login_create_account: "Create account",
 
@@ -796,7 +769,7 @@ glossary_less: "See less",
     verify_title: "Verify Email",
     verify_info: "We sent you a 6-digit code.",
     verify_code_label: "Code",
-    verify_code_placeholder: "123456",
+    verify_code_placeholder: "_ _ _ _ _ _",
     verify_error: "Incorrect code. Try again.",
     verify_submit: "Verify",
   

@@ -5,8 +5,6 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>NFT – CryptoKosmos</title>
 
-  <!-- GLOBAL STYLES -->
-  <link rel="stylesheet" href="../styles.css" />
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-7DWG18EQLG"></script>
 
@@ -17,242 +15,32 @@
   <!-- PAGE TRANSLATIONS -->
 
 
-  <style>
-
-
-#auth-icon {
-  width: 20px;
-  height: 20px;
-}
-
-
-
-     body.article-page {
-      padding: 0;
-    }
-
-    .article-container {
-      max-width: 800px;
-      margin: auto;
-      padding: 20px;
-    }
-
-    /* Desktop: lock widths of header buttons */
-    @media (min-width: 900px) {
-      #theme-toggle {
-        width: 85px;
-        justify-content: center;
-      }
-
-      #auth-btn {
-        width: 85px;
-        justify-content: center;
-      }
-
-      #lang-toggle {
-        width: 70px;
-        justify-content: center;
-      }
-
-      .pill-btn {
-        height: 34px;
-      }
-    }
-
-
-
-
-
-
-
-
-
-
-.more-guides{
-  display:inline-flex;
-  align-items:center;
-  gap:10px;
-
-  padding:10px 16px;
-  border-radius:14px;
-
-  background: rgba(15,18,22,.55);
-  border: 1px solid rgba(91,180,255,.35);
-
-  color: var(--text);
-  font-weight:700;
-  font-size:13px;
-  letter-spacing:.2px;
-  text-decoration:none;
-
-  box-shadow:
-    0 0 0 1px rgba(123,97,255,.12),
-    0 10px 26px rgba(0,0,0,.35);
-
-  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
-}
-
-.more-guides:hover{
-  transform: translateY(-2px);
-  border-color: rgba(91,180,255,.75);
-  box-shadow:
-    0 0 0 1px rgba(91,180,255,.18),
-    0 16px 34px rgba(0,0,0,.42);
-}
-
-.more-guides:hover{
-  transform: translateY(-2px);
-  border-color: rgba(91,180,255,.75);
-  box-shadow:
-    0 0 0 1px rgba(91,180,255,.18),
-    0 16px 34px rgba(0,0,0,.42);
-}
-
-/* Arrow pill */
-.mg-arrow{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-
-  width:28px;
-  height:28px;
-
-  border-radius:10px;
-  background: linear-gradient(135deg, rgba(91,180,255,.95), rgba(123,97,255,.95));
-  color:#0f1216;
-
-  font-weight:900;
-  line-height:1;
-
-  box-shadow: 0 10px 22px rgba(91,180,255,.22);
-}
-
-/* Light theme version */
-body.light-theme .more-guides{
-  background: rgba(255,255,255,.85);
-  border: 1px solid rgba(0,0,0,.12);
-  box-shadow:
-    0 0 0 1px rgba(0,0,0,.04),
-    0 10px 22px rgba(0,0,0,.10);
-}
-
-body.light-theme .more-guides:hover{
-  border-color: rgba(53,92,255,.55);
-}
-
-body.light-theme .more-guides{
-  background: rgba(255,255,255,.85);
-  border: 1px solid rgba(0,0,0,.12);
-}
-
-/* Mobile */
-@media (max-width: 520px){
-  .more-guides{
-    padding:9px 12px;
-    font-size:12px;
-    white-space:nowrap;
-  }
-  .mg-arrow{ width:26px; height:26px; border-radius:9px; }
-}
-
-/* ✅ Το "Γύρνα πίσω" να μένει κάτω από την 1η (αριστερή) κάρτα */
-.guides-grid{
-  display:grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap:16px;
-}
-
-.guides-grid > .more-guides{
-  grid-column: 1;        /* 1η στήλη (αριστερά) */
-  justify-self: start;   /* αριστερά μέσα στη στήλη */
-  align-self: end;       /* κάτω στο row του */
-  margin-top: 8px;       /* μικρό κενό από πάνω */
-}
-  </style>
 </head>
 
 <body class="article-page">
 
-<!-- ================= HEADER ================= -->
-<header class="site-header">
-  <div class="container header-inner">
-
-    <a class="brand" href="../index.html">
-      <img id="site-logo" src="../logo.png" class="logo" />
-      <div class="brand-text">
-        <h1>CryptoKosmos</h1>
-        <p class="tagline" data-i18n="header_tagline">Ο παλμός του κόσμου των crypto</p>
-      </div>
-    </a>
-
-    <nav class="nav">
-      <a href="../index.html#market" data-i18n="nav_market">Αγορά</a>
-      <a href="../index.html#charts" data-i18n="nav_charts">Τάσεις</a>
-      <a href="../index.html#guides" data-i18n="nav_guides">Οδηγοί</a>
-      <a href="../index.html#glossary" data-i18n="nav_glossary">Γλωσσάρι</a>
-    </nav>
-
-    <div class="header-actions">
-
-      <button id="theme-toggle" class="pill-btn">
-        <img id="theme-icon" src="../IMG_5300.png" class="icon-img" />
-        <span id="theme-label" data-i18n="theme_dark">Dark</span>
-      </button>
-
-      <button id="auth-btn" class="pill-btn">
-        <img id="auth-icon" src="../IMG_5301.png" class="icon-img" />
-        <span id="auth-label" data-i18n="login">Login</span>
-      </button>
-
-      <button id="menu-toggle" class="menu-btn">
-        <span class="burger-line"></span>
-        <span class="burger-line"></span>
-        <span class="burger-line"></span>
-      </button>
-
-      <button id="lang-toggle" class="pill-btn">
-        <img id="lang-icon" class="icon-img" src="../IMG_5542.png">
-        <span id="lang-label">GR</span>
-      </button>
-
-    </div>
-  </div>
-</header>
-
-<!-- ================= MOBILE MENU ================= -->
-<div id="mobile-menu" class="mobile-menu">
-  <a href="../index.html#market" data-i18n="nav_market">Αγορά</a>
-  <a href="../index.html#charts" data-i18n="nav_charts">Τάσεις</a>
-  <a href="../index.html#guides" data-i18n="nav_guides">Οδηγοί</a>
-  <a href="../index.html#glossary" data-i18n="nav_glossary">Γλωσσάρι</a>
-
-  <button id="mobile-home-btn" class="mobile-btn" data-i18n="mobile_home">Αρχική</button>
-  <button id="mobile-theme-toggle" class="mobile-btn" data-i18n="mobile_theme">Αλλαγή Θέματος</button>
-  <button id="mobile-auth-btn" class="mobile-btn" data-i18n="login">Login</button>
-
-  <button id="mobile-lang-toggle" class="mobile-btn">
-    <img id="mobile-lang-icon" class="icon-img" src="../IMG_5542.png">
-    <span id="mobile-lang-label">GR</span>
-  </button>
-</div>
+<!-- header.js injects <header>/.mobile-menu/modals here -->
 
 <!-- ================= ARTICLE CONTENT ================= -->
-<div class="article-container">
+<div class="article-wrap">
 
-  <h2 data-i18n="nft_title">Τι είναι τα NFT;</h2>
+  <span class="article-eyebrow" data-i18n="nft_eyebrow">ΟΔΗΓΟΣ</span>
 
-  <p data-i18n="nft_intro">
+  <h2 class="article-title" data-i18n="nft_title">Τι είναι τα NFT;</h2>
+
+  <p class="article-lead" data-i18n="nft_intro">
     Τα NFT (Non-Fungible Tokens) είναι μοναδικά ψηφιακά tokens που αποδεικνύουν ιδιοκτησία και αυθεντικότητα
     για ένα συγκεκριμένο ψηφιακό αντικείμενο (τέχνη, συλλεκτικά, μουσική, in-game items κ.λπ.).
     Σε αντίθεση με τα κρυπτονομίσματα, κάθε NFT είναι διαφορετικό και δεν ανταλλάσσεται 1:1 με κάποιο άλλο.
   </p>
 
 
-  <img id="article-image"
+  <img class="article-hero-img"
+       id="article-image"
        src="./image.png"
        data-light-img="./image.png"
        data-dark-img="./image.png"
-       style="width:100%;border-radius:16px;margin:20px 0;">
+       alt="NFT illustration" />
 
   <h3 data-i18n="nft_speed_title">Πόσο γρήγορα “γίνονται” οι συναλλαγές NFT;</h3>
   <p data-i18n="nft_speed_text">
@@ -317,172 +105,34 @@ body.light-theme .more-guides{
     Για ασφάλεια, πάντα έλεγχε το official link της συλλογής, το smart contract και μην υπογράφεις ύποπτες συναλλαγές.
   </p>
 
-<a href="../guides/MoreGuids.html" class="more-guides" data-i18n="guides_more" aria-label="More guides">
+<div class="cta-row">
+  <a href="../guides/MoreGuids.html" class="more-guides" data-i18n="guides_more" aria-label="More guides">
     Δες περισσότερα <span class="mg-arrow">→</span>
   </a>
+</div>
 
 </div>
 
-<!-- ================= FOOTER ================= -->
-<footer class="site-footer">
-  <div class="container">
-    <p>
-      © <span id="year"></span> CryptoKosmos —
-      <span data-i18n="footer_rights">Όλα τα δικαιώματα διατηρούνται.</span>
-    </p>
-  </div>
-</footer>
+<!-- prefooter.js injects .prefooter + <footer> here -->
 
-<!-- ================= LOGIN MODAL ================= -->
-<div id="login-modal" class="modal hidden">
-  <div class="modal-backdrop"></div>
-  <div class="modal-card">
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
 
-    <div class="modal-header">
-      <span class="modal-title" data-i18n="login_title">Σύνδεση</span>
-      <button class="modal-close" id="login-close">×</button>
-    </div>
+<!-- GLOBAL SCRIPTS -->
+<script src="../header.js" defer></script>
+<script src="../prefooter.js" defer></script>
 
-    <form id="login-form">
-      <div class="modal-body">
+<!-- PAGE TRANSLATIONS (πρέπει να φορτωθεί ΠΡΙΝ το i18n.js) -->
+<script src="../translations-NFT.js" defer></script>
 
-        <label data-i18n="login_email">Email</label>
-        <input id="login-email" type="email"
-               data-i18n-placeholder="login_email"
-               placeholder="Email">
-
-        <label data-i18n="login_password">Κωδικός</label>
-        <div class="pass-wrap">
-          <input id="login-pass" type="password"
-                 data-i18n-placeholder="login_password"
-                 placeholder="Password">
-          <img id="login-pass-toggle" class="pass-eye" src="../IMG_5380.png">
-        </div>
-
-      </div>
-
-      <button class="modal-submit" type="submit" data-i18n="login_btn">
-        Σύνδεση
-      </button>
-
-      <p id="no-account" class="modal-hint" style="color:#ffb3b3; display:none;"
-         data-i18n="login_no_account">
-        Δεν έχεις λογαριασμό στο CryptoKosmos.
-      </p>
-
-      <button id="signup-btn" type="button"
-        style="display:none;margin-top:10px;width:100%;padding:10px 14px;border:none;border-radius:14px;background:#1e293b;color:white;font-weight:600;cursor:pointer;border:1px solid rgba(255,255,255,0.25);"
-        data-i18n="login_create_account">
-        Δημιουργία λογαριασμού
-      </button>
-
-    </form>
-
-  </div>
-</div>
-
-<!-- ================= SIGNUP MODAL ================= -->
-<div id="signup-modal" class="modal hidden">
-  <div class="modal-backdrop"></div>
-
-  <div class="modal-card">
-    <div class="modal-header">
-      <h3 class="modal-title" data-i18n="signup_title">Δημιούργησε λογαριασμό</h3>
-      <button class="modal-close signup-close">×</button>
-    </div>
-
-    <div class="modal-body">
-
-      <label data-i18n="signup_email">Email</label>
-      <input id="signup-email" type="email"
-             data-i18n-placeholder="signup_email"
-             placeholder="Email">
-
-      <label data-i18n="signup_pass1">Κωδικός</label>
-      <div class="pass-wrap">
-        <input id="signup-pass1" type="password"
-               data-i18n-placeholder="signup_pass1"
-               placeholder="Password">
-        <img id="signup-pass1-toggle" class="pass-eye" src="../IMG_5380.png">
-      </div>
-
-      <label data-i18n="signup_pass2">Επιβεβαίωση κωδικού</label>
-      <div class="pass-wrap">
-        <input id="signup-pass2" type="password"
-               data-i18n-placeholder="signup_pass2"
-               placeholder="Confirm Password">
-        <img id="signup-pass2-toggle" class="pass-eye" src="../IMG_5380.png">
-      </div>
-
-      <p id="signup-error" style="color:#ff6b6b; display:none;"
-         data-i18n="signup_error">
-         Οι κωδικοί δεν ταιριάζουν.
-      </p>
-
-      <button id="signup-create" class="modal-submit"
-              data-i18n="signup_btn">
-        Δημιουργία λογαριασμού
-      </button>
-
-      <p class="modal-hint">
-        <span data-i18n="signup_have_account">Έχεις ήδη λογαριασμό;</span>
-        <span id="back-to-login"
-              style="color:#5bb4ff;cursor:pointer;"
-              data-i18n="signup_back">
-          Σύνδεση
-        </span>
-      </p>
-
-    </div>
-  </div>
-</div>
-
-<!-- ================= VERIFY MODAL ================= -->
-<div id="verify-modal" class="modal hidden">
-  <div class="modal-backdrop"></div>
-
-  <div class="modal-card">
-    <div class="modal-header">
-      <h3 class="modal-title" data-i18n="verify_title">Επαλήθευση Email</h3>
-      <button class="modal-close verify-close">×</button>
-    </div>
-
-    <div class="modal-body">
-
-      <p class="muted" data-i18n="verify_subtitle">
-        Σου στείλαμε έναν 6-ψήφιο κωδικό.
-      </p>
-
-      <label data-i18n="verify_code">Κωδικός</label>
-      <input id="verify-code" type="text"
-             data-i18n-placeholder="verify_code"
-             placeholder="Code">
-
-      <p id="verify-error" style="color:#ff6b6b; display:none;"
-         data-i18n="verify_error">
-         Λάθος κωδικός. Προσπάθησε ξανά.
-      </p>
-
-      <button id="verify-submit" class="modal-submit"
-              data-i18n="verify_btn">
-        Επιβεβαίωση
-      </button>
-
-    </div>
-  </div>
-</div>
-
-<!-- ================= SCRIPTS ================= -->
-<script>
-  document.getElementById("year").textContent = new Date().getFullYear();
-  document.getElementById("mobile-home-btn")?.addEventListener("click", () => {
-    window.location.href = "../index.html";
-  });
-</script>
-
-<script src="../translations-NFT.js"></script>
-<script src="../i18n.js"></script>
+<script src="../i18n.js" defer></script>
 <script src="../app.js" defer></script>
 
+<!-- GLOBAL STYLES -->
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="../header-theme.css" />
+  <link rel="stylesheet" href="../article-theme.css" />
+<script src="../scroll-on-lang.js"></script>
 </body>
 </html>

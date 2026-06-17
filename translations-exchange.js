@@ -1,273 +1,256 @@
 window.TRANSLATIONS = {
   el: {
-   
-/* =======================
-      CEX vs DEX CONTENT
-======================= */
-cexdex_title: "CEX vs DEX: Ποια είναι η διαφορά;",
-cexdex_intro:
-  "Τα crypto exchanges χωρίζονται σε δύο βασικές κατηγορίες: κεντρικοποιημένα (CEX) και αποκεντρωμένα (DEX). Το καθένα έχει διαφορετικό τρόπο λειτουργίας, επίπεδο ελέγχου και ρίσκα.",
-
-cexdex_cex_title: "Τι είναι CEX;",
-cexdex_cex_text:
-  "CEX (Centralized Exchange) είναι ένα κεντρικό ανταλλακτήριο που λειτουργεί σαν “μεσάζοντας”. Συνήθως φτιάχνεις λογαριασμό, κάνεις καταθέσεις και το exchange εκτελεί τις συναλλαγές μέσα στην πλατφόρμα του.",
-
-cexdex_dex_title: "Τι είναι DEX;",
-cexdex_dex_text:
-  "DEX (Decentralized Exchange) είναι ανταλλακτήριο πάνω στο blockchain. Οι ανταλλαγές γίνονται μέσω smart contracts και εσύ κρατάς τον έλεγχο των κλειδιών σου (non-custodial), συνδέοντας το wallet σου.",
-
-cexdex_how_title: "Πώς δουλεύει το καθένα;",
-cexdex_how_intro:
-  "Η βασική διαφορά είναι ποιος κρατά τα κεφάλαια και πού εκτελείται η συναλλαγή:",
-cexdex_how_li1: "CEX: order book + λογαριασμός στην πλατφόρμα (custodial).",
-cexdex_how_li2: "DEX: swap μέσω smart contract (on-chain).",
-cexdex_how_li3: "CEX: συχνά απαιτεί KYC, email/2FA και καταθέσεις.",
-cexdex_how_li4: "DEX: δεν χρειάζεται λογαριασμός—χρειάζεται wallet και gas.",
-cexdex_how_outro:
-  "Με απλά λόγια: στο CEX εμπιστεύεσαι την εταιρεία, στο DEX εμπιστεύεσαι τον κώδικα και το δίκτυο.",
-
-cexdex_steps_title: "Ροή μιας ανταλλαγής",
-cexdex_step1: "Επιλέγεις αν θα χρησιμοποιήσεις CEX ή DEX ανάλογα με τον στόχο σου.",
-cexdex_step2: "CEX: κάνεις login/κατάθεση — DEX: συνδέεις wallet.",
-cexdex_step3: "Διαλέγεις ζεύγος (π.χ. BTC/USDT ή ETH/USDC).",
-cexdex_step4: "CEX: βάζεις order — DEX: κάνεις swap και εγκρίνεις (approve) αν χρειαστεί.",
-cexdex_step5: "Πληρώνεις fees (trading fee / gas).",
-cexdex_step6: "Βλέπεις το αποτέλεσμα: υπόλοιπο στον λογαριασμό (CEX) ή στο wallet (DEX).",
-
-cexdex_custody_title: "Τι σημαίνει “custody”;",
-cexdex_custody_text:
-  "Custody σημαίνει ποιος κρατά τα private keys. Σε custodial λύσεις (συνήθως CEX) τα κλειδιά τα κρατά η πλατφόρμα. Σε non-custodial (συνήθως DEX) τα κλειδιά τα κρατάς εσύ μέσω του wallet σου.",
-
-cexdex_fees_title: "Fees & κόστη",
-cexdex_fees_text:
-  "Στα CEX πληρώνεις κυρίως trading fees και πιθανές χρεώσεις ανάληψης. Στα DEX πληρώνεις gas fees του δικτύου + πιθανό DEX fee, και μερικές φορές slippage (διαφορά τιμής λόγω ρευστότητας).",
-cexdex_fees_tip_title: "Tip:",
-cexdex_fees_tip:
-  "Σε DEX έλεγχε πάντα gas, slippage και το contract που κάνεις swap.",
-
-cexdex_security_title: "Ασφάλεια",
-cexdex_security_text:
-  "Τα CEX είναι εύκολα στη χρήση αλλά έχουν ρίσκο “counterparty” (αν συμβεί hack/πάγωμα/λάθος, μπορεί να επηρεαστείς). Τα DEX μειώνουν το custody ρίσκο, αλλά έχουν ρίσκο smart contract, phishing links και λάθος approvals.",
-cexdex_security_adv_title: "Συν:",
-cexdex_security_adv: "CEX: απλό UX, recovery/2FA — DEX: κρατάς τα keys σου.",
-cexdex_security_dis_title: "Πλην:",
-cexdex_security_dis: "CEX: εμπιστοσύνη σε τρίτο — DEX: ευθύνη στον χρήστη + on-chain ρίσκο.",
-
-cexdex_when_title: "Πότε διαλέγω τι;",
-cexdex_when1: "CEX αν θες εύκολες αγορές/πωλήσεις και fiat καταθέσεις.",
-cexdex_when2: "CEX αν κάνεις συχνό trading με χαμηλό slippage σε μεγάλα ζεύγη.",
-cexdex_when3: "DEX αν θες non-custodial έλεγχο (τα keys δικά σου).",
-cexdex_when4: "DEX αν θες πρόσβαση σε DeFi tokens/νέα ζεύγη γρήγορα.",
-cexdex_when5: "DEX αν θες on-chain διαφάνεια και self-custody.",
-cexdex_when6: "Απέφυγε DEX αν δεν είσαι άνετος με approvals/gas/links.",
-cexdex_when7: "Απέφυγε CEX αν θες 100% έλεγχο και φοβάσαι counterparty ρίσκο.",
-
-cexdex_pros_title: "Πλεονεκτήματα",
-cexdex_pro1: "CEX: πολύ εύκολη χρήση και γρήγορες συναλλαγές μέσα στην πλατφόρμα.",
-cexdex_pro2: "CEX: συχνά καλύτερη ρευστότητα σε μεγάλα ζεύγη.",
-cexdex_pro3: "DEX: non-custodial — κρατάς εσύ τα κλειδιά.",
-cexdex_pro4: "DEX: πρόσβαση σε DeFi/νέα tokens χωρίς άδεια.",
-cexdex_pro5: "DEX: διαφάνεια on-chain και έλεγχος approvals.",
-
-cexdex_cons_title: "Μειονεκτήματα",
-cexdex_con1: "CEX: ρίσκο τρίτου (hack, freeze, περιορισμοί).",
-cexdex_con2: "CEX: KYC/λογαριασμός και πιθανές χρεώσεις ανάληψης.",
-cexdex_con3: "DEX: gas fees και slippage σε χαμηλή ρευστότητα.",
-cexdex_con4: "DEX: ρίσκο smart contracts, phishing και λάθος approvals.",
-
-cexdex_examples_title: "Παραδείγματα",
-cexdex_ex1: "CEX: Binance, Coinbase, Kraken (ενδεικτικά).",
-cexdex_ex2: "DEX: Uniswap (Ethereum), PancakeSwap (BSC) (ενδεικτικά).",
-cexdex_ex3: "DEX aggregators: 1inch (ενδεικτικά).",
-cexdex_ex4: "Non-custodial wallets για DEX: MetaMask, Rabby, Phantom (ενδεικτικά).",
-
-cexdex_conclusion_title: "Συμπέρασμα",
-cexdex_conclusion:
-  "Τα CEX είναι πιο “εύκολα” αλλά βασίζονται στην εμπιστοσύνη σε τρίτο. Τα DEX σου δίνουν περισσότερο έλεγχο, αλλά απαιτούν προσοχή και γνώση. Η καλύτερη επιλογή εξαρτάται από το πόση ευκολία ή αυτονομία θέλεις.",
-
-guides_more: "Δες περισσότερα →",
-
     /* =======================
-           FOOTER
+       HEADER / SHARED
     ======================= */
-    footer_rights: "Όλα τα δικαιώματα διατηρούνται.",
-
-
-mobile_home: "Αρχική Σελίδα",
-mobile_theme: "Αλλαγή Θέματος",
-
-
-    /* HEADER */
-    header_tagline: "Ο παλμός του κόσμου των crypto",
+    header_tagline: "Διάβασε την αγορά. Μην την ακούς.",
     nav_market: "Αγορά",
     nav_charts: "Τάσεις",
     nav_guides: "Οδηγοί",
     nav_glossary: "Γλωσσάρι",
+    nav_articles: "Άρθρα",
+    theme_dark: "Dark",
+    mobile_theme: "Αλλαγή Θέματος",
+    login: "Login",
+    logout: "Logout",
+    footer_disclaimer: "Εκπαιδευτικό περιεχόμενο μόνο. Δεν αποτελεί επενδυτική συμβουλή.",
 
     /* =======================
-             LOGIN
+       HERO
     ======================= */
-    login_title: "Σύνδεση",
-    login_email: "Email",
-    login_password: "Κωδικός",
-    login_btn: "Σύνδεση",
-    login_no_account: "Δεν έχεις λογαριασμό στο CryptoKosmos.",
-    login_create_account: "Δημιουργία λογαριασμού",
-
+    cexdex_eyebrow: "ΟΔΗΓΟΣ",
+    cexdex_title: "CEX vs DEX: Ποια είναι η διαφορά;",
+    cexdex_intro:
+      "Τα crypto exchanges χωρίζονται σε δύο βασικές κατηγορίες: κεντρικοποιημένα (CEX) και αποκεντρωμένα (DEX). Το καθένα έχει διαφορετική φιλοσοφία, δομή και ρίσκο.",
 
     /* =======================
-             SIGNUP
+       CEX
     ======================= */
-    signup_title: "Δημιούργησε λογαριασμό",
-    signup_email: "Email",
-    signup_pass1: "Κωδικός",
-    signup_pass2: "Επιβεβαίωση κωδικού",
-    signup_error: "Οι κωδικοί δεν ταιριάζουν.",
-    signup_btn: "Δημιουργία λογαριασμού",
-    signup_back: "Σύνδεση",
-    signup_have_account: "Έχεις ήδη λογαριασμό;",
-
+    cexdex_cex_title: "Τι είναι CEX;",
+    cexdex_cex_text:
+      "Ένα Centralized Exchange (CEX) είναι μια πλατφόρμα που λειτουργεί σαν παραδοσιακό χρηματιστήριο — μια εταιρεία διαχειρίζεται τα κεφάλαιά σου, εκτελεί τις συναλλαγές και τηρεί τα αρχεία. Παραδείγματα: Binance, Coinbase, Kraken.",
 
     /* =======================
-             VERIFY
+       DEX
     ======================= */
-    verify_title: "Επαλήθευση Email",
-    verify_subtitle: "Σου στείλαμε έναν 6-ψήφιο κωδικό.",
-    verify_code: "Κωδικός",
-    verify_error: "Λάθος κωδικός. Προσπάθησε ξανά.",
-    verify_btn: "Επιβεβαίωση"
+    cexdex_dex_title: "Τι είναι DEX;",
+    cexdex_dex_text:
+      "Ένα Decentralized Exchange (DEX) λειτουργεί μέσω smart contracts απευθείας στο blockchain — χωρίς ενδιάμεσο. Εσύ κρατάς πάντα τα κλειδιά του wallet σου. Παραδείγματα: Uniswap, dYdX, Jupiter.",
+
+    /* =======================
+       HOW IT WORKS
+    ======================= */
+    cexdex_how_title: "Πώς δουλεύει το καθένα;",
+    cexdex_how_intro:
+      "Η βασική διαφορά είναι ποιος ελέγχει τα κεφάλαια κατά τη διάρκεια μιας συναλλαγής:",
+    cexdex_how_li1: "CEX: καταθέτεις crypto στο exchange, το οποίο το κρατάει για λογαριασμό σου.",
+    cexdex_how_li2: "CEX: οι συναλλαγές γίνονται στο εσωτερικό σύστημα του exchange (off-chain).",
+    cexdex_how_li3: "DEX: το wallet σου συνδέεται απευθείας με το protocol.",
+    cexdex_how_li4: "DEX: κάθε swap εκτελείται ως on-chain συναλλαγή μέσω smart contract.",
+    cexdex_how_outro:
+      "Στο CEX ο έλεγχος είναι κεντρικός. Στο DEX παραμένει πάντα στον χρήστη.",
+
+    /* =======================
+       FLOW
+    ======================= */
+    cexdex_steps_title: "Ροή μιας ανταλλαγής",
+    cexdex_step1: "Συνδέεσαι στο CEX ή συνδέεις το wallet σου στο DEX.",
+    cexdex_step2: "Επιλέγεις το ζεύγος ανταλλαγής (π.χ. BTC/USDT).",
+    cexdex_step3: "Ορίζεις ποσό και τύπο εντολής (market, limit κ.ά.).",
+    cexdex_step4: "CEX: η εντολή ταιριάζει με αντίστοιχη στο order book. DEX: το smart contract εκτελεί το swap.",
+    cexdex_step5: "Η συναλλαγή επιβεβαιώνεται — στο CEX άμεσα, στο DEX μετά από on-chain επιβεβαίωση.",
+    cexdex_step6: "Το υπόλοιπό σου ενημερώνεται.",
+
+    /* =======================
+       CUSTODY
+    ======================= */
+    cexdex_custody_title: "Τι σημαίνει \"custody\";",
+    cexdex_custody_text:
+      "Custody σημαίνει ποιος κρατάει τα private keys — δηλαδή ποιος ελέγχει πραγματικά τα κρυπτονομίσματά σου. Στο CEX τα κλειδιά ανήκουν στην εταιρεία (custodial). Στο DEX τα κλειδιά ανήκουν πάντα σε εσένα (non-custodial). «Not your keys, not your coins.»",
+
+    /* =======================
+       FEES
+    ======================= */
+    cexdex_fees_title: "Fees & κόστη",
+    cexdex_fees_text:
+      "Τα CEX χρεώνουν συνήθως maker/taker fees (0.1%–0.5%) καθώς και κόστος ανάληψης. Τα DEX χρεώνουν gas fees (κόστος δικτύου) και swap fees του protocol (συνήθως 0.05%–0.3% ανά ανταλλαγή).",
+    cexdex_fees_tip_title: "Tip:",
+    cexdex_fees_tip:
+      "Σε περιόδους συμφόρησης δικτύου, τα gas fees ενός DEX μπορεί να ξεπεράσουν κατά πολύ τα trading fees ενός CEX.",
+
+    /* =======================
+       SECURITY
+    ======================= */
+    cexdex_security_title: "Ασφάλεια",
+    cexdex_security_text:
+      "Το ρίσκο είναι διαφορετικό στις δύο περιπτώσεις — και πρέπει να το κατανοείς πριν επιλέξεις.",
+    cexdex_security_adv_title: "CEX:",
+    cexdex_security_adv:
+      "Εάν χρεοκοπήσει ή παραβιαστεί το exchange, τα κεφάλαιά σου κινδυνεύουν. Ιστορικά παραδείγματα: Mt. Gox, FTX.",
+    cexdex_security_dis_title: "DEX:",
+    cexdex_security_dis:
+      "Το ρίσκο είναι στο smart contract — αν υπάρχει bug, μπορεί να εκμεταλλευτεί κάποιος. Εσύ όμως δεν χάνεις κεφάλαια από πτώχευση τρίτου.",
+
+    /* =======================
+       WHEN TO USE
+    ======================= */
+    cexdex_when_title: "Πότε διαλέγω τι;",
+    cexdex_when1: "CEX: θέλεις να αγοράσεις crypto με fiat (ευρώ, δολάριο).",
+    cexdex_when2: "CEX: είσαι αρχάριος και θέλεις απλή εμπειρία.",
+    cexdex_when3: "CEX: χρειάζεσαι high liquidity για μεγάλες συναλλαγές.",
+    cexdex_when4: "DEX: θέλεις πλήρη έλεγχο των κεφαλαίων σου.",
+    cexdex_when5: "DEX: θέλεις πρόσβαση σε νέα tokens που δεν είναι ακόμα σε CEX.",
+    cexdex_when6: "DEX: θέλεις να παρέχεις ρευστότητα (liquidity provision).",
+    cexdex_when7: "DEX: δεν θέλεις να κάνεις KYC / να αποκαλύψεις ταυτότητα.",
+
+    /* =======================
+       PROS / CONS
+    ======================= */
+    cexdex_pros_title: "Πλεονεκτήματα",
+    cexdex_pro1: "CEX: Εύκολο interface, ιδανικό για αρχάριους.",
+    cexdex_pro2: "CEX: Υψηλή ρευστότητα και γρήγορες εκτελέσεις.",
+    cexdex_pro3: "CEX: Υποστήριξη πελατών και ανάκτηση λογαριασμού.",
+    cexdex_pro4: "DEX: Κανένα custodial ρίσκο — πλήρης αυτονομία.",
+    cexdex_pro5: "DEX: Δεν απαιτείται KYC ή εγγραφή.",
+
+    cexdex_cons_title: "Μειονεκτήματα",
+    cexdex_con1: "CEX: Εξαρτάσαι από τρίτο μέρος για τα κεφάλαιά σου.",
+    cexdex_con2: "CEX: Υπόκειται σε ρυθμιστικές αλλαγές και παγώματα λογαριασμών.",
+    cexdex_con3: "DEX: Πιο σύνθετο για αρχάριους — απαιτεί γνώση wallets & gas.",
+    cexdex_con4: "DEX: Gas fees μπορεί να κάνουν μικρές συναλλαγές ασύμφορες.",
+
+    /* =======================
+       EXAMPLES
+    ======================= */
+    cexdex_examples_title: "Παραδείγματα",
+    cexdex_ex1: "CEX: Binance — το μεγαλύτερο exchange παγκοσμίως σε όγκο.",
+    cexdex_ex2: "CEX: Coinbase — δημοφιλές στις ΗΠΑ, ρυθμιζόμενο.",
+    cexdex_ex3: "DEX: Uniswap — το πιο γνωστό DEX στο Ethereum.",
+    cexdex_ex4: "DEX: Jupiter — κορυφαίο DEX aggregator στο Solana.",
+
+    /* =======================
+       CONCLUSION
+    ======================= */
+    cexdex_conclusion_title: "Συμπέρασμα",
+    cexdex_conclusion:
+      "Δεν υπάρχει «σωστή» επιλογή — εξαρτάται από τις ανάγκες σου. Τα CEX προσφέρουν άνεση, τα DEX προσφέρουν αυτονομία. Οι περισσότεροι έμπειροι χρήστες χρησιμοποιούν και τα δύο.",
+
+    guides_more: "Δες περισσότερα →",
   },
 
-  /* ================================================================
-                          ENGLISH VERSION
-  ================================================================ */
+  /* ========================================================
+       ENGLISH TRANSLATIONS
+  ======================================================== */
   en: {
-   /* =======================
-      CEX vs DEX CONTENT
-======================= */
-cexdex_title: "CEX vs DEX: What’s the difference?",
-cexdex_intro:
-  "Crypto exchanges fall into two main categories: centralized exchanges (CEX) and decentralized exchanges (DEX). Each has a different workflow, level of control, and risk profile.",
-
-cexdex_cex_title: "What is a CEX?",
-cexdex_cex_text:
-  "A CEX (Centralized Exchange) is a company/platform that acts as an intermediary. You typically create an account, deposit funds, and trade inside the platform’s system.",
-
-cexdex_dex_title: "What is a DEX?",
-cexdex_dex_text:
-  "A DEX (Decentralized Exchange) runs on a blockchain. Trades happen via smart contracts and you keep control of your private keys (non-custodial) by connecting your wallet.",
-
-cexdex_how_title: "How does each one work?",
-cexdex_how_intro:
-  "The key difference is who holds the funds and where the trade is executed:",
-cexdex_how_li1: "CEX: order book + platform account (custodial).",
-cexdex_how_li2: "DEX: on-chain swap via smart contract.",
-cexdex_how_li3: "CEX: often requires KYC, email/2FA, and deposits.",
-cexdex_how_li4: "DEX: no account—requires a wallet and gas fees.",
-cexdex_how_outro:
-  "In short: with a CEX you trust a company; with a DEX you trust the code and the network.",
-
-cexdex_steps_title: "A typical swap flow",
-cexdex_step1: "Choose CEX or DEX based on your goal.",
-cexdex_step2: "CEX: login/deposit — DEX: connect your wallet.",
-cexdex_step3: "Pick a pair (e.g., BTC/USDT or ETH/USDC).",
-cexdex_step4: "CEX: place an order — DEX: swap and approve (if needed).",
-cexdex_step5: "Pay fees (trading fee / gas).",
-cexdex_step6: "See results: balance on the platform (CEX) or in your wallet (DEX).",
-
-cexdex_custody_title: "What does “custody” mean?",
-cexdex_custody_text:
-  "Custody is about who controls the private keys. In custodial setups (often CEX) the platform holds the keys. In non-custodial setups (often DEX) you hold the keys via your wallet.",
-
-cexdex_fees_title: "Fees & costs",
-cexdex_fees_text:
-  "On CEXs you mainly pay trading fees and sometimes withdrawal fees. On DEXs you pay network gas fees plus a possible DEX fee, and sometimes slippage (price impact due to liquidity).",
-cexdex_fees_tip_title: "Tip:",
-cexdex_fees_tip:
-  "On DEXs always check gas, slippage, and the contract/router you’re swapping through.",
-
-cexdex_security_title: "Security",
-cexdex_security_text:
-  "CEXs are easier to use but carry counterparty risk (hack/freeze/errors can affect you). DEXs reduce custody risk, but introduce smart contract risk, phishing links, and risky approvals.",
-cexdex_security_adv_title: "Pros:",
-cexdex_security_adv: "CEX: smooth UX, recovery/2FA — DEX: you control your keys.",
-cexdex_security_dis_title: "Cons:",
-cexdex_security_dis: "CEX: trust a third party — DEX: user responsibility + on-chain risks.",
-
-cexdex_when_title: "When should I use which?",
-cexdex_when1: "Use a CEX for simple buying/selling and fiat on-ramps.",
-cexdex_when2: "Use a CEX for frequent trading with low slippage on major pairs.",
-cexdex_when3: "Use a DEX if you want non-custodial control (your keys).",
-cexdex_when4: "Use a DEX for fast access to DeFi tokens/new pairs.",
-cexdex_when5: "Use a DEX for on-chain transparency and self-custody.",
-cexdex_when6: "Avoid DEXs if you’re not comfortable with approvals/gas/links.",
-cexdex_when7: "Avoid CEXs if you want full control and fear counterparty risk.",
-
-cexdex_pros_title: "Advantages",
-cexdex_pro1: "CEX: very easy to use and fast internal execution.",
-cexdex_pro2: "CEX: often deeper liquidity on major pairs.",
-cexdex_pro3: "DEX: non-custodial — you hold the keys.",
-cexdex_pro4: "DEX: permissionless access to DeFi/new tokens.",
-cexdex_pro5: "DEX: on-chain transparency and approval control.",
-
-cexdex_cons_title: "Disadvantages",
-cexdex_con1: "CEX: third-party risk (hack, freeze, restrictions).",
-cexdex_con2: "CEX: KYC/account + potential withdrawal fees.",
-cexdex_con3: "DEX: gas fees and slippage on low liquidity.",
-cexdex_con4: "DEX: smart contract risk, phishing, and bad approvals.",
-
-cexdex_examples_title: "Examples",
-cexdex_ex1: "CEX: Binance, Coinbase, Kraken (examples).",
-cexdex_ex2: "DEX: Uniswap (Ethereum), PancakeSwap (BSC) (examples).",
-cexdex_ex3: "DEX aggregators: 1inch (example).",
-cexdex_ex4: "Non-custodial wallets: MetaMask, Rabby, Phantom (examples).",
-
-cexdex_conclusion_title: "Conclusion",
-cexdex_conclusion:
-  "CEXs are more convenient but rely on trusting a third party. DEXs give you more control, but require caution and basic knowledge. The best choice depends on whether you value convenience or autonomy.",
-
-guides_more: "See more →",
-
-
-    /* FOOTER */
-    footer_rights: "All rights reserved.",
-
-
-mobile_home: "Home Page",
-mobile_theme: "Change Theme",
-
-    /* HEADER */
-    header_tagline: "The pulse of the crypto world",
+    /* HEADER / SHARED */
+    header_tagline: "Read the market. Don't follow the noise.",
     nav_market: "Market",
     nav_charts: "Trends",
     nav_guides: "Guides",
     nav_glossary: "Glossary",
+    nav_articles: "Articles",
+    theme_dark: "Dark",
+    mobile_theme: "Change Theme",
+    login: "Login",
+    logout: "Logout",
+    footer_disclaimer: "Educational content only. Not financial advice.",
 
-    /* LOGIN */
-    login_title: "Login",
-    login_email: "Email",
-    login_password: "Password",
-    login_btn: "Login",
-    login_no_account: "You don't have a CryptoKosmos account.",
-    login_create_account: "Create Account",
+    /* HERO */
+    cexdex_eyebrow: "GUIDE",
+    cexdex_title: "CEX vs DEX: What's the Difference?",
+    cexdex_intro:
+      "Crypto exchanges fall into two main categories: centralized (CEX) and decentralized (DEX). Each has a different philosophy, structure, and risk profile.",
 
+    /* CEX */
+    cexdex_cex_title: "What is a CEX?",
+    cexdex_cex_text:
+      "A Centralized Exchange (CEX) works like a traditional stock exchange — a company manages your funds, executes trades, and keeps the records. Examples: Binance, Coinbase, Kraken.",
 
-    /* SIGNUP */
-    signup_title: "Create an Account",
-    signup_email: "Email",
-    signup_pass1: "Password",
-    signup_pass2: "Confirm Password",
-    signup_error: "Passwords do not match.",
-    signup_btn: "Create Account",
-    signup_back: "Login",
-    signup_have_account: "Already have an account?",
+    /* DEX */
+    cexdex_dex_title: "What is a DEX?",
+    cexdex_dex_text:
+      "A Decentralized Exchange (DEX) operates through smart contracts directly on the blockchain — no intermediary. You always hold the keys to your wallet. Examples: Uniswap, dYdX, Jupiter.",
 
+    /* HOW IT WORKS */
+    cexdex_how_title: "How does each one work?",
+    cexdex_how_intro:
+      "The key difference is who controls the funds during a transaction:",
+    cexdex_how_li1: "CEX: you deposit crypto to the exchange, which holds it on your behalf.",
+    cexdex_how_li2: "CEX: trades happen in the exchange's internal system (off-chain).",
+    cexdex_how_li3: "DEX: your wallet connects directly to the protocol.",
+    cexdex_how_li4: "DEX: every swap is executed as an on-chain transaction via smart contract.",
+    cexdex_how_outro:
+      "On a CEX, control is centralized. On a DEX, it always stays with the user.",
 
-    /* VERIFY */
-    verify_title: "Email Verification",
-    verify_subtitle: "We sent you a 6-digit code.",
-    verify_code: "Code",
-    verify_error: "Incorrect code. Try again.",
-    verify_btn: "Verify"
-  }
+    /* FLOW */
+    cexdex_steps_title: "Trade flow",
+    cexdex_step1: "Log in to the CEX or connect your wallet to the DEX.",
+    cexdex_step2: "Select your trading pair (e.g. BTC/USDT).",
+    cexdex_step3: "Set amount and order type (market, limit, etc.).",
+    cexdex_step4: "CEX: your order is matched in the order book. DEX: the smart contract executes the swap.",
+    cexdex_step5: "The trade is confirmed — instantly on a CEX, after on-chain confirmation on a DEX.",
+    cexdex_step6: "Your balance is updated.",
+
+    /* CUSTODY */
+    cexdex_custody_title: "What does \"custody\" mean?",
+    cexdex_custody_text:
+      "Custody means who holds the private keys — i.e. who actually controls your crypto. On a CEX, the keys belong to the company (custodial). On a DEX, the keys always belong to you (non-custodial). \"Not your keys, not your coins.\"",
+
+    /* FEES */
+    cexdex_fees_title: "Fees & costs",
+    cexdex_fees_text:
+      "CEXs typically charge maker/taker fees (0.1%–0.5%) plus withdrawal costs. DEXs charge gas fees (network cost) and protocol swap fees (usually 0.05%–0.3% per trade).",
+    cexdex_fees_tip_title: "Tip:",
+    cexdex_fees_tip:
+      "During network congestion, DEX gas fees can far exceed the trading fees of a CEX.",
+
+    /* SECURITY */
+    cexdex_security_title: "Security",
+    cexdex_security_text:
+      "The risk profile is different in each case — and you need to understand it before choosing.",
+    cexdex_security_adv_title: "CEX:",
+    cexdex_security_adv:
+      "If the exchange goes bankrupt or gets hacked, your funds are at risk. Historical examples: Mt. Gox, FTX.",
+    cexdex_security_dis_title: "DEX:",
+    cexdex_security_dis:
+      "The risk lies in the smart contract — if there's a bug, it can be exploited. But you won't lose funds due to a third party's bankruptcy.",
+
+    /* WHEN TO USE */
+    cexdex_when_title: "When should I use which?",
+    cexdex_when1: "CEX: you want to buy crypto with fiat (euros, dollars).",
+    cexdex_when2: "CEX: you're a beginner and want a simple experience.",
+    cexdex_when3: "CEX: you need high liquidity for large trades.",
+    cexdex_when4: "DEX: you want full control of your funds.",
+    cexdex_when5: "DEX: you want access to new tokens not yet listed on a CEX.",
+    cexdex_when6: "DEX: you want to provide liquidity.",
+    cexdex_when7: "DEX: you don't want to do KYC or reveal your identity.",
+
+    /* PROS / CONS */
+    cexdex_pros_title: "Pros",
+    cexdex_pro1: "CEX: Easy interface, ideal for beginners.",
+    cexdex_pro2: "CEX: High liquidity and fast execution.",
+    cexdex_pro3: "CEX: Customer support and account recovery.",
+    cexdex_pro4: "DEX: No custodial risk — full autonomy.",
+    cexdex_pro5: "DEX: No KYC or registration required.",
+
+    cexdex_cons_title: "Cons",
+    cexdex_con1: "CEX: You depend on a third party for your funds.",
+    cexdex_con2: "CEX: Subject to regulatory changes and account freezes.",
+    cexdex_con3: "DEX: More complex for beginners — requires knowledge of wallets & gas.",
+    cexdex_con4: "DEX: Gas fees can make small trades uneconomical.",
+
+    /* EXAMPLES */
+    cexdex_examples_title: "Examples",
+    cexdex_ex1: "CEX: Binance — the largest exchange globally by volume.",
+    cexdex_ex2: "CEX: Coinbase — popular in the US, regulated.",
+    cexdex_ex3: "DEX: Uniswap — the best-known DEX on Ethereum.",
+    cexdex_ex4: "DEX: Jupiter — top DEX aggregator on Solana.",
+
+    /* CONCLUSION */
+    cexdex_conclusion_title: "The bottom line",
+    cexdex_conclusion:
+      "There's no single \"right\" choice — it depends on your needs. CEXs offer convenience, DEXs offer autonomy. Most experienced users use both.",
+
+    guides_more: "See more →",
+  },
 };

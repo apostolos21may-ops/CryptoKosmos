@@ -1,6 +1,6 @@
 window.TRANSLATIONS = {
   el: {
-    bc_title: "Όλες Οι Τιμές Κρυπτονομισμάτων",
+    bc_title: "Τιμές Κρυπτονομισμάτων",
     /* =======================
           FOOTER
     ======================= */
@@ -13,11 +13,12 @@ mobile_theme: "Αλλαγή Θέματος",
 
 
     /* HEADER */
-    header_tagline: "Ο παλμός του κόσμου των crypto",
+    header_tagline: "Διάβασε την αγορά. Μην την ακούς.",
     nav_market: "Αγορά",
     nav_charts: "Τάσεις",
     nav_guides: "Οδηγοί",
     nav_glossary: "Γλωσσάρι",
+     nav_articles: "Άρθρα",
 
 
     /* =======================
@@ -27,8 +28,9 @@ mobile_theme: "Αλλαγή Θέματος",
     login_email: "Email",
     login_password: "Κωδικός",
     login_btn: "Σύνδεση",
-    login_no_account: "Δεν έχεις λογαριασμό στο CryptoKosmos.",
+    login_no_account: "Λάθος email ή κωδικός.",
     login_create_account: "Δημιουργία λογαριασμού",
+    login_demo: "Ο λογαριασμός σου αποθηκεύεται με ασφάλεια στο cloud.",
 
 
     /* =======================
@@ -58,7 +60,7 @@ mobile_theme: "Αλλαγή Θέματος",
   ======================================================== */
   en: {
 
-    bc_title: "All Crypto Prices",
+    bc_title: "Crypto Prices",
 
     /* FOOTER */
     footer_rights: "All rights reserved.",
@@ -69,20 +71,21 @@ mobile_home: "Home Page",
 mobile_theme: "Change Theme",
 
     /* HEADER */
-    header_tagline: "The pulse of the crypto world",
+    header_tagline: "Read the market. Don't follow the noise.",
     nav_market: "Market",
     nav_charts: "Trends",
     nav_guides: "Guides",
     nav_glossary: "Glossary",
-
+    nav_articles: "Articles",
 
     /* LOGIN */
     login_title: "Login",
     login_email: "Email",
     login_password: "Password",
     login_btn: "Login",
-    login_no_account: "You don't have a CryptoKosmos account.",
+    login_no_account: "Wrong email or password.",
     login_create_account: "Create Account",
+    login_demo: "Your account is securely stored in the cloud.",
 
     /* SIGNUP */
     signup_title: "Create an Account",

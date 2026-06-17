@@ -1,252 +1,240 @@
-window.TRANSLATIONS = {
-  el: {
-    /* =======================
-     MARKET CYCLES
-======================= */
-mc_title: "Κύκλοι αγοράς & ψυχολογία στα Crypto",
-mc_intro:
-  "Οι αγορές κινούνται σε κύκλους. Το ίδιο και τα συναισθήματα των επενδυτών — από αισιοδοξία μέχρι πανικό.",
+window.TRANSLATIONS = window.TRANSLATIONS || {};
 
-mc_what_title: "Τι είναι οι κύκλοι αγοράς;",
-mc_what_text:
-  "Ένας κύκλος αγοράς είναι το επαναλαμβανόμενο μοτίβο ανόδου και πτώσης των τιμών. Συνήθως επηρεάζεται από ρευστότητα, ειδήσεις, adoption, μακροοικονομία και—κυρίως—συμπεριφορά πλήθους.",
+window.TRANSLATIONS.el = Object.assign(window.TRANSLATIONS.el || {}, {
+  /* =======================
+     HEADER / SHARED
+  ======================= */
+  header_tagline: "Διάβασε την αγορά. Μην την ακούς.",
+  nav_market: "Αγορά",
+  nav_charts: "Τάσεις",
+  nav_guides: "Οδηγοί",
+  nav_glossary: "Γλωσσάρι",
+  nav_articles: "Άρθρα",
+  theme_dark: "Dark",
+  mobile_theme: "Αλλαγή Θέματος",
+  login: "Login",
+  logout: "Logout",
+  footer_disclaimer: "Εκπαιδευτικό περιεχόμενο μόνο. Δεν αποτελεί επενδυτική συμβουλή.",
 
-mc_phases_title: "Βασικές φάσεις ενός κύκλου",
-mc_phases_intro:
-  "Αν και η πραγματικότητα δεν είναι ποτέ “τέλεια”, οι κύκλοι συχνά μοιάζουν με 4 βασικές φάσεις:",
-mc_phase1: "Accumulation (Συσσώρευση): χαμηλά, λίγοι ενδιαφέρονται, οι “ψύχραιμοι” χτίζουν θέσεις.",
-mc_phase2: "Bull / Markup (Άνοδος): αυξάνεται η ζήτηση, μπαίνει νέο χρήμα, τα νέα γίνονται πιο θετικά.",
-mc_phase3: "Distribution (Διανομή): κορυφές, υπερβολική αισιοδοξία, οι μεγάλοι σταδιακά πουλάνε σε FOMO.",
-mc_phase4: "Bear / Markdown (Πτώση): φόβος, capitulation, μείωση ρευστότητας και ενδιαφέροντος.",
-mc_phases_outro:
-  "Το “πότε” αλλάζει φάση φαίνεται περισσότερο από τη συμπεριφορά της αγοράς παρά από μια ημερομηνία.",
+  /* =======================
+     HERO
+  ======================= */
+  mc_eyebrow: "ΟΔΗΓΟΣ",
+  mc_title: "Κύκλοι αγοράς & ψυχολογία στα Crypto",
+  mc_lead:
+    "Οι αγορές κινούνται σε κύκλους. Το ίδιο και τα συναισθήματα των επενδυτών — από αισιοδοξία μέχρι πανικό.",
 
-mc_psy_title: "Ψυχολογία: τι συμβαίνει στο μυαλό μας;",
-mc_psy_intro:
-  "Σε κάθε φάση εμφανίζονται συγκεκριμένες παγίδες σκέψης που οδηγούν σε κακές αποφάσεις:",
-mc_psy1: "FOMO: αγοράζεις επειδή “φεύγει” και φοβάσαι μη χάσεις το τρένο.",
-mc_psy2: "Overconfidence: ανεβαίνει το portfolio και νομίζεις ότι “το έχεις”.",
-mc_psy3: "Confirmation bias: βλέπεις μόνο ό,τι επιβεβαιώνει αυτό που ήδη πιστεύεις.",
-mc_psy4: "Panic selling: πουλάς στο χαμηλό γιατί δεν αντέχεις την πίεση.",
-mc_psy5: "Revenge trading: προσπαθείς να “ρεφάρεις” γρήγορα μετά από ζημιά.",
-mc_psy6: "Apathy: στο bear market εγκαταλείπεις ακριβώς πριν γυρίσει ο κύκλος.",
+  /* =======================
+     WHAT
+  ======================= */
+  mc_what_title: "Τι είναι οι κύκλοι αγοράς;",
+  mc_what_text:
+    "Ένας κύκλος αγοράς είναι το μοτίβο που επαναλαμβάνεται ξανά και ξανά: άνοδος, ευφορία, πτώση, απόγνωση, ανάκαμψη. Στα crypto αυτοί οι κύκλοι είναι πιο έντονοι και πιο γρήγοροι από οποιαδήποτε άλλη αγορά — το Bitcoin έχει ήδη περάσει από τέσσερις μεγάλους κύκλους γύρω από το halving.",
 
-mc_signs_title: "Σημάδια που “φωνάζουν” κύκλο",
-mc_signs_text:
-  "Υπερβολική μόχλευση, ακραία greed/fear, hype παντού, “σίγουρα” κέρδη, και απότομες κινήσεις όγκου/μεταβλητότητας είναι συχνά σημάδια ότι η αγορά είναι σε υπερβολή.",
+  /* =======================
+     PHASES
+  ======================= */
+  mc_phases_title: "Βασικές φάσεις ενός κύκλου",
+  mc_phases_intro:
+    "Κάθε κύκλος περνά από τέσσερις φάσεις, που έχουν διαφορετικές ευκαιρίες και κινδύνους:",
+  mc_phase1:
+    "Συσσώρευση (Accumulation): Η τιμή είναι χαμηλά, ο κόσμος απαισιόδοξος. Οι «smart money» αγοράζουν σιγά-σιγά.",
+  mc_phase2:
+    "Άνοδος (Mark-up): Η τιμή ανεβαίνει, αρχίζει ο FOMO, νέοι επενδυτές μπαίνουν.",
+  mc_phase3:
+    "Διανομή (Distribution): Η τιμή κοντά στο top, οι έμπειροι πουλάνε στους νέους αγοραστές.",
+  mc_phase4:
+    "Πτώση (Mark-down): Η τιμή πέφτει, ο πανικός κυριαρχεί, πολλοί πουλάνε στο χαμηλό.",
 
-mc_manage_title: "Πώς να διαχειρίζεσαι τον κύκλο",
-mc_manage_text:
-  "Χρησιμοποίησε σχέδιο: DCA, στόχους, κανόνες ρίσκου και σταδιακές κινήσεις. Μην βασίζεσαι σε ένα “one-shot” entry/exit. Προστάτευσε κεφάλαιο σε bear markets και πάρε κέρδη σε bull markets με πλάνο.",
-mc_tip_title: "Tip:",
-mc_tip:
-  "Το καλύτερο “αντίδοτο” στην ψυχολογία είναι οι κανόνες: sizing, stop, και πειθαρχία.",
+  mc_phases_outro:
+    "Το δύσκολο: όλοι νομίζουν ότι ξέρουν σε ποια φάση είμαστε — αλλά συνήθως το καταλαβαίνουν αφού έχει ήδη αλλάξει.",
 
-mc_mistakes_title: "Συχνά λάθη",
-mc_mistake1: "Αγοράζεις την κορυφή επειδή όλοι μιλάνε για κέρδη.",
-mc_mistake2: "Βάζεις υπερβολικό leverage χωρίς σχέδιο.",
-mc_mistake3: "Δεν παίρνεις κέρδη ποτέ (ή τα παίρνεις πολύ νωρίς από φόβο).",
-mc_mistake4: "Κυνηγάς pumps και “σήματα” χωρίς επιβεβαίωση.",
-mc_mistake5: "Αλλάζεις στρατηγική κάθε εβδομάδα.",
-mc_mistake6: "Πανικοβάλλεσαι σε διορθώσεις και πουλάς στο λάθος σημείο.",
-mc_mistake7: "Δεν υπολογίζεις ρίσκο/position sizing.",
+  /* =======================
+     PSYCHOLOGY
+  ======================= */
+  mc_psy_title: "Ψυχολογία — τι συμβαίνει στο μυαλό μας;",
+  mc_psy_intro:
+    "Τα συναισθήματα είναι ο μεγαλύτερος εχθρός του επενδυτή. Αυτά είναι τα πιο κοινά ψυχολογικά λάθη:",
+  mc_psy1: "FOMO (Fear Of Missing Out): Αγοράζεις αργά, κοντά στο top, από φόβο ότι θα χάσεις.",
+  mc_psy2: "FUD (Fear, Uncertainty, Doubt): Πουλάς στον πανικό, συχνά στο χαμηλό.",
+  mc_psy3: "Overconfidence: Μετά από σερί κερδών, ρισκάρεις πολύ περισσότερο.",
+  mc_psy4: "Loss aversion: Κρατάς losers πολύ ώρα γιατί «δεν θες να αποδεχτείς την ήττα».",
+  mc_psy5:
+    "Anchoring: Κολλάς σε μια τιμή (π.χ. «το αγόρασα στα €50k») και δεν σκέφτεσαι αντικειμενικά.",
+  mc_psy6:
+    "Herd mentality: Ακολουθείς τον κόσμο — Twitter, YouTube, Telegram — αντί για ανάλυση.",
 
-mc_good_title: "Τι “κάνει νόημα” να κάνεις",
-mc_good1: "DCA σε projects που καταλαβαίνεις (και αντέχεις να κρατήσεις).",
-mc_good2: "Σταδιακό profit-taking σε bull market (π.χ. σε επίπεδα).",
-mc_good3: "Καθαρό πλάνο ρίσκου: max loss, sizing, diversification.",
-mc_good4: "Μελέτη δεδομένων/τάσης αντί για hype.",
-mc_good5: "Ρευστότητα/σταθερότητα όταν η αγορά είναι υπερθερμασμένη.",
+  /* =======================
+     SIGNS
+  ======================= */
+  mc_signs_title: "Σημάδια που «φωνάζουν» κύκλο",
+  mc_signs_text:
+    "Top signals: τα πάντα είναι στα νέα, ο καθένας μιλά για crypto, νέα coins γίνονται viral σε μέρες, leverage και greed index στα ύψη. Bottom signals: απόλυτη σιωπή, media το έχουν «θάψει», volume εξαιρετικά χαμηλό, οι πιο bullish άνθρωποι έχουν παραδοθεί.",
 
-mc_watch_title: "Τι να προσέχεις",
-mc_watch1: "Υπερβολικό hype και “σίγουρες” προβλέψεις.",
-mc_watch2: "Leverage και δανεισμό χωρίς ξεκάθαρους κανόνες.",
-mc_watch3: "Low-liquidity tokens που κάνουν εύκολα spike και dump.",
-mc_watch4: "Αποφάσεις από συναίσθημα (φόβος/απληστία).",
+  /* =======================
+     MANAGE
+  ======================= */
+  mc_manage_title: "Πώς να διαχειρίζεσαι τον κύκλο",
+  mc_manage_text:
+    "Δεν χρειάζεται να τιμάρεις την κορυφή ή το κατώτατο σημείο. Αρκεί να μην αγοράζεις στην ευφορία και να μην πουλάς στον πανικό. DCA (Dollar Cost Averaging) και προκαθορισμένα exit targets βοηθούν να αφαιρέσεις το συναίσθημα από τις αποφάσεις.",
+  mc_tip_title: "Tip:",
+  mc_tip:
+    "Φτιάξε ένα «exit plan» στο bull market — αποφάσισε σε ποια τιμή θα πουλήσεις μέρος των κερδών, πριν φτάσεις εκεί.",
 
-mc_examples_title: "Παραδείγματα στην πράξη",
-mc_ex1: "Bull market: όταν όλοι λένε “δεν πέφτει ποτέ”, συνήθως χρειάζεται προσοχή.",
-mc_ex2: "Bear market: όταν όλοι λένε “πέθανε”, συχνά ξεκινούν οι καλύτερες ευκαιρίες με DCA.",
-mc_ex3: "Μεγάλα pumps: συχνά ακολουθούν διορθώσεις—μην κυνηγάς το τέλος.",
-mc_ex4: "Απότομες πτώσεις: μην πανικοβάλλεσαι—δες επίπεδα, όγκο και σχέδιο.",
+  /* =======================
+     MISTAKES
+  ======================= */
+  mc_mistakes_title: "Συχνά λάθη",
+  mc_mistake1: "Αγοράζουν στο top από FOMO και πουλάνε στο bottom από FUD.",
+  mc_mistake2: "Δεν έχουν exit plan — «θα δω τι θα γίνει».",
+  mc_mistake3: "Αγνοούν τα on-chain signals και ακολουθούν social media.",
+  mc_mistake4: "Κάνουν all-in σε altcoins στο τέλος του cycle.",
+  mc_mistake5: "Δεν κρατούν stablecoins για αγορές σε bear market.",
+  mc_mistake6: "Συγκρίνουν την τρέχουσα τιμή με το ATH και νομίζουν ότι είναι «φθηνό».",
+  mc_mistake7: "Παρατάνε επενδύσεις ακριβώς πριν την ανάκαμψη.",
 
-mc_conclusion_title: "Συμπέρασμα",
-mc_conclusion:
-  "Οι κύκλοι είναι φυσιολογικοί. Αν καταλάβεις τις φάσεις και τις ψυχολογικές παγίδες, μπορείς να παίρνεις πιο “ψύχραιμες” αποφάσεις και να μειώνεις τα λάθη.",
+  /* =======================
+     GOOD MOVES
+  ======================= */
+  mc_good_title: "Τι «κάνει νόημα» να κάνεις",
+  mc_good1: "DCA σε bear market αντί για lump sum στο top.",
+  mc_good2: "Κράτα ένα ποσοστό σε stablecoins πάντα.",
+  mc_good3: "Ορίσε exit targets πριν μπεις — και τήρησέ τα.",
+  mc_good4: "Ακολούθα on-chain metrics (MVRV, Funding Rate, Fear & Greed Index).",
+  mc_good5: "Αξιολόγησε κάθε 3–6 μήνες αν η στρατηγική σου έχει ακόμα νόημα.",
 
-guides_more: "Δες περισσότερα →",
+  /* =======================
+     WATCH OUT
+  ======================= */
+  mc_watch_title: "Τι να προσέχεις",
+  mc_watch1: "Μην εμπιστεύεσαι τυφλά το «αυτή τη φορά είναι διαφορετικά».",
+  mc_watch2: "Leverage σε bull market φαίνεται εύκολο — μέχρι που δεν είναι.",
+  mc_watch3: "Τα altcoins πέφτουν πιο βίαια και ανακάμπτουν αργότερα από το BTC.",
+  mc_watch4: "Τα cycles δεν έχουν ακριβές χρονοδιάγραμμα — υπομονή.",
 
-    /* =======================
-           FOOTER
-    ======================= */
-    footer_rights: "Όλα τα δικαιώματα διατηρούνται.",
+  /* =======================
+     EXAMPLES
+  ======================= */
+  mc_examples_title: "Παραδείγματα στην πράξη",
+  mc_ex1: "2017–2018: Ευφορία → crash 84%. Όσοι αγόρασαν στο top περίμεναν 3 χρόνια.",
+  mc_ex2: "2020–2021: DCA στο bear → x10 αποδόσεις για όσους είχαν υπομονή.",
+  mc_ex3: "2022 bear market: FTX collapse, 80%+ πτώση σε altcoins — risk management έσωσε κόσμο.",
+  mc_ex4: "2023–2024: Αθόρυβη ανάκαμψη — οι περισσότεροι ήταν εκτός αγοράς.",
 
+  /* =======================
+     CONCLUSION
+  ======================= */
+  mc_conclusion_title: "Συμπέρασμα",
+  mc_conclusion:
+    "Ο κύκλος δεν αλλάζει — αλλάζει η αντίδρασή σου σε αυτόν. Μάθε να τον αναγνωρίζεις, κρατάς πειθαρχία και αφαιρείς το συναίσθημα από τις αποφάσεις σου.",
 
-mobile_home: "Αρχική Σελίδα",
-mobile_theme: "Αλλαγή Θέματος",
+  guides_more: "Δες περισσότερα →",
+});
 
+window.TRANSLATIONS.en = Object.assign(window.TRANSLATIONS.en || {}, {
+  /* HEADER / SHARED */
+  header_tagline: "Read the market. Don't follow the noise.",
+  nav_market: "Market",
+  nav_charts: "Trends",
+  nav_guides: "Guides",
+  nav_glossary: "Glossary",
+  nav_articles: "Articles",
+  theme_dark: "Dark",
+  mobile_theme: "Change Theme",
+  login: "Login",
+  logout: "Logout",
+  footer_disclaimer: "Educational content only. Not financial advice.",
 
-    /* HEADER */
-    header_tagline: "Ο παλμός του κόσμου των crypto",
-    nav_market: "Αγορά",
-    nav_charts: "Τάσεις",
-    nav_guides: "Οδηγοί",
-    nav_glossary: "Γλωσσάρι",
+  /* HERO */
+  mc_eyebrow: "GUIDE",
+  mc_title: "Market Cycles & Psychology in Crypto",
+  mc_lead:
+    "Markets move in cycles. So do investor emotions — from optimism to panic.",
 
-    /* =======================
-             LOGIN
-    ======================= */
-    login_title: "Σύνδεση",
-    login_email: "Email",
-    login_password: "Κωδικός",
-    login_btn: "Σύνδεση",
-    login_no_account: "Δεν έχεις λογαριασμό στο CryptoKosmos.",
-    login_create_account: "Δημιουργία λογαριασμού",
+  /* WHAT */
+  mc_what_title: "What Are Market Cycles?",
+  mc_what_text:
+    "A market cycle is a pattern that repeats over and over: rise, euphoria, fall, despair, recovery. In crypto these cycles are more intense and faster than any other market — Bitcoin has already gone through four major cycles around the halving.",
 
+  /* PHASES */
+  mc_phases_title: "The Basic Phases of a Cycle",
+  mc_phases_intro:
+    "Every cycle goes through four phases, each with different opportunities and risks:",
+  mc_phase1:
+    "Accumulation: Price is low, sentiment is pessimistic. 'Smart money' buys gradually.",
+  mc_phase2:
+    "Mark-up: Price rises, FOMO kicks in, new investors enter the market.",
+  mc_phase3:
+    "Distribution: Price near the top, experienced traders sell to new buyers.",
+  mc_phase4:
+    "Mark-down: Price falls, panic dominates, many sell at the bottom.",
 
-    /* =======================
-             SIGNUP
-    ======================= */
-    signup_title: "Δημιούργησε λογαριασμό",
-    signup_email: "Email",
-    signup_pass1: "Κωδικός",
-    signup_pass2: "Επιβεβαίωση κωδικού",
-    signup_error: "Οι κωδικοί δεν ταιριάζουν.",
-    signup_btn: "Δημιουργία λογαριασμού",
-    signup_back: "Σύνδεση",
-    signup_have_account: "Έχεις ήδη λογαριασμό;",
+  mc_phases_outro:
+    "The hard part: everyone thinks they know which phase we're in — but they usually figure it out only after it's already changed.",
 
+  /* PSYCHOLOGY */
+  mc_psy_title: "Psychology — What Happens in Our Minds?",
+  mc_psy_intro:
+    "Emotions are the investor's biggest enemy. These are the most common psychological mistakes:",
+  mc_psy1: "FOMO (Fear Of Missing Out): You buy late, near the top, afraid of missing out.",
+  mc_psy2: "FUD (Fear, Uncertainty, Doubt): You sell in panic, often at the bottom.",
+  mc_psy3: "Overconfidence: After a winning streak, you risk far too much.",
+  mc_psy4: "Loss aversion: You hold losers too long because you 'don't want to admit defeat'.",
+  mc_psy5:
+    "Anchoring: You fixate on a price (e.g. 'I bought at €50k') and can't think objectively.",
+  mc_psy6:
+    "Herd mentality: You follow the crowd — Twitter, YouTube, Telegram — instead of doing analysis.",
 
-    /* =======================
-             VERIFY
-    ======================= */
-    verify_title: "Επαλήθευση Email",
-    verify_subtitle: "Σου στείλαμε έναν 6-ψήφιο κωδικό.",
-    verify_code: "Κωδικός",
-    verify_error: "Λάθος κωδικός. Προσπάθησε ξανά.",
-    verify_btn: "Επιβεβαίωση"
-  },
+  /* SIGNS */
+  mc_signs_title: "Signs That 'Scream' Cycle",
+  mc_signs_text:
+    "Top signals: everything is in the news, everyone talks about crypto, new coins go viral overnight, leverage and greed index at extremes. Bottom signals: total silence, media have 'buried' it, volume extremely low, the most bullish people have given up.",
 
-  /* ================================================================
-                          ENGLISH VERSION
-  ================================================================ */
-  en: {
-   /* =======================
-     MARKET CYCLES
-======================= */
-mc_title: "Market Cycles & Crypto Psychology",
-mc_intro:
-  "Markets move in cycles. So do investor emotions—ranging from optimism to panic.",
+  /* MANAGE */
+  mc_manage_title: "How to Navigate the Cycle",
+  mc_manage_text:
+    "You don't need to perfectly time the top or bottom. Just don't buy in euphoria and don't sell in panic. DCA (Dollar Cost Averaging) and predefined exit targets help remove emotion from your decisions.",
+  mc_tip_title: "Tip:",
+  mc_tip:
+    "Build an 'exit plan' during the bull market — decide at what price you'll sell a portion of your gains before you get there.",
 
-mc_what_title: "What are market cycles?",
-mc_what_text:
-  "A market cycle is the recurring pattern of price expansion and contraction. It’s influenced by liquidity, news, adoption, macro conditions—and most importantly, crowd behavior.",
+  /* MISTAKES */
+  mc_mistakes_title: "Common Mistakes",
+  mc_mistake1: "Buying at the top from FOMO and selling at the bottom from FUD.",
+  mc_mistake2: "No exit plan — 'I'll see what happens'.",
+  mc_mistake3: "Ignoring on-chain signals and following social media instead.",
+  mc_mistake4: "Going all-in on altcoins at the end of the cycle.",
+  mc_mistake5: "Not keeping stablecoins to buy during a bear market.",
+  mc_mistake6:
+    "Comparing current price to ATH and thinking it's 'cheap'.",
+  mc_mistake7: "Giving up on investments right before the recovery.",
 
-mc_phases_title: "Core phases of a cycle",
-mc_phases_intro:
-  "Reality is never perfectly clean, but cycles often resemble four main phases:",
-mc_phase1: "Accumulation: lows, little attention, disciplined buyers build positions.",
-mc_phase2: "Bull / Markup: demand increases, new money flows in, sentiment turns positive.",
-mc_phase3: "Distribution: highs, extreme optimism, larger players sell into FOMO.",
-mc_phase4: "Bear / Markdown: fear, capitulation, declining liquidity and interest.",
-mc_phases_outro:
-  "Phase shifts are better understood through behavior and liquidity, not a calendar date.",
+  /* GOOD MOVES */
+  mc_good_title: "What Makes Sense to Do",
+  mc_good1: "DCA in a bear market instead of a lump sum at the top.",
+  mc_good2: "Always keep a percentage in stablecoins.",
+  mc_good3: "Set exit targets before you enter — and stick to them.",
+  mc_good4: "Follow on-chain metrics (MVRV, Funding Rate, Fear & Greed Index).",
+  mc_good5: "Reassess every 3–6 months whether your strategy still makes sense.",
 
-mc_psy_title: "Psychology: what happens in our minds?",
-mc_psy_intro:
-  "Each phase comes with mental traps that push people into poor decisions:",
-mc_psy1: "FOMO: buying because price is running and you fear missing out.",
-mc_psy2: "Overconfidence: portfolio rises and you think you can’t lose.",
-mc_psy3: "Confirmation bias: only consuming information that supports your view.",
-mc_psy4: "Panic selling: selling lows because you can’t handle the pressure.",
-mc_psy5: "Revenge trading: trying to win back losses quickly.",
-mc_psy6: "Apathy: quitting during bear markets right before conditions improve.",
+  /* WATCH OUT */
+  mc_watch_title: "What to Watch Out For",
+  mc_watch1: "Don't blindly trust 'this time is different'.",
+  mc_watch2: "Leverage in a bull market seems easy — until it isn't.",
+  mc_watch3: "Altcoins fall harder and recover slower than BTC.",
+  mc_watch4: "Cycles have no exact schedule — patience.",
 
-mc_signs_title: "Cycle “warning signs”",
-mc_signs_text:
-  "Excessive leverage, extreme greed/fear, nonstop hype, “guaranteed” profits, and sudden volatility/volume spikes often signal a market in excess.",
+  /* EXAMPLES */
+  mc_examples_title: "Real-World Examples",
+  mc_ex1: "2017–2018: Euphoria → 84% crash. Those who bought at the top waited 3 years.",
+  mc_ex2: "2020–2021: DCA in the bear → 10x returns for those with patience.",
+  mc_ex3: "2022 bear market: FTX collapse, 80%+ drop in altcoins — risk management saved people.",
+  mc_ex4: "2023–2024: Silent recovery — most investors were out of the market.",
 
-mc_manage_title: "How to manage the cycle",
-mc_manage_text:
-  "Use a plan: DCA, targets, risk rules, and gradual moves. Avoid one-shot entries/exits. Protect capital in bear markets and take profits in bull markets with structure.",
-mc_tip_title: "Tip:",
-mc_tip:
-  "Rules beat emotions: position sizing, stops, and discipline are your edge.",
+  /* CONCLUSION */
+  mc_conclusion_title: "Conclusion",
+  mc_conclusion:
+    "The cycle doesn't change — your reaction to it does. Learn to recognize it, stay disciplined, and remove emotion from your decisions.",
 
-mc_mistakes_title: "Common mistakes",
-mc_mistake1: "Buying the top because everyone talks about profits.",
-mc_mistake2: "Using heavy leverage without a plan.",
-mc_mistake3: "Never taking profits (or taking them too early out of fear).",
-mc_mistake4: "Chasing pumps and signals without confirmation.",
-mc_mistake5: "Switching strategy every week.",
-mc_mistake6: "Panic selling during pullbacks at the worst moment.",
-mc_mistake7: "Ignoring risk and position sizing.",
-
-mc_good_title: "What makes sense to do",
-mc_good1: "DCA into assets you actually understand (and can hold).",
-mc_good2: "Gradual profit-taking in bull markets (e.g., by levels).",
-mc_good3: "Clear risk plan: max loss, sizing, diversification.",
-mc_good4: "Focus on data/trend instead of hype.",
-mc_good5: "Keep liquidity/stability when the market is overheated.",
-
-mc_watch_title: "What to watch out for",
-mc_watch1: "Extreme hype and “certain” predictions.",
-mc_watch2: "Leverage/borrowing without clear rules.",
-mc_watch3: "Low-liquidity tokens that spike and dump easily.",
-mc_watch4: "Emotion-driven decisions (fear/greed).",
-
-mc_examples_title: "Real-world examples",
-mc_ex1: "Bull market: when everyone says “it never goes down,” be cautious.",
-mc_ex2: "Bear market: when everyone says “it’s dead,” DCA opportunities often start.",
-mc_ex3: "Big pumps: pullbacks often follow—don’t chase the last part.",
-mc_ex4: "Sharp drops: don’t panic—check levels, volume, and your plan.",
-
-mc_conclusion_title: "Conclusion",
-mc_conclusion:
-  "Cycles are normal. If you understand phases and psychological traps, you can make calmer decisions and avoid costly mistakes.",
-
-guides_more: "See more →",
-
-
-    /* FOOTER */
-    footer_rights: "All rights reserved.",
-
-
-mobile_home: "Home Page",
-mobile_theme: "Change Theme",
-
-    /* HEADER */
-    header_tagline: "The pulse of the crypto world",
-    nav_market: "Market",
-    nav_charts: "Trends",
-    nav_guides: "Guides",
-    nav_glossary: "Glossary",
-
-    /* LOGIN */
-    login_title: "Login",
-    login_email: "Email",
-    login_password: "Password",
-    login_btn: "Login",
-    login_no_account: "You don't have a CryptoKosmos account.",
-    login_create_account: "Create Account",
-
-
-    /* SIGNUP */
-    signup_title: "Create an Account",
-    signup_email: "Email",
-    signup_pass1: "Password",
-    signup_pass2: "Confirm Password",
-    signup_error: "Passwords do not match.",
-    signup_btn: "Create Account",
-    signup_back: "Login",
-    signup_have_account: "Already have an account?",
-
-
-    /* VERIFY */
-    verify_title: "Email Verification",
-    verify_subtitle: "We sent you a 6-digit code.",
-    verify_code: "Code",
-    verify_error: "Incorrect code. Try again.",
-    verify_btn: "Verify"
-  }
-};
+  guides_more: "See more →",
+});

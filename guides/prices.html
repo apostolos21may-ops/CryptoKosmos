@@ -3,1190 +3,548 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>LIVEprices – CryptoKosmos</title>
-
-  <!-- GLOBAL STYLES -->
+  <title>Live Prices — CryptoKosmos</title>
+  <meta name="description" content="Ζωντανές τιμές κρυπτονομισμάτων. Bitcoin, Ethereum, Solana και 2000+ coins σε πραγματικό χρόνο." />
+  <meta property="og:title" content="Live Crypto Prices — CryptoKosmos" />
+  <meta property="og:description" content="2000+ coins, ζωντανές τιμές από CoinGecko." />
+  <meta property="og:url" content="https://cryptokosmos.app/guides/prices.html" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../styles.css" />
-
-  <!-- PAGE TRANSLATIONS -->
-  <script src="../translations-prices.js" defer></script>
+  <link rel="preload" as="image" href="../IMG_5299.png">
+  <link rel="preload" as="image" href="../IMG_5301.png">
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-7DWG18EQLG"></script>
 
-  <!-- Light/Dark article images preload -->
-  <link rel="preload" as="image" href="./IMG_5536.png">
-  <link rel="preload" as="image" href="./IMG_5537.png">
- <link rel="preload" as="image" href="./IMG_5299.png">
- <link rel="preload" as="image" href="./IMG_5301.png">
-
-
 <script>
-  (function () {
-    // διάβασε τη γλώσσα ΠΡΙΝ ζωγραφίσει το page
-    var lang = localStorage.getItem("ck-lang") || "el"; // ή "en"
-    document.documentElement.setAttribute("lang", lang);
-    document.documentElement.setAttribute("data-lang", lang);
-    document.documentElement.classList.add("lang-" + lang);
-  })();
+(function(){
+  try{
+    var lang=(localStorage.getItem("ck-lang")||"el").toLowerCase();
+    if(lang!=="en") lang="el";
+    document.documentElement.setAttribute("lang",lang);
+    document.documentElement.setAttribute("data-lang",lang);
+    document.documentElement.classList.add("lang-"+lang,"lang-ready");
+    if(localStorage.getItem("ck-theme")==="light")
+      document.documentElement.classList.add("light-theme");
+  }catch(e){}
+})();
 </script>
-
-
-<script>
-  (function () {
-    var lang = localStorage.getItem("ck-lang") || "el";
-    document.documentElement.setAttribute("lang", lang);
-    document.documentElement.setAttribute("data-lang", lang);
-    document.documentElement.classList.add("lang-" + lang);
-    document.documentElement.classList.add("lang-ready");
-  })();
-</script>
-
 
 <style>
   html:not(.lang-ready) body { visibility: hidden; }
-</style>
 
-  <style>
-   
-
-.spark {
-  overflow: visible !important;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-}
-
-
-#auth-icon {
-  width: 20px;
-  height: 20px;
-}
-
-
-body.article-page {
-      padding: 0;
-    }
-
-    .article-container {
-      max-width: 800px;
-      margin: auto;
-      padding: 20px;
-    }
-
-    /* Desktop: lock widths of header buttons */
-    @media (min-width: 900px) {
-      #theme-toggle {
-        width: 85px;
-        justify-content: center;
-      }
-
-      #auth-btn {
-        width: 85px;
-        justify-content: center;
-      }
-
-      #lang-toggle {
-        width: 70px;
-        justify-content: center;
-      }
-
-      .pill-btn {
-        height: 34px;
-      }
-    }
-
-/* =====================================
-   PRICES PAGE
-===================================== */
-.prices-page {
-  padding: 26px 0;
-}
-
-.prices-head {
-  display: flex;
-  gap: 12px;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 14px;
-}
-
-.prices-head h2 {
-  margin: 0;
-  font-size: 22px;
-}
-
-.prices-tools {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  flex-wrap: wrap;
-}
-
-/* SEARCH */
-.prices-search {
-  width: min(420px, 90vw);
-  padding: 12px;
-  border-radius: 12px;
-  border: 1px solid var(--border, #222a33);
-  background: rgba(15,19,25,.8);
-  color: var(--text, #e8edf2);
-  outline: none;
-}
-
-/* SOURCE BUTTONS */
-.segmented {
-  display: flex;
-  border: 1px solid var(--border, #222a33);
-  border-radius: 999px;
-  overflow: hidden;
-  background: rgba(15,19,25,.6);
-}
-
-.segmented button {
-  min-width: 90px;
-  padding: 10px 12px;
-  background: transparent;
-  border: 0;
-  color: var(--text, #e8edf2);
-  font-size: 13px;
-  font-weight: 600;
-  cursor: pointer;
-  opacity: .85;
-  transition: background .2s ease, color .2s ease;
-}
-
-.segmented button.active {
-  opacity: 1;
-  background: linear-gradient(135deg,var(--brand,#5bb4ff),var(--brand2,#7b61ff));
-  color: #0f1216;
-}
-
-/* =====================================
-   PANEL
-===================================== */
-.prices-panel {
-  width: 100%;
-  border-radius: 26px;
-  padding: 16px;
-  background:
-    radial-gradient(circle at 20% 0%, rgba(120,170,255,.18), transparent 55%),
-    radial-gradient(circle at 80% 100%, rgba(150,110,255,.16), transparent 55%),
-    linear-gradient(145deg, rgba(10,15,25,.92), rgba(12,16,28,.92));
-  border: 1px solid rgba(255,255,255,.07);
-  box-shadow: 0 30px 70px rgba(0,0,0,.45);
-}
-
-.prices-list {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-/* =====================================
-   PRICE ROW
-===================================== */
-.price-row {
-  display: grid;
-  grid-template-columns:
-  minmax(44px, auto)  /* rank – δυναμικό */
-  34px                /* icon */
-  1fr
-  120px
-  150px;
-  align-items: center;
-  column-gap: 12px;
-
-  padding: 12px;
-  border-radius: 18px;
-  background: rgba(10,15,25,.88);
-  border: 1px solid rgba(255,255,255,.06);
-  box-shadow: 0 10px 22px rgba(0,0,0,.35);
-}
-
-.rank{
-  opacity: .7;
-  font-weight: 700;
-  font-variant-numeric: tabular-nums;
-
-  min-width: 32px;        /* ⬅ extra χώρος για 1000+ */
-  text-align: right;
-  padding-right: 6px;    /* ⬅ ανάσα από το icon */
-  box-sizing: border-box;
-}
-
-.coin-icon {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  object-fit: cover;
-}
-
-.sub {
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-}
-
-.sym {
-  font-weight: 800;
-  letter-spacing: .4px;
-  text-transform: uppercase;
-}
-
-.name {
-  font-size: 12px;
-  opacity: .7;
-}
-
-/* CHANGE */
-.chg {
-  justify-self: end;
-  margin-right: 20px;
-  font-weight: 800;
-  font-variant-numeric: tabular-nums;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  white-space: nowrap;
-}
-
-.arrow {
-  font-size: 12px;
-  opacity: .9;
-}
-
-/* PRICE */
-.price {
-  justify-self: end;
-  font-weight: 800;
-  font-variant-numeric: tabular-nums;
-  white-space: nowrap;
-}
-
-/* COLORS */
-.up { color: #4ade80; }
-.down { color: #f97373; }
-.flat { color: #cbd5e1; }
-
-/* =====================================
-   META
-===================================== */
-.meta {
-  margin-top: 10px;
-  display: flex;
-  gap: 10px;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  font-size: 12px;
-  color: var(--muted,#8ea0b3);
-}
-
-.pill {
-  padding: 6px 10px;
-  border-radius: 999px;
-  border: 1px solid rgba(255,255,255,.12);
-  background: rgba(255,255,255,.04);
-}
-
-/* =====================================
-   PAGINATION
-===================================== */
-.prices-pagination-wrap {
-  margin: 26px auto 34px;
-}
-
-.prices-pagination {
-  max-width: 1050px;
-  margin: auto;
-  padding: 14px 18px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 14px;
-
-  background: rgba(15,19,30,.6);
-  border: 1px solid rgba(255,255,255,.08);
-  border-radius: 22px;
-  backdrop-filter: blur(10px);
-}
-
-.pages {
-  display: flex;
-  gap: 8px;
-}
-
-.page-btn {
-  min-width: 40px;
-  height: 40px;
-  border-radius: 12px;
-  border: 1px solid rgba(255,255,255,.15);
-  background: rgba(15,19,25,.6);
-  color: var(--text,#e8edf2);
-  font-weight: 600;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.page-btn.active {
-  background: linear-gradient(135deg,var(--brand),var(--brand2));
-  color: #0f1216;
-  border-color: transparent;
-}
-
-.page-btn:disabled {
-  opacity: .35;
-  cursor: not-allowed;
-}
-
-/* =====================================
-   MOBILE
-===================================== */
-@media (max-width: 520px){
-  .price-row{
-    grid-template-columns:
-      34px   /* rank */
-      32px
-      1fr
-      96px
-      120px;
-  }
-  .chg {
-    margin-right: 14px;
-  }
-}
-
-/* =====================================
-   LIGHT THEME
-===================================== */
-body.light-theme .prices-panel {
-  background: #ffffff;
-  border: 1px solid #e2e8f0;
-  box-shadow: 0 20px 40px rgba(0,0,0,.08);
-}
-
-body.light-theme .price-row {
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
-  box-shadow: 0 6px 14px rgba(0,0,0,.06);
-}
-
-body.light-theme .rank { color:#475569; }
-body.light-theme .sym { color:#0f172a; }
-body.light-theme .name { color:#64748b; }
-body.light-theme .price { color:#0f172a; }
-
-body.light-theme .up { color:#16a34a; }
-body.light-theme .down { color:#dc2626; }
-body.light-theme .flat { color:#64748b; }
-
-body.light-theme .page-btn {
-  background:#ffffff;
-  color:#0f172a;
-  border:1px solid #d0d7e2;
-}
-
-/* =====================================
-   MOBILE PAGINATION – REAL FIX
-===================================== */
-@media (max-width: 520px){
-
-  .prices-pagination-wrap{
-    overflow-x: auto !important;   /* ⬅ ΑΥΤΟ ΕΛΕΙΠΕ */
-    -webkit-overflow-scrolling: touch;
+  /* ── BASE ── */
+  body {
+    padding: 0;
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    background: var(--bg, #0a0d12);
+    color: var(--text, #e8edf5);
   }
 
-  .prices-pagination{
-    min-width: max-content;        /* ⬅ να ΜΗΝ στριμώχνεται */
+  /* ── HEADER BUTTONS ── */
+  @media (min-width: 900px) {
+    #theme-toggle { width: 85px; justify-content: center; }
+    #auth-btn     { width: 85px; justify-content: center; }
+    #lang-toggle  { width: 70px; justify-content: center; }
+    .pill-btn     { height: 34px; }
+  }
+  #auth-icon { width: 20px; height: 20px; }
+
+  /* ── SITE HEADER ── */
+  .site-header {
+    position: sticky; top: 0; z-index: 1000;
+    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255,255,255,.06);
+    background: rgba(10,13,18,.85);
+  }
+  body.light-theme .site-header {
+    background: rgba(255,255,255,.92);
+    border-bottom: 1px solid rgba(0,0,0,.08);
+  }
+  body:not(.light-theme) .site-header {
+    background: rgba(10,13,18,.88);
+    border-bottom: 1px solid rgba(255,255,255,.07);
+  }
+  .mobile-menu { z-index: 9999; }
+
+  /* ── PAGE WRAPPER ── */
+  .prices-page {
+    min-height: 80vh;
+    padding: 32px 0 60px;
   }
 
-  .pages{
-    flex-wrap: nowrap;
-  }
-
-  .page-btn{
-    min-width: 32px;
-    height: 32px;
-    font-size: 12px;
-    flex: 0 0 auto;
-  }
-}
-
-
-/* =====================================
-   SKELETON BASE
-===================================== */
-.skeleton {
-  position: relative;
-  overflow: hidden;
-  background: rgba(255,255,255,0.08);
-  border-radius: 6px;
-}
-
-/* shimmer animation */
-.skeleton::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  transform: translateX(-100%);
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255,255,255,0.18),
-    transparent
-  );
-  animation: skeleton-shimmer 1.4s infinite;
-}
-
-@keyframes skeleton-shimmer {
-  100% {
-    transform: translateX(100%);
-  }
-}
-
-/* =====================================
-   SKELETON ROW
-===================================== */
-.skeleton-row {
-  pointer-events: none;
-}
-
-/* rank */
-.skeleton-row .rank.skeleton {
-  width: 34px;
-  height: 14px;
-}
-
-/* icon */
-.skeleton-row .coin-icon.skeleton {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-}
-
-/* symbol */
-.skeleton-row .sym.skeleton {
-  width: 90px;
-  height: 14px;
-  margin-bottom: 6px;
-}
-
-/* name */
-.skeleton-row .name.skeleton {
-  width: 130px;
-  height: 12px;
-}
-
-/* change */
-.skeleton-row .chg.skeleton {
-  width: 60px;
-  height: 14px;
-}
-
-/* price */
-.skeleton-row .price.skeleton {
-  width: 90px;
-  height: 16px;
-}
-
-/* =====================================
-   LIGHT THEME SKELETON
-===================================== */
-body.light-theme .skeleton {
-  background: #e5e7eb;
-}
-
-body.light-theme .skeleton::after {
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255,255,255,0.6),
-    transparent
-  );
-}
-
-/* =====================================
-   MOBILE OPTIMIZATION
-===================================== */
-@media (max-width: 520px) {
-  .skeleton-row .price.skeleton {
-    width: 70px;
-  }
-
-  .skeleton-row .chg.skeleton {
-    width: 50px;
-  }
-}
-
-
-
-/* PRICE COLUMN – STACKED */
-.price-wrap {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;   /* ⬅ ΠΙΟ ΑΡΙΣΤΕΡΑ */
-  justify-content: center;
-
-  width: 160px;
-  min-width: 160px;
-
-  padding-left: 20px;        /* ⬅ micro-shift αριστερά */
-  gap: 6px;
-}
-
-/* ΜΟΝΟ μετακίνηση της τιμής */
-.price-wrap .price {
-  margin-right: 12px;   /* ⬅ πάει την τιμή πιο αριστερά */
-}
-
-.price {
-  font-weight: 800;
-  white-space: nowrap;
-  text-align: right;
-}
-
-/* SPARKLINE ΚΑΤΩ ΑΠΟ ΤΗΝ ΤΙΜΗ */
-.spark {
-  width: 120px;
-  height: 28px;
-  overflow: hidden;
-  pointer-events: none;
-}
-
-
-
-
-
-/* =====================================
-   MOBILE TEXT COMPRESSION – FINAL
-===================================== */
-@media (max-width: 600px){
-
-  /* 🔢 Rank πιο μικρό */
-  .rank{
-    font-size: 11px;
-    min-width: 22px;
-    padding-right: 4px;
-  }
-
-  /* 🪙 Icon ελάχιστα μικρότερο */
-  .coin-icon{
-    width: 26px;
-    height: 26px;
-  }
-
-  /* 🔤 Symbol (BTC, EETH, WSTUSR) */
-  .sym{
-    font-size: 13px;
-    letter-spacing: .2px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 90px;
-  }
-
-  /* 🏷️ Name: ΜΟΝΟ 1 γραμμή */
-  .name{
-    font-size: 11px;
-    line-height: 1.2;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 120px;
-  }
-
-  /* 📉 % change – ΠΟΤΕ πάνω στο icon */
-  .chg{
-    justify-self: end;
-    align-self: center;
-    font-size: 12px;
-    margin: 0;
-    white-space: nowrap;
-    min-width: 64px;
-    text-align: right;
-  }
-}
-
-
-
-/* =====================================
-   MOBILE GRID LOCK – FINAL FIX
-===================================== */
-@media (max-width: 600px){
-
-  /* 🔒 Κλειδώνουμε ΟΡΙΣΤΙΚΑ τις στήλες */
-  .price-row{
-    grid-template-columns:
-      26px    /* rank */
-      30px    /* icon */
-      minmax(0,1fr) /* name */
-      78px    /* % change */
-      96px;   /* price + spark */
-
+  /* ── PAGE HEADER ── */
+  .prices-head {
+    display: flex;
+    gap: 16px;
     align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+  }
+  .prices-head-left { display: flex; flex-direction: column; gap: 4px; }
+  .prices-head h2 {
+    margin: 0;
+    font-size: clamp(22px, 3vw, 30px);
+    font-weight: 700;
+    letter-spacing: -.5px;
+  }
+  .prices-head-sub {
+    font-size: 13px;
+    color: var(--muted, #7a8fa3);
+  }
+  .prices-tools {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
   }
 
-  /* ⛔️ Ποσοστό ΔΕΝ μπαίνει ποτέ πάνω στο icon */
-  .chg{
-    justify-self: end;
-    font-size: 12px;
-    margin-right: 4px;
-    white-space: nowrap;
-  }
-
-  /* 💰 Τιμή */
-  .price{
+  /* ── SEARCH ── */
+  .prices-search {
+    width: min(360px, 90vw);
+    padding: 11px 16px;
+    border-radius: 12px;
+    border: 1px solid var(--border, #1e2733);
+    background: rgba(19,24,31,.8);
+    color: var(--text, #e8edf5);
+    font-family: inherit;
     font-size: 14px;
-    line-height: 1.1;
+    outline: none;
+    transition: border-color .2s, box-shadow .2s;
+  }
+  .prices-search:focus {
+    border-color: var(--brand, #5bb4ff);
+    box-shadow: 0 0 0 3px rgba(91,180,255,.12);
+  }
+  .prices-search::placeholder { color: var(--muted, #7a8fa3); }
+  body.light-theme .prices-search {
+    background: #f1f5f9;
+    border-color: #d1dae6;
+    color: #0f172a;
   }
 
-  /* 📦 Price column containment */
-  .price-wrap{
+  /* ── SOURCE SEGMENTED ── */
+  .segmented {
+    display: flex;
+    border: 1px solid var(--border, #1e2733);
+    border-radius: 12px;
+    overflow: hidden;
+    background: rgba(19,24,31,.7);
+  }
+  .segmented button {
+    min-width: 88px;
+    padding: 10px 14px;
+    background: transparent;
+    border: 0;
+    color: var(--muted, #7a8fa3);
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background .2s, color .2s;
+  }
+  .segmented button.active {
+    background: linear-gradient(135deg, var(--brand,#5bb4ff), var(--brand2,#7b61ff));
+    color: #fff;
+  }
+  .segmented button:hover:not(.active) { color: var(--text, #e8edf5); }
+  body.light-theme .segmented { background: #f1f5f9; border-color: #d1dae6; }
+  body.light-theme .segmented button { color: #64748b; }
+  body.light-theme .segmented button:hover:not(.active) { color: #0f172a; }
+
+  /* ── STATUS ── */
+  #status {
+    font-size: 13px;
+    color: var(--muted, #7a8fa3);
+    margin-bottom: 14px;
+    min-height: 20px;
+  }
+
+  /* ── PANEL ── */
+  .prices-panel {
+    border-radius: 20px;
+    padding: 6px;
+    background:
+      radial-gradient(ellipse 80% 40% at 10% 0%, rgba(91,180,255,.06), transparent 60%),
+      radial-gradient(ellipse 60% 40% at 90% 100%, rgba(123,97,255,.05), transparent 60%),
+      var(--card, #13181f);
+    border: 1px solid var(--border, #1e2733);
+    box-shadow: 0 24px 60px rgba(0,0,0,.4);
+    overflow: hidden;
+  }
+  body.light-theme .prices-panel {
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 8px 30px rgba(0,0,0,.07);
+  }
+
+  /* ── COLUMN HEADER ── */
+  .prices-col-header {
+    display: grid;
+    grid-template-columns: 44px 34px 1fr 130px 160px;
+    column-gap: 12px;
+    padding: 10px 14px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .8px;
+    text-transform: uppercase;
+    color: var(--muted, #7a8fa3);
+    border-bottom: 1px solid var(--border, #1e2733);
+    margin-bottom: 4px;
+  }
+  .prices-col-header .col-chg { justify-self: end; margin-right: 20px; }
+  .prices-col-header .col-price { justify-self: end; }
+  body.light-theme .prices-col-header { border-bottom-color: #e2e8f0; }
+
+  /* ── PRICE LIST ── */
+  .prices-list { display: flex; flex-direction: column; gap: 4px; padding: 4px; }
+
+  /* ── PRICE ROW ── */
+  .price-row {
+    display: grid;
+    grid-template-columns: 44px 34px 1fr 130px 160px;
+    align-items: center;
+    column-gap: 12px;
+    padding: 12px 14px;
+    border-radius: 14px;
+    background: transparent;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: background .18s, border-color .18s, transform .18s;
+  }
+  .price-row:hover {
+    background: rgba(91,180,255,.05);
+    border-color: rgba(91,180,255,.12);
+    transform: translateX(2px);
+  }
+  body.light-theme .price-row:hover {
+    background: #f8fafd;
+    border-color: #c0cfe0;
+  }
+
+  /* ── RANK ── */
+  .rank {
+    text-align: right;
+    padding-right: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--muted, #7a8fa3);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ── COIN ICON ── */
+  .coin-icon {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  /* ── COIN INFO ── */
+  .sub { display: flex; flex-direction: column; min-width: 0; }
+  .sym {
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: .3px;
+    text-transform: uppercase;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .name {
+    font-size: 12px;
+    color: var(--muted, #7a8fa3);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 160px;
+  }
+
+  /* ── CHANGE ── */
+  .chg {
+    justify-self: end;
+    margin-right: 20px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 13px;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: transparent;
+  }
+  .arrow { font-size: 10px; }
+
+  /* ── PRICE WRAP ── */
+  .price-wrap {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    gap: 3px;
-
-    width: 100%;
+    gap: 4px;
     min-width: 0;
-    padding: 0;
-
-    overflow: hidden;   /* ⬅️ ΚΡΙΣΙΜΟ */
+  }
+  .price {
+    font-size: 15px;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+    text-align: right;
+  }
+  .spark {
+    width: 80px; height: 24px;
+    overflow: visible;
   }
 
-  /* 📈 Sparkline FIX */
-  .spark{
-    width: 100%;
-    max-width: 96px;
-    height: 22px;
+  /* ── COLORS ── */
+  .up   { color: #4ade80; }
+  .down { color: #f97373; }
+  .flat { color: var(--muted, #7a8fa3); }
+  .up   .chg { background: rgba(74,222,128,.1); }
+  .down .chg { background: rgba(249,115,115,.1); }
+  body.light-theme .up   { color: #16a34a; }
+  body.light-theme .down { color: #dc2626; }
+  body.light-theme .up   .chg { background: rgba(22,163,74,.08); }
+  body.light-theme .down .chg { background: rgba(220,38,38,.08); }
 
-    overflow: hidden;
-  }
-
-  .spark svg{
-    width: 100%;
-    height: 100%;
-    display: block;
-  }
-}
-
-
-.coin-wrap{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  gap:4px;
-  min-width:52px;
-}
-
-.mobile-name{
-  display:none;
-  font-size:11px;
-  opacity:.75;
-  text-align:center;
-  line-height:1.1;
-}
-
-.desktop-name{
-  display:block;
-}
-
-@media (max-width: 600px){
-
-  .sub .desktop-name{
-    display:none;
-  }
-
-  .coin-wrap .mobile-name{
-    display:block;
-  }
-
-  /* μικρή βελτίωση για να μη “πέφτουν” ποσοστά */
-  .sub{
-    min-width:0;
-  }
-}
-
-.pages span {
-  font-weight: 700;
-  font-size: 14px;
-  line-height: 40px;
-  user-select: none;
-}
-
-
-/* =====================================
-   PAGINATION ALIGN FIX
-===================================== */
-.prices-pagination{
-  display: flex;
-  align-items: center;   /* ⬅️ ΚΛΕΙΔΙ */
-}
-
-.pages{
-  display: flex;
-  align-items: center;   /* ⬅️ ίδια γραμμή */
-}
-
-/* dots */
-.pages .dots{
-  display: flex;
-  align-items: center;
-  height: 40px;
-  font-weight: 700;
-  opacity: .6;
-}
-
-
-
-/* ===============================
-   PRICES HEADER – MOBILE FIX
-================================ */
-@media (max-width: 700px) {
-
-  .prices-head {
+  /* ── META ── */
+  .meta {
     display: flex;
-    flex-direction: column;     /* ⬅️ τίτλος πάνω, εργαλεία κάτω */
-    align-items: flex-start;    /* ⬅️ όλα αριστερά */
-    gap: 14px;
-    padding: 12px 14px;
+    gap: 8px;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    padding: 12px 14px 8px;
+    border-top: 1px solid var(--border, #1e2733);
+    margin-top: 4px;
   }
-
-  .prices-head h2 {
-    width: 100%;
-    text-align: left;
-    font-size: 22px;
-    line-height: 1.25;
+  body.light-theme .meta { border-top-color: #e2e8f0; }
+  .pill {
+    padding: 4px 12px;
+    border-radius: 999px;
+    border: 1px solid var(--border, #1e2733);
+    background: rgba(255,255,255,.03);
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--muted, #7a8fa3);
+    letter-spacing: .3px;
   }
+  body.light-theme .pill { background: #f1f5f9; border-color: #d1dae6; }
 
-  .prices-tools {
-    width: 100%;
+  /* ── PAGINATION ── */
+  .prices-pagination-wrap { margin: 20px auto 0; }
+  .prices-pagination {
+    max-width: 1050px;
+    margin: auto;
+    padding: 12px 16px;
     display: flex;
-    flex-direction: column;     /* ⬅️ search πάνω, buttons κάτω */
+    align-items: center;
+    justify-content: center;
     gap: 10px;
-  }
-
-  .prices-search {
-    width: 100%;
-  }
-
-  .segmented {
-    width: 100%;
-    display: flex;
-  }
-
-  .segmented button {
-    flex: 1;                    /* ⬅️ ίσο πλάτος, δεν κόβονται */
-    padding: 10px 0;
-    font-size: 14px;
-  }
-}
-
-@media (max-width: 700px) {
-  .segmented {
+    background: var(--card, #13181f);
+    border: 1px solid var(--border, #1e2733);
     border-radius: 16px;
   }
-}
-
-
-
-.prices-page,
-.prices-panel,
-.prices-wrap {
-  position: relative;
-  z-index: 1;
-}
-
-
-.prices-panel {
-  isolation: isolate;
-}
-
-.prices-wrap {
-  background: transparent;
-}
-
-.prices-scale {
-  background: transparent;
-}
-
-
-
-
-
-
-.site-header {
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-
-  background: inherit;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-
-  border-bottom: 1px solid rgba(0,0,0,0.08);
-}
-
-body:not(.light-theme) .site-header {
-  border-bottom: 1px solid rgba(255,255,255,0.08);
-}
-
-.prices-page {
-  padding-top: 12px;
-}
-
-/* ===============================
-   HIDE SCROLLBAR (BUT KEEP SCROLL)
-================================ */
-
-/* Chrome, Safari, Edge */
-::-webkit-scrollbar {
-  width: 0px;
-  height: 0px;
-}
-
-/* Firefox */
-html {
-  scrollbar-width: none;
-}
-
-/* IE / old Edge */
-body {
-  -ms-overflow-style: none;
-}
-
-
-/* ===============================
-   MOBILE BURGER MENU (ON TOP)
-================================ */
-.mobile-menu {
-  
-  z-index: 9999; /* ΠΑΝΩ ΑΠΟ ΟΛΑ */
-}
-
-
- /* =====================================
-   HEADER THEME FIX – prices.html
-   (Tablet Safari safe)
-===================================== */
-
-/* 🌞 LIGHT THEME */
-body.light-theme .site-header {
-  background: rgba(255, 255, 255, 0.95) !important;
-  color: #0f172a;
-  border-bottom: 1px solid rgba(0,0,0,0.08);
-
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-}
-
-/* 🌙 DARK THEME */
-body:not(.light-theme) .site-header {
-  background: rgba(10, 14, 22, 0.96) !important;
-  color: #e8edf2;
-  border-bottom: 1px solid rgba(255,255,255,0.08);
-
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-}
-
-/* 🧯 Safari iPad – force repaint */
-.site-header {
-  will-change: background;
-  transform: translateZ(0);
-}
-
-.nav, .nav ul {
-  display: flex;
-  align-items: center;
-  flex-wrap: nowrap;
-}
-
-.nav a, .nav button {
-  white-space: nowrap;
-}
-
-header, .topbar, .nav {
-  min-height: 64px; /* διάλεξε ό,τι ταιριάζει */
-}
-
-
-
-
-
-
-
-
-
-
-
-
-/* ================= PRE-FOOTER (IMPACT) ================= */
-.prefooter{
-  position: relative;
-  margin-top: 40px;
-  padding: 46px 18px 26px;
-  overflow: hidden;
-
-  border-radius: 22px;
-  background:
-    radial-gradient(900px 280px at 15% 20%, rgba(91,180,255,.16), transparent 65%),
-    radial-gradient(900px 280px at 85% 30%, rgba(123,97,255,.14), transparent 65%),
-    rgba(10,12,16,.55);
-
-  border: 1px solid rgba(255,255,255,.08);
-  box-shadow:
-    0 0 0 1px rgba(91,180,255,.08),
-    0 26px 80px rgba(0,0,0,.55);
-
-  /* fade reveal */
-  opacity: 0;
-  transform: translateY(10px);
-  animation: pfFadeUp .7s ease forwards;
-}
-
-/* soft animated glow behind */
-.prefooter-glow{
-  position:absolute;
-  inset:-120px -120px auto -120px;
-  height: 320px;
-  background: radial-gradient(circle at 30% 40%, rgba(91,180,255,.35), transparent 55%),
-              radial-gradient(circle at 70% 30%, rgba(123,97,255,.30), transparent 55%);
-  filter: blur(18px);
-  opacity: .55;
-  animation: pfGlow 6s ease-in-out infinite;
-  pointer-events: none;
-}
-
-.prefooter-inner{
-  position: relative;
-  max-width: 1100px;
-  margin: 0 auto;
-  display: grid;
-  gap: 22px;
-  grid-template-columns: 1.1fr 1fr 1fr;
-}
-
-.prefooter h4{
-  margin: 0 0 10px;
-  font-size: 14px;
-  letter-spacing: .25px;
-  font-weight: 800;
-  color: rgba(255,255,255,.92);
-}
-
-.pf-muted{
-  margin: 0;
-  font-size: 13px;
-  line-height: 1.55;
-  color: rgba(255,255,255,.70);
-}
-
-.pf-link{
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-
-  padding: 10px 12px;
-  border-radius: 14px;
-  text-decoration: none;
-  font-weight: 700;
-  font-size: 13px;
-  color: rgba(255,255,255,.85);
-
-  background: rgba(15,18,22,.38);
-  border: 1px solid rgba(255,255,255,.08);
-
-  transition: transform .18s ease, border-color .18s ease, background .18s ease;
-  margin-bottom: 10px;
-}
-
-.pf-link:hover{
-  transform: translateY(-2px);
-  border-color: rgba(91,180,255,.55);
-  background: rgba(15,18,22,.55);
-}
-
-.prefooter-divider{
-  position: relative;
-  height: 2px;
-  margin: 26px auto 0;
-  max-width: 1100px;
-  border-radius: 999px;
-  background: linear-gradient(90deg,
-    transparent,
-    rgba(91,180,255,.75),
-    rgba(123,97,255,.75),
-    transparent
-  );
-  opacity: .7;
-}
-
-/* animations */
-@keyframes pfFadeUp{
-  to { opacity: 1; transform: translateY(0); }
-}
-@keyframes pfGlow{
-  0%,100%{ transform: translateY(0); opacity:.55; }
-  50%{ transform: translateY(18px); opacity:.72; }
-}
-
-/* mobile */
-@media (max-width: 720px){
-  .prefooter-inner{
-    grid-template-columns: 1fr;
+  body.light-theme .prices-pagination { background: #fff; border-color: #e2e8f0; }
+  .pages { display: flex; gap: 6px; align-items: center; }
+  .page-btn {
+    min-width: 38px; height: 38px;
+    border-radius: 10px;
+    border: 1px solid var(--border, #1e2733);
+    background: transparent;
+    color: var(--text, #e8edf5);
+    font-family: inherit;
+    font-weight: 600;
+    font-size: 13px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background .18s, border-color .18s, color .18s;
   }
-}
-
-
-.hero-anim .fade-right{
-  opacity: 0;
-  transform: translateX(28px);
-  animation: fadeRightIn .75s ease-out forwards;
-  will-change: transform, opacity;
-}
-
-.hero-anim .delay-1{ animation-delay: .10s; }
-.hero-anim .delay-2{ animation-delay: .20s; }
-.hero-anim .delay-3{ animation-delay: .30s; }
-
-@keyframes fadeRightIn{
-  to{
-    opacity: 1;
-    transform: translateX(0);
+  .page-btn:hover:not(:disabled):not(.active) {
+    background: rgba(91,180,255,.1);
+    border-color: var(--brand, #5bb4ff);
   }
-}
-
-@media (prefers-reduced-motion: reduce){
-  .hero-anim .fade-right{
-    animation: none;
-    opacity: 1;
-    transform: none;
+  .page-btn.active {
+    background: linear-gradient(135deg, var(--brand,#5bb4ff), var(--brand2,#7b61ff));
+    color: #fff;
+    border-color: transparent;
+    box-shadow: 0 4px 14px rgba(91,180,255,.3);
   }
-}
+  .page-btn:disabled { opacity: .3; cursor: not-allowed; }
+  body.light-theme .page-btn { color: #0f172a; border-color: #d1dae6; }
+  .pages .dots { display: flex; align-items: center; height: 38px; font-weight: 700; color: var(--muted,#7a8fa3); }
 
+  /* ── SKELETON ── */
+  .skeleton {
+    position: relative; overflow: hidden;
+    background: rgba(255,255,255,.06); border-radius: 8px;
+  }
+  .skeleton::after {
+    content: ""; position: absolute; inset: 0;
+    transform: translateX(-100%);
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,.12), transparent);
+    animation: shimmer 1.4s infinite;
+  }
+  @keyframes shimmer { 100% { transform: translateX(100%); } }
+  .skeleton-row { pointer-events: none; }
+  .skeleton-row .rank.skeleton   { width: 28px; height: 13px; }
+  .skeleton-row .coin-icon.skeleton { width: 32px; height: 32px; border-radius: 50%; }
+  .skeleton-row .sym.skeleton    { width: 80px; height: 14px; margin-bottom: 5px; }
+  .skeleton-row .name.skeleton   { width: 110px; height: 11px; }
+  .skeleton-row .chg.skeleton    { width: 70px; height: 26px; border-radius: 999px; }
+  .skeleton-row .price.skeleton  { width: 85px; height: 15px; }
+  body.light-theme .skeleton     { background: #e5e7eb; }
+  body.light-theme .skeleton::after {
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,.5), transparent);
+  }
 
+  /* ── MOBILE ── */
+  @media (max-width: 700px) {
+    .prices-head { flex-direction: column; align-items: flex-start; gap: 14px; }
+    .prices-tools { width: 100%; flex-direction: column; }
+    .prices-search { width: 100%; }
+    .segmented { width: 100%; }
+    .segmented button { flex: 1; padding: 10px 0; }
+    .prices-col-header { display: none; }
+  }
+  @media (max-width: 600px) {
+    .price-row {
+      grid-template-columns: 28px 32px minmax(0,1fr) 78px 96px;
+      padding: 10px;
+    }
+    .rank { font-size: 11px; min-width: 22px; }
+    .coin-icon { width: 28px; height: 28px; }
+    .sym { font-size: 13px; max-width: 80px; }
+    .name { font-size: 11px; max-width: 100px; }
+    .chg { margin-right: 4px; font-size: 12px; }
+    .price { font-size: 13px; }
+    .spark { width: 100%; max-width: 80px; height: 20px; }
+    .price-wrap { padding: 0; min-width: 0; overflow: hidden; }
+    .prices-pagination-wrap { overflow-x: auto; }
+    .prices-pagination { min-width: max-content; }
+    .pages { flex-wrap: nowrap; }
+    .page-btn { min-width: 32px; height: 32px; font-size: 12px; flex: 0 0 auto; }
+  }
 
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 0; height: 0; }
+  html { scrollbar-width: none; }
+  body { -ms-overflow-style: none; }
+
+  /* ── PREFOOTER/FOOTER (unchanged) ── */
+  .pf-link {
+    display: block;
+    padding: 8px 12px;
+    border-radius: 10px;
+    text-decoration: none;
+    color: var(--text, #e8edf5);
+    font-size: 13px;
+    background: rgba(15,18,22,.38);
+    border: 1px solid rgba(255,255,255,.08);
+    transition: transform .18s, border-color .18s, background .18s;
+    margin-bottom: 10px;
+  }
+  .pf-link:hover {
+    transform: translateY(-2px);
+    border-color: rgba(91,180,255,.55);
+    background: rgba(15,18,22,.55);
+  }
+  .prefooter-divider {
+    position: relative; height: 2px;
+    margin: 26px auto 0; max-width: 1100px; border-radius: 999px;
+    background: linear-gradient(90deg, transparent, rgba(91,180,255,.75), rgba(123,97,255,.75), transparent);
+    opacity: .7;
+  }
+  @keyframes pfFadeUp { to { opacity: 1; transform: translateY(0); } }
+  @media (max-width: 720px) { .prefooter-inner { grid-template-columns: 1fr; } }
+
+  /* ── PREFOOTER ── */
+  .prefooter {
+    position: relative;
+    padding: 60px 0 40px;
+    overflow: hidden;
+  }
+  .prefooter-glow {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 60% at 20% 50%, rgba(91,180,255,.07), transparent 70%),
+      radial-gradient(ellipse 50% 50% at 80% 50%, rgba(123,97,255,.06), transparent 70%);
+    pointer-events: none;
+    animation: pfGlow 8s ease-in-out infinite;
+  }
+  .prefooter-inner {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 32px;
+    max-width: 1100px;
+    margin: auto;
+    padding: 0 20px;
+    position: relative;
+    z-index: 1;
+    opacity: 0;
+    transform: translateY(24px);
+    animation: pfFadeUp .7s ease-out .2s forwards;
+  }
+  .pf-col h4 {
+    margin: 0 0 14px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: .8px;
+    text-transform: uppercase;
+    color: var(--muted, #7a8fa3);
+  }
+  .pf-muted {
+    font-size: 13px;
+    color: var(--muted, #7a8fa3);
+    line-height: 1.6;
+    margin: 0 0 12px;
+  }
 </style>
 </head>
 
 <body class="article-page">
 
-<!-- ================= HEADER ================= -->
-<header class="site-header">
-  <div class="container header-inner">
-
-    <a class="brand" href="../index.html">
-      <img id="site-logo" src="../logo.png" alt="CryptoKosmos" class="logo" />
-      <div class="brand-text">
-        <h1>CryptoKosmos</h1>
-        <p class="tagline" data-i18n="header_tagline">Ο παλμός του κόσμου των crypto</p>
-      </div>
-    </a>
-
-    <nav class="nav">
-      <a href="../index.html#market" data-i18n="nav_market">Αγορά</a>
-      <a href="../index.html#charts" data-i18n="nav_charts">Τάσεις</a>
-      <a href="../index.html#guides" data-i18n="nav_guides">Οδηγοί</a>
-      <a href="../index.html#glossary" data-i18n="nav_glossary">Γλωσσάρι</a>
-    </nav>
-
-    <div class="header-actions">
-
-      <button id="theme-toggle" class="pill-btn">
-        <img id="theme-icon" src="../IMG_5300.png" class="icon-img" />
-        <span id="theme-label">Dark</span>
-      </button>
-
-      <button id="auth-btn" class="pill-btn">
-        <img id="auth-icon" src="../IMG_5301.png" class="icon-img" />
-        <span id="auth-label" data-i18n="login">Login</span>
-      </button>
-
-      <button id="menu-toggle" class="menu-btn">
-        <span class="burger-line"></span>
-        <span class="burger-line"></span>
-        <span class="burger-line"></span>
-      </button>
-
-      <button id="lang-toggle" class="pill-btn">
-        <img id="lang-icon" class="icon-img" src="../IMG_5542.png">
-        <span id="lang-label">GR</span>
-      </button>
-
-    </div>
-  </div>
-</header>
-
-<!-- ================= MOBILE MENU ================= -->
-<div id="mobile-menu" class="mobile-menu">
-  <a href="../index.html#market" data-i18n="nav_market">Αγορά</a>
-  <a href="../index.html#charts" data-i18n="nav_charts">Τάσεις</a>
-  <a href="../index.html#guides" data-i18n="nav_guides">Οδηγοί</a>
-  <a href="../index.html#glossary" data-i18n="nav_glossary">Γλωσσάρι</a>
-
-  <button id="mobile-home-btn" class="mobile-btn" data-i18n="mobile_home">
-    Αρχική Σελίδα
-  </button>
-
-  <button id="mobile-theme-toggle" class="mobile-btn" data-i18n="mobile_theme">
-    Αλλαγή Θέματος
-  </button>
-
-  <button id="mobile-auth-btn" class="mobile-btn" data-i18n="login">
-    Login
-  </button>
-
-  <button id="mobile-lang-toggle" class="mobile-btn">
-    <img id="mobile-lang-icon" class="icon-img" src="../IMG_5542.png">
-    <span id="mobile-lang-label">GR</span>
-  </button>
-</div>
-
-<!-- ================= PRICES PAGE ================= -->
+<!-- header.js injects header here -->
 
 <section class="prices-page">
   <div class="container">
 
-    <!-- ===== Header ===== -->
     <div class="prices-head">
-      <h2 data-i18n="bc_title">
-        Όλες οι Τιμές Κρυπτονομισμάτων
-      </h2>
-
+      <div class="prices-head-left">
+        <h2 data-i18n="bc_title">Τιμές Κρυπτονομισμάτων</h2>
+        <span class="prices-head-sub" id="prices-subtitle">Live data · CoinGecko &amp; Binance</span>
+      </div>
       <div class="prices-tools">
-        <input
-          id="q"
-          class="prices-search"
-          type="search"
-          placeholder="Search (e.g. btc, eth, sol)"
-          aria-label="Search cryptocurrencies"
-        />
-
+        <input id="q" class="prices-search" type="search"
+          placeholder="Search (e.g. btc, eth, sol)" aria-label="Search cryptocurrencies" />
         <div class="segmented" role="tablist" aria-label="Price source">
-          <button id="src-auto" class="active" type="button" role="tab">Auto</button>
-          <button id="src-binance" type="button" role="tab">Binance</button>
-          <button id="src-coingecko" type="button" role="tab">CoinGecko</button>
+          <button id="src-auto"      class="active" type="button" role="tab">Auto</button>
+          <button id="src-binance"   type="button"  role="tab">Binance</button>
+          <button id="src-coingecko" type="button"  role="tab">CoinGecko</button>
         </div>
       </div>
     </div>
 
-    <!-- ===== Status ===== -->
-    <div id="status" class="loading">
-      Φόρτωση τιμών…
-    </div>
+    <div id="status" class="loading"></div>
 
-    <!-- ===== SCALE WRAPPER ===== -->
     <div class="prices-scale">
-
-      <!-- ===== WRAP (PANEL + PAGINATION ΜΑΖΙ) ===== -->
       <div id="prices-wrap" class="prices-wrap">
 
-        <!-- ===== Prices Panel ===== -->
         <div class="prices-panel">
+          <!-- Column headers (desktop) -->
+          <div class="prices-col-header">
+            <span>#</span>
+            <span></span>
+            <span>Coin</span>
+            <span class="col-chg">24h %</span>
+            <span class="col-price">Price</span>
+          </div>
+
           <div id="list" class="prices-list"></div>
 
           <div class="meta">
@@ -1196,223 +554,28 @@ header, .topbar, .nav {
           </div>
         </div>
 
-        <!-- ===== Pagination ===== -->
         <div class="prices-pagination-wrap">
           <div class="prices-pagination">
-            <button class="page-btn prev" aria-label="Previous page">‹</button>
+            <button class="page-btn prev" aria-label="Previous">‹</button>
             <div class="pages"></div>
-            <button class="page-btn next" aria-label="Next page">›</button>
+            <button class="page-btn next" aria-label="Next">›</button>
           </div>
         </div>
 
-      </div><!-- /prices-wrap -->
-
-    </div><!-- /prices-scale -->
-
-  </div>
-</section>
-
-<!-- ================= PRE-FOOTER (IMPACT) ================= -->
-<section class="prefooter">
-  <div class="prefooter-glow"></div>
-
-  <div class="prefooter-inner">
-    <div class="pf-col">
-      <h4>CryptoKosmos</h4>
-       <p class="pf-muted" data-i18n="pf_brand_sub">Quick links & updates από το crypto σύμπαν.</p>
-    </div>
-
-    <div class="pf-col">
-      <h4>Explore</h4>
-      <a href="../index.html#market" class="pf-link">Market</a>
-      <a href="../index.html#charts" class="pf-link">Trends</a>
-      <a href="../index.html#guides" class="pf-link">Guides</a>
-      <a href="../index.html#glossary" class="pf-link">Glossary</a>
-    </div>
-
-    <div class="pf-col">
-      <h4>Social</h4>
-      <a href="https://x.com/CryptoKosmosApp" class="pf-link" target="_blank" rel="noopener">X / Twitter</a>
-      <a href="https://www.instagram.com/cryptokosmos.app/" class="pf-link" target="_blank" rel="noopener">Instagram</a>
-      <a href="mailto:cryptokosmos.news@gmail.com" class="pf-link">Email</a>
+      </div>
     </div>
   </div>
-
-  <div class="prefooter-divider"></div>
 </section>
 
 
 
 
-<footer class="site-footer">
-  <div class="container">
-    <p>
-      © <span id="year"></span> CryptoKosmos —
-      <span data-i18n="footer_rights">Όλα τα δικαιώματα διατηρούνται.</span>
-    </p>
-  </div>
-</footer>
-
-<div id="login-modal" class="modal hidden">
-  <div class="modal-backdrop"></div>
-  <div class="modal-card">
-
-    <div class="modal-header">
-      <span class="modal-title" data-i18n="login_title">Σύνδεση</span>
-      <button class="modal-close" id="login-close">×</button>
-    </div>
-
-    <form id="login-form">
-      <div class="modal-body">
-
-        <label data-i18n="login_email">Email</label>
-        <input id="login-email" type="email" 
-               data-i18n-placeholder="login_email"
-               placeholder="Email">
-
-        <label data-i18n="login_password">Κωδικός</label>
-        <div class="pass-wrap">
-          <input id="login-pass" type="password"
-                 data-i18n-placeholder="login_password"
-                 placeholder="Password">
-          <img id="login-pass-toggle" class="pass-eye" src="../IMG_5380.png">
-        </div>
-
-      </div>
-
-      <button class="modal-submit" type="submit" data-i18n="login_btn">
-        Σύνδεση
-      </button>
-
-      <p id="no-account"
-         class="modal-hint"
-         style="color:#ffb3b3; display:none;"
-         data-i18n="login_no_account">
-         Δεν έχεις λογαριασμό στο CryptoKosmos.
-      </p>
-
-      <button id="signup-btn" type="button"
-        style="display:none;margin-top:10px;width:100%;padding:10px 14px;border:none;border-radius:14px;
-        background:#1e293b;color:white;font-weight:600;cursor:pointer;border:1px solid rgba(255,255,255,0.25);"
-        data-i18n="login_create_account">
-        Δημιουργία λογαριασμού
-      </button>
-
-    </form>
-  </div>
-</div>
-
-<div id="signup-modal" class="modal hidden">
-  <div class="modal-backdrop"></div>
-  <div class="modal-card">
-
-    <div class="modal-header">
-      <h3 class="modal-title" data-i18n="signup_title">Δημιούργησε λογαριασμό</h3>
-      <button class="modal-close signup-close">×</button>
-    </div>
-
-    <div class="modal-body">
-
-      <label data-i18n="signup_email">Email</label>
-      <input id="signup-email" type="email"
-             data-i18n-placeholder="signup_email"
-             placeholder="Email">
-
-      <label data-i18n="signup_pass1">Κωδικός</label>
-      <div class="pass-wrap">
-        <input id="signup-pass1" type="password"
-               data-i18n-placeholder="signup_pass1"
-               placeholder="Password">
-        <img id="signup-pass1-toggle" class="pass-eye" src="../IMG_5380.png">
-      </div>
-
-      <label data-i18n="signup_pass2">Επιβεβαίωση κωδικού</label>
-      <div class="pass-wrap">
-        <input id="signup-pass2" type="password"
-               data-i18n-placeholder="signup_pass2"
-               placeholder="Confirm Password">
-        <img id="signup-pass2-toggle" class="pass-eye" src="../IMG_5380.png">
-      </div>
-
-      <p id="signup-error"
-         style="color:#ff6b6b; display:none;"
-         data-i18n="signup_error">
-         Οι κωδικοί δεν ταιριάζουν.
-      </p>
-
-      <button id="signup-create" class="modal-submit" data-i18n="signup_btn">
-        Δημιουργία λογαριασμού
-      </button>
-
-      <p class="modal-hint">
-        <span data-i18n="signup_have_account">Έχεις ήδη λογαριασμό;</span>
-        <span id="back-to-login"
-              style="color:#5bb4ff;cursor:pointer;"
-              data-i18n="signup_back">
-          Σύνδεση
-        </span>
-      </p>
-
-    </div>
-  </div>
-</div>
-
-<div id="verify-modal" class="modal hidden">
-  <div class="modal-backdrop"></div>
-  <div class="modal-card">
-
-    <div class="modal-header">
-      <h3 class="modal-title" data-i18n="verify_title">Επαλήθευση Email</h3>
-      <button class="modal-close verify-close">×</button>
-    </div>
-
-    <div class="modal-body">
-
-      <p class="muted" data-i18n="verify_subtitle">
-        Σου στείλαμε έναν 6-ψήφιο κωδικό.
-      </p>
-
-      <label data-i18n="verify_code">Κωδικός</label>
-      <input id="verify-code" type="text"
-             data-i18n-placeholder="verify_code"
-             placeholder="Code">
-
-      <p id="verify-error" style="color:#ff6b6b; display:none;"
-         data-i18n="verify_error">
-         Λάθος κωδικός. Προσπάθησε ξανά.
-      </p>
-
-      <button id="verify-submit" class="modal-submit" data-i18n="verify_btn">
-        Επιβεβαίωση
-      </button>
-
-    </div>
-
-  </div>
-</div>
-
-<!-- Performance -->
-<link rel="preconnect" href="https://api.coingecko.com">
-<link rel="preconnect" href="https://api.binance.com">
-
-<!-- YEAR -->
 <script>
-  document.getElementById("year").textContent = new Date().getFullYear();
-  document.getElementById("mobile-home-btn")?.addEventListener("click", () => {
-    window.location.href = "../index.html";
-  });
-</script>
-
-<script>
-/* =========================
-   HELPERS + CONFIG (πάνω-πάνω)
-========================= */
+/* ========================= HELPERS + CONFIG ========================= */
 const $ = (id) => document.getElementById(id);
-
 const PER_PAGE = 200;
 const TOTAL_PAGES = 10;
 const REFRESH_MS = 30_000;
-
 let cgCooldownUntil = 0;
 let hasLoadedOnce = false;
 
@@ -1424,50 +587,30 @@ function setStatus(text = "", type = "loading") {
   el.style.display = text ? "block" : "none";
 }
 
-
-
-
-
-
-
-
-const memCache = new Map(); // in-memory cache (πολύ γρήγορο)
+const memCache = new Map();
 const FETCH_TIMEOUT = 12000;
-
-// μικρό helper
 function sleep(ms){ return new Promise(r => setTimeout(r, ms)); }
 
 async function fetchJSON(url, { signal, timeout = FETCH_TIMEOUT } = {}) {
   const ctrl = new AbortController();
   const t = setTimeout(() => ctrl.abort(), timeout);
-
   if (signal) signal.addEventListener("abort", () => ctrl.abort(), { once: true });
-
   try {
     const res = await fetch(url, { cache: "no-store", signal: ctrl.signal, headers: { accept: "application/json" } });
     return res;
-  } finally {
-    clearTimeout(t);
-  }
+  } finally { clearTimeout(t); }
 }
-/* =========================
-   STATE
-========================= */
+
+/* ========================= STATE ========================= */
 let sourceMode = "auto";
 let currentPage = 1;
 let allRows = [];
-
 let abortCtrl = null;
 let requestId = 0;
 
-/* =========================
-   CACHE (per page)
-========================= */
-function cacheKeyCG(vs, page) {
-  return `ck:cg_rows:${vs}:p${page}:pp${PER_PAGE}`;
-}
-
-function readCache(key, maxAgeMs = 30 * 60_000) { // 30'
+/* ========================= CACHE ========================= */
+function cacheKeyCG(vs, page) { return `ck:cg_rows:${vs}:p${page}:pp${PER_PAGE}`; }
+function readCache(key, maxAgeMs = 30 * 60_000) {
   try {
     const raw = localStorage.getItem(key);
     if (!raw) return null;
@@ -1475,38 +618,95 @@ function readCache(key, maxAgeMs = 30 * 60_000) { // 30'
     if (!obj?.t || !obj?.data) return null;
     if (Date.now() - obj.t > maxAgeMs) return null;
     return obj.data;
-  } catch {
-    return null;
-  }
+  } catch { return null; }
+}
+function writeCache(key, data) {
+  try { localStorage.setItem(key, JSON.stringify({ t: Date.now(), data })); } catch {}
 }
 
-function writeCache(key, data) {
+
+
+/* ========================= BINANCE ========================= */
+const BINANCE_TICKER_KEY = "ck:binance_ticker_map";
+let binanceMap = null;
+
+function buildBinanceMap(data) {
+  const map = {};
+  if (!Array.isArray(data)) return map;
+  for (const t of data) {
+    const sym = t?.symbol;
+    if (!sym || !sym.endsWith("USDT")) continue;
+    const base = sym.slice(0, -4);
+    const price = Number(t.lastPrice);
+    const chg = Number(t.priceChangePercent);
+    const vol = Number(t.quoteVolume);
+    if (!Number.isFinite(price)) continue;
+    map[base] = { price, chg, vol };
+  }
+  return map;
+}
+
+async function fetchBinanceTickers({ signal, force = false } = {}) {
+  if (binanceMap && !force) return binanceMap;
+  if (!force) {
+    const cached = readCache(BINANCE_TICKER_KEY, 60_000);
+    if (cached) {
+      binanceMap = cached;
+      refreshBinanceInBackground();
+      return binanceMap;
+    }
+  }
+  const res = await fetchJSON("https://api.binance.com/api/v3/ticker/24hr", { signal, timeout: 10000 });
+  if (!res.ok) throw new Error(`BINANCE_${res.status}`);
+  const data = await res.json();
+  const map = buildBinanceMap(data);
+  writeCache(BINANCE_TICKER_KEY, map);
+  binanceMap = map;
+  return map;
+}
+
+async function refreshBinanceInBackground() {
   try {
-    localStorage.setItem(key, JSON.stringify({ t: Date.now(), data }));
+    const res = await fetch("https://api.binance.com/api/v3/ticker/24hr", { cache: "no-store" });
+    if (!res.ok) return;
+    const data = await res.json();
+    const map = buildBinanceMap(data);
+    writeCache(BINANCE_TICKER_KEY, map);
+    binanceMap = map;
+    if (sourceMode === "binance") render(allRows);
   } catch {}
 }
 
-/* =========================
-   UI helpers
-========================= */
+/* Εφαρμόζει τις τιμές Binance πάνω στα CoinGecko rows όταν sourceMode = "binance" */
+function applySourceData(rows) {
+  const safe = Array.isArray(rows) ? rows : [];
+  if (sourceMode !== "binance") return safe;
+  if (!binanceMap) return safe; // δεν φόρτωσε ακόμα -> δείξε CoinGecko προσωρινά
+  return safe
+    .map(r => {
+      const b = binanceMap[r.symbol];
+      if (!b) return null; // δεν υπάρχει pair στο Binance -> κρύψε
+      return { ...r, price: b.price, chg: b.chg };
+    })
+    .filter(Boolean);
+}
+
+
+
+/* ========================= UI HELPERS ========================= */
 function setActiveSource(id) {
   document.querySelectorAll(".segmented button").forEach(b => b.classList.remove("active"));
   const btn = document.getElementById(id);
   if (btn) btn.classList.add("active");
-
   const meta = $("meta-source");
-  if (meta) {
-    meta.textContent =
-      "Source: " +
-      (id === "src-binance" ? "Binance" : id === "src-coingecko" ? "CoinGecko" : "Auto");
-  }
+  if (meta) meta.textContent = "Source: " + (id === "src-binance" ? "Binance" : id === "src-coingecko" ? "CoinGecko" : "Auto");
 }
 
 function formatPrice(n) {
   const num = Number(n);
   if (!Number.isFinite(num)) return "—";
   const abs = Math.abs(num);
-  if (abs >= 1) return "$" + num.toLocaleString(undefined, { maximumFractionDigits: 2 });
+  if (abs >= 1)    return "$" + num.toLocaleString(undefined, { maximumFractionDigits: 2 });
   if (abs >= 0.01) return "$" + num.toLocaleString(undefined, { maximumFractionDigits: 4 });
   return "$" + num.toLocaleString(undefined, { maximumFractionDigits: 8 });
 }
@@ -1523,44 +723,33 @@ function arrow(v) {
   return num > 0 ? "▲" : num < 0 ? "▼" : "•";
 }
 
-/* =========================
-   SPARKLINE (safe)
-========================= */
+/* ========================= SPARKLINE ========================= */
 function drawSparkline(data, color) {
   if (!Array.isArray(data) || data.length < 2) return "";
-
   const clean = data.map(Number).filter(Number.isFinite);
   if (clean.length < 2) return "";
-
   const w = 90, h = 28;
-  const min = Math.min(...clean);
-  const max = Math.max(...clean);
+  const min = Math.min(...clean), max = Math.max(...clean);
   const range = (max - min) || 1;
-
   const pts = clean.map((v, i) => {
     const x = (i / (clean.length - 1)) * w;
     const y = h - ((v - min) / range) * h;
     return `${x.toFixed(1)},${y.toFixed(1)}`;
   }).join(" ");
-
-  return `
-    <svg viewBox="0 0 ${w} ${h}" aria-hidden="true" focusable="false">
-      <polyline fill="none" stroke="${color}" stroke-width="1.8"
-        stroke-linecap="round" stroke-linejoin="round" points="${pts}" />
-    </svg>`;
+  return `<svg viewBox="0 0 ${w} ${h}" aria-hidden="true" focusable="false">
+    <polyline fill="none" stroke="${color}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" points="${pts}" />
+  </svg>`;
 }
 
-/* =========================
-   RENDER
-========================= */
+/* ========================= RENDER ========================= */
 function render(rows) {
+  rows = applySourceData(rows);
   const input = $("q");
   const q = (input?.value || "").trim().toUpperCase();
-
   const safeRows = Array.isArray(rows) ? rows : [];
   const list = !q ? safeRows : safeRows.filter(r => {
     const sym  = String(r.symbol || "").toUpperCase();
-    const name = String(r.name || "").toUpperCase();
+    const name = String(r.name   || "").toUpperCase();
     return sym.includes(q) || name.includes(q);
   });
 
@@ -1575,85 +764,58 @@ function render(rows) {
   listEl.innerHTML = list.map((r, i) => {
     const chgNum  = Number(r.chg);
     const chgText = Number.isFinite(chgNum) ? chgNum.toFixed(2) + "%" : "—";
-
     const rank = startRank + i;
-
-    const sparkColor =
-      Number.isFinite(chgNum)
-        ? (chgNum > 0 ? "#4ade80" : chgNum < 0 ? "#f87171" : "#94a3b8")
-        : "#94a3b8";
-
-    // ✅ ΔΕΝ σπάει ποτέ
+    const sparkColor = Number.isFinite(chgNum) ? (chgNum > 0 ? "#4ade80" : chgNum < 0 ? "#f87171" : "#94a3b8") : "#94a3b8";
     const sparkData = Array.isArray(r.spark) ? r.spark : [];
-
-    const icon = r.icon
-      ? `<img class="coin-icon" src="${r.icon}" loading="lazy" alt="">`
-      : `<div class="coin-icon skeleton"></div>`;
+    const icon = r.icon ? `<img class="coin-icon" src="${r.icon}" loading="lazy" alt="">` : `<div class="coin-icon skeleton"></div>`;
 
     return `
       <div class="price-row">
         <div class="rank">${rank}</div>
-
         <div class="coin-wrap">
           ${icon}
           <div class="name mobile-name">${r.name || ""}</div>
         </div>
-
         <div class="sub">
           <div class="sym">${r.symbol || "—"}</div>
           <div class="name desktop-name">${r.name || ""}</div>
         </div>
-
         <div class="chg ${chgClass(chgNum)}">
           <span class="arrow">${arrow(chgNum)}</span>
           <span>${chgText}</span>
         </div>
-
         <div class="price-wrap">
           <div class="price">${formatPrice(r.price)}</div>
-          <div class="spark">
-            ${rank <= 10 ? drawSparkline(sparkData, sparkColor) : ""}
-          </div>
+          <div class="spark">${rank <= 10 ? drawSparkline(sparkData, sparkColor) : ""}</div>
         </div>
-      </div>
-    `;
+      </div>`;
   }).join("");
 }
 
-function renderSkeleton(count = PER_PAGE) {
+function renderSkeleton(count = 20) {
   const listEl = $("list");
   if (!listEl) return;
-
   const row = `
     <div class="price-row skeleton-row">
       <div class="rank skeleton"></div>
-      <div class="coin-wrap">
-        <div class="coin-icon skeleton"></div>
-        <div class="name skeleton" style="width:40px;height:10px"></div>
-      </div>
+      <div class="coin-wrap"><div class="coin-icon skeleton"></div></div>
       <div class="sub">
         <div class="sym skeleton"></div>
         <div class="name skeleton"></div>
       </div>
       <div class="chg skeleton"></div>
-      <div class="price skeleton"></div>
+      <div class="price-wrap"><div class="price skeleton"></div></div>
     </div>`;
-
   listEl.innerHTML = Array.from({ length: count }, () => row).join("");
 }
 
-/* =========================
-   PAGINATION
-========================= */
+/* ========================= PAGINATION ========================= */
 function renderPagination() {
   const wrap = document.querySelector(".pages");
   if (!wrap) return;
-
   wrap.innerHTML = "";
-
   const isMobile = window.innerWidth <= 600;
-  const total = TOTAL_PAGES;
-  const current = currentPage;
+  const total = TOTAL_PAGES, current = currentPage;
 
   const addPage = p => {
     const b = document.createElement("button");
@@ -1663,11 +825,9 @@ function renderPagination() {
     b.addEventListener("click", () => goToPage(p));
     wrap.appendChild(b);
   };
-
   const addDots = () => {
     const s = document.createElement("span");
-    s.className = "dots";
-    s.textContent = "…";
+    s.className = "dots"; s.textContent = "…";
     wrap.appendChild(s);
   };
 
@@ -1694,82 +854,26 @@ function goToPage(p) {
   loadPage(true);
 }
 
-/* =========================
-   FETCH (CoinGecko) -> rows normalized + cached
-========================= */
+/* ========================= FETCH CoinGecko ========================= */
 async function fetchCoinGeckoRows({ vs = "usd", page = 1, signal } = {}) {
   const key = cacheKeyCG(vs, page);
-
-  // 0) super fast memory cache
   if (memCache.has(key)) return memCache.get(key);
-
-  // 1) localStorage cache (instant)
   const cached = readCache(key);
   if (cached) {
     memCache.set(key, cached);
-    // background refresh (αλλά όχι συνέχεια)
     refreshCoinGeckoInBackground({ vs, page, key }).catch(() => {});
     return cached;
   }
-
-  // 2) cooldown
   if (Date.now() < cgCooldownUntil) throw new Error("RATE_LIMIT");
 
-  // 3) live fetch
-  const url =
-    `https://api.coingecko.com/api/v3/coins/markets` +
-    `?vs_currency=${encodeURIComponent(vs)}` +
-    `&order=market_cap_desc` +
-    `&per_page=${PER_PAGE}` +
-    `&page=${page}` +
-    `&sparkline=false` +
-    `&price_change_percentage=24h`;
-
+  const url = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${encodeURIComponent(vs)}&order=market_cap_desc&per_page=${PER_PAGE}&page=${page}&sparkline=false&price_change_percentage=24h`;
   const res = await fetchJSON(url, { signal });
-
   if (res.status === 429) {
     const ra = parseInt(res.headers.get("retry-after") || "60", 10);
     cgCooldownUntil = Date.now() + Math.max(ra, 20) * 1000;
     throw new Error("RATE_LIMIT");
   }
   if (!res.ok) throw new Error(`CG_${res.status}`);
-
-  const data = await res.json();
-
-  const rows = Array.isArray(data) ? data.map(c => ({
-    symbol: String(c?.symbol || "").toUpperCase(),
-    name: String(c?.name || ""),
-    icon: String(c?.image || ""),
-    price: Number(c?.current_price),
-    chg: Number(c?.price_change_percentage_24h),
-    spark: [] // sparkline=false
-  })) : [];
-
-  writeCache(key, rows);
-  memCache.set(key, rows);
-  return rows;
-}
-
-async function refreshCoinGeckoInBackground({ vs, page, key }) {
-  if (Date.now() < cgCooldownUntil) return;
-
-  const url =
-    `https://api.coingecko.com/api/v3/coins/markets` +
-    `?vs_currency=${encodeURIComponent(vs)}` +
-    `&order=market_cap_desc` +
-    `&per_page=${PER_PAGE}` +
-    `&page=${page}` +
-    `&sparkline=false` +
-    `&price_change_percentage=24h`;
-
-  const res = await fetch(url, { cache: "no-store" });
-  if (res.status === 429) {
-    const ra = parseInt(res.headers.get("retry-after") || "60", 10);
-    cgCooldownUntil = Date.now() + Math.max(ra, 20) * 1000;
-    return;
-  }
-  if (!res.ok) return;
-
   const data = await res.json();
   const rows = Array.isArray(data) ? data.map(c => ({
     symbol: String(c?.symbol || "").toUpperCase(),
@@ -1779,67 +883,104 @@ async function refreshCoinGeckoInBackground({ vs, page, key }) {
     chg: Number(c?.price_change_percentage_24h),
     spark: []
   })) : [];
-
   writeCache(key, rows);
+  memCache.set(key, rows);
+  return rows;
+}
 
+async function refreshCoinGeckoInBackground({ vs, page, key }) {
+  if (Date.now() < cgCooldownUntil) return;
+  const url = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${encodeURIComponent(vs)}&order=market_cap_desc&per_page=${PER_PAGE}&page=${page}&sparkline=false&price_change_percentage=24h`;
+  const res = await fetch(url, { cache: "no-store" });
+  if (res.status === 429) { cgCooldownUntil = Date.now() + 60000; return; }
+  if (!res.ok) return;
+  const data = await res.json();
+  const rows = Array.isArray(data) ? data.map(c => ({
+    symbol: String(c?.symbol || "").toUpperCase(),
+    name: String(c?.name || ""),
+    icon: String(c?.image || ""),
+    price: Number(c?.current_price),
+    chg: Number(c?.price_change_percentage_24h),
+    spark: []
+  })) : [];
+  writeCache(key, rows);
   const metaUpdated = $("meta-updated");
   if (metaUpdated) metaUpdated.textContent = "Updated: " + new Date().toLocaleTimeString();
 }
 
-/* =========================
-   LOAD PAGE
-========================= */
+/* ========================= LOAD PAGE ========================= */
 async function loadPage(isPageChange = false) {
   const token = ++requestId;
-
   if (abortCtrl) abortCtrl.abort();
   abortCtrl = new AbortController();
-
   const key = cacheKeyCG("usd", currentPage);
-
-  // ✅ Αν υπάρχει cache, ΔΕΝ δείχνουμε skeleton. Δείχνουμε cache αμέσως.
   const instant = memCache.get(key) || readCache(key);
   if (instant) {
     allRows = instant;
     memCache.set(key, instant);
     render(allRows);
     renderPagination();
-    setStatus("Updating…", "warn"); // μικρή ένδειξη, χωρίς “μάζεμα”
+    setStatus("Updating…", "warn");
     hasLoadedOnce = true;
   } else {
-    // ✅ Μόνο αν δεν υπάρχει τίποτα, δείξε skeleton
-    renderSkeleton(PER_PAGE);
+    renderSkeleton(20);
     setStatus("Loading prices…", "loading");
   }
+  
 
-  try {
-    // μικρό debounce ώστε αν πατήσει 3 σελίδες γρήγορα να ακυρώνεται πριν ξεκινήσει
+
+   try {
     await sleep(120);
     if (token !== requestId) return;
-
     const rows = await fetchCoinGeckoRows({ vs: "usd", page: currentPage, signal: abortCtrl.signal });
     if (token !== requestId) return;
-
     allRows = rows;
     render(allRows);
     renderPagination();
     setStatus("", "");
     hasLoadedOnce = true;
-
-    // ✅ Prefetch next page (βοηθάει ΠΟΛΥ στο “3 σελίδες”)
     prefetchNext();
-
+    if (!binanceMap) fetchBinanceTickers().catch(() => {});
   } catch (e) {
-    // αν έχουμε ήδη δείξει cache, απλά κράτα το και άλλαξε status
+    // Μία επανάληψη για μη rate-limit σφάλματα (π.χ. προσωρινό network blip)
+    if (e?.message !== "RATE_LIMIT") {
+      try {
+        await sleep(900);
+        if (token !== requestId) return;
+        const rows = await fetchCoinGeckoRows({ vs: "usd", page: currentPage, signal: abortCtrl.signal });
+        if (token !== requestId) return;
+        allRows = rows;
+        render(allRows);
+        renderPagination();
+        setStatus("", "");
+        hasLoadedOnce = true;
+        prefetchNext();
+        if (!binanceMap) fetchBinanceTickers().catch(() => {});
+        return;
+      } catch (e2) { e = e2; }
+    }
+
     const fallback = memCache.get(key) || readCache(key, 24 * 60 * 60_000);
     if (fallback) {
-      allRows = fallback;
-      memCache.set(key, fallback);
-      render(allRows);
-      renderPagination();
-      setStatus("Showing cached data (no refresh).", "warn");
+      allRows = fallback; memCache.set(key, fallback);
+      render(allRows); renderPagination();
+      setStatus("Showing cached data.", "warn");
       hasLoadedOnce = true;
-    } else {
+      return;
+    }
+
+    // Τελευταία λύση: τιμές απευθείας από Binance (ταξινομημένες κατά 24h volume)
+    try {
+      const bmap = await fetchBinanceTickers();
+      const rows = Object.entries(bmap)
+        .sort((a, b) => (b[1].vol || 0) - (a[1].vol || 0))
+        .slice(0, PER_PAGE)
+        .map(([sym, v]) => ({ symbol: sym, name: sym, icon: "", price: v.price, chg: v.chg, spark: [] }));
+      allRows = rows;
+      render(allRows); renderPagination();
+      setStatus("CoinGecko unavailable — showing Binance data.", "warn");
+      hasLoadedOnce = true;
+    } catch {
       setStatus("Connection failed.", "error");
     }
   }
@@ -1848,48 +989,58 @@ async function loadPage(isPageChange = false) {
 function prefetchNext() {
   const next = currentPage + 1;
   if (next > TOTAL_PAGES) return;
-
   const key = cacheKeyCG("usd", next);
   if (memCache.has(key) || readCache(key)) return;
-
-  // background prefetch
-  fetchCoinGeckoRows({ vs: "usd", page: next }).then(rows => {
-    memCache.set(key, rows);
-  }).catch(() => {});
+  fetchCoinGeckoRows({ vs: "usd", page: next }).then(rows => memCache.set(key, rows)).catch(() => {});
 }
 
-/* =========================
-   INIT + EVENTS
-========================= */
+/* ========================= INIT ========================= */
 function bindClick(id, fn) {
   const el = document.getElementById(id);
   if (!el) return;
-  el.addEventListener("click", (e) => { e.preventDefault(); fn(); });
+  el.addEventListener("click", e => { e.preventDefault(); fn(); });
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  bindClick("src-auto",     () => { sourceMode = "auto";     setActiveSource("src-auto");     render(allRows); });
-  bindClick("src-binance",  () => { sourceMode = "binance";  setActiveSource("src-binance");  render(allRows); });
-  bindClick("src-coingecko",() => { sourceMode = "coingecko";setActiveSource("src-coingecko");render(allRows); });
+ bindClick("src-auto", () => {
+    sourceMode = "auto";
+    setActiveSource("src-auto");
+    render(allRows);
+  });
+
+  bindClick("src-binance", () => {
+    sourceMode = "binance";
+    setActiveSource("src-binance");
+    if (binanceMap) {
+      render(allRows);
+    } else {
+      setStatus("Loading Binance prices…", "loading");
+      fetchBinanceTickers()
+        .then(() => { setStatus("", ""); render(allRows); })
+        .catch(() => { setStatus("Binance unavailable — showing CoinGecko.", "warn"); render(allRows); });
+    }
+  });
+
+  bindClick("src-coingecko", () => {
+    sourceMode = "coingecko";
+    setActiveSource("src-coingecko");
+    render(allRows);
+  });
 
   $("q")?.addEventListener("input", () => render(allRows));
 
-  document.querySelector(".page-btn.prev")?.addEventListener("click", (e) => {
+  document.querySelector(".page-btn.prev")?.addEventListener("click", e => {
     e.preventDefault();
     if (currentPage > 1) goToPage(currentPage - 1);
   });
-
-  document.querySelector(".page-btn.next")?.addEventListener("click", (e) => {
+  document.querySelector(".page-btn.next")?.addEventListener("click", e => {
     e.preventDefault();
     if (currentPage < TOTAL_PAGES) goToPage(currentPage + 1);
   });
 
-  // boot from cache (instant)
   const cached = readCache(cacheKeyCG("usd", currentPage));
   if (cached && !hasLoadedOnce) {
-    allRows = cached;
-    render(allRows);
-    renderPagination();
+    allRows = cached; render(allRows); renderPagination();
     setStatus("Δείχνω cached τιμές…", "warn");
     hasLoadedOnce = true;
   }
@@ -1903,9 +1054,17 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 </script>
 
-<!-- GLOBAL SCRIPTS -->
-<script src="../app.js" defer></script>
-<script src="../i18n.js" defer></script>
-
+<!-- ★ Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<!-- ★ EmailJS SDK -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<!-- ★ App scripts -->
+<script src="../header.js"></script>
+<script src="../translations-prices.js"></script>
+<script src="../i18n.js"></script>
+<script src="../app.js"></script>
+<script src="../prefooter.js"></script>
+<script src="../scroll-on-lang.js"></script>
 </body>
 </html>
