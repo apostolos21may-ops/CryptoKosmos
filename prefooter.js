@@ -38,7 +38,7 @@
       <a href="${root}index.html#charts" class="pf-link" data-i18n="pf_explore_trends">Trends</a>
       <a href="${root}index.html#guides" class="pf-link" data-i18n="pf_explore_guides">Guides</a>
       <a href="${root}index.html#glossary" class="pf-link" data-i18n="pf_explore_glossary">Glossary</a>
-      <a href="/news/articles.html" class="pf-link" data-i18n="pf_explore_articles">Άρθρα</a>
+      <a href="${root}news/articles.html" class="pf-link" data-i18n="pf_explore_articles">Άρθρα</a>
     </div>
 
     <div class="pf-col">
@@ -78,11 +78,11 @@
     el: {
       pf_brand_title:      "CryptoKosmos",
       pf_brand_sub:        "Ζωντανές τιμές, ανάλυση & οδηγοί στα ελληνικά.",
-      pf_explore_title:    "Explore",
-      pf_explore_market:   "Market",
-      pf_explore_trends:   "Trends",
-      pf_explore_guides:   "Guides",
-      pf_explore_glossary: "Glossary",
+      pf_explore_title:    "Εξερεύνησε",
+      pf_explore_market:   "Αγορά",
+      pf_explore_trends:   "Τάσεις",
+      pf_explore_guides:   "Οδηγοί",
+      pf_explore_glossary: "Γλωσσάρι",
       pf_explore_articles: "Άρθρα",
       pf_social_title:     "Social",
       pf_social_x:         "X / Twitter",
@@ -120,7 +120,9 @@
     // Update articles link href based on language
     const articlesLink = document.querySelector('.prefooter [data-i18n="pf_explore_articles"]');
     if (articlesLink) {
-      articlesLink.href = lang === "en" ? "/news/articles-en.html" : "/news/articles.html";
+      articlesLink.href = lang === "en"
+        ? root + "news/articles-en.html"
+        : root + "news/articles.html";
     }
   }
 

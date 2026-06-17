@@ -9,12 +9,13 @@ news_title: "Νέα",
 news_subtitlee: "Τελευταία άρθρα",
 
 
-  pf_explore_title: "Explore",
-  pf_explore_market: "Market",
-  pf_explore_trends: "Trends",
-  pf_explore_guides: "Guides",
-  pf_explore_glossary: "Glossary",
- 
+  pf_explore_title: "Εξερεύνησε",
+  pf_explore_market: "Αγορά",
+  pf_explore_trends: "Τάσεις",
+  pf_explore_guides: "Οδηγοί",
+  pf_explore_glossary: "Γλωσσάρι",
+  pf_explore_articles: "Άρθρα",
+
 
   pf_social_title: "Social",
   pf_social_x: "X / Twitter",
@@ -399,7 +400,8 @@ news_subtitlee: "Latest articles",
   pf_explore_trends: "Trends",
   pf_explore_guides: "Guides",
   pf_explore_glossary: "Glossary",
- 
+  pf_explore_articles: "Articles",
+
 
   pf_social_title: "Social",
   pf_social_x: "X / Twitter",

@@ -3,32 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>CryptoKosmos — Ο παλμός των crypto | Crypto Prices, Analysis & Guides</title>
-  <meta name="description" content="CryptoKosmos: Ζωντανές τιμές crypto, ανάλυση αγοράς και οδηγοί στα ελληνικά. Live crypto prices, market analysis and guides in Greek & English." />
-
-  <!-- ═══ SEO: Canonical & hreflang ═══════════════════════════════════
-       Λέει στη Google ότι αυτή η σελίδα υπάρχει σε EL και EN,
-       ώστε να δείχνει το σωστό αποτέλεσμα στον κατάλληλο χρήστη.
-       ⚠️ Άλλαξε το domain σε αυτό του πραγματικού site.
-  ════════════════════════════════════════════════════════════════════ -->
-  <link rel="canonical" href="https://cryptokosmos.app/" />
-  <link rel="alternate" hreflang="el" href="https://cryptokosmos.app/" />
-  <link rel="alternate" hreflang="en" href="https://cryptokosmos.app/?lang=en" />
-  <link rel="alternate" hreflang="x-default" href="https://cryptokosmos.app/" />
-
-  <!-- Open Graph -->
-  <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="CryptoKosmos" />
-  <meta property="og:title" content="CryptoKosmos — Live Crypto Prices, Analysis & Guides" />
-  <meta property="og:description" content="Ζωντανές τιμές crypto, ανάλυση αγοράς και οδηγοί στα ελληνικά. Live crypto prices, market analysis and guides in Greek & English." />
-  <meta property="og:url" content="https://cryptokosmos.app/" />
-  <meta property="og:locale" content="el_GR" />
-  <meta property="og:locale:alternate" content="en_US" />
-
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="CryptoKosmos — Live Crypto Prices, Analysis & Guides" />
-  <meta name="twitter:description" content="Ζωντανές τιμές crypto, ανάλυση αγοράς και οδηγοί στα ελληνικά. Live crypto prices, market analysis and guides." />
+  <title>CryptoKosmos — Ο παλμός των crypto</title>
+  <meta name="description" content="CryptoKosmos: Ζωντανές τιμές crypto, ανάλυση αγοράς και οδηγοί στα ελληνικά." />
   <!-- ★ Space Grotesk — premium crypto/fintech font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -3781,6 +3757,7 @@ body.light-theme .pn-read--btn{
       <a href="#charts" class="pf-link" data-i18n="pf_explore_trends">Trends</a>
       <a href="#guides" class="pf-link" data-i18n="pf_explore_guides">Guides</a>
       <a href="#glossary" class="pf-link" data-i18n="pf_explore_glossary">Glossary</a>
+      <a href="./news/articles.html" class="pf-link" id="pf-articles-link" data-i18n="pf_explore_articles">Άρθρα</a>
     </div>
 
     <div class="pf-col">
@@ -5211,6 +5188,29 @@ document.addEventListener("languageChanged", function () {
     });
   }
 });
+</script>
+
+<!-- ── ARTICLES LINKS: lang-aware ─────────────────────────────
+     Ενημερώνει όλα τα links που οδηγούν στο articles index
+     (nav header + mobile menu + prefooter) βάσει ck-lang.
+──────────────────────────────────────────────────────────── -->
+<script>
+(function () {
+  var EL_HREF = "./news/articles.html";
+  var EN_HREF = "./news/articles-en.html";
+
+  function updateArticlesLinks() {
+    var lang = (localStorage.getItem("ck-lang") || "el").trim();
+    var href = lang === "en" ? EN_HREF : EL_HREF;
+    // nav header, mobile menu, prefooter — all in one pass
+    document.querySelectorAll('[data-i18n="nav_articles"], [data-i18n="pf_explore_articles"]').forEach(function (el) {
+      el.href = href;
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", updateArticlesLinks);
+  document.addEventListener("languageChanged", updateArticlesLinks);
+})();
 </script>
 
 </html>
