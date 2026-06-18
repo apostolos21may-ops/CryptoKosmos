@@ -1,0 +1,5 @@
+[build]
+  publish = "."
+
+[context.production.environment]
+  SECRETS_SCAN_SMART_DETECTION_OMIT_VALUES = "AIzaSyC6K0qqRG8odUSnni6xpmUSpDaaEYHiuvc"
